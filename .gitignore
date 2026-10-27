@@ -1,0 +1,7 @@
+# Vmesne datoteke gradnje PDF
+tools/build/
+# Python odvisnosti; obnovi: pip install --target tools/pylib -r tools/requirements.txt
+tools/pylib/
+__pycache__/
+# Izvirni učbenik 1. izdaje (tuje avtorsko delo), ostane le lokalno
+U*BENIK PROGRAMA ZA ZGORNJI DEL TELESA.pdf

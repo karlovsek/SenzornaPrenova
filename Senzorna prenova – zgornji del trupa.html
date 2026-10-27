@@ -1,0 +1,2253 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Senzorna prenova – zgornji del trupa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>
+/* Layout: mirna bralna knjiga – ozek stolpec besedila (~66 znakov), lepljivo kazalo na levi pri širokih zaslonih, ponavljajoč se ritem okvirjev v vsakem poglavju, zložljivi okvirji »Za radovedne« za globljo teorijo. */
+:root{
+  --bg:#F2F5F3; --surface:#FBFCFB; --ink:#1D2826; --muted:#56645F; --line:#D3DDD9;
+  --accent:#2E6B66; --accent-soft:#DDEBE8;
+  --warm:#9A6418; --warm-soft:#F5EBD8;
+  --ventral:#3B8456; --ventral-soft:#E0EFE4;
+  --symp:#B0680F; --symp-soft:#F7E6CF;
+  --dorsal:#4F5F7A; --dorsal-soft:#E2E7EF;
+  --skin:#3A3430; --muscle:#B0483C; --muscle-soft:#F4DCD8; --core:#3C6FA8; --core-soft:#DCE7F4; --mind:#3B8456;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Literata", Georgia, "Times New Roman", serif;
+  --measure:66ch;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#121917; --surface:#18211E; --ink:#E2E9E6; --muted:#9BA9A4; --line:#2C3834;
+  --accent:#7DC3BB; --accent-soft:#1E3431;
+  --warm:#E2B46A; --warm-soft:#2D2617;
+  --ventral:#72C390; --ventral-soft:#1A2E22;
+  --symp:#E9A653; --symp-soft:#33250F;
+  --dorsal:#9DB0CF; --dorsal-soft:#1F2633;
+  --skin:#D8CFC8; --muscle:#E88D80; --muscle-soft:#3A2220; --core:#8DB6E6; --core-soft:#1C2A3B; --mind:#72C390;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#121917; --surface:#18211E; --ink:#E2E9E6; --muted:#9BA9A4; --line:#2C3834;
+  --accent:#7DC3BB; --accent-soft:#1E3431;
+  --warm:#E2B46A; --warm-soft:#2D2617;
+  --ventral:#72C390; --ventral-soft:#1A2E22;
+  --symp:#E9A653; --symp-soft:#33250F;
+  --dorsal:#9DB0CF; --dorsal-soft:#1F2633;
+  --skin:#D8CFC8; --muscle:#E88D80; --muscle-soft:#3A2220; --core:#8DB6E6; --core-soft:#1C2A3B; --mind:#72C390;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.12rem;line-height:1.72;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px;padding-block:40px 80px}
+@media (min-width:1020px){.shell{grid-template-columns:260px minmax(0,1fr)}}
+
+/* Kazalo */
+.toc{font-family:var(--f-display);font-size:.9rem;line-height:1.35;min-width:0}
+@media (min-width:1020px){.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;max-height:calc(100vh - 48px);overflow:auto;padding-right:8px}}
+.toc details{border:1px solid var(--line);border-radius:10px;padding:12px 16px;background:var(--surface)}
+@media (min-width:1020px){.toc details{border:0;padding:0;background:none}.toc summary{pointer-events:none;list-style:none}.toc summary::-webkit-details-marker{display:none}}
+.toc summary{cursor:pointer;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;color:var(--muted)}
+.toc ol{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:1px}
+.toc .part{margin-top:14px}
+.toc .part a{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.toc a{display:flex;gap:10px;padding:4px 8px;border-radius:6px;color:var(--ink);text-decoration:none}
+.toc a:hover{background:var(--accent-soft)}
+.toc a span{color:var(--muted);font-variant-numeric:tabular-nums;min-width:1.5em}
+
+main{min-width:0}
+.col{max-width:var(--measure);display:grid;gap:16px}
+
+/* Naslovnica */
+.hero{display:grid;gap:20px;padding-bottom:40px;border-bottom:1px solid var(--line);margin-bottom:56px}
+.kicker{font-family:var(--f-display);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(2.3rem,6vw,3.8rem);font-weight:700;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:1.22rem;line-height:1.6;max-width:56ch}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--f-display);font-size:.88rem;color:var(--muted)}
+
+/* Poglavja */
+section.ch{display:grid;gap:22px;margin-bottom:84px;scroll-margin-top:24px}
+.part-head{margin:24px 0 56px;padding:28px 0;border-top:2px solid var(--ink);display:grid;gap:8px;scroll-margin-top:24px}
+.part-head .kicker{color:var(--muted)}
+.part-head h2{font-size:clamp(1.7rem,3.6vw,2.3rem)}
+.part-head p{color:var(--muted);max-width:56ch}
+.ch-eyebrow{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;font-family:var(--f-display);font-size:.8rem;color:var(--muted)}
+.ch-eyebrow b{color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+.ch h2{font-size:clamp(1.55rem,3.3vw,2.1rem);letter-spacing:-.01em}
+.ch h3{font-size:1.18rem;margin-top:8px}
+.ch .short{font-size:1.16rem;color:var(--muted);font-style:italic;max-width:var(--measure)}
+.ch ul,.ch ol{margin:0;padding-left:1.3em;display:grid;gap:6px}
+strong{font-weight:600}
+.navdih{font-family:var(--f-display);font-size:.8rem;color:var(--muted);max-width:var(--measure);border-left:2px solid var(--line);padding-left:10px}
+.navdih i{font-style:italic}
+
+/* Okvirji */
+.box{border-radius:12px;padding:20px 22px;display:grid;gap:10px;max-width:var(--measure)}
+.box-label{font-family:var(--f-display);font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.primer{background:var(--warm-soft)} .primer .box-label{color:var(--warm)}
+.kljucne{background:var(--accent-soft)} .kljucne .box-label{color:var(--accent)}
+.vprasanja{border:1.5px dashed var(--line);background:var(--surface)} .vprasanja .box-label{color:var(--muted)}
+.vaja{border:1.5px solid var(--accent);background:var(--surface)} .vaja .box-label{color:var(--accent)}
+.varno{background:var(--dorsal-soft)} .varno .box-label{color:var(--dorsal)}
+.razlaga{border:1.5px solid var(--warm);background:var(--surface)} .razlaga .box-label{color:var(--warm)}
+.box ul,.box ol{padding-left:1.2em}
+details.radoved{max-width:var(--measure);border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+details.radoved summary{cursor:pointer;padding:14px 20px;font-family:var(--f-display);font-weight:600;font-size:.95rem;color:var(--ink);list-style-position:outside}
+details.radoved summary::marker{color:var(--accent)}
+details.radoved summary span{font-weight:400;color:var(--muted);font-size:.85rem;margin-left:6px}
+details.radoved .in{padding:0 20px 18px;display:grid;gap:12px;font-size:1.02rem}
+blockquote{margin:0;padding:4px 0 4px 16px;border-left:3px solid var(--accent);font-style:italic}
+
+/* Slike */
+.figure{display:grid;gap:10px;margin:6px 0;max-width:820px}
+.figure figcaption{font-family:var(--f-display);font-size:.85rem;color:var(--muted);max-width:var(--measure)}
+.figure svg{width:100%;height:auto;display:block}
+.svgwrap{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+.scroll-x{overflow-x:auto}
+.t{font-family:var(--f-display);font-size:15px;fill:var(--ink)}
+.t-s{font-family:var(--f-display);font-size:13px;fill:var(--muted)}
+.t-b{font-family:var(--f-display);font-size:15px;font-weight:600;fill:var(--ink)}
+.stroke-muted{stroke:var(--muted)} .fill-muted{fill:var(--muted)}
+.fill-surface{fill:var(--surface)} .fill-bg{fill:var(--bg)}
+
+.cycles{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width:760px){.cycles{grid-template-columns:1fr 1fr}}
+.cycle-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;min-width:0}
+.cycle-card h4{font-size:.95rem}
+.node rect{stroke-width:1.5}
+.node text{font-family:var(--f-display);font-size:15px;font-weight:600}
+.c-bad .node rect{fill:var(--symp-soft);stroke:var(--symp)} .c-bad .node text{fill:var(--ink)} .c-bad .arc{stroke:var(--symp)} .c-bad .ah{fill:var(--symp)}
+.c-good .node rect{fill:var(--ventral-soft);stroke:var(--ventral)} .c-good .node text{fill:var(--ink)} .c-good .arc{stroke:var(--ventral)} .c-good .ah{fill:var(--ventral)}
+.arc{fill:none;stroke-width:2}
+.cycle-center{font-family:var(--f-display);font-size:14px;fill:var(--muted)}
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--f-display);font-size:.92rem;line-height:1.3}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.flow .arr{color:var(--muted)}
+.flow.danger .step:last-child{border-color:var(--symp);background:var(--symp-soft)}
+.flow.grow .step:last-child{border-color:var(--ventral);background:var(--ventral-soft)}
+
+/* Lestvica prepustnosti in stopnje */
+.cards3{display:grid;grid-template-columns:1fr;gap:12px;max-width:860px}
+@media (min-width:720px){.cards3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h4{font-size:1rem}
+.card p{font-size:.98rem;line-height:1.55}
+.card svg{width:100%;max-width:180px;height:auto;justify-self:center}
+.card.mid{border-color:var(--ventral);background:var(--ventral-soft)}
+.meter{display:grid;gap:4px;font-family:var(--f-display);font-size:.8rem;color:var(--muted)}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:5px}
+.bar .em{background:var(--accent)} .bar .to{background:var(--muscle)}
+
+/* Lestev stanj */
+.ladder{display:grid;gap:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);max-width:820px}
+.rung{display:grid;grid-template-columns:1fr;gap:6px;padding:18px 20px}
+@media (min-width:640px){.rung{grid-template-columns:200px 1fr;gap:20px}}
+.rung h4{font-size:1.02rem}
+.rung .who{font-family:var(--f-display);font-size:.8rem;color:var(--muted)}
+.rung p{font-size:1rem;line-height:1.55}
+.r-v{background:var(--ventral-soft)} .r-v h4{color:var(--ventral)}
+.r-s{background:var(--symp-soft)} .r-s h4{color:var(--symp)}
+.r-d{background:var(--dorsal-soft)} .r-d h4{color:var(--dorsal)}
+
+.checkin{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;max-width:820px}
+.checkin .btns{display:flex;flex-wrap:wrap;gap:8px}
+.checkin button{font-family:var(--f-display);font-size:.95rem;font-weight:600;padding:10px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.checkin button[aria-pressed="true"][data-k="v"]{border-color:var(--ventral);background:var(--ventral-soft)}
+.checkin button[aria-pressed="true"][data-k="s"]{border-color:var(--symp);background:var(--symp-soft)}
+.checkin button[aria-pressed="true"][data-k="d"]{border-color:var(--dorsal);background:var(--dorsal-soft)}
+.checkin .out{font-size:1rem;line-height:1.6}
+.checkin .out ul{padding-left:1.2em;display:grid;gap:4px;margin:6px 0 0}
+
+/* Proračun */
+.budget{display:grid;gap:14px;max-width:820px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.budget .row{display:grid;gap:6px}
+.budget .row h4{font-size:.92rem}
+.stack{display:flex;height:34px;border-radius:8px;overflow:hidden;font-family:var(--f-display);font-size:.78rem;font-weight:600}
+.stack span{display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;padding:0 4px;color:var(--ink)}
+.stack .b1{background:var(--symp-soft)} .stack .b2{background:var(--dorsal-soft)} .stack .b3{background:var(--line)} .stack .b4{background:var(--ventral);color:var(--bg)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--f-display);font-size:.8rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* Tabele */
+table{border-collapse:collapse;width:100%;font-size:.98rem;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-display);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.tbl{max-width:820px}
+.tbl table{min-width:560px}
+
+/* Zlata pravila */
+.rules{display:grid;gap:14px;max-width:820px}
+.rule{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.rule .n{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1;color:var(--warm);font-variant-numeric:tabular-nums}
+.rule h4{font-size:1.05rem;margin-bottom:4px}
+.rule p{font-size:1rem;line-height:1.6}
+
+/* 30 dni */
+.weeks{display:grid;gap:16px;max-width:820px}
+.week{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px}
+.week h4{font-size:1.05rem}
+.week .theme{font-size:.98rem;color:var(--muted);line-height:1.55}
+.days{display:flex;flex-wrap:wrap;gap:6px}
+.day{width:42px;height:42px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--f-display);font-weight:600;font-variant-numeric:tabular-nums;cursor:pointer}
+.day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.progress{font-family:var(--f-display);font-size:.9rem;color:var(--muted)}
+.reset{font-family:var(--f-display);font-size:.85rem;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0;justify-self:start}
+
+/* Slovar */
+dl.gloss{display:grid;gap:14px;margin:0}
+dl.gloss div{display:grid;gap:2px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+dl.gloss dt{font-family:var(--f-display);font-weight:600}
+dl.gloss dd{margin:0;font-size:1rem;line-height:1.6}
+.refs li{font-size:1rem}
+.refs .why{color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-display);font-size:.85rem;color:var(--muted);display:grid;gap:8px;max-width:var(--measure)}
+
+/* Tisk: na zaslonu skrito */
+.print-toc,.print-only,.print-lines{display:none}
+.print-btn{margin-top:14px;font-family:var(--f-display);font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.print-btn:hover{border-color:var(--accent)}
+
+/* Tisk: A4, belo ozadje, kazalo s številkami strani */
+@page{
+  size:A4;margin:20mm 18mm 18mm;
+  @top-right{content:"Senzorna prenova · Zgornji del trupa";font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-size:7.5pt;color:#8a8f8d}
+  @bottom-center{content:counter(page);font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-size:9pt;color:#444}
+}
+@page :first{
+  @top-right{content:none}
+  @bottom-center{content:none}
+}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --bg:#fff; --surface:#fff; --ink:#1D2826; --muted:#56645F; --line:#C9D3CF;
+    --accent:#2E6B66; --accent-soft:#DDEBE8;
+    --warm:#9A6418; --warm-soft:#F5EBD8;
+    --ventral:#3B8456; --ventral-soft:#E0EFE4;
+    --symp:#B0680F; --symp-soft:#F7E6CF;
+    --dorsal:#4F5F7A; --dorsal-soft:#E2E7EF;
+    --skin:#3A3430; --muscle:#B0483C; --muscle-soft:#F4DCD8; --core:#3C6FA8; --core-soft:#DCE7F4; --mind:#3B8456;
+    --measure:80ch;
+    color-scheme:light;
+  }
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{font-size:9.6pt}
+  body{background:#fff;font-size:1.12rem;line-height:1.5;padding:0}
+  a{color:inherit;text-decoration:none}
+  .shell{display:block;max-width:none;padding:0}
+  nav.toc,.screen-only{display:none!important}
+  .print-only{display:block}
+  span.print-only{display:inline}
+
+  /* Naslovnica sama na prvi strani */
+  .hero{border-bottom:0;margin:0;padding:70mm 0 0;break-after:page}
+  .hero h1{font-size:3.4rem}
+
+  /* Kazalo za tisk */
+  .print-toc{display:block;break-after:page;font-family:var(--f-display)}
+  .print-toc h2{font-size:2rem;margin-bottom:18pt}
+  .print-toc ol{list-style:none;margin:0;padding:0}
+  .print-toc li{display:flex;align-items:baseline;gap:6px;font-size:.98rem;line-height:1.3;padding:1.6pt 0;break-inside:avoid}
+  .print-toc li.part{font-weight:700;font-size:1rem;margin-top:9pt;break-after:avoid}
+  .print-toc li.part:first-child{margin-top:0}
+  .print-toc .n{min-width:2em;color:var(--muted);font-variant-numeric:tabular-nums}
+  .print-toc .dots{flex:1;border-bottom:1px dotted #9aa3a0;transform:translateY(-3px);min-width:12px}
+  .print-toc .pg{min-width:2.2em;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* Prelomi */
+  .part-head{break-before:page;margin:0 0 20pt;padding:10mm 0 14pt}
+  section.ch{margin-bottom:26pt;gap:12pt}
+  h2,h3,h4,.ch-eyebrow,.box-label,.kicker{break-after:avoid}
+  .box,.figure,.rule,.week,.card,.cycle-card,.budget,.tbl,table,tr,details.radoved,.checkin,blockquote,dl.gloss div,.rung,.ladder,.flow,.navdih{break-inside:avoid}
+  p,li{orphans:3;widows:3}
+  .col{gap:8pt}
+
+  /* Širši stolpec */
+  .figure,.cards3,.ladder,.checkin,.budget,.tbl,.rules,.weeks{max-width:none}
+  .tbl table{min-width:0}
+  .scroll-x{overflow:visible}
+
+  /* Okvirji: belo ozadje, tanka obroba, barvni levi rob */
+  .box{padding:10pt 12pt;border-radius:0 6px 6px 0;border:1px solid var(--line)}
+  .primer{background:#fff;border-left:3px solid var(--warm)}
+  .kljucne{background:#fff;border-left:3px solid var(--accent)}
+  .varno{background:#fff;border-left:3px solid var(--dorsal)}
+  .vprasanja{border:1px dashed #9aa3a0;border-radius:6px}
+  .vaja{border:1.5px solid var(--accent);border-radius:6px}
+  .razlaga{border:1.5px solid var(--warm);border-radius:6px}
+  .svgwrap,.cycle-card,.card,.rule,.week,.budget,.checkin{background:#fff;border:1px solid var(--line);border-radius:6px}
+  .card.mid{background:#fff;border:1.5px solid var(--ventral)}
+
+  /* Za radovedne: vedno odprto */
+  details.radoved{background:#fff;border-left:3px solid var(--muted);border-radius:0 6px 6px 0}
+  details.radoved::details-content{content-visibility:visible;display:block}
+  details.radoved summary{list-style:none;padding:10pt 12pt 6pt}
+  details.radoved summary::-webkit-details-marker{display:none}
+  details.radoved .in{padding:0 12pt 10pt}
+
+  /* Kje na lestvici sem: vsi trije nasveti */
+  .checkin .btns,#ci-out{display:none}
+  .ci-print{display:grid;gap:8pt}
+  .ci-print > div{border-left:3px solid var(--line);padding-left:10pt;font-size:1rem;line-height:1.5}
+  .ci-print .k-v{border-color:var(--ventral)} .ci-print .k-s{border-color:var(--symp)} .ci-print .k-d{border-color:var(--dorsal)}
+  .ci-print h4{font-size:.95rem;margin-bottom:2pt}
+  .ci-print ul{padding-left:1.2em;margin:4pt 0}
+
+  /* 30 dni: prazni kvadratki */
+  #progress,#reset{display:none}
+  .days{gap:5px}
+  .day,.day[aria-pressed="true"]{width:34px;height:34px;border-radius:3px;border:1px solid #6b7471;background:#fff;color:#8a8f8d;font-size:7pt;font-weight:400;padding:2px 3px;display:flex;align-items:flex-start;justify-content:flex-start}
+  .print-lines{display:block;height:34pt;margin-top:2pt;border-bottom:.75pt solid #9aa3a0}
+  .print-lines::before{content:"";display:block;height:17pt;border-bottom:.75pt solid #9aa3a0}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<nav class="toc" aria-label="Kazalo">
+  <details open id="toc-d">
+    <summary>Kazalo</summary>
+    <ol id="toc-list"></ol>
+    <button type="button" class="print-btn" id="print-btn">Natisni</button>
+  </details>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="kicker">Zgornji del trupa · 30-dnevni program · 2. izdaja (osnutek)</div>
+  <h1>Senzorna prenova: <em>kako prebuditi zakrčeno telo in um</em></h1>
+  <p class="lede">Učbenik za udeležence programa, ki jih bolijo vrat, ramena, hrbet ali prsni koš. Razloži, zakaj se telo zakrči, kako to povezuje otroštvo, čustva in dih, in kako vam vaje Senzorne prenove pomagajo spet čutiti in voditi lastno telo.</p>
+  <div class="meta-row"><span>9 delov · 37 kratkih poglavij</span><span>3–6 min branja na poglavje</span><span>Avtor: Peter Karlovšek</span></div>
+</header>
+
+<section class="print-toc" aria-hidden="true">
+  <h2>Kazalo</h2>
+  <ol id="print-toc-list"></ol>
+</section>
+
+<section class="ch" id="uvod" data-toc="Kako brati ta učbenik" data-num="·">
+  <div class="ch-eyebrow"><b>Začetek</b><span>≈ 3 min branja</span></div>
+  <h2>Kako brati ta učbenik</h2>
+  <div class="col">
+    <p>Če živite s kronično bolečino, imate verjetno manj energije in težje ostanete zbrani. Bolečina porablja moč, tudi ko jo samo prenašate. Zato je ta učbenik razdeljen na kratka poglavja, ki jih lahko berete po malem, tudi na slab dan.</p>
+    <p>Vsako poglavje ima enak ritem:</p>
+    <ul>
+      <li><strong>Stavek bistva</strong> pod naslovom. Če nimate moči za več, preberite le tega.</li>
+      <li><strong>Razlaga</strong> v kratkih odstavkih.</li>
+      <li><strong>Iz vsakdanjega življenja</strong>: primer, v katerem se boste morda prepoznali.</li>
+      <li><strong>Ključne točke</strong> in <strong>vprašanja zase</strong> za trenutek tišine ali dnevnik.</li>
+      <li>Ponekod <strong>mala vaja</strong>, ki traja nekaj minut.</li>
+      <li>Ponekod zložljiv okvir <strong>Za radovedne</strong> z globljo teorijo. Lahko ga preskočite.</li>
+    </ul>
+    <p>Kjer se avtor naslanja na misli drugih avtorjev, je pod besedilom drobna opomba <em>Navdih</em>. Vsi viri so zbrani v dodatku B.</p>
+    <p>Ni vam treba razumeti vsega naenkrat. Pri Senzorni prenovi je pomembneje čutiti kot vedeti. Razumevanje pride, ko telo izkusi spremembo.</p>
+  </div>
+  <div class="box varno">
+    <div class="box-label">Za vašo varnost</div>
+    <p>Ta učbenik ne nadomešča zdravnika, fizioterapevta ali psihoterapevta. Če imate novo, hudo ali nepojasnjeno bolečino, bolečino v prsih, otrplost ali nenadno šibkost, najprej obiščite zdravnika.</p>
+    <p>Vaje z zadrževanjem diha izvajajte le po navodilih učitelja (več v poglavju 29). Če med vajami na površje pridejo spomini ali čustva, ki vas preplavijo, poiščite podporo izkušenega učitelja metode ali usposobljenega psihoterapevta.</p>
+  </div>
+</section>
+
+<section class="ch" id="o-programu" data-toc="O Senzorni prenovi in programu" data-num="·">
+  <div class="ch-eyebrow"><b>Začetek</b><span>≈ 3 min branja</span></div>
+  <h2>O Senzorni prenovi in tem programu</h2>
+  <p class="short">Kronično zakrčenost so v veliki meri povzročila čustva, ki smo jih nekoč potlačili. Zakrčenost nato tiho usmerja, kako se počutimo, kaj si želimo in kaj dosežemo.</p>
+  <div class="col">
+    <p>Vsakdo je kdaj doživel močna čustva, ki jih ni smel ali mogel pokazati. Nekateri pogosteje, drugi redkeje. Takšna čustva ne vplivajo le na telesno in duševno počutje. Skozi mišično napetost oblikujejo tudi razmerje med tem, kar si želimo, kar naredimo, in tem, kar na koncu dosežemo.</p>
+    <p>Za nastanek zakrčenosti niso potrebni udarci, žalitve ali zloraba. Dovolj je vzgoja, ki sledi pravilom sodobne družbe in pogosto nasprotuje temeljni človeški naravi. Otrok že takrat začne izgubljati občutek za nekatere dele telesa.</p>
+    <p>V tridesetih dneh programa tako obsežnega področja ne moremo v celoti obdelati. Lahko pa pridemo precej globlje vase. Na delavnici bo učitelj poglavja tega učbenika dodatno razložil, z vajami pa boste urili povezavo med zavestjo in telesom.</p>
+    <p><strong>Priporočilo:</strong> metodi namenite približno uro na dan, del za vaje in del za branje. Če je to zdaj preveč, začnite z 10 do 20 minutami. Redno je pomembneje kot veliko.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Kronična zakrčenost ima pogosto čustveni izvor iz preteklosti.</li>
+      <li>Ne potrebuje hudih travm: dovolj je vzgoja, ki od otroka zahteva preveč.</li>
+      <li>Vaje in teorija skupaj pokažejo, kdaj in zakaj je zakrčenost nastala.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL I ========== -->
+<div class="part-head" id="del1" data-toc="I · Opazovati, preden spreminjamo">
+  <div class="kicker">Del I</div>
+  <h2>Opazovati, preden spreminjamo</h2>
+  <p>Vsaka dobra sprememba se začne z opazovanjem. Tri poglavja o tem, zakaj je pri vajah opazovanje pomembnejše od napora.</p>
+</div>
+
+<section class="ch" id="p1" data-toc="Akvarij" data-num="1">
+  <div class="ch-eyebrow"><b>Poglavje 1</b><span>≈ 4 min branja</span></div>
+  <h2>Akvarij</h2>
+  <p class="short">Sistema ne moremo dobro urejati, dokler ga ne opazujemo dovolj dolgo, da ga razumemo.</p>
+  <div class="col">
+    <p>Ko kupimo akvarij, vanj spustimo ribe, dodamo rastline in kamenje. V naslednjih tednih in mesecih se ta mali svet počasi uskladi. Ribe in rastline najdejo ravnovesje. Kdor akvarij opazuje, spozna njegova pravila. Šele potem lahko vanj pametno poseže.</p>
+    <p>Enako ravnajo dober vrtnar, čebelar, kmet ali vodja podjetja. Najprej opazujejo, nato uvedejo majhno spremembo in pogledajo, kaj se zgodi. Tako sistem postopoma postaja bolj urejen.</p>
+    <p>Pri vajah velja isto. Gibe izvajamo na tleh, počasi in pozorno. Najprej le opazujemo, kako naše telo in um dejansko delujeta. Počutje, omejitve in bolečine so rezultat tega, kako je sistem deloval v preteklosti. <strong>Rezultat nikoli ne laže.</strong></p>
+    <p>Ko preberete natančen opis vaje, veste, kako jo izvesti. Pa vendar gib izvedete drugače. Opazite odklone in to, da nekaterih mišic ne morete zavestno voditi. Ti odkloni niso znak premajhne moči ali vzdržljivosti. So znak nejasne komunikacije med možgani in mišicami, ki je prej niste opazili in je zato niste mogli popraviti.</p>
+    <p>To je bistvo Senzorne prenove: s pravilno izvedbo vaje se naučite opaziti, kje komunikacija med možgani in mišicami ne deluje. Zavestno spreminjanje giba hkrati umirja um.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Nova sodelavka prvi teden v službi predvsem posluša in gleda. Kdor takoj začne vse spreminjati, pogosto naredi več škode kot koristi. Kdor najprej razume, kako stvari tečejo, lahko kasneje izboljša prav tisto, kar je treba.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Najprej opazujemo, šele nato spreminjamo.</li>
+      <li>Bolečine in omejitve so rezultat preteklega delovanja telesa in uma.</li>
+      <li>Odkloni pri vajah kažejo na nejasno komunikacijo med možgani in mišicami, ne na šibkost.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kdaj sem nazadnje svoje telo samo opazoval(a), ne da bi ga hotel(a) takoj popraviti?</li>
+      <li>Kateri gib pri vajah izvedem drugače, kot je opisan?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p2" data-toc="Um kot opazovalec" data-num="2">
+  <div class="ch-eyebrow"><b>Poglavje 2</b><span>≈ 4 min branja</span></div>
+  <h2>Um kot opazovalec</h2>
+  <p class="short">Nemiren um ne more opazovati. Ko mu damo nalogo opazovalca, postane koristen in zdravilen.</p>
+  <div class="col">
+    <p>Um nam ves čas nekaj dopoveduje. Zahteva dejavnost, kot da mu brez nje grozi propad. Če se tega ne zavedamo, nas počasi pripelje v stalen stres.</p>
+    <p>Um lahko zaposlimo drugače: postavimo ga v vlogo opazovalca. Pri vajah opazuje, kaj telo počne. Tako opazimo navade in vzorce, ki nam ne koristijo, in jih lahko izboljšamo. Ko vemo, kako nekaj delamo, nas je manj strah in manj skrbi. Zavest se umiri.</p>
+    <p>Šele umirjen um lahko zavestno spreminja sedanjost. To je edini zdrav in dolgoročno učinkovit način za spremembo. Z voljo spreminjamo mišljenje, mišljenje pa oblikuje naše življenje.</p>
+    <h3>Bolečina in nemiren um</h3>
+    <p>Bolečina, katere vzroka ne poznamo in nanjo ne moremo vplivati, kaže, da ne vemo dovolj dobro, kaj delamo, ko telo obremenjujemo. Bolečina naredi um nemiren. Nemiren um ne zmore opazovati, kaj se dogaja, zato tudi ne more odpraviti vzroka bolečine. Krog se zapre.</p>
+    <p>Ko pri vaji poskusite umiriti um, boste morda opazili, da tega ne znate več. A kot otroci ste znali. Drugače se ne bi naučili vsega, kar odrasel človek potrebuje. Opazovanje je veščina, ki jo lahko spet izurimo. Vaje klinične somatike ob tem izboljšujejo občutek, nadzor, usklajenost in natančnost gibov. Vse to pomaga odpraviti vzroke bolečine.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 2 minuti</div>
+    <ol>
+      <li>Sedite in zaprite oči. Ne spreminjajte ničesar.</li>
+      <li>Opazujte, kje vaša ramena so. Kje je vaš dih? Kje se dotikate stola?</li>
+      <li>Ko um začne komentirati (»moral bi …«), samo opazite: »misel«. Vrnite se k telesu.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Um, ki ga zaposlimo kot opazovalca, se umiri.</li>
+      <li>Bolečina vznemiri um, nemiren um pa ne najde vzroka bolečine.</li>
+      <li>Opazovanje je veščina, ki smo jo kot otroci imeli in jo lahko spet izurimo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kaj mi um najpogosteje dopoveduje, ko poskušam mirovati?</li>
+      <li>Ali vem, kaj sproži mojo bolečino?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p3" data-toc="O »nimam časa«" data-num="3">
+  <div class="ch-eyebrow"><b>Poglavje 3</b><span>≈ 4 min branja</span></div>
+  <h2>O »nimam časa«</h2>
+  <p class="short">Ravnovesja ne najdemo. Ustvarimo ga, z majhnimi odločitvami o času.</p>
+  <div class="col">
+    <p>Za vsako učenje sta potrebna rednost in čas. Časa je v sodobnem življenju vedno premalo. A nagrada za čas, ki ga namenimo tej vrsti učenja, je velika.</p>
+    <p>Stavek »nimam časa« ima mnogo vzrokov: delo, skrb za otroke ali starše, utrujenost, bolečina. Nekaterih ne moremo spremeniti. Pogosto pa čas odteka tudi v stvari, ki nam niso pomembne: v nakupe, ki jih ne potrebujemo, v zaslone, v obveznosti, ki smo jih prevzeli iz navade. Ko nimamo časa opaziti razlike med pomembnim in nepomembnim, o našem času odločajo drugi.</p>
+    <p>Pomanjkanje časa nam tako tiho vzame del svobode, da sami vodimo svoje življenje. Dobra novica je, da jo lahko postopoma vrnemo.</p>
+    <p>Pri vajah se boste učili opazovati, kako porabljate energijo. Kdor z njo ravna premišljeno, si pridobi tudi čas. Več časa pomeni več energije in več moči, da vodimo svoje življenje. Tako spet postanemo ustvarjalci lastnega življenja.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Mateja je bila prepričana, da nima niti deset minut zase. En teden si je zapisovala, kam gre njen čas. Ugotovila je, da zvečer pol ure brska po telefonu, ne da bi se po tem počutila bolje. Teh deset minut je postalo njen čas za vajo.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>»Nimam časa« ima resnične vzroke, ki zaslužijo razumevanje, ne krivde.</li>
+      <li>Del časa vedno lahko vrnemo sebi. Že deset minut na dan šteje.</li>
+      <li>Ravnovesja ne najdemo, temveč ga ustvarimo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kam gre moj čas v dnevu, ko »ga nimam«?</li>
+      <li>Katerih deset minut bi lahko vsak dan namenil(a) sebi?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL II ========== -->
+<div class="part-head" id="del2" data-toc="II · Um, telo, življenjska energija">
+  <div class="kicker">Del II</div>
+  <h2>Um, telo, življenjska energija</h2>
+  <p>Zakaj se um in telo razideta, kaj ju ločuje in kaj ju spet poveže. Filozofsko jedro Senzorne prenove.</p>
+</div>
+
+<section class="ch" id="p4" data-toc="Ločenost uma in telesa" data-num="4">
+  <div class="ch-eyebrow"><b>Poglavje 4</b><span>≈ 6 min branja</span></div>
+  <h2>Ločenost uma in telesa</h2>
+  <p class="short">Telo ni le orodje uma. Občutki in čustva so enako pomemben del človeka kot misli.</p>
+  <div class="col">
+    <p>Senzorna prenova pomaga odpraviti kronične bolečine tako, da spodbuja usklajenost uma in telesa. V zahodni kulturi radi pozabimo, da telo ni le skupek organov, kože in mišic. Prav tako um ni nadrejen telesu, ki naj bi mu le služilo. Telesni občutki in čustva so enako pomemben del sestavljanke, brez katerega se iz oklepa zakrčenosti ne moremo rešiti.</p>
+    <h3>Kako je prišlo do ločenosti</h3>
+    <p>Človek je edini sesalec, ki stoji povsem pokonci. Pokončna drža je dvignila glavo nad ostalo telo in svetu izpostavila ranljive dele: trebuh, vrat in mednožje. Tako izpostavljen človek se je močneje zavedal čustev in razvil sposobnost, da jih izraža.</p>
+    <p>Hkrati so roke dobile novo vlogo. Ko opazujete violinista, se zdi, kot da imajo njegove roke svoje življenje. Rokam dolgujemo izjemno razvit dotik, ki je ključen za dojemanje resničnosti in za razvoj uma.</p>
+    <p>Človeški možgani so najkompleksnejša nam znana stvaritev narave. Dosežki kulture in znanosti so ljudi napeljali, da so um povezali z božanskim. Ta misel je stara: v Svetem pismu človek ne bi smel jesti z drevesa spoznanja, da ne bi postal kakor Bog. Pa je jedel. Z razvojem civilizacije sta se um in telo vse bolj ločevala. Danes je vse bolj jasno, da je bila ta ločitev stranpot.</p>
+    <h3>Dve ravni: površina in globina</h3>
+    <p>Stari Grki so rekli: zdrav duh v zdravem telesu. Vemo pa tudi, da misel in občutek ne gresta vedno skupaj. Lahko mislimo, ne da bi se premaknili. Lahko naredimo gib, ne da bi se ga zavedali.</p>
+    <p>Na površini um in telo delujeta drug na drugega: misli vplivajo na telo, telesni občutki na misli. V globini pa ločenosti ni. Tam je en sam organizem z zbiralnikom življenjske energije, ki je po razumevanju Senzorne prenove predvsem v trebušni votlini. Iz njega črpata tako um kot telo. Telo se na energijo odzove z gibanjem in dejanji, um z mislimi, željami in podobami. Energijo ustvarjajo celice, predvsem mišice, ko s kisikom pretvarjajo hrano.</p>
+    <p>Kronična zakrčenost ovira in popači pretok te energije. Občutki iz notranjosti do površine telesa in uma ne pridejo več jasno. Razumsko vemo, da sta um in telo povezana, a povezava ne seže dovolj globoko. Človek v sebi ne čuti več otroške spontanosti. Med sedanjostjo in preteklostjo nastane prepad.</p>
+  </div>
+  <p class="navdih">Navdih: dvojnost površinske polarnosti in globinske enotnosti uma in telesa je zamisel W. Reicha, kot jo razlaga A. Lowen (<i>Bioenergetics</i>, 1975).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Občutki in čustva so enakovreden del človeka, ne dodatek k umu.</li>
+      <li>Na površini um in telo vplivata drug na drugega; v globini sta eno.</li>
+      <li>Kronična zakrčenost ovira pretok energije in ločuje um od telesa.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Ali svoje telo doživljam kot sebe ali kot nekaj, kar »imam«?</li>
+      <li>Kdaj sem nazadnje začutil(a) otroško spontanost?</li>
+    </ul>
+  </div>
+  <p class="navdih">Več o tem v delih III (membrana) in VI (čustva v telesu).</p>
+</section>
+
+<section class="ch" id="p5" data-toc="Upanje in strah" data-num="5">
+  <div class="ch-eyebrow"><b>Poglavje 5</b><span>≈ 6 min branja</span></div>
+  <h2>Upanje in strah</h2>
+  <p class="short">Da bi telesu spet zaupali, potrebujemo upanje. Strah, ki nas zadržuje, je pogosto strah iz otroštva.</p>
+  <div class="col">
+    <h3>Upanje</h3>
+    <p>Razkoraka med umom in telesom, ki ga v Senzorni prenovi imenujemo senzorno-motorična amnezija (SMA, več v poglavju 15), ne odpravimo samo z znanjem. Znanje je na površini, v območju zavesti. Za spremembo moramo čutiti: telesne občutke, čustva, tok energije. Šele takrat razumevanje postane dojemanje, tako kot teorija postane uporabna šele s prakso.</p>
+    <p>Da bi občutki prišli na površje, mora popustiti zakrčenost. To je lažje reči kot storiti. Togost se je v otroštvu razvila prav zato, da bi preprečila izražanje. Človek se boji, da bi izgubil nadzor in se počutil nemočnega, če bi telesu prepustil krmilo.</p>
+    <p>Da bi se nadzoru odrekli, moramo upati in zaupati vase. Upanja pa pri močni zakrčenosti najbolj primanjkuje. Kar nam ostane, je nadzor zavesti. Zato je pomembno, da vaje izvajate natančno po navodilih. Tako boste začutili, kje se je telo oddaljilo od pravilnega delovanja, in to spremenili. Ego se bo upiral in iskal izgovore. To je pričakovano in ni razlog za obup.</p>
+    <h3>Strah</h3>
+    <p>V zgodnjem otroštvu smo vsi doživljali nemoč. Če okolica te nemoči ne bi zlorabila, do ločitve od vira energije ne bi prišlo. Ne bi izgubili upanja, um ne bi prevladal nad telesom in občutki iz globine bi lažje prihajali na površje.</p>
+    <p>Življenje, ločeno od jedra, sčasoma izgubi smisel. Energija se v trebušni votlini nabira in prej ali slej najde pot do zavesti, včasih kot izbruh čustev. Začutimo, da nam nekaj manjka. Če pravega stika s telesom ne najdemo, lahko praznino zapolnimo z odvisnostmi: od alkohola, drog, spolnosti, adrenalina.</p>
+    <p>Poleg strahu pred nemočjo nas zadržujejo še drugi strahovi. Bojimo se žalosti, ki meji na obup, potlačene jeze, panike in groze. Ta čustva čakajo pod prepono kot pošasti iz otroštva. Ko smo jih potlačili, smo bili majhni in so bila večja od nas. Danes smo odrasli, močnejši in izkušenejši, a strah ostaja enak, ker ga ne preverimo z resničnim občutkom.</p>
+    <p>Ob učenju Senzorne prenove te povezave vse bolje razumemo in strah se manjša. Dojamemo, da nas je strah preteklosti, čeprav živimo v sedanjosti. Ko se strahu postavimo nasproti, pogosto ugotovimo, da ni tako strašen, kot se je zdel.</p>
+    <h3>Nadomestki</h3>
+    <p>Možgani znajo ustvariti snovi, ki prinesejo občutek ugodja in za nekaj časa preglasijo utrujenost in potrtost (na primer »zasvojenost« s tekom ali vadbo). Pomagamo si tudi z omamo: s čokolado, alkoholom, drogami. Ko telo tega ne zmore samo, se v nas utrdi prepričanje, da je telo vir težav in ga je bolje utišati. Takšen odnos do telesa ima v naši kulturi dolgo zgodovino, tudi v verskem izročilu, ki je telo pogosto razumelo kot vir greha.</p>
+  </div>
+  <p class="navdih">Navdih: povezava med upanjem, vero in predajo telesu sledi A. Lowenu, <i>Depression and the Body</i> (1972).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Samo znanje ne zadošča; potrebno je čutenje.</li>
+      <li>Zakrčenost je nekoč varovala pred izražanjem, zato je opuščanje nadzora strašljivo.</li>
+      <li>Strah, ki ga čutimo, je pogosto strah iz otroštva, ki ga danes lahko preverimo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katerega čustva se najbolj bojim, da bi ga začutil(a)?</li>
+      <li>S čim zapolnim občutek, da mi nekaj manjka?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p6" data-toc="Povezanost" data-num="6">
+  <div class="ch-eyebrow"><b>Poglavje 6</b><span>≈ 4 min branja</span></div>
+  <h2>Povezanost</h2>
+  <p class="short">Telo je kot kralj, ki odloča na podlagi občutka. Zavest je kot vlada, ki odločitve izpelje.</p>
+  <div class="col">
+    <p>Ko se odrečemo strogemu nadzoru uma, se prepustimo tudi nezavednemu. Telesu dovolimo, da občasno prevzame krmilo. Samo tako se lahko zares prepustimo ljubezni, strasti, hrepenenju ali spancu.</p>
+    <p>Tako nastane naravna delitev vlog. <strong>Telo je kot kralj</strong>, ki sprejema odločitve na podlagi občutka za resničnost. <strong>Zavest je kot vlada</strong>, ki poskrbi, da se kraljeve odločitve dobro izpeljejo.</p>
+    <p>Pri senzorno-motorični amneziji to ne deluje. Zavest se boji, da jo bo telo izdalo. Ne zaupa mu. Za to ima razloge: v preteklosti je bilo telo zaradi nerealnih zahtev ega in okolice prevečkrat najšibkejši člen. Če bi telo postalo enakovredno, bi pokazalo šibkosti, žalost in jezo. Padla bi maska, za katero se skriva pravi obraz.</p>
+    <p>A če masko odložimo, se odpre globina. Na dan pride bogastvo telesnih občutkov, užitka in radosti. To bogastvo je vir duhovnosti, vere, upanja, volje in želja. Ponuja ga le uravnoteženo razmerje med umom in telesom.</p>
+    <p>Za večino je to nov način razmišljanja. Navajeni smo, da je duša nekaj drugega kot telo in da telo le uporablja za svoje namene. To je ista navidezna ločenost, o kateri je govorilo poglavje 4.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Telo (kralj) čuti resničnost, zavest (vlada) izpelje odločitve.</li>
+      <li>Pri SMA zavest telesu ne zaupa, ker je bilo v preteklosti ranljivo.</li>
+      <li>Za masko je bogastvo občutkov, užitka in radosti.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>V katerih trenutkih se lahko popolnoma prepustim (spanec, glasba, objem)?</li>
+      <li>Katero masko najpogosteje nosim?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p7" data-toc="Polarnosti, čas in težnost" data-num="7">
+  <div class="ch-eyebrow"><b>Poglavje 7</b><span>≈ 5 min branja</span></div>
+  <h2>Polarnosti, čas in težnost</h2>
+  <p class="short">Um se giblje svobodno, telo spoštuje čas in težnost. Ko se slišita, celota raste.</p>
+  <div class="col">
+    <p>V nas sta dva pola: um in telo. Sta si nasprotna, a obstajata zato, da drug drugemu pomagata. Podobnih parov je v telesu veliko. Vzemimo spanje in budnost. Če dobro spimo, smo budni bolj zbrani. Če smo čez dan dobro živeli, ponoči bolje spimo. Slab spanec pa vodi v slab dan in slab dan v še slabši spanec.</p>
+    <p>Ko sta pola v ravnovesju, omogočata rast. Senzorna prenova temu pravi <strong>sintropija</strong>: rast, razvoj, večja urejenost. Za ravnovesje je nujna jasna komunikacija med poloma. Kronična zakrčenost to komunikacijo slabša, popači ali celo prekine. Sistem takrat drsi v <strong>entropijo</strong>: nered, razkroj in propadanje.</p>
+    <h3>Čas in težnost</h3>
+    <p>Um lahko v trenutku odpotuje v preteklost ali prihodnost, na drugi konec sveta ali v oblake. Omejujeta ga le znanje in domišljija.</p>
+    <p>Telo ima maso. Spoštovati mora čas in težnost. Čas določa zaporedje vseh telesnih procesov: celjenje, rast, učenje giba. Če zaporedje preskočimo, sledijo neučinkovitost, bolečina, bolezen ali poškodba.</p>
+    <p>Ker um in telo čas doživljata tako različno, se lahko razideta. Um telesu naloži tempo, ki ga telo ne zmore. Zavest lahko sporočila telesa preslišuje dolgo, telo pa sporočil zavesti ne more preslišati. Pravilno izvajanje vaj pomaga, da se spet uskladita.</p>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>um, fizika in prispodobe</span></summary>
+    <div class="in">
+      <p>V izvirni izdaji je avtor zapisal, da um deluje po pravilih kvantne fizike, telo pa po klasični Newtonovi fiziki in termodinamiki. To razumite kot prispodobo. Ali v možganih potekajo kvantni procesi, ki bi vplivali na mišljenje, znanost še raziskuje in tega ni potrdila.</p>
+      <p>Prispodoba pa dobro pove nekaj resničnega: misli niso vezane na kraj in čas, telo pa je. Mišica potrebuje čas, da se okrepi, sklep potrebuje čas, da se zaceli, živčni sistem potrebuje ponovitve, da se nauči novega giba. Noben ukaz uma tega ne pospeši.</p>
+      <p>Entropija in sintropija sta izraza iz fizike in biologije. Senzorna prenova ju uporablja v prenesenem pomenu: entropija za vse, kar sistem vodi v nered in izčrpanost, sintropija za vse, kar ga vodi v red, rast in zorenje. Pojma je razvijal slovenski fizik Andrej Detela.</p>
+    </div>
+  </details>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Um in telo sta pola, ki si pomagata, kadar se slišita.</li>
+      <li>Sintropija je rast, entropija razkroj. Zakrčenost sistem potiska v entropijo.</li>
+      <li>Telo potrebuje čas. Um ga ne more prehiteti brez posledic.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kje v življenju od telesa zahtevam tempo, ki ga ne zmore?</li>
+      <li>Kako se povezujeta moj spanec in moj dan?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL III ========== -->
+<div class="part-head" id="del3" data-toc="III · Membrana">
+  <div class="kicker">Del III</div>
+  <h2>Membrana: zaščitni plašč telesa</h2>
+  <p>Koža in mišice tik pod njo hkrati čutijo in varujejo. Šest poglavij o tem, kako ta plašč deluje, kako se zakrči in zakaj nas to odreže od sebe.</p>
+</div>
+
+<section class="ch" id="p8" data-toc="Kaj je membrana" data-num="8">
+  <div class="ch-eyebrow"><b>Poglavje 8</b><span>≈ 6 min branja</span></div>
+  <h2>Kaj je membrana</h2>
+  <p class="short">Vsak organizem ima mejo, ki ga loči od okolja. Pri človeku jo tvorijo koža in mišice pod njo.</p>
+  <div class="col">
+    <p>Vsako celico obdaja membrana. Ločuje jo od okolice in omogoča, da je samostojna. Skozi membrano poteka vsa izmenjava snovi in energije z okoljem. Če je preveč prepustna, se celica razlije v okolico. Če je preveč zaprta, izmenjava ne zadošča za življenje. Zdrava membrana je <strong>selektivno prepustna</strong>: hrano spusti noter, odpadke ven.</p>
+    <p>Tudi človek ima takšno mejo. V Senzorni prenovi ji pravimo <strong>membrana</strong>, v tem učbeniku tudi <strong>zaščitni plašč</strong>. Sestavljajo jo:</p>
+    <ul>
+      <li><strong>koža</strong> in čutila na površini, ki sprejemajo dražljaje od zunaj,</li>
+      <li>podkožna maščoba in <strong>vezivo (fascija)</strong>,</li>
+      <li><strong>skeletne mišice</strong>, ovite v fascijo, ki tvorijo plašč okoli vsega telesa. V njih so čutilna telesca, ki zaznavajo položaj in napetost telesa, zato prenašajo predvsem impulze od znotraj.</li>
+    </ul>
+    <p>V telesu so še druge membrane, na primer sluznice v prebavilih in dihalih. Te ločujejo prostore znotraj telesa in imajo pri zaznavanju manjšo vlogo.</p>
+  </div>
+
+  <figure class="figure">
+    <div class="svgwrap">
+    <svg viewBox="0 0 640 360" role="img" aria-label="Plasti membrane: koža, mišice in fascija, v jedru zbiralnik življenjske energije; občutek potuje do zavesti na površini možganov">
+      <defs>
+        <marker id="m-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--muted)"/></marker>
+        <marker id="m-ar-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--mind)"/></marker>
+        <marker id="m-ar-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--core)"/></marker>
+      </defs>
+      <ellipse cx="240" cy="200" rx="180" ry="140" style="fill:var(--muscle-soft);stroke:var(--skin);stroke-width:4"/>
+      <ellipse cx="240" cy="200" rx="150" ry="110" style="fill:var(--surface);stroke:var(--muscle);stroke-width:2;stroke-dasharray:6 4"/>
+      <ellipse cx="240" cy="222" rx="84" ry="54" style="fill:var(--core-soft);stroke:var(--core);stroke-width:2"/>
+      <text class="t-b" x="240" y="218" text-anchor="middle">zbiralnik</text>
+      <text class="t-s" x="240" y="236" text-anchor="middle">življenjske energije</text>
+      <line x1="240" y1="166" x2="240" y2="100" style="stroke:var(--core);stroke-width:2" marker-end="url(#m-ar-c)"/>
+      <line x1="158" y1="222" x2="100" y2="222" style="stroke:var(--core);stroke-width:2" marker-end="url(#m-ar-c)"/>
+      <text class="t-s" x="250" y="128">impulzi</text><text class="t-s" x="250" y="144">od znotraj</text>
+      <line x1="8" y1="150" x2="62" y2="170" style="stroke:var(--muted);stroke-width:2" marker-end="url(#m-ar)"/>
+      <line x1="8" y1="262" x2="66" y2="238" style="stroke:var(--muted);stroke-width:2" marker-end="url(#m-ar)"/>
+      <text class="t-s" x="4" y="120">dražljaji</text>
+      <text class="t-s" x="4" y="136">od zunaj</text>
+      <path d="M480 118 A60 60 0 0 1 600 118 Z" style="fill:var(--ventral-soft);stroke:var(--mind);stroke-width:3"/>
+      <text class="t-b" x="540" y="144" text-anchor="middle">zavest</text>
+      <text class="t-s" x="540" y="162" text-anchor="middle">površina možganov</text>
+      <path d="M380 112 Q 430 70 474 100" style="fill:none;stroke:var(--mind);stroke-width:2.5" marker-end="url(#m-ar-g)"/>
+      <text class="t-s" x="404" y="70">občutek</text>
+      <line x1="410" y1="246" x2="458" y2="246" style="stroke:var(--muted);stroke-width:1"/>
+      <text class="t" x="464" y="251">koža</text>
+      <line x1="372" y1="284" x2="458" y2="284" style="stroke:var(--muted);stroke-width:1"/>
+      <text class="t" x="464" y="289">mišice in fascija</text>
+      <line x1="320" y1="236" x2="458" y2="322" style="stroke:var(--muted);stroke-width:1"/>
+      <text class="t" x="464" y="327">jedro (trebušna votlina)</text>
+    </svg>
+    </div>
+    <figcaption>Telo kot ena velika celica. Barve sledijo izvirni sliki: temna črta je koža, rdeči pas mišice v fasciji, modro jedro zbiralnik življenjske energije, zeleno zavest. Dražljaj postane občutek, ko je dovolj močan, da ga membrana zazna in prenese do zavesti.</figcaption>
+  </figure>
+
+  <div class="col">
+    <h3>Membrana in zavest</h3>
+    <p>Predstavljajte si telo kot eno samo veliko celico. Dražljaj, ki zadene membrano, ustvari občutek, če je dovolj močan. Občutek nato po živcih potuje do možganov, kjer se ga zavemo: kaj je, kje je in od kod prihaja. To velja za dražljaje od zunaj (dotik, mraz) in od znotraj (lakota, polni mehur, utrip srca).</p>
+    <p>Zavest je pojav površine. Vključuje površino telesa in površino možganov, skorjo ali korteks. Kar se dogaja na koži in v mišicah, se odraža na površini možganov, kjer se zaznavanje začne.</p>
+    <p>Membrano si lahko predstavljate kot bobnič v ušesu. Bobnič spremeni nihanje zraka v zvok, membrana spremeni pritiske v telesu in okolici v občutek. Razlika je v tem, da bobnič samo posluša, membrana pa tudi deluje: z mišicami lahko vpliva na okolico.</p>
+    <h3>Česa ne čutimo</h3>
+    <p>Večine dogajanja v telesu se ne zavedamo: utripa srca, gibanja črevesja, nastajanja urina. Notranji dogodek začutimo šele, ko je dovolj močan, da se dotakne mišičnega plašča. Na primer, ko srce bije zelo močno.</p>
+    <p>Napetost mišic ne odloča, ali impulz zaznamo, močno pa vpliva na to, <em>kakšen</em> občutek ustvari. Kronično napete mišice zato popačijo sporočila iz telesa. Enako velja za dražljaje iz okolice.</p>
+  </div>
+  <p class="navdih">Navdih: zavest kot pojav površine in ego kot »projekcija površine« sta misli S. Freuda (<i>Jaz in Ono</i>, 1923), kot ju v telesni psihoterapiji razlaga A. Lowen.</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Membrano tvorijo koža, fascija in mišice tik pod kožo.</li>
+      <li>Zdrava membrana je selektivno prepustna: ni ne preveč odprta ne preveč zaprta.</li>
+      <li>Kronična napetost mišic popači občutke, ki pridejo do zavesti.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katere notranje občutke (lakota, žeja, utrujenost) opazim pozno?</li>
+      <li>Kje v telesu čutim najmanj, ko se ga dotaknem?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p9" data-toc="Poln mehur in prepustnost" data-num="9">
+  <div class="ch-eyebrow"><b>Poglavje 9</b><span>≈ 6 min branja</span></div>
+  <h2>Poln mehur in prepustnost membrane</h2>
+  <p class="short">Preveč mehka membrana spusti impulze mimo zavesti. Preveč toga jih ustavi. Zdrava jih prenese ob pravem času.</p>
+  <div class="col">
+    <h3>Primer polnega mehurja</h3>
+    <p>Ledvice ves čas filtrirajo kri. Urin teče v mehur, kjer ga zadržuje mišica zapiralka. Nastajanja urina ne čutimo, ker so ti dražljaji prešibki. Ko se mehur polni, pritisk narašča in se dotakne okoliških mišic. Počasi začutimo polni mehur. Občutek v umu ustvari potrebo: začnemo razmišljati, kje je stranišče. Ko mehur izpraznimo, dražljaj izgine in pozornost se vrne k prejšnjemu delu.</p>
+    <p>Vsi vemo, kako močan postane ta občutek, če dolgo ni priložnosti za stranišče. Na tem preprostem primeru lahko vidimo tri vrste membrane.</p>
+  </div>
+  <figure class="figure">
+    <div class="cards3">
+      <div class="card">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="44" style="fill:none;stroke:var(--muscle);stroke-width:2;stroke-dasharray:4 6"/><circle cx="60" cy="60" r="12" style="fill:var(--core-soft);stroke:var(--core);stroke-width:2"/><line x1="74" y1="54" x2="114" y2="34" style="stroke:var(--core);stroke-width:2"/><line x1="46" y1="66" x2="6" y2="88" style="stroke:var(--core);stroke-width:2"/></svg>
+        <h4>Preveč prepustna</h4>
+        <p>Impulzi gredo skozi, ne da bi jih zavest pravočasno zaznala. Odziv je nenaden in impulziven: mehur začutimo šele, ko je že kritično poln. Kljub velikemu nemiru je občutenje zmanjšano. Človek težko obvlada sebe in hitro ga preplavi okolica.</p>
+      </div>
+      <div class="card mid">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="44" style="fill:none;stroke:var(--muscle);stroke-width:6"/><circle cx="60" cy="60" r="12" style="fill:var(--core-soft);stroke:var(--core);stroke-width:2"/><line x1="74" y1="54" x2="100" y2="42" style="stroke:var(--core);stroke-width:2"/><circle cx="104" cy="40" r="5" style="fill:var(--mind)"/></svg>
+        <h4>Selektivna</h4>
+        <p>Impulz pride do mišičnega plašča in postane jasen občutek. Zavest ga zazna ob pravem času in se odzove primerno. Mišice se napnejo, ko je treba, in popustijo, ko ni več treba.</p>
+      </div>
+      <div class="card">
+        <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="42" style="fill:none;stroke:var(--muscle);stroke-width:16"/><circle cx="60" cy="60" r="12" style="fill:var(--core-soft);stroke:var(--core);stroke-width:2"/><line x1="74" y1="54" x2="88" y2="48" style="stroke:var(--core);stroke-width:2"/></svg>
+        <h4>Toga (oklep)</h4>
+        <p>Mišice so kot viteški oklep. Ustavijo impulze in zavrejo izražanje. Človek deluje nadzorovano, a manj spontano, včasih mehanično. Tudi občutenje je zmanjšano, ker se mišice ne morejo svobodno odzvati.</p>
+      </div>
+    </div>
+    <figcaption>Lestvica prepustnosti membrane. Cilj Senzorne prenove je srednja pot: prožna, a jasna meja.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Toga membrana je značilna za ljudi, ki so morali močno omejevati svoja čustva in v stresu ohraniti nadzor. Telo to doseže z mišično napetostjo in zadrževanjem diha. Prepona, notranja membrana med trebušno in prsno votlino, pri tem skrbi, da energija čustev iz trebuha »ne udari v glavo« in ego ne izgubi nadzora.</p>
+    <h3>Tanka in debela koža</h3>
+    <p>Membrana, posebej koža, nas tudi varuje. Prestreže dražljaje in sistemu omogoči, da jih loči in presodi, na katere naj se odzove. Kadar je koža energijsko podhranjena, na primer ob dolgotrajni stresni pripravljenosti, nas dražljaji od zunaj hitro preplavijo. Sledijo lahko močan strah, panika ali groza.</p>
+    <p>Ljudje to dobro poznamo. Za preobčutljive pravimo, da imajo <em>tanko kožo</em>, za tiste z močno napetimi mišicami pa, da imajo <em>debelo kožo</em>.</p>
+    <h3>Mišice imajo dve nalogi</h3>
+    <p>Senzorna prenova zmanjšuje nepotrebno napetost, ker ta otežuje pretvorbo dražljajev v občutke. A nekaj napetosti je potrebne. Pomislite, kaj naredijo trebušne mišice, ko vidite, da vas bo nekdo udaril v trebuh. Mišice gib omogočajo in ga tudi zaustavljajo: zapiralka mehurja, zapiralka črevesa, mišice, ki ujamejo udarec.</p>
+    <p>Vaje Senzorne prenove zmanjšujejo <strong>senzorno atrofijo</strong>, torej slabšo pretvorbo dražljajev v občutek in slabši prenos občutka do možganov. Izboljšajo prepoznavanje občutkov v možganih in izvedbo ukazov v mišicah. Tej povezavi med možgani in mišicami pravimo <strong>navpična povezanost</strong>. Ko občutke bolje prepoznamo, jih tudi lažje ubesedimo.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Preveč prepustna membrana vodi v impulzivnost, preveč toga v okorelost.</li>
+      <li>Tanka in debela koža opisujeta stanje zaščitnega plašča.</li>
+      <li>Mišice gib omogočajo in ustavljajo. Cilj ni nič napetosti, ampak prava napetost ob pravem času.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Imam bolj tanko ali bolj debelo kožo? V katerih situacijah?</li>
+      <li>Ali pogosto opazim potrebo (lakota, stranišče, počitek) šele, ko postane nujna?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p10" data-toc="Zaščitna vloga kože" data-num="10">
+  <div class="ch-eyebrow"><b>Poglavje 10</b><span>≈ 5 min branja</span></div>
+  <h2>Zaščitna vloga kože</h2>
+  <p class="short">Membrana je kot državna meja, ki je lahko bolj ali manj odprta. Zaščita je nujna, a mora biti prilagodljiva.</p>
+  <div class="col">
+    <p>Poznavanje membrane je pomembno za učitelje in za vse, ki izvajajo vaje. Učitelju pomaga razumeti, v kakšnem stanju je telo stranke s kronično bolečino, gibalnimi omejitvami ali čustveno napetostjo.</p>
+    <p>Ena najpomembnejših nalog membrane je zaščita središča telesa pred vplivi okolja. Stopnja zaščite pa se mora prilagajati. Skozi membrano namreč prihaja tudi energija, ki je za življenje nujna in nam pove, kaj se dogaja okoli nas. Membrano si lahko predstavljamo kot <strong>državno mejo</strong>, ki je za ljudi in blago bolj ali manj prepustna.</p>
+    <h3>Koža kot ščit</h3>
+    <p>Osnovni zaščitni sloj je koža. Izraza »debela« in »tanka« koža imata delno telesno podlago, saj je tanka koža res bolj občutljiva na bolečino. Večinoma pa sta prispodobi, ki dobro opišeta, kako se ljudje odzivamo na pritiske okolice. Občutljivost kože je odvisna od njene živosti, torej od tega, koliko je energijsko napolnjena.</p>
+    <p>Da bi zavarovala središče telesa, zavest dvigne napetost v membrani in s tem omrtviči njeno površino. Površina takrat postane trša in manj živa. Oklep školjke ali polža je lep primer, kako narava utrdi površino, da zaščiti mehko notranjost.</p>
+    <h3>Koža in zavest</h3>
+    <p>Koža ni le ščit, temveč je tesno povezana z zavestjo. Ko zaspimo, se postopno nehamo zavedati sebe in zunanjega sveta. Zaznavanje dražljajev upade, zato lahko spimo. Podobno deluje anestetik: če je spanec dovolj globok, bolečine ne čutimo.</p>
+    <p>Koža loči notranji in zunanji svet ter je občutljiva na oba. Z vidika Senzorne prenove površina telesa ne vključuje le kože, ampak tudi podkožje, fascijo in mišice. Vsa čutila so na površini. Če zmanjšamo njihovo občutljivost, zmanjšamo tudi stik zavesti s svetom. Pod hudim stresom se zaznavanje okolice zoži: lahko spregledamo vlak na prehodu ali ne začutimo skritih namenov sogovornika.</p>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>Freudov zaščitni ščit</span></summary>
+    <div class="in">
+      <p>Sigmund Freud je v delu <em>Onkraj načela ugodja</em> (1920) organizem opisal kot majhen mehurček živega tkiva sredi sveta, polnega močnih energij. Brez zaščitnega ščita bi ga dražljaji uničili. Zato je po Freudu zaščita pred dražljaji za živo bitje skoraj pomembnejša od samega sprejemanja dražljajev.</p>
+      <p>Kožo je opisal kot posebno prevleko, odporno na dražljaje, in zapisal, da zunanja plast, ko se utrdi, do neke mere izgubi lastnosti živega. Zavest je razumel kot funkcijo površine, kjer se stikata notranji in zunanji svet.</p>
+      <p>Telesni psihoterapevti, med njimi Wilhelm Reich in Alexander Lowen, so te misli prenesli na mišice: kronična napetost je ščit, ki varuje pred bolečino, a hkrati otopi občutenje.</p>
+    </div>
+  </details>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Membrana varuje središče telesa, a mora ostati prilagodljiva.</li>
+      <li>Ko zaščita postane stalna, površina otrdi in čutimo manj.</li>
+      <li>Pod stresom se zaznavanje zoži, zato spregledamo pomembne stvari.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kdaj sem pod stresom nekaj pomembnega spregledal(a)?</li>
+      <li>Kje je moja meja preveč zaprta in kje preveč odprta?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p11" data-toc="Zavest kot svetilka" data-num="11">
+  <div class="ch-eyebrow"><b>Poglavje 11</b><span>≈ 5 min branja</span></div>
+  <h2>Zavest kot svetilka</h2>
+  <p class="short">Zavest osvetli le del sveta. Kadar sveti samo navzven, notranji svet ostane v temi.</p>
+  <div class="col">
+    <p>Zavedanje se zmanjša tudi ob narkozi, ki deluje neposredno na možgane in ne na membrano. Na zavest torej vplivata dve površini: površina telesa in površina možganov.</p>
+    <p>Da se nečesa zavemo, mora impulz dovolj močno vplivati na površino telesa. Ustvari občutek, ki nato na površini možganov sproži zaznavo. Površina možganov deluje kot zaslon, telo pa kot sprejemnik, ki signale iz okolice in notranjosti prenese na zaslon kot sliko.</p>
+    <p>Zavest si lahko predstavljamo kot luč v temi nezavednega. A ta luč ni reflektor, ki bi osvetlil vse. Bolj je podobna <strong>ročni svetilki</strong>: osvetli majhen del, ostalo ostane v še večji temi. Podobno radar vidi le predmete, na katere je usmerjen njegov snop.</p>
+    <p>Imamo pa tudi nezavedni sistem, ki opazuje vse okoli nas, tudi tam, kamor zavest ne sveti. Od tam pridejo občutki, ki zavest usmerijo: »nekaj mi pravi«, naj pogledam tja. Impulzi lahko pridejo tudi od znotraj. Lakota narašča, dokler ni dovolj močna, da preusmeri zavest. Poskrbimo zanjo in se vrnemo k drugemu.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+    <svg viewBox="0 0 640 220" role="img" aria-label="Snop zavesti: močno osvetljuje zunanji svet, notranji svet ostaja v temi">
+      <polygon points="306,110 24,82 24,138" style="fill:var(--line)"/>
+      <polygon points="334,110 616,26 616,194" style="fill:var(--warm-soft);stroke:var(--warm);stroke-width:1"/>
+      <circle cx="320" cy="110" r="16" style="fill:var(--warm)"/>
+      <text class="t-b" x="600" y="100" text-anchor="end">zunanji svet</text>
+      <text class="t-s" x="600" y="120" text-anchor="end">zasloni, delo, hrup, novice</text>
+      <text class="t-b" x="34" y="66">notranji svet</text>
+      <text class="t-s" x="34" y="160">dih, mišice, čustva, lakota</text>
+      <text class="t-s" x="320" y="150" text-anchor="middle">zavest</text>
+    </svg>
+    </div>
+    <figcaption>Snopa nikoli ne moremo usmeriti v oba svetova hkrati. Hiperstimulacija sodobnega sveta ga obrne navzven, zato notranji svet ostane v temi.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Zunanji in notranji svet nikoli nista hkrati v polni svetlobi. Ko se posvečamo zunanjemu, manj vidimo notranjega, in obratno. Sodobni svet nas s stalnimi dražljaji vleče navzven. Notranjemu svetu zato zmanjka pozornosti, ki bi jo potreboval, da bi navade in vzorce usklajeval s sedanjostjo in s spremembami, ki jih prinaša čas. To pomanjkanje pozornosti je eden glavnih vzrokov za senzorno-motorično amnezijo.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Ves dan ste bili v službi zbrani na zaslon in roke. Šele ko zvečer sedete na kavč, opazite, da vas že ure boli med lopaticami in da niste nič jedli od kosila. Občutki so bili ves čas tu. Svetilka je svetila drugam.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Zavest je kot ročna svetilka: osvetli le del.</li>
+      <li>Ko sveti navzven, notranji svet ostane v temi.</li>
+      <li>Premalo pozornosti navznoter vodi v senzorno-motorično amnezijo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Koliko časa na dan moja svetilka sveti navznoter?</li>
+      <li>Kateri občutek opazim šele zvečer?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p12" data-toc="Ego in ščitenje" data-num="12">
+  <div class="ch-eyebrow"><b>Poglavje 12</b><span>≈ 6 min branja</span></div>
+  <h2>Ego in ščitenje</h2>
+  <p class="short">Ko se otrok ne more ne upreti ne umakniti, se zavaruje tako, da preneha čutiti. Ta zaščita lahko ostane vse življenje.</p>
+  <div class="col">
+    <p>Zavest je hkrati dejavna in sprejemajoča. Svetilke ne moremo kar ugasniti, lahko pa jo večino časa usmerjamo. Del zavesti, ki zaznava in se odziva, imenujemo <strong>ego</strong>. Ego spreminja okolico, da zadovolji naše potrebe, ali pa nas okolici prilagodi. Oviro odstrani s poti, in če to ni mogoče, spremeni vedenje, da jo obide. Pri tem se spremeni napetost v membrani. Ta sprememba je zavestna in kratkotrajna: ko je ovira premagana, popusti.</p>
+    <p>Kaj pa, ko ovire ne moremo ne premagati ne obiti? Ego se mora sprijazniti, čeprav ga stanje moti. Če tak odnos traja dolgo, se potreba, da bi resničnost zanikali, krepi. Najbolj očitno je to v otroštvu, ko otrok ne more premagati ali se izogniti staršem. Napetost membrane se dvigne in ostane dvignjena, nezavedno. Omogoča, da otrok ne čuti sebe in neznosnega stanja v sebi. To sčasoma vpliva na ves organizem.</p>
+    <h3>Ščitenje</h3>
+    <p>Zaščita pred dražljajem, ki se mu ni mogoče ubraniti, je del prilagoditvene naloge ega. Varuje celovitost človeka. Ego lahko zavrne celo dele zunanje resničnosti.</p>
+    <p>Mnogi ljudje opisujejo svoje otroštvo kot srečno in starše kot ljubeče, čeprav hkrati povedo za pretepanje, kazni in stalne kritike. Da bi otrok to preživel, mora potisniti upor in se podrediti. To zmore le tako, da ne čuti svojih čustev in ne vidi, kako se starši v resnici vedejo. Membrano tako uporabi za obrambo pred premočnimi dražljaji <em>od znotraj</em>, čeprav bi morala stanje v notranjosti čim bolj zvesto prenesti v zavest.</p>
+    <p>Če nemoč traja dolgo, ta obramba postane kronična in nezavedna. Ostane tudi v odrasli dobi, ko človek ni več nemočen. V novih situacijah se odzove, kot da je še vedno otrok. Nasmeh postane maska, ki je ne more več sneti. Zmožnost, da se na resničnost odzove čustveno zrelo, se zmanjša.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Prispodoba</div>
+    <p>Freud je ego primerjal z jezdecem na konju, ki predstavlja moč nagonov in čustev. Togi jezdec, ki se konja oklepa in ga ne čuti, ob nenadnem skoku hitreje pade. Jezdec, ki se giblje s konjem, ostane v sedlu. Varnost togega ega je hkrati resnična in navidezna: telo je otopelo, malo čustev pride do površine, a pritisk v notranjosti narašča.</p>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>Freud o notranjih vzburjenjih</span></summary>
+    <div class="in">
+      <p>Freud je opozoril, da navadno ne potrebujemo ščita pred vzburjenji, ki nastajajo v telesu: pred užitkom, bolečino in impulzi, povezanimi s čustvi. Če jih ne bi zaznavali, organizem ne bi mogel preživeti in se izpolniti.</p>
+      <p>Kadar pa notranja vzburjenja prinesejo preveč nelagodja, obstaja težnja, da z njimi ravnamo, kot da prihajajo od zunaj. Takrat se ščit uporabi proti njim. Ego lahko z dvigom napetosti membrane bolečim občutkom prepreči dostop do zavesti.</p>
+      <p>Ker se zanikanje resničnosti doseže z otopitvijo membrane, ta proces hkrati utrjuje ego. Tog ego in toga membrana gresta skupaj.</p>
+    </div>
+  </details>
+  <p class="navdih">Navdih: S. Freud, <i>Onkraj načela ugodja</i> (1920) in <i>Jaz in Ono</i> (1923), v branju A. Lowena (<i>The Betrayal of the Body</i>, 1967).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Ego je dejavni del zavesti, ki ovire premaga, obide ali se jim prilagodi.</li>
+      <li>Otrok, ki se ne more braniti, preneha čutiti. Ta zaščita lahko postane trajna.</li>
+      <li>Tog ego in toga membrana se podpirata. Varnost, ki jo dajeta, je delno navidezna.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kako opišem svoje otroštvo? Se ujema s tem, kar čutim, ko pomislim nanj?</li>
+      <li>Kdaj se nasmehnem, čeprav mi ni do smeha?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p13" data-toc="Krhko ravnovesje in opozorila" data-num="13">
+  <div class="ch-eyebrow"><b>Poglavje 13</b><span>≈ 6 min branja</span></div>
+  <h2>Krhko ravnovesje in opozorila</h2>
+  <p class="short">Vzdrževanje oklepa stane veliko energije. Telo nas na to opozarja z bolečino in nelagodjem.</p>
+  <div class="col">
+    <h3>Krhko ravnovesje</h3>
+    <p>Ego si močno prizadeva ohraniti navidezno ravnovesje. Zato dviguje napetost membrane in ohranja razdaljo do telesne resničnosti. Togost membrane in ega rasteta skupaj.</p>
+    <p>Takšno stanje je drago. Energijo porablja oklep sam. Še več je porabi telo, ki z vse večjim pritiskom poskuša zavesti sporočiti, kako je v resnici. Sistem se sčasoma izčrpa. Raste verjetnost bolezni, poškodb in obrabe. Hkrati otopelost povečuje lakoto po občutenju, ki lahko vodi v iskanje užitkov, odvisnosti, pretiran spiritualizem ali tesnobo.</p>
+    <h3>Debela koža sodobnega človeka</h3>
+    <p>Psihološko gledano ima veliko sodobnih ljudi debelo kožo. Manj so občutljivi za druge, za močne dražljaje okolja (oglasi, mediji, hrup) in za sebe. Koža kot zunanja meja osebnosti postane trdna stena. Varuje pred svetom, a človeka loči od lastnih občutkov.</p>
+    <p>Takšna maska prenese velik pritisk in ohrani pokončno držo in nasmeh, tudi ko odnos do časa, energije in okolice ni več vzdržen. V hitrem svetu je takšna osebnost pogosto uspešna. A dolgo ne zdrži. Prej ali slej maska popusti in sledijo izgorelost, kronična utrujenost, depresija ali druge bolezni sodobnega časa.</p>
+    <p>Drugi ljudje imajo tanko, energijsko podhranjeno kožo in krhko mejo. Okolica jih hitro preobremeni. Branijo se z umikom: v samoto, v virtualni svet družbenih omrežij ali v nezaupanje do okolice.</p>
+    <h3>Energija ne izgine</h3>
+    <p>Če povzamemo: človek pride v težave, če je stalno preveč stimuliran in nima načina, da bi presežno energijo sprostil. Energija, ki jo telo ustvari kot odziv na okolje, ne izgine samo od sebe, tudi če jo ego zanika. Če se ne izrazi skozi gibanje, ostane ujeta v membrani ali pod njo. Povzroča nestabilnost, nesimetrijo in neučinkovitost.</p>
+    <h3>Opozorila</h3>
+    <p>Telo, ki resničnosti ne more olepšati, kot to zna zavest, nato pritiska, naj se stanje uredi. Zavest ta pritisk čuti kot <strong>bolečino ali nelagodje</strong>. Ko napetost preseže mejo, ki jo človek še prenese, se odzove na enega od načinov:</p>
+    <ul>
+      <li>se še bolj otopi (debelejša koža, več tesnobe, stalna pripravljenost živčnega sistema),</li>
+      <li>energijo izrazi na »dovoljene« načine: adrenalinski športi, pretirana vadba, spolnost brez stika,</li>
+      <li>diha plitveje in tako ustvari manj energije (več o tem v delu VII),</li>
+      <li>se omami (alkohol, droge, pa tudi moč, denar, slava),</li>
+      <li>se utrudi (deloholizem, izčrpavajoči odnosi, v katerih se pusti izkoriščati).</li>
+    </ul>
+    <p>Večja ko je nevarnost, da bi bolečina predrla oklep, več energije gre za masko, ki jo kažemo svetu. Na koncu oklep zapre resničnega, čutečega človeka. Telo s svojo inteligenco, intuicijo in globokim zaznavanjem ne more več vplivati na misli in odločitve. Te pa oblikujejo sedanjost in s tem prihodnost.</p>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>termodinamika kot prispodoba</span></summary>
+    <div class="in">
+      <p>Prvi zakon termodinamike pravi, da se energija ne ustvari iz nič in ne izgine, le spreminja obliko. V izvirni izdaji je bil zakon naveden kot dokaz, da se mora vsaka čustvena energija nekje izraziti.</p>
+      <p>Bolje ga je razumeti kot prispodobo. Čustva niso merljiva energija v fizikalnem smislu. A izkušnja kaže podobno: kar je bilo vzbujeno in ni bilo izraženo, se pogosto pokaže drugje, na primer kot napetost, nemir ali bolezen.</p>
+    </div>
+  </details>
+  <p class="navdih">Navdih: »debela koža« sodobnega človeka po A. Lowenu, <i>Narcissism: Denial of the True Self</i> (1983).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Oklep porablja energijo in sistem počasi izčrpa.</li>
+      <li>Bolečina in nelagodje sta opozorili telesa, da je stanje treba urediti.</li>
+      <li>Omama, utrujanje in plitev dih so načini, kako oklep vzdržujemo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katerega od naštetih načinov uporabljam, ko pritisk postane prevelik?</li>
+      <li>Kaj bi telo reklo, če bi lahko govorilo namesto mene?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL IV ========== -->
+<div class="part-head" id="del4" data-toc="IV · Red in nered v gibu">
+  <div class="kicker">Del IV</div>
+  <h2>Red in nered v gibu</h2>
+  <p>Kako se gib uči, kako se pozabi in kaj nam sporoča bolečina. Del, ki je najbližje vajam.</p>
+</div>
+
+<section class="ch" id="p14" data-toc="Red in nered" data-num="14">
+  <div class="ch-eyebrow"><b>Poglavje 14</b><span>≈ 5 min branja</span></div>
+  <h2>Red in nered</h2>
+  <p class="short">Otroci se gibanja učijo z radovednostjo in brez boja. Odrasli s pristopom »naredi ali umri« hitro dosežemo in hitro izgubimo.</p>
+  <div class="col">
+    <p>Osnovni namen Senzorne prenove je povečati red pri krajšanju in daljšanju mišic, ki sodelujejo v gibu. Mišice v gibu delajo na dva načina: s krajšanjem (krčenjem) in daljšanjem (popuščanjem). V idealnih pogojih, brez senzorno-motorične amnezije, pri vsakem, še tako majhnem gibu vse mišice sodelujejo usklajeno. Gib je urejen in učinkovit.</p>
+    <p>Naloga možganov je, da mišice vodijo in usklajujejo. Zato potrebujejo z njimi dobro povezavo. Bolj ko je sistem urejen, bolj zapletene gibe zmore. Gib, ki ga obvladamo, je lahkoten, neboleč in prijeten.</p>
+    <p>Če je gib za nas prezahteven, začutimo strah in odpor. Hkrati pa nas nekaj sili, da ga vseeno izvedemo, četudi čez mejo zmožnosti. Pri otrocih tega ne vidimo. Ne izvajajo gibov, za katere še niso pripravljeni. Ostajajo v območju prijetnega, ki jim kaže, kje je meja trenutnega znanja. Vodi jih radovednost, ki omogoča počasno, a stalno napredovanje, brez boja s seboj.</p>
+    <p>Ta na videz počasen pristop pripelje do napredka, ki ga odrasli s pristopom <strong>»naredi ali umri«</strong> (pridnost, trud, premagovanje sebe) ne dosežemo. Kar se otrok nauči skozi igro, mu ostane. Kar si odrasel pribori s silo, pogosto hitro izgubi.</p>
+    <h3>Od nereda do SMA</h3>
+    <p>Prevelika pridnost vodi v vse večji nered med krajšanjem in daljšanjem mišic. Temu pravimo <strong>senzorno-motorična amnezija</strong> (SMA). Ko izgubljamo red, izgubljamo tudi kompleksnost gibanja. Postajamo okorni, trdi in neučinkoviti, počutimo se starejši. Gibanje postane nadležno, nekaj, kar <em>moramo</em>. Stanje se izboljša le z učenjem gibanja, pri katerem negujemo občutek. Ko je gib spet urejen, nam je v veselje.</p>
+    <p>Nered v gibanju se pogosto pokaže tudi na drugih področjih: v tem, kako uravnavamo čustva in sprejemamo odločitve. Manj ko čustva prepoznamo in vodimo, manj premišljeno odločamo in bolj »robotsko« izvajamo naloge. Zmanjka nam pozornosti za učinkovitost: kako z manj napora in več premisleka doseči boljši rezultat.</p>
+  </div>
+  <p class="navdih">Navdih: učenje giba z radovednostjo in brez napora po M. Feldenkraisu; senzorno-motorična amnezija po T. Hanni (<i>Somatics</i>, 1988).</p>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Otrok, ki se uči hoditi, pade stokrat in vsakič vstane z nasmehom. Ne trenira, igra se. Odrasel, ki se je odločil, da bo »končno začel teči«, prvi teden preteče deset kilometrov, drugi teden ga bolijo kolena, tretji teden ne teče več.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Urejen gib pomeni usklajeno krajšanje in daljšanje mišic.</li>
+      <li>Radovednost uči trajno, sila začasno.</li>
+      <li>Nered v gibu se pogosto pokaže tudi v čustvih in odločitvah.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Pri katerih gibih se še vedno »prisilim«?</li>
+      <li>Kaj bi pomenilo, da se vaje lotim kot igre?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p15" data-toc="SMA in pandikulacija" data-num="15">
+  <div class="ch-eyebrow"><b>Poglavje 15</b><span>≈ 5 min branja</span></div>
+  <h2>Senzorno-motorična amnezija in pandikulacija</h2>
+  <p class="short">Ko napetost postane navada, možgani pozabijo, kako mišico čutiti in sprostiti. Z voljo tega ne popravimo, s pozornim gibom pa.</p>
+  <div class="col">
+    <p>Vsak refleks ima zaznavni in gibalni del. Ko odziv postane navada, torej se zgodi sam od sebe, smo izgubili nadzor nad tem gibom in tudi občutek zanj. Temu pravimo <strong>senzorno-motorična</strong> ali <strong>čutno-gibalna amnezija</strong> (SMA). Je zelo pogost pojav in predvidljiva posledica dolgotrajnega stresa. Ponavljajoči se stresni dražljaji povzročijo, da zavestni nadzor nad večjimi skupinami mišic izgine. Najpogosteje se to zgodi v središču telesa, kjer se stikata medenica in prsni koš. Pri zgornjem delu trupa so to vrat, ramena in mišice med lopaticami.</p>
+    <p>Pri SMA teh mišic ne moremo več zavestno čutiti ali voditi. Kdor na primer poskuša sprostiti »pozabljen« ledveni del, mu z voljo ne uspe. Mišice ostanejo toge in se ne odzivajo. Nasvet »samo sprosti se« zato ne deluje: ne moremo sprostiti nečesa, česar ne čutimo.</p>
+    <h3>Pandikulacija</h3>
+    <p>Opazujte mačko, ko se zbudi. Pretegne se, mišice zategne in jih nato počasi spusti. Temu pravimo <strong>pandikulacija</strong>. Je naravni način, kako telo ohranja stik med možgani in mišicami in ostaja gibko. Ljudje to počnemo, ko zehamo in se pretegnemo.</p>
+    <p>Ko je SMA močna, potreba po pretegovanju upada in počasi izgine. Živali jo ohranijo, ker morajo biti vedno pripravljene na hiter gib. Pri ljudeh v industrijski družbi ni tako. Močno SMA uspešno odpravimo le s somatskim pristopom, ki znova vključi zavestni del možganov v vodenje in občutenje giba. Pri zelo močni SMA je potrebna tudi aktivna terapija z učiteljem.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 2 minuti</div>
+    <ol>
+      <li>Sedite udobno. Pri vdihu zelo počasi dvignite ramena proti ušesom, samo do približno 70 % moči.</li>
+      <li>Za trenutek zadržite in opazite, kje čutite napetost.</li>
+      <li>Ramena spuščajte trikrat počasneje, kot ste jih dvignili.</li>
+      <li>Na dnu počakajte tri dihe. Se ramena zdaj zdijo nižje kot prej?</li>
+    </ol>
+    <p>Ponovite trikrat. Nikoli ne pojdite v bolečino.</p>
+  </div>
+  <p class="navdih">Navdih: T. Hanna, <i>Somatics</i> (1988).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>SMA pomeni, da možgani ne čutijo in ne vodijo več dobro dela mišic.</li>
+      <li>Najpogosteje prizadene središče telesa ter vrat in ramena.</li>
+      <li>Pandikulacija (zategni, nato počasi spusti) obnovi stik.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kdaj sem se nazadnje z užitkom pretegnil(a)?</li>
+      <li>Kateri del telesa čutim kot »pozabljen«?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p16" data-toc="Pomen bolečine" data-num="16">
+  <div class="ch-eyebrow"><b>Poglavje 16</b><span>≈ 4 min branja</span></div>
+  <h2>Pomen bolečine</h2>
+  <p class="short">Bolečina je kot opozorilna lučka na armaturi. Ne prelepimo je, ampak pogledamo, kaj sporoča.</p>
+  <div class="col">
+    <p>Ko odrasli učenju in raziskovanju namenjamo vse manj časa, mišice izgubljajo sposobnost daljšanja. Usklajenost krajšanja in daljšanja se slabša, gibanje postaja neurejeno. Neurejenost se prenese na delo in življenje.</p>
+    <p>Najprej to začutimo kot nelagodje in odpor. Če stanja ne uredimo, sledi bolečina. Poskušamo jo premagati, čeprav ne poznamo vzroka. Kratkoročno nam uspe, zato ne opazimo, da je pristop napačen. Sčasoma se na bolečino navadimo in sprijaznimo. Tako nastanejo pogoji za kronično bolečino: močno napete mišice, preobremenjeno vezivo, sklepi in kosti. Gibanje izgubi lahkotnost in užitek.</p>
+    <p>Bolečina nas torej opozarja na nered, ki ga nosimo v sebi ali okoli sebe. Tehnologija, medicina in zdravila nam bolečino olajšajo, kar je dragoceno. Z vzrokom pa se ukvarjajo redkeje.</p>
+    <p>Bolečina je kot <strong>opozorilna lučka na armaturi avtomobila</strong>. Ko v nekem sistemu nastane preveč nereda, zasveti in nas usmeri, da težavo rešimo sami ali pri strokovnjaku. Pri avtu to razumemo, saj vemo, da bo škoda večja, če lučko prezremo. Pri sebi pa jo pogosto prezremo in se potem čudimo neredu.</p>
+    <p>V preteklosti so imeli ljudje do bolečine drugačen odnos. Brez bolnišnic, lekarn, pokojnin in bolniške odsotnosti je bil skrben odnos do telesa nujen za preživetje. Danes ga lahko izberemo sami, iz spoštovanja do sebe.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Bolečina opozarja na nered v gibanju ali življenju.</li>
+      <li>Navada na bolečino ustvari pogoje za kronično bolečino.</li>
+      <li>Lajšanje bolečine je koristno, a ne nadomesti iskanja vzroka.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katero »lučko« že dolgo prelepljam?</li>
+      <li>Kaj bi mi moja bolečina rekla, če bi znala govoriti?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p17" data-toc="Bolečine pri vajah" data-num="17">
+  <div class="ch-eyebrow"><b>Poglavje 17</b><span>≈ 6 min branja</span></div>
+  <h2>Bolečine pri vajah</h2>
+  <p class="short">Bolečina ne pomeni »prezri« ali »nehaj«. Pomeni »opazi, razčleni, spremeni«.</p>
+  <div class="col">
+    <p>Pri učenju se boste pogosto srečali z bolečino med vajami ali po njih. Ker bolečina opozarja na nered, je tudi pri somatskem gibu znak, da gib izvajate premalo urejeno, nadzorovano in občuteno. Navada nam veleva, da jo prezremo. To ni rešitev.</p>
+    <h3>Najpogostejši vzroki</h3>
+    <ol>
+      <li><strong>Gib je prevelik.</strong> Mišice, ki se krčijo, potegnejo dlje, kot se nasprotne mišice zmorejo podaljšati. Naredite manjši gib.</li>
+      <li><strong>Okončine premikajo središče.</strong> Pravilno je obratno: gibi središča telesa s pomočjo okončin premikajo telo proti cilju. Takrat bolečine ni, ker gib ustreza obliki in nalogi mišic, sklepov in kosti. Če glavo dvigate samo z vratom, trup pa ne sodeluje, čutite nelagodje ali bolečino v vratu in glavi. Če glavo dvigate predvsem s trebuhom in prsnim košem, vrat pa le pomaga, hrbet pa se daljša, bolečine ni. Zaradi sodobnega načina življenja večina uporablja okončine namesto središča.</li>
+      <li><strong>Okončine pomagajo preveč.</strong> Bolečina v okončinah med gibom pomeni, da mišice rok ali nog preveč pomagajo središču. Pri vaji za sprostitev hrbta se to pokaže, ko stopalo preveč pritiskamo v tla in nas zgrabi krč v meči ali zadnji stegenski mišici.</li>
+      <li><strong>Prebujajo se stare bolečine.</strong> Po vajah in delavnici čustev se pogosto pojavijo bolečine, ki jih dolgo niste čutili ali ste mislili, da so minile. Ko zakrčenost popušča in razumevanje raste, membrana sprosti potlačene občutke, čustva in spomine, ker ni več nevarnosti, da bi izgubili nadzor. Te bolečine se niso vrnile. Ves čas so bile tu, le čutili jih niste. Zdaj jih čutite, ker se občutek vrača. To vam omogoča bolj realne odločitve. Več v poglavju 24.</li>
+    </ol>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+    <svg viewBox="0 0 640 300" role="img" aria-label="Gib se začne v središču telesa in se postopno širi na kolke in ramena ter nato na roke, noge, vrat in glavo">
+      <defs><marker id="m-ar-v" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ventral)"/></marker>
+      <marker id="m-ar-s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--symp)"/></marker></defs>
+      <circle cx="320" cy="150" r="140" style="fill:var(--surface);stroke:var(--line);stroke-width:2;stroke-dasharray:6 6"/>
+      <circle cx="320" cy="150" r="90" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.5;stroke-dasharray:6 6"/>
+      <circle cx="320" cy="150" r="42" style="fill:var(--ventral-soft);stroke:var(--ventral);stroke-width:2"/>
+      <text class="t-b" x="320" y="146" text-anchor="middle">1 središče</text>
+      <text class="t-s" x="320" y="164" text-anchor="middle">trebuh, prsni koš</text>
+      <text class="t-b" x="320" y="82" text-anchor="middle">2 kolki, ramena</text>
+      <text class="t-b" x="320" y="30" text-anchor="middle">3 roke, noge, vrat, glava</text>
+      <line x1="356" y1="170" x2="430" y2="214" style="stroke:var(--ventral);stroke-width:2.5" marker-end="url(#m-ar-v)"/>
+      <line x1="284" y1="170" x2="210" y2="214" style="stroke:var(--ventral);stroke-width:2.5" marker-end="url(#m-ar-v)"/>
+      <line x1="320" y1="192" x2="320" y2="272" style="stroke:var(--ventral);stroke-width:2.5" marker-end="url(#m-ar-v)"/>
+      <text class="t-b" x="8" y="120" style="fill:var(--ventral)">pravilno</text>
+      <text class="t-s" x="8" y="140">gib začne središče,</text>
+      <text class="t-s" x="8" y="158">okončine mu sledijo</text>
+      <line x1="610" y1="196" x2="470" y2="196" style="stroke:var(--symp);stroke-width:2.5;stroke-dasharray:6 4" marker-end="url(#m-ar-s)"/>
+      <text class="t-b" x="632" y="120" text-anchor="end" style="fill:var(--symp)">napačno</text>
+      <text class="t-s" x="632" y="140" text-anchor="end">okončine vlečejo</text>
+      <text class="t-s" x="632" y="158" text-anchor="end">središče</text>
+    </svg>
+    </div>
+    <figcaption>Zaporedje, po katerem dodajate dele telesa: najprej središče, nato kolki in ramena, na koncu roke, noge, vrat in glava. Tempo določa občutek.</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Rešitev pri vsaki vaji</div>
+    <p>Gib začnite s preprostim premikom središča. Postopoma dodajajte kolke, ramena, noge, roke, vrat in glavo. Kdaj in kako hitro dodate nov del, naj odloči občutek. Če stopnjujete prehitro, možgani preklopijo na samodejno vodenje in zamrznejo del sklepov, da gib poenostavijo. To čutite kot togost in pretiran trud. Takrat upočasnite.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Bolečina pri vaji pomeni: gib je prevelik, prehiter ali ga vodi napačen del telesa.</li>
+      <li>Gib začne središče, okončine mu sledijo.</li>
+      <li>Stare bolečine, ki se vrnejo, pogosto pomenijo, da se občutek prebuja.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kako se navadno odzovem na bolečino: jo prezrem, se ustrašim ali jo opazujem?</li>
+      <li>Kateri del telesa pri vajah najprej »prevzame« gib?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL V ========== -->
+<div class="part-head" id="del5" data-toc="V · Otroštvo in sodobni svet">
+  <div class="kicker">Del V</div>
+  <h2>Otroštvo in sodobni svet</h2>
+  <p>Kako način življenja, družina in tempo oblikujejo telo že od otroštva. Brez iskanja krivca: večina staršev je dala, kar je imela.</p>
+</div>
+
+<section class="ch" id="p18" data-toc="Sodobna družina in dom" data-num="18">
+  <div class="ch-eyebrow"><b>Poglavje 18</b><span>≈ 5 min branja</span></div>
+  <h2>Sodobna družina in dom</h2>
+  <p class="short">Otrok se rodi z enakimi potrebami kot pred stoletji. Okolje, v katerem odrašča, pa se je močno spremenilo.</p>
+  <div class="col">
+    <p>Sodoben način življenja je močno spremenil odnose v družini. Življenje brez avtomobilov, tehnologije in interneta si težko predstavljamo. Te spremembe so prinesle tudi konec večgeneracijskih domov. Sodobna družina je pogosto majhna, samostojna enota: starša in otroci, s starimi starši, ki živijo daleč ali so v stiku le občasno.</p>
+    <p>Stari starši so otroku nekoč pokazali počasnejše načine življenja, ki so bližje človekovi telesni naravi. Prinašali so izkušnje in modrost, ki jih mladi še ne morejo imeti, in realnejši pogled na čas in odnose. Domu so dajali mir, toplino in varnost. Dom je bil drugačen od sveta zunaj in prav ta drugačnost je človeku pomagala, da je zunaj dobro deloval.</p>
+    <p>Sodobna družina je privlačna zaradi mobilnosti, neodvisnosti in svobode, da se izrazimo po svoje. Vsak starš želi delati drugače in bolje kot njegovi starši. Redko pa pomislimo, da so se odnosi v družini oblikovali skozi tisočletja preizkušanja, ker so otrokom dajali največ možnosti za preživetje. Hitre spremembe zadenejo otroka, ki je ob rojstvu po zgradbi in potrebah enak kot pred petsto leti. Za zdrav razvoj potrebuje enako kot nekoč: bližino, čas in starše, ki ga čutijo.</p>
+    <h3>Dom</h3>
+    <p>Potrošniška družba nam ponuja na videz neomejeno izražanje: oblačimo se in opremljamo dom po svojem okusu. Če se urejanju doma in statusu posvečamo preveč, zmanjka časa in energije za odnose. Dom, v katerem je treba nenehno kupovati in postoriti, izgublja svoj namen: biti zatočišče pred svetom in prostor miru in zaupanja. Otroku tak dom ne more dati varnosti, kakršno je čutil v naročju starša, ko je bil zelo majhen.</p>
+    <p>Umik iz sveta v »membrano doma« vse bolj ogrožajo mediji in zasloni, ki člane družine razdvajajo. Namesto tihega, mirnega življenja, ki prija živčnemu sistemu, dom postaja še en prostor dražljajev.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Otrokove potrebe so enake kot nekoč, okolje pa se je hitro spremenilo.</li>
+      <li>Večgeneracijska družina je dajala čas, modrost in mir.</li>
+      <li>Dom naj bo zatočišče. Zasloni in stalne obveznosti mu to vlogo jemljejo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kdo mi je v otroštvu dajal občutek miru in časa?</li>
+      <li>Je moj dom danes zatočišče? Kaj bi ga naredilo bolj mirnega?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p19" data-toc="Biti in delati" data-num="19">
+  <div class="ch-eyebrow"><b>Poglavje 19</b><span>≈ 5 min branja</span></div>
+  <h2>Biti in delati</h2>
+  <p class="short">Kdor premalo »je«, preveč »dela«. Smisel obstoja izpolnimo že s tem, da smo, kar smo.</p>
+  <div class="col">
+    <p>Izražamo se z dejanji. Pa tudi s tem, da smo razumni, topli, sočutni, živi, veseli, žalostni ali jezni. Izražamo se v starševstvu, veri, delu in odnosih, ki nam dajo globlji užitek in smisel.</p>
+    <p>Osnovni življenjskosti, <strong>biti</strong>, se pridruži <strong>delati</strong>. Če smo pri biti preveč skopi, pretiravamo pri delati, da bi ravnovesje izenačili. Ego takrat išče globlji užitek v rezultatih dela namesto v samem bivanju.</p>
+    <p>Če nam delo pomeni več kot uživanje v njegovih sadovih, pridemo v protislovje. Ob koncu projekta se ne znamo poveseliti in si oddahniti. Ego takoj preklopi na novo nalogo. To kaže na strah pred življenjem, pred resničnostjo telesa in pred plitkostjo odnosov. Prepričani smo, da potrebujemo še več dejavnosti. To se ujema z zahtevo sodobnega časa: naredi več.</p>
+    <p>Ta zahteva spregleda preprosto resnico: <strong>človek izpolni smisel svojega obstoja že s tem, da je v celoti to, kar je.</strong></p>
+    <h3>Stalna rast</h3>
+    <p>Logika stalne rasti je nenaravna in škodljiva. Otrok jo spozna v šoli in pri starših, ki zapovedujejo:</p>
+    <ul>
+      <li>vedno moraš dati vse od sebe,</li>
+      <li>doseči moraš svoj potencial,</li>
+      <li>z dovolj volje in znanja je vse mogoče.</li>
+    </ul>
+    <p>Te zahteve ne dajo miru. Silijo v stalno tekmovanje in premagovanje telesa in duha. Škodljive so predvsem zato, ker se od prenapetih staršev prenesejo na majhne otroke, še preden ti okusijo brezskrbnost in spoznajo, da so svobodna bitja, ki se lahko igrajo v zaščiti doma. Telesa nas staršev so pogosto napeta, kot da bi bili v stalni vojni.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Andrej je po mesecih dela oddal velik projekt. Namesto da bi šel na sprehod ali se zvečer veselil z družino, je že isti večer odprl seznam naslednjih nalog. Ko ga je žena vprašala, kako se počuti, ni znal odgovoriti.</p>
+  </div>
+  <p class="navdih">Navdih: razlikovanje med »being« in »doing« ter kritika stalne rasti po A. Lowenu (<i>Fear of Life</i>, 1980; <i>Narcissism</i>, 1983).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Biti je osnova, delati je dodatek. Ko eno manjka, drugo pretiravamo.</li>
+      <li>Kdor se ne zna veseliti opravljenega, ga žene strah, ne veselje.</li>
+      <li>Zapovedi stalne rasti se prenašajo s staršev na otroke.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kdaj sem nazadnje proslavil(a) nekaj, kar sem dokončal(a)?</li>
+      <li>Kdo sem, ko ne delam ničesar?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p20" data-toc="Otrok, ki prehitro odraste" data-num="20">
+  <div class="ch-eyebrow"><b>Poglavje 20</b><span>≈ 6 min branja</span></div>
+  <h2>Otrok, ki prehitro odraste, in hiperstimulacija</h2>
+  <p class="short">Drevo ne more biti močnejše od svojih korenin. Otrok, ki prehitro odraste, nima časa, da bi jih razvil.</p>
+  <div class="col">
+    <p>Ločenost ega od telesa ne izvira iz želja otrok, temveč iz pričakovanj odraslih. Od otrok pričakujemo, da hitro zrastejo, zgodaj postanejo samostojni, se hitro učijo in so razumni kot odrasli. Pričakujemo, da zvečer zaspijo brez našega objema, čeprav jih je morda strah teme. Sami zvečer nismo mirni, ker nas še doma spremljajo službene in eksistenčne skrbi. Zahtevamo, da se otrok prilagodi življenju odraslih, ki je vse bolj oddaljeno od njegovih naravnih potreb.</p>
+    <p>Zahteve rastejo z leti: v šoli naj bo odličen, uspešen naj bo tudi pri športu in krožkih. Njegov mladi um je prezgodaj izpostavljen svetu in njegovim krizam: poročilom v avtu, pogovorom odraslih, spletu in lastnemu telefonu. Pogosto podpira odrasle bolj kot oni njega. Pri rosnih letih pokaže zrelost, ki nas navduši. Kam pa je izginil otrok?</p>
+    <h3>Sadjar in korenine</h3>
+    <p>Dober sadjar rast mlade sadike zavira, da se bolje razvijejo korenine. Prvi sadeži pridejo pozneje, a drevo je bolj odporno in rodi dolga leta. Z otroki pogosto ravnamo obratno. Priganjamo jih, da hitreje zrastejo, in jim ne damo dovolj sprejemanja njihove otroškosti, ki je potrebna za korenine: za vero vase. Otrok, ki prehitro odrašča, potlači občutke in čustva iz telesa.</p>
+    <h3>Hiperstimulacija</h3>
+    <p>Preobremenjeni smo, kadar je vtisov več, kot jih zmoremo predelati in se nanje odzvati. Ostanemo v stanju vznemirjenosti, ki se je ne moremo otresti. Postanemo razdražljivi in tesnobni. To vodi v iskanje novih dražljajev. Kakor otrok beži od doma, kjer ni miru, tako mi bežimo od nemira v svojem telesu. Nastane spirala, ki ego vrti vse višje, stran od resničnosti telesa. Pogosto vodi v omamo in odvisnosti, ki za nekaj časa sprostijo mišice in zmanjšajo tesnobo. Za kratek čas ego in telo spet začutita stik. Zato je prijetno, a ne traja.</p>
+    <p>Stalni stres moti notranje ritme telesa. Brez omame se živčni sistem ne zna več umiriti. Užitek, ki ga takrat čutimo, ne nastane v telesu, ki se razširi in sprosti, ampak le v živčnem sistemu. Resnost tega se pokaže, ko človek ne zmore sedeti pri miru ali biti sam s seboj. Nemir ga žene v stalno dejavnost in nove projekte, kljub utrujenosti in izgorelosti, s pomočjo kave ali cigaret. Za bližnje mu ne ostane časa.</p>
+    <p>Otroke preobremenimo lažje kot odrasle, ker so bolj občutljivi in manj zmorejo omejiti dražljaje. Otrok, ki ima preveč igrač, želi vedno nove. Če lahko gleda zaslon, ga bo gledal ves čas. Preobremenjuje ga tudi nemir staršev, ki ga prinesejo domov. Biti tih, miren, sočuten in moder je danes skoraj pozabljen način življenja.</p>
+  </div>
+  <p class="navdih">Navdih: preobremenjenost otrok in sodobna družina po A. Lowenu (<i>Fear of Life</i>, 1980).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Otrok, ki mora prehitro odrasti, potlači občutke iz telesa.</li>
+      <li>Hiperstimulacija vodi v nemir, iskanje novih dražljajev in omamo.</li>
+      <li>Nemir staršev se prenaša na otroke.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Ali sem moral(a) kot otrok hitro odrasti? Kdo je skrbel za koga?</li>
+      <li>Ali zmorem pet minut sedeti pri miru brez telefona?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p21" data-toc="Levi, desni ali odstavni pas" data-num="21">
+  <div class="ch-eyebrow"><b>Poglavje 21</b><span>≈ 5 min branja</span></div>
+  <h2>Levi, desni ali odstavni pas?</h2>
+  <p class="short">Na avtocesti življenja lahko pas menjamo sami, z občutkom. Če tega ne storimo, nas telo prej ali slej odstavi.</p>
+  <figure class="figure">
+    <div class="svgwrap">
+    <svg viewBox="0 0 640 270" role="img" aria-label="Avtocesta s tremi pasovi: hitri pas, počasnejši pas in odstavni pas">
+      <defs><marker id="m-ar-v2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--ventral)"/></marker>
+      <marker id="m-ar-s2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--symp)"/></marker></defs>
+      <rect x="0" y="16" width="640" height="184" style="fill:var(--dorsal-soft)"/>
+      <line x1="0" y1="16" x2="640" y2="16" style="stroke:var(--muted);stroke-width:2"/>
+      <line x1="0" y1="76" x2="640" y2="76" style="stroke:var(--surface);stroke-width:3;stroke-dasharray:24 18"/>
+      <line x1="0" y1="136" x2="640" y2="136" style="stroke:var(--muted);stroke-width:3"/>
+      <line x1="0" y1="200" x2="640" y2="200" style="stroke:var(--muted);stroke-width:2"/>
+      <text class="t-b" x="12" y="52">hitri pas</text>
+      <text class="t-b" x="12" y="112">počasnejši pas</text>
+      <text class="t-b" x="12" y="174">odstavni pas</text>
+      <rect x="230" y="34" width="60" height="26" rx="7" style="fill:var(--symp)"/>
+      <rect x="500" y="94" width="60" height="26" rx="7" style="fill:var(--ventral)"/>
+      <rect x="520" y="154" width="60" height="26" rx="7" style="fill:var(--muted)"/>
+      <path d="M296 54 C 360 58, 400 100, 492 106" style="fill:none;stroke:var(--ventral);stroke-width:2.5" marker-end="url(#m-ar-v2)"/>
+      <path d="M296 52 C 330 140, 420 170, 512 168" style="fill:none;stroke:var(--symp);stroke-width:2.5;stroke-dasharray:7 5" marker-end="url(#m-ar-s2)"/>
+      <line x1="16" y1="230" x2="44" y2="230" style="stroke:var(--ventral);stroke-width:3"/>
+      <text class="t" x="52" y="235">z občutkom sami zamenjamo pas</text>
+      <line x1="16" y1="256" x2="44" y2="256" style="stroke:var(--symp);stroke-width:3;stroke-dasharray:7 5"/>
+      <text class="t" x="52" y="261">ali nas odstavijo poškodba, bolezen, depresija</text>
+    </svg>
+    </div>
+    <figcaption>Avtocesta življenja. Kdor čuti svojo hitrost, lahko pravočasno preide na počasnejši pas in se pozneje vrne.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Kdor se odloči za Senzorno prenovo, se odloči za dolgotrajno <strong>izkustveno učenje</strong>, katerega namen je izboljšati komunikacijo med telesom in zavestjo. Takega učenja se danes loti vse manj ljudi, predvsem zato, ker nimajo časa.</p>
+    <p>Večina ljudi, ki pride na vaje Senzorne prenove, je dolgo živela v pomanjkanju časa. Nekoč to ni bilo pravilo. Naglica in nepremišljenost sta bili v naravi hitro kaznovani. Naš način življenja se je spremenil, telo pa se mu ni prilagodilo. Da trajna naglica telesu ne ustreza, nam sporoča z nelagodjem, bolečino in boleznijo. Prej ali slej nas prisili, da se na avtocesti življenja umaknemo s hitrega na odstavni pas. Tam upamo, da nam bo kdo pomagal nazaj.</p>
+    <p>Pomoč okolice je dragocena, a omejena. Ne more seči v našo globino, kjer so zapisane napake v komunikaciji med telesom in zavestjo. Tja seže le naš lastni um, ki ima dovolj globok vpliv na telo. A samo, če te povezave razume in hkrati z ustreznimi orodji odstranjuje zakrčenost. Zakrčenost namreč popači zaznavo in nam omogoča, da dlje ostanemo na hitrem pasu, čeprav tja ne sodimo. Zato je vsaka vrnitev na hitri pas težja in krajša.</p>
+    <p>Vaje nam pomagajo realneje začutiti, kako hitro živimo. Začnemo razumeti, zakaj telesa ni dobro siliti, kadar to ni nujno za preživetje. Izkustveno učenje pa ni mogoče v stanju »nimam časa«. Zahteva čas, pozornost in rednost.</p>
+    <p>Skoraj vedno lahko izberemo, da upočasnimo in se uredimo. Tako si omogočimo daljšo vožnjo in menjavanje pasov po potrebi in z občutkom, ki lahko prihaja le iz telesa. Lahko pa nadaljujemo z nogo na plinu in skušamo držati tempo, ki je primeren za računalnike, ne pa za človeško telo, ki čuti, se veseli in trpi.</p>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>kaj je izkustveno učenje</span></summary>
+    <div class="in">
+      <p>Izkustveno učenje povezuje teorijo in prakso, zato omogoča globlje razumevanje. Sama praksa ni dovolj. O izkušnji moramo razmisliti, ji pripisati pomen in jo primerjati s pričakovanji. V vsaki situaciji moramo biti navzoči telesno in miselno. Šele potem se iz izkušnje res naučimo (Selinšek, 2012).</p>
+    </div>
+  </details>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Telo se ni prilagodilo trajni naglici in nas na to opozarja.</li>
+      <li>Zakrčenost popači občutek za hitrost, zato predolgo ostajamo na hitrem pasu.</li>
+      <li>Senzorna prenova je izkustveno učenje: zahteva čas, pozornost in rednost.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Na katerem pasu sem ta teden preživel(a) največ časa?</li>
+      <li>Ali sem bil(a) že kdaj odstavljen(a)? Kaj me je odstavilo?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL VI ========== -->
+<div class="part-head" id="del6" data-toc="VI · Čustva v telesu">
+  <div class="kicker">Del VI</div>
+  <h2>Čustva v telesu</h2>
+  <p>Kako zadržano čustvo postane mišična napetost in kaj se zgodi, ko napetost popušča.</p>
+</div>
+
+<section class="ch" id="p22" data-toc="Od zadrževanja do potlačitve" data-num="22">
+  <div class="ch-eyebrow"><b>Poglavje 22</b><span>≈ 6 min branja</span></div>
+  <h2>Od zadrževanja do potlačitve</h2>
+  <p class="short">Čustvo, ki ga ne izrazimo, ustavimo z mišicami. Če se to ponavlja, napetost ostane, čustvo pa izgine iz zavesti.</p>
+  <div class="col">
+    <p>Življenje med ljudmi zahteva, da odrasel človek ne pokaže vsakega občutka, ko ga začuti. Med odraščanjem se naučimo, katera čustva smemo pokazati, koliko, kdaj in kako. Pri tem sodeluje membrana, posebej mišice tik pod kožo, ki jih vodi zavest.</p>
+    <p>Vsako čustvo ima telesni del. Jeza želi udariti ali zakričati, žalost želi jokati, strah želi zbežati. Ko čustvo zadržimo, mišice, ki bi ga izrazile, z ukazom uma zategnemo. Proces ima tri stopnje.</p>
+  </div>
+  <figure class="figure">
+    <div class="cards3">
+      <div class="card">
+        <h4>1 · Zadrževanje</h4>
+        <p>Čustvo čutimo in se ga zavedamo. Zavestno ustavimo le njegov izraz. Napetost je kratka.</p>
+        <div class="meter">zavedanje čustva<div class="bar"><i class="em" style="width:90%"></i></div></div>
+        <div class="meter">napetost mišic<div class="bar"><i class="to" style="width:35%"></i></div></div>
+      </div>
+      <div class="card">
+        <h4>2 · Navada</h4>
+        <p>Zadrževanje je pogosto in dolgo. Postane samodejen vzorec. Telo poleg napetosti diha plitveje in ustvari manj energije.</p>
+        <div class="meter">zavedanje čustva<div class="bar"><i class="em" style="width:50%"></i></div></div>
+        <div class="meter">napetost mišic<div class="bar"><i class="to" style="width:65%"></i></div></div>
+      </div>
+      <div class="card">
+        <h4>3 · Potlačitev</h4>
+        <p>Ne čutimo več ne čustva ne želje, da bi ga izrazili. Spomin je potisnjen iz zavesti, del membrane je otopel.</p>
+        <div class="meter">zavedanje čustva<div class="bar"><i class="em" style="width:12%"></i></div></div>
+        <div class="meter">napetost mišic<div class="bar"><i class="to" style="width:90%"></i></div></div>
+      </div>
+    </div>
+    <figcaption>Tri stopnje: z vsako je napetost večja, zavedanje čustva manjše.</figcaption>
+  </figure>
+  <div class="col">
+    <h3>1. Zadrževanje</h3>
+    <p>Zadrževanje poteka tik pod površino telesa, preden se čustvo pokaže navzven. Ukaz uma ustavi le dejanje izražanja. Čustvo še vedno čutimo, zavedamo se želje, da bi ga izrazili, opazujemo svoje misli. Zadrževanje zahteva le trenutno spremembo napetosti.</p>
+    <h3>2. Navada</h3>
+    <p>Če je potreba po zadrževanju močna in dolgotrajna, se zavestna odločitev postopoma spremeni v nezavedni vzorec. Telo se proti neprijetnemu stanju bori na dveh ravneh. Prvič, z bolj plitvim dihanjem ustvari manj energije, zato so impulzi šibkejši. Drugič, poveča napetost v membrani, da manj prepušča proti zavesti. Ob tem zavest pogosto naredi iz tega »vrlino« in razvije odpor do ljudi, ki to čustvo izražajo.</p>
+    <h3>3. Potlačitev</h3>
+    <p>Pri potlačitvi so zadržani vsi deli čustva, ne le zadnji, vidni del na površini. Impulze potisnemo globlje, pod sloj, kjer zaznavamo resničnost. Ko je spomin ali misel na impulz potisnjena v nezavedno, govorimo o <strong>represiji</strong>. Del membrane, ki je nekoč izražal čustvo, otopi zaradi kronične nezavedne napetosti. Vse bolj je odrezan od zavesti. To se pokaže tudi v gibanju, ki izgubi obliko in spontanost.</p>
+    <h3>Cena otopelosti</h3>
+    <p>Vsak otopel del membrane zmanjša živost telesa. Otežuje gibanje, slabša pretvorbo in rabo energije in povečuje negativne misli in napačna ravnanja. Spontanost, ustvarjalnost in užitek se zmanjšajo. Ta omejitev ne izbira: otopi neprijetna in prijetna čustva. Človek postaja otopel in se na resničnost odziva vse manj realno.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Marjeta je kot deklica slišala: »Nehaj jokati, saj nisi dojenček.« Danes, pri petdesetih, nikoli ne joka in je ponosna, da je močna. Ko pa vidi koga jokati, jo to nerazložljivo razjezi. Že leta jo bolijo vrat in prsi, kot da bi ji nekaj stiskalo grlo.</p>
+  </div>
+  <figure class="figure">
+    <div class="cycles">
+      <div class="cycle-card c-bad"><h4>Začarani krog</h4><svg id="cyc-bad" viewBox="0 0 520 440" role="img" aria-label="Začarani krog: stres, zakrčenost, izguba občutka, napačna odločitev, več stresa"></svg></div>
+      <div class="cycle-card c-good"><h4>Krog okrevanja</h4><svg id="cyc-good" viewBox="0 0 520 440" role="img" aria-label="Krog okrevanja: varnost, mehkejše mišice, več občutka, boljša odločitev, manj stresa"></svg></div>
+    </div>
+    <figcaption>Isti mehanizem deluje v obe smeri. Vaje Senzorne prenove krog obrnejo pri točki »občutek«.</figcaption>
+  </figure>
+  <p class="navdih">Navdih: zaporedje zadrževanje, zatiranje, potlačitev in vloga kronične mišične napetosti po A. Lowenu (<i>Bioenergetics</i>, 1975; <i>Pleasure</i>, 1970).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Čustvo, ki ga ne izrazimo, ustavimo z mišicami.</li>
+      <li>Ponavljanje spremeni zavestno zadrževanje v nezavedno napetost.</li>
+      <li>Otopelost zajame vsa čustva, tudi veselje, in porablja energijo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katero čustvo pri drugih me nerazložljivo moti?</li>
+      <li>Kaj naredi moje telo, ko želim nekaj povedati, pa ne smem?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p23" data-toc="Vplivi iz otroštva" data-num="23">
+  <div class="ch-eyebrow"><b>Poglavje 23</b><span>≈ 4 min branja</span></div>
+  <h2>Vplivi iz otroštva</h2>
+  <p class="short">Večina potlačitev se zgodi v otroštvu, ko se ne moremo ne upreti ne umakniti. To ni iskanje krivca, temveč razumevanje.</p>
+  <div class="col">
+    <p>V otroštvu smo najbolj odvisni od staršev in najbolj ranljivi. Hkrati še ne znamo dobro izražati sebe, zato se na naše resnične občutke okolica pogosto odzove negativno.</p>
+    <p>V podobnih situacijah otrok nato zadrži ali omeji svoj odziv. Napne mišice in zmanjša občutljivost membrane za dražljaje od zunaj in od znotraj. Tako ublaži strah in nemoč, ki ju čuti kot grožnjo. Odrasel bi se lahko uprl, se boril ali odšel. Otrok tega ne more.</p>
+    <p>Postopoma se prilagodi navadam okolja, ki so v nasprotju z otroškim načinom čutenja in odzivanja. Takšno prilagajanje gre pogosto dlje, kot bi bilo treba za življenje v družbi. Starši, vzgojitelji in učitelji so se v otroštvu prilagajali enako in vzorce nevede prenašajo naprej. Svoje doda odtujenost med ljudmi.</p>
+    <p>Včasih otrok v obupnem poskusu, da bi preživel, otopi celotno telo. Če to traja dlje, se razvijejo moteči vedenjski in miselni vzorci, slabe navade in neustrezni odzivi. Človek je nagnjen k depresiji.</p>
+    <p>Večina staršev je dala, kar je imela. Razumevanje teh vzorcev ni obtožba. Je pogoj, da jih ne prenašamo naprej.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Otrok se ne more braniti, zato se prilagodi z napetostjo in otopelostjo.</li>
+      <li>Vzorci se prenašajo iz roda v rod, večinoma nevede.</li>
+      <li>Razumevanje omogoči, da krog prekinemo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katero čustvo je bilo v moji družini »prepovedano«?</li>
+      <li>Kateri vzorec bi rad(a) prekinil(a) pri sebi?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p24" data-toc="Ko se telo prebuja" data-num="24">
+  <div class="ch-eyebrow"><b>Poglavje 24</b><span>≈ 7 min branja</span></div>
+  <h2>Ko se telo prebuja</h2>
+  <p class="short">Tresenje, toplota, solze ali zehanje med vajami niso napaka. So telo, ki končuje nekaj, česar nekoč ni smelo končati.</p>
+  <div class="col">
+    <p>Ko pri vajah ali pri delu z dihom zakrčenost popušča, se lahko začne sproščati energija, ki je bila dolgo zadržana. Divje živali po nevarnosti to naredijo same od sebe: tresejo se, globoko dihajo, nato se vrnejo k čredi. Ljudje to naravno praznjenje pogosto ustavimo, ker nas je sram ali strah. Obramba, ki se je začela, se nikoli ne konča.</p>
+    <h3>Kaj lahko opazite</h3>
+    <ul>
+      <li>drhtenje ali tresenje, najpogosteje v nogah, rokah ali čeljusti,</li>
+      <li>val toplote ali mraza, potenje,</li>
+      <li>solze, ne da bi vedeli zakaj,</li>
+      <li>zehanje, globok spontan vzdih, kruljenje v trebuhu,</li>
+      <li>potrebo po pretegovanju, potiskanju, brcanju,</li>
+      <li>nenaden spomin, podobo ali čustvo (jezo, žalost, olajšanje),</li>
+      <li>bolečino, ki je dolgo niste čutili (poglavje 17).</li>
+    </ul>
+    <p><strong>Vse to je dovoljeno.</strong> Ne dušite tega nazaj in tudi ne stopnjujte namerno. Dovolite, da pride in odide kot val.</p>
+    <h3>Po žličkah</h3>
+    <ol>
+      <li><strong>Opazite.</strong> Z radovednostjo: »Zanimivo, roka se trese.«</li>
+      <li><strong>Pustite.</strong> Ne ustavljajte in ne pospešujte. Dihajte skozi nos.</li>
+      <li><strong>Nihajte.</strong> Če je občutek močan, za nekaj trenutkov prenesite pozornost na miren del telesa, na primer na stopala ali dlani. Nato se, če želite, vrnite.</li>
+      <li><strong>Po malem.</strong> Bolje malo in pogosto kot vse naenkrat. Ostanite v območju, kjer še lahko opazujete.</li>
+      <li><strong>Počakajte, da se umiri.</strong> Po valu navadno pride mir, toplota in globlji dih. Ostanite v tem nekaj minut.</li>
+    </ol>
+  </div>
+  <div class="box varno">
+    <div class="box-label">Kdaj ustaviti</div>
+    <p>Vajo ustavite, če se počutite preplavljeni, odrezani od telesa (kot da se gledate od daleč), če vas zgrabi panika ali če se spomin vrača tako živo, kot da se dogaja zdaj. Takrat:</p>
+    <ul>
+      <li>odprite oči in poimenujte pet stvari, ki jih vidite,</li>
+      <li>trdno pritisnite stopala v tla in začutite oporo,</li>
+      <li>z dlanmi podrgnite stegna ali roke,</li>
+      <li>počasi izdihnite, kot skozi slamico.</li>
+    </ul>
+    <p>Če se to ponavlja, poiščite izkušenega učitelja metode ali psihoterapevta, ki dela s travmo in telesom. To ni neuspeh, ampak pameten naslednji korak.</p>
+  </div>
+  <p class="navdih">Navdih: praznjenje obrambne energije, »titracija« in nihanje po P. A. Levineju (<i>Prebuditi tigra</i>, 1997).</p>
+
+  <div class="col">
+    <h3>Sodobni pogled: varnost in živčni sistem</h3>
+    <p>Mišice se resnično sprostijo šele, ko se živčni sistem počuti varnega. Ta misel je skupna Senzorni prenovi in sodobnim terapijam travme. Eden od priljubljenih modelov, ki to razloži, je <strong>polivagalna teorija</strong> (S. Porges, za vsakdanjo rabo D. Dana). Opiše tri stanja kot lestev.</p>
+  </div>
+  <figure class="figure">
+    <div class="ladder" role="img" aria-label="Lestev treh stanj živčnega sistema">
+      <div class="rung r-v"><div><h4>Varno in povezano</h4><div class="who">mir, stik</div></div><p>Mirno dihanje, mehak obraz, radovednost. Lahko se pogovarjamo, smejimo in učimo. Mišice lahko popustijo. Najboljše stanje za vaje.</p></div>
+      <div class="rung r-s"><div><h4>Boj ali beg</h4><div class="who">simpatična pripravljenost</div></div><p>Hiter dih v prsni koš, napeta ramena in čeljust, nemir, razdražljivost, občutek »nimam časa«.</p></div>
+      <div class="rung r-d"><div><h4>Zamrznitev ali izklop</h4><div class="who">otopelost</div></div><p>Težko telo, praznina, izčrpanost, »vseeno mi je«, megla v glavi. Ko se ni mogoče ne boriti ne zbežati, se telo »ugasne«.</p></div>
+    </div>
+    <figcaption>Model treh stanj. Navzgor nas vodi občutek varnosti, navzdol zaznana nevarnost.</figcaption>
+  </figure>
+  <div class="box varno">
+    <div class="box-label">Model, ne dokazano dejstvo</div>
+    <p>Polivagalna teorija je v praksi priljubljena, njene anatomske in evolucijske razlage (npr. vloga dveh vej vagusnega živca) pa so med raziskovalci sporne (P. Grossman, 2023, in drugi). Uporabljajte jo kot zemljevid za opazovanje sebe, ne kot natančen opis delovanja živcev.</p>
+  </div>
+  <div class="checkin" id="checkin">
+    <div class="box-label" style="color:var(--accent)">Kje na lestvici sem zdaj?</div>
+    <p style="font-size:1rem">Izberite stanje, ki je najbližje temu, kar čutite ta trenutek. Ni pravilnega odgovora.</p>
+    <div class="btns">
+      <button type="button" id="ci-v" data-k="v" aria-pressed="false">Mirno in prisotno</button>
+      <button type="button" id="ci-s" data-k="s" aria-pressed="false">Napeto, nemirno</button>
+      <button type="button" id="ci-d" data-k="d" aria-pressed="false">Prazno, utrujeno</button>
+    </div>
+    <div class="out" id="ci-out" aria-live="polite">Ko izberete, se tukaj pokaže, kaj vam lahko zdaj pomaga.</div>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Tresenje, toplota, solze in zehanje so lahko praznjenje zadržane energije.</li>
+      <li>Dovolite jim teči, po malem, in vedite, kdaj se ustaviti.</li>
+      <li>Telo se sprosti, ko se počuti varno.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kaj se je med zadnjo vajo zgodilo v telesu, česar nisem pričakoval(a)?</li>
+      <li>Kateri del telesa mi je varno »sidro«?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL VII ========== -->
+<div class="part-head" id="del7" data-toc="VII · Dih in življenjska energija">
+  <div class="kicker">Del VII</div>
+  <h2>Dih in življenjska energija</h2>
+  <p>Dih je edini samodejni proces, ki ga lahko tudi zavestno vodimo. Zato je most med živčnim sistemom, mišicami in energijo.</p>
+</div>
+
+<section class="ch" id="p25" data-toc="Kako telo ve, kdaj vdihniti" data-num="25">
+  <div class="ch-eyebrow"><b>Poglavje 25</b><span>≈ 5 min branja</span></div>
+  <h2>Kako telo ve, kdaj vdihniti</h2>
+  <p class="short">Dih v vsakdanjem življenju ne sproži pomanjkanje kisika, ampak ogljikov dioksid. In prav CO₂ pomaga kisiku do celic.</p>
+  <div class="col">
+    <p>Potrebo po vdihu sproži skupina živčnih celic v možganskem deblu, ki jim pravimo <strong>osrednji kemoreceptorji</strong>. Ves čas merijo raven ogljikovega dioksida (CO₂) v krvi. Ko je CO₂ previsok, možganom sporočijo, naj dihamo hitreje in globlje. Ko je prenizek, sporočijo, naj dih upočasnimo, da se CO₂ spet dvigne. Občutek »zmanjkuje mi zraka« je torej v vsakdanjih razmerah alarm za CO₂, ne za kisik.</p>
+    <p>Telo ima tudi tipala za kisik (v vratnih arterijah). Ta se oglasijo predvsem, ko kisika res zmanjka, na primer visoko v gorah.</p>
+    <h3>CO₂ odklene kisik</h3>
+    <p>Kri prenaša kisik vezan na hemoglobin, kot potnike v taksiju. CO₂ in kislost taksiju povesta, kje naj potnike izpusti: tam, kjer je CO₂ več, torej v delujočih mišicah in organih, hemoglobin lažje odda kisik. Temu pravimo <strong>Bohrov učinek</strong>. V pljučih se zgodi obratno: CO₂ preide v zrak, kisik se veže na hemoglobin.</p>
+    <p>Kdor kronično diha preveč (hitro, plitvo, skozi usta, z vzdihi), izdiha preveč CO₂. Kisika v krvi je dovolj, a ga tkiva dobijo manj. Posledice so lahko mrzle roke, mravljinčenje, vrtoglavica, tesnoba in napete mišice.</p>
+  </div>
+  <figure class="figure">
+    <div class="flow danger" role="img" aria-label="Čezmerno dihanje vodi v zakrčen zgornji del trupa">
+      <span class="step">Hiter, plitev dih v prsni koš</span><span class="arr">→</span>
+      <span class="step">Manj CO₂ v krvi</span><span class="arr">→</span>
+      <span class="step">Hemoglobin teže odda kisik</span><span class="arr">→</span>
+      <span class="step">Tkiva dobijo manj kisika</span><span class="arr">→</span>
+      <span class="step">Alarm: napet vrat, ramena, čeljust</span>
+    </div>
+    <figcaption>Veriga CO₂ → Bohrov učinek → mišični tonus. Zato je dih neposredno povezan z napetostjo v zgornjem delu trupa.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Sistem za zaznavanje CO₂ ustvari občutek dušenja in močno željo po gibanju in spremembi kraja. To boste začutili pri zadrževanju diha v modulih 3 in 4 protokola za dvig tolerance na CO₂. Občutek je neprijeten, a ni nevaren, če vajo izvajate po navodilih (poglavje 29).</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>V vsakdanjih razmerah dih sproži CO₂, ne pomanjkanje kisika.</li>
+      <li>Dovolj CO₂ je potrebno, da kri odda kisik tkivom.</li>
+      <li>Čezmerno dihanje zmanjša oskrbo tkiv s kisikom in napne zgornji del trupa.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Ali pogosto vzdihujem ali diham skozi usta?</li>
+      <li>Kje se moj dih ustavi ali zatakne, ko sem pod stresom?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p26" data-toc="Kratka zgodba o kisiku" data-num="26">
+  <div class="ch-eyebrow"><b>Poglavje 26</b><span>≈ 4 min branja</span></div>
+  <h2>Kratka zgodba o kisiku</h2>
+  <p class="short">Življenje je nastalo v svetu z veliko CO₂ in brez kisika. Zato naše telo še danes posluša predvsem CO₂.</p>
+  <div class="col">
+    <p>Ko je nastalo ozračje, je bilo razmerje plinov povsem drugačno kot danes. CO₂ je bilo veliko, kisika skoraj nič. Prvi organizmi so energijo pridobivali brez kisika, z anaerobnimi procesi.</p>
+    <p>Nato so se razvile cianobakterije, ki so znale izkoristiti sončno svetlobo. S <strong>fotosintezo</strong> so iz CO₂ in vode ustvarjale sladkor in kot stranski produkt sproščale kisik. Ker kisika sprva nihče ni porabljal, se ga je v ozračju nabiralo vse več. Pred približno 2,4 milijarde let ga je bilo toliko, da je spremenil Zemljo.</p>
+    <p>Kisik je omogočil nov način pridobivanja energije: <strong>aerobno dihanje</strong> celic, ki porablja kisik in sprošča CO₂. Iz enake količine hrane da približno petnajstkrat več energije kot anaerobni procesi. Ta presežek energije je omogočil nastanek zapletenih bitij z mišicami in živčnim sistemom, ki se lahko gibljejo sama in imajo vse bolj zapleteno povratno zanko med čutili in gibom.</p>
+    <p>Prva aerobna bitja so živela v svetu, kjer je bil CO₂ še visok, zato so ga morala zaznavati in se mu izogniti. Kemorecepcija, ki se je razvila takrat, je bila tako pomembna za preživetje, da se je ohranila do zapletenih živali in do nas. S časom so kemoreceptorji postali bolj prilagodljivi. Bitja so lahko živela v širšem razponu CO₂ in kisika, kar je življenju pomagalo, da se je razširilo.</p>
+    <p>Danes je v zraku le okoli 0,04 % CO₂. V pljučnih mešičkih pa ga je okoli 5 %. CO₂, ki ga potrebujemo, torej proizvajamo sami. Na prvi pogled je paradoksalno, da za dobro oskrbo s kisikom potrebujemo dovolj CO₂. Zgodba evolucije pa pojasni, zakaj je tako.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>CO₂ je bil na Zemlji prej kot kisik; telo ga še danes posluša.</li>
+      <li>Aerobno dihanje je dalo dovolj energije za mišice in živčni sistem.</li>
+      <li>CO₂, ki ga potrebujemo za oskrbo s kisikom, proizvajamo sami.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p27" data-toc="Tempomat ali mestna vožnja" data-num="27">
+  <div class="ch-eyebrow"><b>Poglavje 27</b><span>≈ 5 min branja</span></div>
+  <h2>Tempomat ali mestna vožnja</h2>
+  <p class="short">Telo energijo pridobiva na dva načina. Prvi je varčen in počasen, drugi hiter in potraten.</p>
+  <div class="col">
+    <p>Celice za delo uporabljajo molekulo <strong>ATP</strong>, nekakšno polnjeno baterijo. Ko mišica dela, baterijo izprazni (ATP postane ADP). Da se baterija spet napolni, skrbita dva procesa:</p>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th></th><th>Aerobno (s kisikom)</th><th>Anaerobno (brez kisika)</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Podoba</strong></td><td>Vožnja po avtocesti na tempomatu</td><td>Mestna vožnja s stalnim ustavljanjem in speljevanjem</td></tr>
+        <tr><td><strong>Izkoristek</strong></td><td>Visok: iz ene molekule glukoze okoli 30 ATP</td><td>Nizek: iz ene molekule glukoze 2 ATP</td></tr>
+        <tr><td><strong>Hitrost</strong></td><td>Počasnejši zagon, zdrži dolgo</td><td>Hiter, a le za kratek čas</td></tr>
+        <tr><td><strong>Ostanek</strong></td><td>CO₂ in voda</td><td>Laktat (mlečna kislina)</td></tr>
+        <tr><td><strong>Kdaj</strong></td><td>Vsakdanje življenje, počitek, obnova</td><td>Nevarnost, šprint, nenaden napor</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>Anaerobni proces telo uporabi, ko je potreba po energiji večja, kot jo aerobni proces lahko sproti zagotovi. Glukoza se takrat razgradi le delno. Telo prihrani čas, a žrtvuje izkoristek. Zato mora porabiti veliko glukoze, sunek pa traja le kratek čas, pri največjem naporu okoli minute ali dveh. Ta sistem nam omogoča hiter odziv v nevarnosti in je zato pomemben za preživetje.</p>
+    <p>V praksi oba procesa tečeta ves čas. Od tega, kako dobro telo ustvarja in usmerja energijo, je odvisno, iz katerega črpa več. Ključno je razumeti: aerobni proces je počasnejši in veliko bolj varčen, anaerobni je namenjen kratkim sunkom.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Aerobno: varčno, počasno, dolgotrajno. Anaerobno: hitro, potratno, kratko.</li>
+      <li>Oba procesa tečeta vedno, razmerje med njima se spreminja.</li>
+      <li>Za vsakdanje življenje je naraven pretežno aerobni način.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p28" data-toc="Zakaj otrok »izgubi« dih" data-num="28">
+  <div class="ch-eyebrow"><b>Poglavje 28</b><span>≈ 5 min branja</span></div>
+  <h2>Zakaj otrok »izgubi« dih</h2>
+  <p class="short">Malo energije pomeni manj moči za jok, jezo in upor. Po razlagi Senzorne prenove se otrok, ki ne sme čutiti, nauči dihati tako, da ima energije manj.</p>
+  <div class="box razlaga">
+    <div class="box-label">Razlaga Senzorne prenove</div>
+    <p>To poglavje predstavi avtorjevo razlago, ki izhaja iz dolgoletnega dela s strankami. Posamezni deli (vpliv dihanja na CO₂ in oskrbo tkiv) so dobro raziskani, povezava z vzgojo in čustvi pa je hipoteza Senzorne prenove.</p>
+  </div>
+  <div class="col">
+    <p>Ko razumete, čemu služita mišična zakrčenost in neučinkovito dihanje, postane jasno, da telo včasih <em>namenoma</em> deluje manj učinkovito. Pomislite na otroka, ki ne sme imeti močnih čustev, ker jih odrasli okoli njega ne prenesejo. Otrok je od njih odvisen. Najti mora način, kako kljub dovolj hrane in vode ohraniti nizko raven življenjske energije. Z manj energije je njegovo naravno vedenje manj glasno in se lažje prilagodi zahtevam okolice.</p>
+    <p>Odrasli, ki sami nosijo SMA in potlačena čustva, otroka pogosto ne razumejo. Njegovo pristno vedenje doživljajo kot motnjo. Namesto da bi pogledali svoje vedenje in odnose, proti katerim otrok protestira, zahtevajo, da se spremeni on. Lažje je otroka ne razumeti kot se soočiti z dediščino lastnega življenja.</p>
+    <p>Telo otroka se tako postopoma nauči dihati več, kot potrebuje: hitreje, plitveje, v prsni koš. To zniža CO₂ v krvi. Po Bohrovem učinku tkiva dobijo manj kisika, delež manj učinkovitega pridobivanja energije se poveča. Energije je manj in čustva so šibkejša.</p>
+    <p>Otrok ob tem opazuje odrasle. Če so tudi oni v otroštvu spremenili dih in izražanje čustev, ne more videti nikogar, ki bi se gibal, izražal in dihal spontano. Posnema jih in počasi prevzame enake vzorce.</p>
+    <h3>Zakaj je to pomembno</h3>
+    <p>Človek ima najbolj zapleteno gibanje in najbogatejšo paleto čustev med živimi bitji. Zato je za njegovo zdravje, izražanje in odzivanje dih tako pomemben. Dober dih je mogoč, kadar telo prenaša dovolj CO₂. Raziskave kažejo, da so ljudje s paničnimi napadi pogosto preobčutljivi na CO₂. Boljša toleranca na CO₂ je zato povezana z mirnejšim dihom in bolj stabilnim odzivom v stresu.</p>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>kaj je bilo v izvirni izdaji popravljeno</span></summary>
+    <div class="in">
+      <p>V prvi izdaji je bilo zapisano, da potlačena čustva znižajo pH krvi »proti 6,8«. Normalni pH krvi je 7,35–7,45; vrednost 6,8 je meja preživetja. Čezmerno dihanje pH krvi celo nekoliko <em>zviša</em>, ker odstrani CO₂. Bistvo avtorjeve misli ostaja: čezmerno dihanje zniža CO₂ in s tem oskrbo tkiv s kisikom.</p>
+      <p>Prav tako je bilo zapisano, da plezalci na Everest brez kisika in potapljači, ki zadržijo dih deset minut, dokazujejo, kaj loči zdrave od nezdravih. Plezalci na višini dihajo zelo veliko in imajo nizek CO₂, potapljanje na vdih pa je vrhunski šport s tveganjem nezavesti. Zato ta primera v novi izdaji nista navedena kot merilo zdravja.</p>
+    </div>
+  </details>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Po razlagi Senzorne prenove se otrok, ki ne sme čutiti, nauči dihati tako, da ima manj energije.</li>
+      <li>Čezmerno dihanje zniža CO₂ in s tem oskrbo tkiv s kisikom.</li>
+      <li>Otroci dih posnemajo po odraslih.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kako so dihali ljudje, s katerimi sem odraščal(a)?</li>
+      <li>Ali opazim, da zadržim dih, ko bi moral(a) kaj reči?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p29" data-toc="Zlata pravila dihanja" data-num="29">
+  <div class="ch-eyebrow"><b>Poglavje 29</b><span>≈ 6 min branja</span></div>
+  <h2>Zlata pravila dihanja</h2>
+  <p class="short">Več zraka ne pomeni več kisika. Pomembnejše od globine je, kako mirno in skozi kaj dihamo.</p>
+  <div class="rules">
+    <div class="rule"><div class="n">1</div><div><h4>Dihajte skozi nos</h4><p>Nos zrak očisti, ogreje in navlaži. V obnosnih votlinah nastaja dušikov oksid, ki širi žile. Nosni dih je naravno počasnejši, zato pomaga ohranjati CO₂. Usta so za govor, hrano in izjemne napore.</p></div></div>
+    <div class="rule"><div class="n">2</div><div><h4>Toleranca na CO₂ je ključ do kisika</h4><p>Kdor bolje prenaša nekoliko višji CO₂, ima mirnejši dih, celice pa dobijo več kisika. To ni športni izziv, ampak osnova umirjenega živčnega sistema.</p></div></div>
+    <div class="rule"><div class="n">3</div><div><h4>Dih v prsni koš je signal nevarnosti</h4><p>Plitev, hiter dih z dviganjem ramen je dih bega. Možgani ga preberejo kot »nekaj je narobe« in zategnejo vrat in ramena. Ko dih spustimo nižje, v trebuh in boke, se zgodi obratno.</p></div></div>
+    <div class="rule"><div class="n">4</div><div><h4>Izdih naj bo daljši od vdiha</h4><p>Daljši, mehak izdih (ne potiskan) umirja. Je najhitrejša pot k stanju varnosti iz poglavja 24.</p></div></div>
+    <div class="rule"><div class="n">5</div><div><h4>Manj je več</h4><p>Dober dih je tih, mehak in skoraj neviden. Če svoj dih v mirovanju slišite, verjetno dihate preveč.</p></div></div>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 3 minute · Mehki nosni dih</div>
+    <ol>
+      <li>Sedite ali ležite. Eno dlan položite na prsni koš, drugo na trebuh.</li>
+      <li>Dihajte samo skozi nos. Pustite, da se dlan na trebuhu premika bolj kot dlan na prsih.</li>
+      <li>Vdih štejte do 4, izdih do 6. Če je to preveč, poskusite 3 in 5.</li>
+      <li>Vsak dih naj bo malenkost manjši od prejšnjega. Rahla želja po zraku je v redu. Če postane neprijetna, za nekaj dihov dihajte normalno.</li>
+    </ol>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Samopreverba · Kontrolna pavza</div>
+    <p>Preprost način, kako spremljati toleranco na CO₂ (po metodi Buteyko). Merite zjutraj, v mirovanju, sede.</p>
+    <ol>
+      <li>Normalno vdihnite in normalno izdihnite.</li>
+      <li>Stisnite nos in začnite šteti sekunde.</li>
+      <li>Ustavite se pri <strong>prvi jasni želji</strong> po vdihu, ne pri meji zdržljivosti. Prvi vdih po tem naj bo miren.</li>
+    </ol>
+    <p>Številko zapišite. Ni tekmovanje. Pomembno je, da se v tednih počasi dviga. Pri ljudeh s kroničnim stresom je pogosto pod 20 sekund.</p>
+  </div>
+  <div class="box varno">
+    <div class="box-label">Previdno pri zadrževanju diha</div>
+    <ul>
+      <li>Vaje z daljšim zadrževanjem diha (moduli 3 in 4 protokola za dvig tolerance na CO₂) izvajajte le po navodilih učitelja.</li>
+      <li><strong>Nikoli</strong> jih ne izvajajte v vodi, v kadi, med vožnjo ali stoje na višini.</li>
+      <li>Pred začetkom se posvetujte z zdravnikom, če ste noseči, imate bolezen srca, nezdravljen visok krvni tlak, epilepsijo, ledvično bolezen, sladkorno bolezen tipa 1 ali panične napade.</li>
+      <li>Če začutite vrtoglavico, motnje vida, bolečino v prsih ali mravljinčenje, ki ne mine, prenehajte in dihajte normalno.</li>
+    </ul>
+  </div>
+  <p class="navdih">Navdih: metoda K. P. Buteyka; P. McKeown, <i>The Oxygen Advantage</i> (2015); J. Nestor, <i>Dih</i> (2020).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Nos, nizko, počasi, mehko, daljši izdih.</li>
+      <li>Kontrolna pavza je merilo napredka, ne tekmovanje.</li>
+      <li>Zadrževanje diha le po navodilih in nikoli v vodi ali med vožnjo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Ali ponoči ali pri delu diham skozi usta?</li>
+      <li>Kakšna je bila moja kontrolna pavza ta teden?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL VIII ========== -->
+<div class="part-head" id="del8" data-toc="VIII · Bistvo Senzorne prenove">
+  <div class="kicker">Del VIII</div>
+  <h2>Bistvo Senzorne prenove</h2>
+  <p>Čas, pozornost in energija. Tri vrednosti, ki določajo kakovost življenja, in kako vaje spreminjajo razmerje med njimi.</p>
+</div>
+
+<section class="ch" id="p30" data-toc="Čas, pozornost, energija" data-num="30">
+  <div class="ch-eyebrow"><b>Poglavje 30</b><span>≈ 6 min branja</span></div>
+  <h2>Čas, pozornost, energija</h2>
+  <p class="short">Za trajno spremembo potrebujemo višek energije. Prvi korak je manj porabe, ne več napora.</p>
+  <div class="col">
+    <p>V prejšnjih delih so se ves čas pojavljale tri vrednosti: <strong>čas, pozornost in energija</strong>. Njihovo razmerje določa, kako se počutimo, kaj želimo, kaj potrebujemo in kako rešujemo težave. Skupaj določajo kakovost življenja.</p>
+    <h3>Potrebna sprememba</h3>
+    <p>Če se želimo znebiti opozoril v obliki bolečine in nelagodja, moramo spremeniti delovanje celega sistema, telesa in uma skupaj. Senzorna prenova temu pravi <strong>soma</strong>. Sicer bolečine postanejo kronične in vodijo v obrabo sklepov.</p>
+    <p>Kronično bolečino tvegamo tudi po poškodbi, ki se zgodi zaradi nepozornosti. Telo med celjenjem spremeni način gibanja, da zaščiti poškodovani del. Če teh sprememb po celjenju ne odpravimo, ker jih ne čutimo ali nimamo dovolj energije, ostanejo. Vodijo v nelagodje, kronično bolečino in obrabo.</p>
+    <h3>Višek energije</h3>
+    <p>Osnovni pogoj za trajne spremembe je <strong>višek energije</strong>. Brez njega dolgoročna sprememba ni mogoča. Če spremembo kljub pomanjkanju energije poskušamo izsiliti, porabljamo rezerve. Kar težko dosežemo, težko obdržimo, hkrati pa smo še bolj utrujeni in manj pozorni.</p>
+    <p>Telo se pred izčrpanostjo zaščiti tako, da nas potisne v depresivno stanje, ki zmanjša obremenitve in mu omogoči, da pride k sebi. V obdobju pred tem je pozornost zelo nizka, zato je več nesreč, poškodb in neljubih dogodkov.</p>
+  </div>
+  <figure class="figure">
+    <div class="budget" role="img" aria-label="Dnevni energijski proračun pred vajami in po njih">
+      <div class="row">
+        <h4>Pred: energija gre v vzdrževanje oklepa</h4>
+        <div class="stack"><span class="b1" style="width:38%">napetost</span><span class="b2" style="width:22%">plitev dih</span><span class="b3" style="width:35%">vsakdan</span><span class="b4" style="width:5%"></span></div>
+      </div>
+      <div class="row">
+        <h4>Po: manj porabe, več viška</h4>
+        <div class="stack"><span class="b1" style="width:18%">napetost</span><span class="b2" style="width:10%">dih</span><span class="b3" style="width:35%">vsakdan</span><span class="b4" style="width:37%">višek za spremembo</span></div>
+      </div>
+      <div class="legend"><span><i style="background:var(--symp-soft)"></i>nepotrebna napetost in pripravljenost</span><span><i style="background:var(--dorsal-soft)"></i>čezmerno dihanje</span><span><i style="background:var(--line)"></i>vsakdanje delo</span><span><i style="background:var(--ventral)"></i>višek</span></div>
+    </div>
+    <figcaption>Ponazoritev, ne meritev. Dnevna energija je omejena; višek nastane predvsem, ko zmanjšamo nepotrebno porabo.</figcaption>
+  </figure>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Nekdo ima mesečno 1000 evrov. Če jih 700 nepremišljeno porabi, ga nato skrbi, kako bo preživel do konca meseca. Kupuje manj zdravo hrano in se pritožuje nad krivičnim življenjem. Za znanje, ki bi mu prineslo več, ni ne denarja ne časa. Če se reši s še več trdega dela, si lahko še dodatno škodi. Z energijo je enako: najprej je treba zapreti odtoke.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Čas, pozornost in energija določajo kakovost življenja.</li>
+      <li>Brez viška energije ni trajne spremembe.</li>
+      <li>Višek nastane, ko zmanjšamo nepotrebno porabo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kam danes odteka največ moje energije?</li>
+      <li>Kateri »odtok« bi lahko ta teden zmanjšal(a)?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p31" data-toc="Entropija, sintropija in zorenje" data-num="31">
+  <div class="ch-eyebrow"><b>Poglavje 31</b><span>≈ 6 min branja</span></div>
+  <h2>Entropija, sintropija in zorenje</h2>
+  <p class="short">Na čas ne moremo vplivati. Lahko pa vplivamo na to, ali za nas teče v smeri razkroja ali rasti.</p>
+  <div class="col">
+    <h3>Časovni izkoristek</h3>
+    <p>Čas teče v eno smer, ne glede na to, kaj se dogaja, in vendar določa vse dogajanje. Je del vsakega živega sistema. Na čas vplivamo le posredno, s tem kako ga izkoristimo. Kakovost porabe časa je odvisna od tega, kako dobro uporabimo energijo in pozornost.</p>
+    <p>Bolj zrel sistem (soma) lahko v enakem času usmeri več pozornosti kot manj zrel, zato porabi manj energije za isti cilj. Sposobnost dobrega načrtovanja časa je odvisna od energije in pozornosti, ki ju vložimo v učenje in zorenje.</p>
+    <h3>Dva načina doživljanja časa</h3>
+    <p>Čas lahko doživljamo <strong>entropično</strong> (propadanje, poenostavljanje, razkroj) ali <strong>sintropično</strong> (rast, večja kompleksnost, razvoj). Kateri način prevladuje, je odvisno od tega, kam vlagamo pozornost in energijo.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Primer: otrok in starši</div>
+    <p>Otroku čas teče sintropično. Raste, uživa in se veseli vsakega dne. Od spočetja vanj starši vlagajo čas, pozornost in energijo. Bolj ko odrašča, bolj skrbi zase. Pri starših je pogosto obratno. Vlagajo v otroka in v službo, zato jim čas začne teči entropično: starševstvo utruja. Pregovor pravi, da šele ob otrocih vidiš, kako se staraš. Zdaj ga boste morda razumeli drugače.</p>
+  </div>
+  <div class="col">
+    <p>Entropija prinaša tudi verjetnost neljubih dogodkov. Te se lahko zgodijo tudi ob največji pozornosti in znanju. A ob primerni pozornosti so redkejši in manj škodljivi. Če smo dovolj pozorni in se iz doživetega učimo, ohranjamo sintropičnost časa. Senzorna prenova jo krepi.</p>
+    <h3>Zorenje</h3>
+    <p>Zorenje sistema poteka po zaporedju, v katerem vsak člen omogoči naslednjega:</p>
+  </div>
+  <figure class="figure">
+    <div class="flow grow" role="img" aria-label="Zaporedje zorenja">
+      <span class="step">Energija</span><span class="arr">→</span>
+      <span class="step">Pozornost</span><span class="arr">→</span>
+      <span class="step">Učenje</span><span class="arr">→</span>
+      <span class="step">Razumevanje</span><span class="arr">→</span>
+      <span class="step">Sprejemanje</span><span class="arr">→</span>
+      <span class="step">Sprememba</span><span class="arr">→</span>
+      <span class="step">Napredek</span>
+    </div>
+    <figcaption>Veriga zorenja po Senzorni prenovi. Brez viška energije se ustavi že na začetku. Vsak člen potrebuje čas.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Sprejemanje trenutnega stanja je ključni člen. Prepreči nepotreben boj za izhod in hkrati nemoč, ki se kaže kot depresija ali apatija. Šele ko stanje sprejmemo, lahko presežek energije in pozornost usmerimo v spremembo. Brez sprememb ni napredka. Za zorenje je potreben čas, saj šele čas omogoči, da veriga steče.</p>
+    <p>Na čas ne moremo vplivati. Namen vaj je zato povečati vpliv na drugi dve vrednosti: <strong>pozornost in energijo</strong>.</p>
+  </div>
+  <p class="navdih">Navdih: pojma entropija in sintropija v smislu, kot ju uporablja A. Detela (<i>Sintropija</i>).</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Čas lahko teče entropično ali sintropično, odvisno od pozornosti in energije.</li>
+      <li>Zorenje: energija, pozornost, učenje, razumevanje, sprejemanje, sprememba.</li>
+      <li>Sprejemanje prepreči tako boj kot nemoč.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kje mi čas zdaj teče sintropično in kje entropično?</li>
+      <li>Kateri člen verige se mi najpogosteje zatakne?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p32" data-toc="Pozornost in ekspanzija" data-num="32">
+  <div class="ch-eyebrow"><b>Poglavje 32</b><span>≈ 5 min branja</span></div>
+  <h2>Pozornost in ekspanzija</h2>
+  <p class="short">Pozornost zmanjša napake. Ekspanzija telesa prinese mir in prihrani energijo.</p>
+  <div class="col">
+    <h3>Pozornost</h3>
+    <p>Pri vajah urimo pozornost, ki jo usmerjamo v gib. Tako vse bolje opazujemo svoje gibanje in s tem svoje ravnanje. Začnemo opažati, kako je počutje odvisno od naših odločitev. Spoznamo, da se na napakah dobro učimo in da več pozornosti pomeni manj napak, ki so tudi manj boleče. Lažje se uprimo večopravilnosti, ki je danes priljubljena, a slabša počutje in kakovost življenja.</p>
+    <h3>Ekspanzija</h3>
+    <p>Z usmerjanjem pozornosti dobimo boljši nadzor nad mišicami. Okrepi se navpična povezanost med možgani in mišicami ter sposobnost, da napetost spustimo, ko ni potrebna. Krčenje in daljšanje mišic se bolje uskladita. Med spanjem je napetost nižja, gibalna inteligenca raste.</p>
+    <p>Ker se mišice bolje daljšajo, se telo lahko bolj razširi. Membrana bolj utripa in prostornina telesa se poveča. Temu pravimo <strong>ekspanzija</strong>. Ekspanzija je sintropija: prinaša prijetne občutke in zmanjšuje neprijetne, telesno in čustveno.</p>
+    <p>Po vaji se počutite bolje in mirneje. Živčni sistem preide iz pripravljenosti (simpatični način) v počitek (parasimpatični način). V počitku telo porabi veliko manj energije. Če nepotrebne pripravljenosti zmanjšamo, ostane več proste energije za spremembo.</p>
+    <h3>Bistvo ni v vajah</h3>
+    <p>Z načeli Senzorne prenove se naučite premišljeno, občuteno in ustvarjalno razporediti svoje vire. Tako ustvarite višek energije ter zdravo motivacijo in radovednost, ki sta potrebni za spremembe. Sodobni svet pogosto ne pomaga: cenimo mladost bolj kot modrost, vseživljenjsko učenje podcenjujemo, topli osebni stiki so redkejši, družbena omrežja ponujajo hitre rešitve in plitve odnose.</p>
+    <p>Skozi vaje boste bolje ocenili, koliko energije in pozornosti imate in kako ju uporabljate. Tako boste lahko energijo vlagali na način in v količini, ki sistem vodi v red. Soma postane odpornejša proti vleku v kaos.</p>
+    <p>Bistvo ni v vajah samih. Bistvo je v učenju giba, ki je do telesa spoštljiv. Ne vodi v premagovanje, temveč v razumevanje bolečine kot pravice telesa, da se brani pred nesmotrnostjo.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Več pozornosti pomeni manj in manj bolečih napak.</li>
+      <li>Ekspanzija telesa prinaša mir in prihrani energijo.</li>
+      <li>Bistvo je v spoštljivem odnosu do telesa, ne v številu ponovitev.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kako se počutim po vaji v primerjavi s pred vajo?</li>
+      <li>Kdaj sem danes delal(a) več stvari hkrati in kaj je to prineslo?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p33" data-toc="Preveč in premalo" data-num="33">
+  <div class="ch-eyebrow"><b>Poglavje 33</b><span>≈ 4 min branja</span></div>
+  <h2>Preveč in premalo</h2>
+  <p class="short">Dve besedi, ki pokažeta, kje je ravnovesje porušeno.</p>
+  <div class="col">
+    <h3>Čas je osnova</h3>
+    <p>Iz vsega napisanega sledi, da je osnova uspešnega učenja Senzorne prenove čas. Pomanjkanje časa prekine verigo zorenja in onemogoči trajen napredek. Je največja ovira, da bi kdo z metodo dosegel želeni rezultat. Čas, ki ga vložite, vam bo omogočil, da spreminjate razmerje med časom, pozornostjo in energijo. Sčasoma boste razumeli, zakaj je rednost tako pomembna.</p>
+    <h3>Dve besedi</h3>
+    <p>Ko iščete področja, kamor je treba vložiti več časa in pozornosti, si pomagajte z besedama <strong>preveč</strong> in <strong>premalo</strong>. Ko razmišljate, poslušate, govorite ali pišete, bodite pozorni nanju. Vsakič, ko ju uporabite, pokažete na področje, kjer so čas, pozornost ali energija razporejeni neprimerno. To je naravna posledica slabšega občutka zaradi SMA. Bolj ko je občutek popačen, težje najdemo zlato sredino in težje v njej ostanemo.</p>
+    <p>Zlata sredina je ključ do prilagodljivosti, iznajdljivosti in učinkovitosti. Ko besedo ujamete, presodite, kako pomembno je to področje za vaše stanje in napredek. Če je pomembno, nanj usmerite pozornost in uporabite načelo <em>sprejmi in spremeni</em>. Česar je preveč, zmanjšajte. Česar je premalo, povečajte. Tako ustvarjate pogoje za ravnovesje (homeostazo) in za prilagajanje nanj (alostazo).</p>
+    <p>Še bolj zgovorno je, ko se v enem stavku nabere več besed na »pre«: »Predolgo je vozil prehitro.« Edina do zdaj najdena izjema je beseda <em>preudarno</em>.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · ves dan</div>
+    <p>Na list papirja napišite dva stolpca: <strong>PREVEČ</strong> in <strong>PREMALO</strong>. Čez dan vpisujte, kar ujamete. Zvečer izberite eno vrstico in zanjo en droben korak za jutri.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Pomanjkanje časa je največja ovira za napredek.</li>
+      <li>»Preveč« in »premalo« pokažeta, kje ravnovesje manjka.</li>
+      <li>Sprejmi, nato spremeni: zmanjšaj, kar je preveč, povečaj, kar je premalo.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DEL IX ========== -->
+<div class="part-head" id="del9" data-toc="IX · Urejanje zavesti in pot iz SMA">
+  <div class="kicker">Del IX</div>
+  <h2>Urejanje zavesti in pot iz SMA</h2>
+  <p>Telo in misli se spreminjata skupaj. Zadnji del o vzorcih, mislih, energiji za spremembo in stiku z resničnostjo.</p>
+</div>
+
+<section class="ch" id="p34" data-toc="Vzorci" data-num="34">
+  <div class="ch-eyebrow"><b>Poglavje 34</b><span>≈ 4 min branja</span></div>
+  <h2>Vzorci</h2>
+  <p class="short">Kako hodimo, govorimo in si predstavljamo stvari, so vzorci. V njih je zapisano, zakaj smo takšni, kakršni smo.</p>
+  <div class="col">
+    <p>Ko človek ureja svojo zavest, se srečuje s svojimi vzorci in jih lahko spreminja. Tako lažje vodi svoje življenje. Um in gibanje sta tesno povezana: možgani mišicam dajejo ukaze, mišice pošiljajo nazaj povratne informacije. SMA otežuje čutenje, zato um slabše vodi gibanje in težave rešujemo manj učinkovito.</p>
+    <p>Ko se nam pogled na življenje širi, se lažje poglobimo v posamezne dele. Kako delamo eno stvar, odseva, kako delamo vse. Kako hodimo, pišemo, utemeljujemo, govorimo, celo kako si stvari predstavljamo: vse to so vzorci. V njih je zapisano, zakaj smo takšni, kakršni smo, in kaj bi lahko spremenili, da bi postali bolj to, kar želimo biti.</p>
+    <p>Vaje Senzorne prenove so večplastne prav zato, ker nam prinašajo boljše počutje. Pomagajo nam ustvariti <strong>somatski pogled</strong> nase in na svet. Ko ga osvojimo, bolje zaznavamo sebe in okolico, laže premislimo svoje življenje in odnose in drugače razumemo svojo preteklost. Vaje nam pomagajo razmisliti o sebi in o tem, kako naprej. To pogosto ugodno vpliva tudi na bolečine in bolezenska stanja, saj nam ta jasno kažejo, da tako ne gre več naprej.</p>
+    <p>Življenje usmerjata tudi samozaupanje in samozavest. Vaje razvijajo čutenje in s tem oboje. Vsi imamo notranjega nasprotnika. Ko razumemo, zakaj in kako se borimo sami s seboj, in spoznamo, da boj ne prinese trajne spremembe, smo na poti k boljšemu življenju.</p>
+    <p>Ko razumemo vzroke svojega stanja, ga lahko sprejmemo. Ko ga sprejmemo, ga lahko spreminjamo. Spremembe vodijo v napredek, ki je smisel zorenja in vodi v modrost. Z modrostjo lažje uresničujemo želje in potrebe in težave rešujemo po najlažji poti.</p>
+    <p><strong>Bolj ko vemo, kaj delamo, bolj je prav vse, kar delamo.</strong> Seveda le, če spoznano tudi izboljšujemo.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Kako delamo eno stvar, odseva, kako delamo vse.</li>
+      <li>Boj s seboj ne prinese trajne spremembe.</li>
+      <li>Razumeti, sprejeti, spremeniti.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kateri moj gibalni vzorec (hoja, sedenje, pisanje) spominja na to, kako živim?</li>
+      <li>V čem se najpogosteje borim sam(a) s seboj?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p35" data-toc="Misli kot neposodobljen telefon" data-num="35">
+  <div class="ch-eyebrow"><b>Poglavje 35</b><span>≈ 6 min branja</span></div>
+  <h2>Misli kot neposodobljen telefon</h2>
+  <p class="short">Mnoge misli o sebi so stari programi iz otroštva. Še delujejo, a ne ustrezajo več današnjemu življenju.</p>
+  <div class="col">
+    <p>Če se vsak dan dve uri učite igrati kitaro, boste igrali vse bolje. Če vsak dan uro slikate, boste vse boljši. Enako velja za telo (poglavji 1 in 14) in za misli. Vsak dan nekaj časa namenite opazovanju svojih misli in temu, kako jih ubesedite, opišete ali narišete.</p>
+    <p>Mišljenje ustvarja občutke, občutki dejanja, dejanja pa rezultate. Ker večina kronične zakrčenosti izhaja iz čustvenih vzorcev in navad, je delo z mislimi enako pomembno kot delo z mišicami. Tako počasi zmanjšujete jedra bolečine, ki pritiskajo na membrano, da se zapira v oklep. Pri močni zakrčenosti je nujen dvojen pristop: spreminjanje napetosti v telesu in mišljenja v umu.</p>
+    <h3>Kako posodobite program</h3>
+    <ol>
+      <li><strong>Ujemite stavek.</strong> »Nikoli se ne bom rešil(a) bolečin.« »Partnerju se ne morem približati, pa če se še tako trudim.« Ko se slišite, se ustavite.</li>
+      <li><strong>Vprašajte se, od kod je.</strong> Kdaj sem to prvič mislil(a)? Koliko sem bil(a) star(a)? Kateri dogodek je to misel ustvaril?</li>
+      <li><strong>Preverite, ali še velja.</strong> Je ta dogodek danes še aktualen? Sem danes res tako nemočen, kot sem bil takrat?</li>
+      <li><strong>Napišite novo različico.</strong> Ne pretirano pozitivno, ampak resnično: »Bolečina je zdaj tu. Učim se, kako ji pomagati.«</li>
+    </ol>
+    <p>Pogosto boste ugotovili, da so vaše misli neusklajene z dejanskim stanjem. Ste kot telefon, ki mu že dolgo niste posodobili sistema. Še deluje, a stari program slabo rešuje današnje naloge in vpliva na to, kako gledate na prihodnost, česa si želite in česa se bojite.</p>
+    <h3>Kaj okoliščine povedo o nas</h3>
+    <p>Poglejte, kako živite: odnose, finance, koliko ste srečni in zdravi. Na marsikaj od tega niste imeli vpliva. Del pa je odsev vaših misli in dejanj, ki iz njih izhajajo. Ta del priznajte brez krivde, ker je prav on tisti, ki ga lahko spremenite. Moč usmerjene pozornosti lahko uporabite, da stanje ohranite, poslabšate ali izboljšate.</p>
+    <p>Ko je energije, časa in pozornosti dolgo premalo, se življenje skrči na preživetje. To ni značajska napaka, temveč posledica izčrpanosti. Ljudje, ki so se izvili iz na videz brezupnih razmer, pogosto povedo, da je bila gonilna sila njihova vera vase. In vedite: niste oseba, kakršna ste bili. Ste tukaj in zdaj, rezultat vseh dosedanjih dejanj. Na podlagi spremenjenega mišljenja lahko naredite nova, drugačna dejanja.</p>
+    <p>Pozitivno razmišljanje samo po sebi ne zadošča, kadar telo nima energije. Zato misli in vaje gredo skupaj: telo, ki se počuti bolj varno, lažje verjame novi misli.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Stare misli so vzorci iz preteklosti, ne dejstva o sedanjosti.</li>
+      <li>Del okoliščin je naš in ga lahko spremenimo, brez krivde.</li>
+      <li>Delo z mislimi in delo s telesom se podpirata.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kateri stavek o sebi najpogosteje ponavljam?</li>
+      <li>Kako bi ga rekel(a) prijatelju, ki bi bil v enakem položaju?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p36" data-toc="Energija za spremembo" data-num="36">
+  <div class="ch-eyebrow"><b>Poglavje 36</b><span>≈ 6 min branja</span></div>
+  <h2>Energija za spremembo</h2>
+  <p class="short">Odraslost ni stanje, v katerem se nič več ne spreminja. Je zorenje, za katero potrebujemo energijo.</p>
+  <div class="col">
+    <p>Spremembe na ravni mišljenja so potrebne, da ohranimo boljšo usklajenost mišic, ki smo jo dosegli z vajami. Tudi mišljenje je podvrženo SMA. Kdor bolje čuti in vodi telo, bolje čuti in vodi tudi misli in prepozna, kako čustva vplivajo na počutje. Kot imamo lahko preveč napetosti v mišicah, imamo lahko tudi pretiran čustveni odziv ali čustveno otopelost, značilno za depresijo. Soma je nedeljiva celota telesa in uma.</p>
+    <h3>Višek energije</h3>
+    <p>Za spremembe potrebujete energijo. Brez viška ni sprememb, ki bi obstale. Če porabite preveč, je treba porabo zmanjšati. Kot pri denarju: če imate stalen prihodek, je pomembneje omejiti nesmotrno porabo, kot varčevati s tem, kar po njej ostane.</p>
+    <p>Energija, ki jo imamo na voljo, je omejena: s tem, kar v dnevu pridobimo iz hrane in zalog, in s pozornostjo, ki nam jo dajo drugi. Če jo trošimo nesmotrno, se ne moremo spreminjati. Potem verjamemo, da smo pač takšni in da bo tako ostalo. Celo verjamemo, da sta nespremenljivost in stabilnost znak odraslosti. To ne drži. Odraslost je zorenje, rast modrosti in stalno spreminjanje z zavestnim izboljševanjem.</p>
+    <h3>Dve ravni povezave</h3>
+    <p>Pridobivanje energije z dihanjem in presnovo ter njena poraba z gibanjem sta osnovni funkciji življenja. Koliko energije ima človek in kako jo uporablja, določa, kako se odziva na življenje. Osnova Senzorne prenove je, da sta um in telo funkcionalno povezana. Kar se dogaja v umu, se odraža v telesu, in obratno.</p>
+    <p>Povezava ima zavestno in nezavedno raven in na obe vplivajo energijski procesi. Ko imamo dovolj energije, so razpoloženje, drža in gibanje drugačni kot takrat, ko smo utrujeni ali potrti. Iz depresije ne pridemo s prigovarjanjem, naj mislimo pozitivno, niti samo s pogovorom, ker takrat ni moči za spremembe.</p>
+    <h3>Od stresa do kronične napetosti</h3>
+    <p>Vsak stres ustvari napetost, ki ima namen odstraniti oviro. Ko željo izpolnimo, potrebo zadovoljimo ali težavo rešimo, vzrok izgine in napetost se porabi. Če ovire ne moremo odstraniti ali se napetosti ne zavedamo (med počitkom, v spanju), nastane kronična napetost. Ostane, tudi ko je ovire že dolgo ni. Zmanjšuje energijo, otežuje gibanje in mišljenje, zmanjša spontanost in samoizražanje.</p>
+    <p>Staranju in nekaj trdote se ne moremo izogniti. Trdoto, ki izvira iz neurejenih telesnih in čustvenih ran, pa lahko zmanjšamo in energijo povečamo. Vaje Senzorne prenove so zasnovane tako, da povečajo zavedanje napetosti in sposobnost zavesti, da spremeni signale mišicam in jih vrne v stanje, ki ustreza trenutnim potrebam.</p>
+    <h3>Odgovornost</h3>
+    <p>Vsaka kronično napeta mišica ovira gibanje in popači čutenje. Zato je pomembno, da si povrnemo samonadzor in prevzamemo odgovornost zase. Tako lahko postanemo svobodno misleči, neodvisni ljudje, ki se z drugimi povezujejo za skupne cilje, sicer pa razmišljajo s svojo glavo.</p>
+    <p>Ko začnemo čutiti, nosimo tudi odgovornost, da ne delamo več tistega, kar nam ne ustreza, če ni nujno. Prej smo to leta počeli, ne da bi vedeli. Življenje je bilo preprostejše. Zdaj se moramo svojega ravnanja zavedati v celoti. To je včasih zapleteno. Vemo pa, kaj sledi, če ta pristop opustimo in urejanje življenja prepustimo tehnologiji: vrnejo se bolečine in težave.</p>
+  </div>
+  <blockquote>»Močan si, če se grobi moči odpoveš, podobno pa tudi tehnologija nudi odrešujoče možnosti samo tedaj, ko je ne postavljaš več na vzvišeno mesto rešitelja naših človeških težav. Tako kot vidimo zvezde samo na jasnem nočnem nebu, lahko naš pogled uzre in osmisli naše dejavnosti samo na jasnem ozadju vsepovezujočega vesolja.«</blockquote>
+  <p class="navdih">Andrej Detela, <i>Sintropija</i>.</p>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Brez viška energije ni trajne spremembe, ne v telesu ne v mislih.</li>
+      <li>Kronična napetost je ostanek stresa, ki se ni porabil.</li>
+      <li>Ko začnemo čutiti, prevzamemo odgovornost zase.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katera napetost v mojem telesu je ostala od ovire, ki je že ni več?</li>
+      <li>Kaj počnem iz navade, čeprav mi ne ustreza?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p37" data-toc="V stiku z realnostjo" data-num="37">
+  <div class="ch-eyebrow"><b>Poglavje 37</b><span>≈ 7 min branja</span></div>
+  <h2>V stiku z realnostjo</h2>
+  <p class="short">Za vsakega od nas je prva resničnost lastno telo. Kdor izgubi stik s telesom, izgubi stik s seboj.</p>
+  <div class="col">
+    <p>V prejšnjih delih smo opisali, kako se izgubi stik med umom, telesom in življenjsko energijo in kako nastane oklep. Za človeka s kronično zakrčenostjo je pogosto značilno, da sledi nerealnim ciljem ali se oklepa iluzij in je izgubil upanje in vero vase. Vzroke smo pogledali z zavestne, telesne in energijske strani. A to so le trije pogledi na isto stvar. Kdor nima upanja, lovi nerealne cilje. Kdor je v stiku z resničnostjo, verjame vase.</p>
+    <p>Resničnost vsak razume malo drugače: kot nujnost, da zaslužimo za življenje, kot zakon narave, kjer preživijo močnejši, ali kot življenje brez tekmovalnega pritiska. V vsakem pogledu je nekaj resnice. Tu nas zanima predvsem resničnost notranjega sveta. Ko rečemo, da nekdo nima stika z resničnostjo, mislimo, da nima stika s seboj.</p>
+    <h3>Realnost</h3>
+    <p>Prva resničnost je naše telo. Skozi telo doživljamo notranji in zunanji svet in se nanju odzivamo. Kdor ni v stiku s telesom, ni v stiku s svetom. Bolj ko je telo živo, jasneje zaznavamo svet in bolj dejavno se nanj odzovemo. Vsi poznamo dneve, ko smo dobro razpoloženi in je svet bolj barvit, in dneve potrtosti, ko je vse sivo.</p>
+    <p>S Senzorno prenovo ta odnos spreminjate in krepite stik z resničnostjo telesa. Kolikšno ločenost začutite pri vajah, vam pove, koliko zavedanja sebe se je izgubilo. Človek ni ločen od telesa. Ljubezen, strah, jeza in hrepenenje so najprej dogodki v telesu: mehčanje, otrplost, drhtenje, iztegovanje proti drugemu. Brez telesnega občutka so te besede prazne. Ko jih telo izkusi in zavest začuti, dobijo pomen.</p>
+    <p>Pri delu s strankami se pogosto zgodi, da človek ne zna poimenovati ali razložiti občutkov, ki jih je začel zaznavati. Razlog je slabo razvita <strong>vodoravna povezanost</strong>, povezava med občutkom in besedo, med telesom in razumevanjem. Identiteta dobi vsebino iz telesnih občutkov. Brez njih je le seznam podatkov o sebi.</p>
+    <p>Nekateri na delavnicah vprašajo, kaj ima telo sploh opraviti z njihovim počutjem. Vprašanje pove veliko: kar človek čuti, čuti s telesom. Kdor tako sprašuje, verjetno doživlja telo kot stroj, ki ga vzdržuje pri življenju, nanj pa ne vpliva.</p>
+    <h3>Um</h3>
+    <p>To prepričanje ima korenine v zahodni kulturi. V velikem delu verskega izročila je bilo telo razumljeno kot grešno, podrejeno, kot ječa duše in vir skušnjav. Um, ki človeka loči od živali, je veljal za merilo človečnosti. Moč, ki so jo stari ljudje častili v telesu, smo prenesli v dušo. Znanost je nato zavrnila subjektivno izkušnjo kot nezanesljivo in priznala le to, kar je merljivo. Telesne funkcije smo začeli obravnavati kot kemične mehanizme in telo postavili na raven predmeta. To je človeku prineslo veliko moči in varnosti. Izgubili pa smo stik z lastnim doživljanjem.</p>
+    <h3>Slepota</h3>
+    <p>Da bi odpravili nepojasnjene bolečine in bolezni, si moramo dovoliti pogled v svoje nezavedne procese in razumeti senzorno-motorično amnezijo. To pa je mogoče le, če se sprejmemo kot bitje, ki je telo in ki čuti. Wilhelm Reich je bil med prvimi, ki je opisal, kako telo izraža značaj. Kako se kdo drži, govori, hodi in izraža čustva, pove veliko o njem. To vemo nagonsko, vedeli smo že kot otroci. V hitrem, tehnološkem svetu pa smo to znanje zameglili.</p>
+    <p>Naučili smo se, da čutom ne smemo zaupati, ker so subjektivni. Kdor pa čutom ne zaupa, ne more zaupati telesu. In ne more biti prepričan o resničnosti: živi v iluziji.</p>
+    <p>Odpor proti misli, da je telo bistvo osebe, je globoko zakoreninjen. Izkušen učitelj iz drže in gibanja pogosto prepozna veliko o človeku, ki ga vidi prvič. Ljudje se ob tem včasih začudijo in ne verjamejo, čeprav vedo, da je res. V tem ni nič nadnaravnega. Je naravna resničnost, ki jo razumemo, ko poznavanje telesa povežemo z lastnimi občutki.</p>
+    <h3>Razumevanje</h3>
+    <p>Tega odpora ni lahko premagati, saj večina ljudi ne želi opustiti iluzije, da je um z dovolj podatki vsemogočen. Senzorna prenova ponuja možnost razumevanja. Vsem, ki živijo s kronično bolečino, je skupno pomanjkanje razumevanja. Začne se v otroštvu. Otrok razvije občutek zase do mere, do katere ga razumejo in sprejemajo starši. Starši pa lahko razumejo otroka le toliko, kolikor razumejo in čutijo sebe. Zato je pri učenju Senzorne prenove največji poudarek na poglabljanju razumevanja sebe.</p>
+  </div>
+  <p class="navdih">Navdih: telo kot temelj resničnosti in identitete po A. Lowenu, <i>The Betrayal of the Body</i> (1967), 1. poglavje; telo kot izraz značaja po W. Reichu, <i>Analiza karakterja</i> (1933).</p>
+  <div class="box varno">
+    <div class="box-label">Če se ustavite</div>
+    <p>Če se v procesu ustavite, poiščite pomoč pri izkušenih učiteljih metode. Pomagali vam bodo dopolniti znanje in bolje razumeti vlogo in namen vaj. Če se ob vajah sprostijo težki dogodki iz preteklosti, ne oklevajte in obiščite psihoterapevta. Psihoterapevti so najbolje usposobljeni, da vam pomagajo razumeti tisto, česar se zdaj zavedate in je bilo prej potlačeno.</p>
+    <p>Kot del učenja priporočamo knjigo <em>Strupeni starši</em> (Susan Forward in Craig Buck), ki pomaga globlje razumeti odnose med otrokom in starši.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Prva resničnost je telo. Kdor ne čuti telesa, izgubi stik s seboj.</li>
+      <li>Občutke je treba tudi poimenovati; to je vodoravna povezanost.</li>
+      <li>Razumevanje sebe je jedro Senzorne prenove.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kdaj sem nazadnje svet doživel(a) barvito? Kaj je bilo takrat drugače v mojem telesu?</li>
+      <li>Ali znam poimenovati, kar čutim v telesu zdaj?</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== DELOVNI DEL ========== -->
+<div class="part-head" id="delovni" data-toc="Delovni del">
+  <div class="kicker">Delovni del</div>
+  <h2>Vaših 30 dni</h2>
+  <p>Tedenski okvir, ki dopolnjuje vaje iz programa. Vaje same izvajajte po navodilih učitelja in avdio posnetkov.</p>
+</div>
+
+<section class="ch" id="dni30" data-toc="Sledilnik 30 dni" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Sledilnik 30 dni</h2>
+  <div class="col">
+    <p>Priporočilo je ura na dan. Če je to zdaj preveč, začnite z 10 do 20 minutami in postopoma dodajajte. <span class="screen-only">Ko ste vadili, se dotaknite številke dneva. Oznake si zapomni samo vaš brskalnik.</span><span class="print-only">Ko ste vadili, prekrižajte kvadratek.</span></p>
+  </div>
+  <div class="weeks" id="weeks"></div>
+  <p class="progress" id="progress"></p>
+  <button type="button" class="reset" id="reset">Počisti oznake</button>
+  <div class="box vprasanja">
+    <div class="box-label">Dnevni vprašalnik · 3 minute zvečer</div>
+    <ol>
+      <li>Kje v telesu sem danes najbolj čutil(a) pritisk?</li>
+      <li>Kje na lestvici stanj (poglavje 24) sem preživel(a) največ dneva?</li>
+      <li>Kakšen je bil moj dih, ko sem bil(a) pod stresom?</li>
+      <li>Ali se je med vajo zgodilo kaj nepričakovanega (toplota, tresenje, čustvo, stara bolečina)?</li>
+      <li>Kaj je bilo danes preveč in kaj premalo?</li>
+      <li>Za kaj sem danes hvaležen(-na) svojemu telesu?</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========== DODATKI ========== -->
+<div class="part-head" id="dodatki" data-toc="Dodatki">
+  <div class="kicker">Dodatki</div>
+  <h2>Za sprotno uporabo</h2>
+</div>
+
+<section class="ch" id="slovar" data-toc="Slovar" data-num="A">
+  <div class="ch-eyebrow"><b>Dodatek A</b></div>
+  <h2>Mali slovar</h2>
+  <dl class="gloss col">
+    <div><dt>Alostaza</dt><dd>Prilagajanje telesa spremembam (s hormoni, živčnim sistemom), s katerim ohranja ravnovesje.</dd></div>
+    <div><dt>ATP</dt><dd>Molekula, ki v celicah shranjuje energijo za delo. Kot polnjena baterija.</dd></div>
+    <div><dt>Aerobno / anaerobno</dt><dd>Pridobivanje energije s kisikom (varčno, počasno) ali brez njega (hitro, potratno, kratkotrajno).</dd></div>
+    <div><dt>Bohrov učinek</dt><dd>Kjer je več CO₂ in kisline, hemoglobin lažje odda kisik tkivom.</dd></div>
+    <div><dt>Ego</dt><dd>Dejavni del zavesti, ki zaznava, odloča in se odziva na okolico.</dd></div>
+    <div><dt>Ekspanzija</dt><dd>Razširitev telesa, ko se mišice daljšajo. Prinaša mir in prijetne občutke.</dd></div>
+    <div><dt>Entropija / sintropija</dt><dd>V Senzorni prenovi: entropija je nered, razkroj in izčrpavanje, sintropija red, rast in zorenje.</dd></div>
+    <div><dt>Fascija</dt><dd>Vezivo, ki ovija mišice in jih povezuje v celoto.</dd></div>
+    <div><dt>Hiperstimulacija</dt><dd>Preveč dražljajev, več kot jih zmoremo predelati.</dd></div>
+    <div><dt>Homeostaza</dt><dd>Stanje notranjega ravnovesja telesa.</dd></div>
+    <div><dt>Kemoreceptorji</dt><dd>Živčne celice, ki merijo kemično sestavo krvi, predvsem CO₂, in uravnavajo dih.</dd></div>
+    <div><dt>Kontrolna pavza</dt><dd>Število sekund udobnega zadrževanja diha po izdihu; merilo tolerance na CO₂.</dd></div>
+    <div><dt>Korteks</dt><dd>Možganska skorja, površina možganov, kjer se začne zavestno zaznavanje.</dd></div>
+    <div><dt>Membrana (zaščitni plašč)</dt><dd>Koža, podkožje, fascija in mišice tik pod kožo. Ločuje nas od okolice, čuti in varuje.</dd></div>
+    <div><dt>Navpična povezanost</dt><dd>Povezava med možgani in mišicami: kako dobro občutek pride do možganov in ukaz do mišic.</dd></div>
+    <div><dt>Vodoravna povezanost</dt><dd>Povezava med občutkom in besedo: kako dobro to, kar čutimo, prepoznamo in poimenujemo.</dd></div>
+    <div><dt>Pandikulacija</dt><dd>Naravno pretegovanje: mišico zategnemo in jo nato počasi spustimo. Obnovi stik med možgani in mišico.</dd></div>
+    <div><dt>Parasimpatični / simpatični način</dt><dd>Stanje počitka in obnove / stanje pripravljenosti na boj ali beg.</dd></div>
+    <div><dt>Potlačitev, represija</dt><dd>Čustvo in spomin nanj sta potisnjena iz zavesti; v telesu ostane napetost.</dd></div>
+    <div><dt>Praznjenje</dt><dd>Spontano sproščanje zadržane obrambne energije s tresenjem, toploto, solzami, zehanjem.</dd></div>
+    <div><dt>Senzorna atrofija</dt><dd>Slabša pretvorba dražljajev v občutek in slabši prenos občutka do možganov.</dd></div>
+    <div><dt>Senzorno-motorična amnezija (SMA)</dt><dd>Stanje, ko možgani zaradi dolgotrajnega stresa izgubijo občutek in nadzor nad delom mišic. Mišice ostanejo napete, čeprav tega ne želimo.</dd></div>
+    <div><dt>Soma</dt><dd>Človek kot celota telesa in uma, kakor ga doživljamo od znotraj.</dd></div>
+    <div><dt>Tonus</dt><dd>Stalna osnovna napetost mišice.</dd></div>
+    <div><dt>Toleranca na CO₂</dt><dd>Kako dobro telo prenaša nekoliko višji CO₂, ne da bi sprožilo alarm. Višja toleranca pomeni mirnejši dih.</dd></div>
+  </dl>
+</section>
+
+<section class="ch" id="viri" data-toc="Viri in navdihi" data-num="B">
+  <div class="ch-eyebrow"><b>Dodatek B</b></div>
+  <h2>Viri in navdihi</h2>
+  <div class="col">
+    <p>Senzorna prenova je sinteza, ki se naslanja na misli več avtorjev. Spodaj so dela, iz katerih izhajajo posamezne zamisli tega učbenika, in priporočila za nadaljnje branje.</p>
+    <h3>Temeljni navdihi</h3>
+    <ul class="refs">
+      <li>Aleš Ernst, Vesna Cijan: <em>Učbenik programa za zgornji del telesa</em> (2021). <span class="why">Izhodišče te izdaje.</span></li>
+      <li>Alexander Lowen: <em>The Betrayal of the Body</em> (1967), <em>Pleasure</em> (1970), <em>Depression and the Body</em> (1972), <em>Bioenergetics</em> (1975), <em>Fear of Life</em> (1980), <em>Narcissism: Denial of the True Self</em> (1983). <span class="why">Membrana, debela koža, potlačitev, biti in delati, telo kot resničnost.</span></li>
+      <li>Thomas Hanna: <em>Somatics</em> (1988). <span class="why">Senzorno-motorična amnezija, pandikulacija, središče telesa.</span></li>
+      <li>Moshé Feldenkrais: <em>Zavedanje skozi gibanje</em> (1972). <span class="why">Učenje giba z radovednostjo, brez napora.</span></li>
+      <li>Sigmund Freud: <em>Onkraj načela ugodja</em> (1920), <em>Jaz in Ono</em> (1923). <span class="why">Zaščitni ščit, zavest kot površina, jezdec in konj.</span></li>
+      <li>Wilhelm Reich: <em>Analiza karakterja</em> (1933). <span class="why">Mišični oklep, telo kot izraz značaja.</span></li>
+      <li>Konstantin P. Buteyko; Patrick McKeown: <em>The Oxygen Advantage</em> (2015). <span class="why">CO₂, kontrolna pavza, nosni dih.</span></li>
+      <li>Andrej Detela: <em>Sintropija</em>. <span class="why">Entropija in sintropija.</span></li>
+      <li>Selinšek (2012), Strokovna revija za ravnanje z ljudmi pri delu. <span class="why">Izkustveno učenje.</span></li>
+    </ul>
+    <h3>Za nadaljnje branje</h3>
+    <ul class="refs">
+      <li>Susan Forward, Craig Buck: <em>Strupeni starši</em>. <span class="why">Odnosi med otrokom in starši (priporočilo avtorja).</span></li>
+      <li>Peter A. Levine: <em>Prebuditi tigra</em> (1997). <span class="why">Kako telo nosi in sprošča travmo.</span></li>
+      <li>Bessel van der Kolk: <em>Telo si vse zapomni</em> (2014). <span class="why">Travma, možgani in telo.</span></li>
+      <li>Deb Dana: <em>Anchored</em> (2021). <span class="why">Praktična raba polivagalnega modela.</span></li>
+      <li>James Nestor: <em>Dih</em> (2020). <span class="why">Znanost in zgodovina dihanja.</span></li>
+      <li>Gabor Maté: <em>Ko telo reče ne</em> (2003). <span class="why">Stres, čustva in bolezen.</span></li>
+      <li>Paul Grossman (2023), <em>Biological Psychology</em>. <span class="why">Kritika polivagalne teorije.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="opombe" data-toc="Opombe za avtorja" data-num="C">
+  <div class="ch-eyebrow"><b>Dodatek C</b><span>Za avtorja in učitelje</span></div>
+  <h2>Opombe za avtorja</h2>
+  <div class="col"><p>Seznam vsebinskih sprememb glede na 1. izdajo (april 2021) in odprta vprašanja. Pred tiskom naj ta dodatek odstrani.</p></div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Mesto v 1. izdaji</th><th>Sprememba</th><th>Poglavje</th></tr></thead>
+      <tbody>
+        <tr><td>pH krvi »7,325 → proti 6,8« (str. 23)</td><td>Odstranjeno. Normalno 7,35–7,45; čezmerno dihanje pH zviša. Ohranjena misel o nizkem CO₂ in slabši oskrbi tkiv.</td><td>28</td></tr>
+        <tr><td>38 ATP iz glukoze (str. 21–22)</td><td>Okoli 30 ATP (sodobna ocena 30–32).</td><td>27</td></tr>
+        <tr><td>Fotosinteza kot »anaerobni proces, ki ustvarja ATP«; prvi organizmi so živeli od nje</td><td>Popravljena zgodba: anaerobni začetki, cianobakterije, kisik pred ~2,4 milijarde let.</td><td>26</td></tr>
+        <tr><td>CO₂ se veže na mesto kisika na hemoglobinu; kisik viša bazičnost</td><td>Nadomeščeno s preprosto razlago Bohrovega učinka.</td><td>25</td></tr>
+        <tr><td>»Za sprožitev dihanja ni pomembna raven kisika«</td><td>Dodano »v vsakdanjih razmerah« in omemba perifernih tipal za kisik.</td><td>25</td></tr>
+        <tr><td>»Ko je zahteva višja od sposobnosti, da ga zagotovi na anaeroben način«</td><td>Popravljeno v »aeroben«.</td><td>27</td></tr>
+        <tr><td>Everest brez kisika in 10 minut pod vodo kot merilo zdravja</td><td>Odstranjeno kot merilo; razlaga v okvirju »Za radovedne«.</td><td>28</td></tr>
+        <tr><td>Zadrževanje diha (moduli 3 in 4) brez opozoril</td><td>Dodana varnostna pravila.</td><td>29</td></tr>
+        <tr><td>»Um deluje po pravilih kvantne fizike«</td><td>Ohranjeno kot prispodoba z opombo.</td><td>7</td></tr>
+        <tr><td>Prvi zakon termodinamike</td><td>Popravljena formulacija, uporabljen kot prispodoba.</td><td>13</td></tr>
+        <tr><td>Primer s paraplegikom (str. 6)</td><td>Odstranjen, ker je zavajajoč.</td><td>7</td></tr>
+        <tr><td>Dvom o materah, ki rodijo s pomočjo porodnišnice (str. 14)</td><td>Izpuščeno. Ohranjeno sporočilo, da otrok potrebuje bližino in starše, ki ga čutijo.</td><td>18</td></tr>
+        <tr><td>Spolni stereotipi (dom, status; »mož nima časa za ženo«)</td><td>Preoblikovano nevtralno.</td><td>18, 20</td></tr>
+        <tr><td>»Pomanjkanje časa smo si sami ustvarili«, »položaj le odseva vaše misli«, »ljudje, ki komaj životarijo«</td><td>Preoblikovano brez krivde; sporočilo o lastnem deležu ohranjeno.</td><td>3, 35</td></tr>
+        <tr><td>»Telo je naš tempelj […] kažemo odnos do samega sebe«</td><td>Preoblikovano v spoštljiv odnos kot izbiro.</td><td>16</td></tr>
+        <tr><td>»Psihotičen odnos«, »histerična reakcija«, »šibka osebnost«</td><td>Nadomeščeno z opisnimi izrazi.</td><td>9, 13</td></tr>
+        <tr><td>Sklici na »Pravo učenje skozi vaje«, »Valovanje življenjske energije«, »Entropija«, »Zorenje«</td><td>Poglavij v učbeniku ni. Sklici preusmerjeni na poglavja 1, 14, 7 in 31.</td><td>—</td></tr>
+        <tr><td>Skoraj dobesedni prevodi A. Lowena (str. 33–34 in drugje)</td><td>Napisano na novo, z opombo »Navdih«.</td><td>12, 13, 37</td></tr>
+        <tr><td>Slika plasti membrane brez razlage (str. 10)</td><td>Nova slika z razlago in ohranjeno barvno legendo.</td><td>8</td></tr>
+        <tr><td>Tipkarske napake (življenska, Co2, aveolih, saturdacija, pendikulacija …)</td><td>Popravljeno.</td><td>—</td></tr>
+        <tr><td>Polivagalna teorija (predlog AI analize)</td><td>Dodana kot model v okvirju, z opozorilom o znanstvenih sporih.</td><td>24</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <h3>Odprta vprašanja</h3>
+    <ol>
+      <li>Ali obstajajo poglavja »Pravo učenje skozi vaje«, »Valovanje življenjske energije« in »Entropija« v drugem gradivu? Jih vključimo?</li>
+      <li>Ali naj teza o anaerobnem načinu pri otrocih (poglavje 28) ostane? Je označena kot razlaga Senzorne prenove.</li>
+      <li>Kateri so moduli 1–4 protokola za dvig tolerance na CO₂? Varnostna pravila bi morala biti ob njih.</li>
+      <li>Ali želite navesti Lowena, Hanno in Feldenkraisa kot navdih po imenu, kot je predlagano?</li>
+      <li>Ali naj polivagalni okvir ostane?</li>
+      <li>Ali je primerno, da so primeri (Mateja, Marjeta, Andrej) izmišljeni? Morda jih nadomestite z resničnimi, anonimiziranimi zgodbami strank.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Izjava o uporabi gradiva.</strong> Ta učbenik lahko uporabljate samo za lastne potrebe in v skladu s pravicami in omejitvami Zakona o avtorskih in sorodnih pravicah (ZASP), ki veljajo za prosto uporabo avtorskih del. Učbenik je avtorsko delo in ga brez izrecnega pisnega dovoljenja avtorja, Petra Karlovška, ni dovoljeno distribuirati, kopirati (delno ali v celoti) ali objavljati.</p>
+  <p>Avtor: Peter Karlovšek · 2. izdaja, delovni osnutek oktober 2026.</p>
+  <p>Delno po gradivu A. Ernsta in V. Cijan (2021).</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function(){
+  // Kazalo iz naslovov delov in poglavij
+  var list=document.getElementById("toc-list"), plist=document.getElementById("print-toc-list");
+  function span(c,t){var s=document.createElement("span");s.className=c;s.textContent=t;return s;}
+  document.querySelectorAll("[data-toc]").forEach(function(el){
+    var li=document.createElement("li"), a=document.createElement("a");
+    a.href="#"+el.id;
+    var part=el.classList.contains("part-head");
+    if(part){li.className="part";a.textContent=el.dataset.toc;}
+    else{var s=document.createElement("span");s.textContent=el.dataset.num||"·";a.appendChild(s);a.appendChild(document.createTextNode(el.dataset.toc));}
+    li.appendChild(a);list.appendChild(li);
+    // Kazalo za tisk: številka strani iz data-page (vpiše jo izdelava PDF)
+    var pli=document.createElement("li");
+    if(part)pli.className="part";else pli.appendChild(span("n",el.dataset.num||"·"));
+    pli.appendChild(span("t",el.dataset.toc));pli.appendChild(span("dots",""));
+    var pg=span("pg",el.dataset.page||"");pg.dataset.for=el.id;pli.appendChild(pg);
+    plist.appendChild(pli);
+  });
+  document.getElementById("print-btn").addEventListener("click",function(){window.print();});
+
+  // Krogi
+  var NS="http://www.w3.org/2000/svg";
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);return e;}
+  function cycle(id,labels,center){
+    var svg=document.getElementById(id); if(!svg) return;
+    var cx=260,cy=220,r=150,n=labels.length,uid=id+"-ah";
+    var defs=el("defs",{}); var m=el("marker",{id:uid,viewBox:"0 0 10 10",refX:"8",refY:"5",markerWidth:"7",markerHeight:"7",orient:"auto-start-reverse"});
+    m.appendChild(el("path",{d:"M0,0 L10,5 L0,10 z","class":"ah"})); defs.appendChild(m); svg.appendChild(defs);
+    function pt(deg){var a=deg*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+    var gap=20;
+    for(var i=0;i<n;i++){
+      var a0=-90+i*360/n+gap, a1=-90+(i+1)*360/n-gap;
+      var p0=pt(a0),p1=pt(a1);
+      svg.appendChild(el("path",{d:"M"+p0[0].toFixed(1)+","+p0[1].toFixed(1)+" A"+r+","+r+" 0 0 1 "+p1[0].toFixed(1)+","+p1[1].toFixed(1),"class":"arc","marker-end":"url(#"+uid+")"}));
+    }
+    for(var j=0;j<n;j++){
+      var p=pt(-90+j*360/n); var g=el("g",{"class":"node"});
+      var lines=labels[j].split("|"); var w=150,h=lines.length>1?54:38;
+      g.appendChild(el("rect",{x:(p[0]-w/2).toFixed(1),y:(p[1]-h/2).toFixed(1),width:w,height:h,rx:10}));
+      lines.forEach(function(t,k){var tx=el("text",{x:p[0].toFixed(1),y:(p[1]+(k-(lines.length-1)/2)*18+5).toFixed(1),"text-anchor":"middle"});tx.textContent=t;g.appendChild(tx);});
+      svg.appendChild(g);
+    }
+    var c=el("text",{x:cx,y:cy+5,"text-anchor":"middle","class":"cycle-center"}); c.textContent=center; svg.appendChild(c);
+  }
+  cycle("cyc-bad",["Stres","Zakrčenost","Izguba|občutka","Napačna|odločitev","Več stresa"],"se ponavlja");
+  cycle("cyc-good",["Varnost","Mehkejše|mišice","Več občutka","Boljša|odločitev","Manj stresa"],"se krepi");
+
+  // Kje na lestvici sem
+  var tips={
+    v:"<strong>Lepo.</strong> To je najboljši čas za vajo, saj se telo lahko uči. Zapomnite si, kako se to stanje čuti v ramenih, obrazu in dihu, da ga boste pozneje prepoznali.",
+    s:"<strong>Telo je v pripravljenosti.</strong> Preden začnete vajo, pomagajte živčnemu sistemu:<ul><li>pet dihov z izdihom, daljšim od vdiha (4 noter, 6 ven),</li><li>počasi poglejte po prostoru in poimenujte tri stvari,</li><li>pritisnite stopala v tla in začutite oporo.</li></ul>Vajo nato izvajajte počasneje in z manjšimi gibi.",
+    d:"<strong>Energije je malo.</strong> Danes ni čas za napor. Najprej nežno prebujanje:<ul><li>pomigajte s prsti na rokah in nogah,</li><li>z dlanmi podrgnite roke in stegna,</li><li>sedite pokonci in poglejte skozi okno,</li><li>če je mogoče, pokličite nekoga, ob katerem ste mirni.</li></ul>Tudi pet minut vaje je danes dovolj."
+  };
+  var btns=document.querySelectorAll("#checkin button"), out=document.getElementById("ci-out");
+  btns.forEach(function(b){b.addEventListener("click",function(){btns.forEach(function(x){x.setAttribute("aria-pressed","false");});b.setAttribute("aria-pressed","true");out.innerHTML=tips[b.dataset.k];});});
+  // Za tisk vsi trije nasveti hkrati
+  var cp=document.createElement("div");cp.className="ci-print print-only";
+  btns.forEach(function(b){var d=document.createElement("div");d.className="k-"+b.dataset.k;var h=document.createElement("h4");h.textContent=b.textContent;var t=document.createElement("div");t.innerHTML=tips[b.dataset.k];d.appendChild(h);d.appendChild(t);cp.appendChild(d);});
+  out.parentNode.insertBefore(cp,out);
+
+  // Za tisk prazne vrstice pod vprašanji dnevnega vprašalnika
+  document.querySelectorAll("#dni30 .vprasanja li").forEach(function(li){var l=document.createElement("span");l.className="print-lines";li.appendChild(l);});
+
+  // Za radovedne: pri tiskanju odpri, potem vrni
+  var rad=document.querySelectorAll("details.radoved"), was=[];
+  window.addEventListener("beforeprint",function(){rad.forEach(function(d,i){was[i]=d.open;d.open=true;});});
+  window.addEventListener("afterprint",function(){rad.forEach(function(d,i){d.open=!!was[i];});});
+
+  // 30 dni
+  var W=[
+    {t:"1. teden · Opazovanje (deli I–III)",d:"Ne spreminjajte ničesar, samo opazujte. Kdaj se dvignejo ramena? Kje dih zastane? Vaje izvajajte počasi, z radovednostjo. Preberite dele I do III.",days:[1,7]},
+    {t:"2. teden · Gib iz središča (deli IV–V)",d:"Pri vsaki vaji začnite v središču in dodajajte dele telesa po občutku. Opazujte, na katerem pasu avtoceste živite.",days:[8,14]},
+    {t:"3. teden · Čustva in dih (deli VI–VII)",d:"Pred vajo preverite, kje ste na lestvici stanj. Dodajte mehki nosni dih in zjutraj zapišite kontrolno pavzo. Če se med vajo pojavijo tresenje, toplota ali čustva, jim dovolite teči po žličkah.",days:[15,21]},
+    {t:"4. teden · Energija in misli (deli VIII–IX)",d:"Vodite seznam preveč in premalo. Ujemite en star stavek o sebi in ga posodobite. Vaje prenesite v vsakdan: pri vožnji, za računalnikom, v pogovoru.",days:[22,28]},
+    {t:"Zadnja dva dneva · Pogled nazaj",d:"Preberite svoj dnevnik. Kaj se je spremenilo? Kaj želite obdržati? Kje bi potrebovali podporo učitelja?",days:[29,30]}
+  ];
+  var KEY="sp30-dni-izdaja2", done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){done={};}
+  var wrap=document.getElementById("weeks"), prog=document.getElementById("progress");
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}}
+  function upd(){var c=0;for(var k in done)if(done[k])c++;prog.textContent="Opravljeni dnevi: "+c+" od 30";}
+  W.forEach(function(w){
+    var box=document.createElement("div");box.className="week";
+    var h=document.createElement("h4");h.textContent=w.t;var p=document.createElement("p");p.className="theme";p.textContent=w.d;
+    var ds=document.createElement("div");ds.className="days";
+    for(var i=w.days[0];i<=w.days[1];i++){(function(i){var b=document.createElement("button");b.type="button";b.className="day";b.id="dan-"+i;b.textContent=i;b.setAttribute("aria-label","Dan "+i);b.setAttribute("aria-pressed",done[i]?"true":"false");b.addEventListener("click",function(){done[i]=!done[i];b.setAttribute("aria-pressed",done[i]?"true":"false");save();upd();});ds.appendChild(b);})(i);}
+    box.appendChild(h);box.appendChild(p);box.appendChild(ds);wrap.appendChild(box);
+  });
+  upd();
+  document.getElementById("reset").addEventListener("click",function(){done={};save();document.querySelectorAll(".day").forEach(function(b){b.setAttribute("aria-pressed","false");});upd();});
+
+  // Na ozkih zaslonih kazalo zaprto
+  if(window.matchMedia&&window.matchMedia("(max-width:1019px)").matches){var d=document.getElementById("toc-d");if(d)d.removeAttribute("open");}
+})();
+</script>
+</body>
+</html>
