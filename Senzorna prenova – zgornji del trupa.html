@@ -275,7 +275,10 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   h2,h3,h4,.ch-eyebrow,.box-label,.kicker{break-after:avoid}
   .box,.figure,.rule,.week,.card,.cycle-card,.budget,.tbl,table,tr,details.radoved,.checkin,blockquote,dl.gloss div,.rung,.ladder,.flow,.navdih{break-inside:avoid}
   p,li{orphans:3;widows:3}
-  .col{gap:8pt}
+  .col{display:block}
+  .col:not(.gloss)>*{margin-top:0;margin-bottom:0}
+  .col:not(.gloss)>*+*{margin-top:8pt}
+  .ch .col>h3{margin-top:14pt}
 
   /* Širši stolpec */
   .figure,.cards3,.ladder,.checkin,.budget,.tbl,.rules,.weeks{max-width:none}
@@ -434,6 +437,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <p>Um nam ves čas nekaj dopoveduje. Zahteva dejavnost, kot da mu brez nje grozi propad. Če se tega ne zavedamo, nas počasi pripelje v stalen stres.</p>
     <p>Um lahko zaposlimo drugače: postavimo ga v vlogo opazovalca. Pri vajah opazuje, kaj telo počne. Tako opazimo navade in vzorce, ki nam ne koristijo, in jih lahko izboljšamo. Ko vemo, kako nekaj delamo, nas je manj strah in manj skrbi. Zavest se umiri.</p>
     <p>Šele umirjen um lahko zavestno spreminja sedanjost. To je edini zdrav in dolgoročno učinkovit način za spremembo. Z voljo spreminjamo mišljenje, mišljenje pa oblikuje naše življenje.</p>
+    <p>Eckhart Tolle opisuje, da um največ moči porabi s potovanji v preteklost, kjer obžaluje, in v prihodnost, kjer skrbi. Sedanjost mu je le prehod do naslednjega trenutka. Telo pa je vedno tukaj in zdaj. Zato je sedanji trenutek edini čas, ko um telo res lahko opazuje.</p>
     <h3>Bolečina in nemiren um</h3>
     <p>Bolečina, katere vzroka ne poznamo in nanjo ne moremo vplivati, kaže, da ne vemo dovolj dobro, kaj delamo, ko telo obremenjujemo. Bolečina naredi um nemiren. Nemiren um ne zmore opazovati, kaj se dogaja, zato tudi ne more odpraviti vzroka bolečine. Krog se zapre.</p>
     <p>Ko pri vaji poskusite umiriti um, boste morda opazili, da tega ne znate več. A kot otroci ste znali. Drugače se ne bi naučili vsega, kar odrasel človek potrebuje. Opazovanje je veščina, ki jo lahko spet izurimo. Vaje klinične somatike ob tem izboljšujejo občutek, nadzor, usklajenost in natančnost gibov. Vse to pomaga odpraviti vzroke bolečine.</p>
@@ -446,6 +450,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <li>Ko um začne komentirati (»moral bi …«), samo opazite: »misel«. Vrnite se k telesu.</li>
     </ol>
   </div>
+  <p class="navdih">Navdih: E. Tolle, <i>The Power of Now</i> (1997).</p>
   <div class="box kljucne">
     <div class="box-label">Ključne točke</div>
     <ul>
@@ -1170,6 +1175,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <p>Osnovni življenjskosti, <strong>biti</strong>, se pridruži <strong>delati</strong>. Če smo pri biti preveč skopi, pretiravamo pri delati, da bi ravnovesje izenačili. Ego takrat išče globlji užitek v rezultatih dela namesto v samem bivanju.</p>
     <p>Če nam delo pomeni več kot uživanje v njegovih sadovih, pridemo v protislovje. Ob koncu projekta se ne znamo poveseliti in si oddahniti. Ego takoj preklopi na novo nalogo. To kaže na strah pred življenjem, pred resničnostjo telesa in pred plitkostjo odnosov. Prepričani smo, da potrebujemo še več dejavnosti. To se ujema z zahtevo sodobnega časa: naredi več.</p>
     <p>Ta zahteva spregleda preprosto resnico: <strong>človek izpolni smisel svojega obstoja že s tem, da je v celoti to, kar je.</strong></p>
+    <p>Robin Sharma v zgodbi o menihu, ki je prodal svoj ferrari, piše o <em>dharmi</em>, življenjskem namenu. Po njegovem delovanje, ki izhaja iz lastnega namena, ne izčrpa tako kot delovanje iz pritiska in tekmovanja. Delati torej ni napaka. Težava nastane, ko delo bivanje nadomesti, namesto da bi iz njega izviralo.</p>
     <h3>Stalna rast</h3>
     <p>Logika stalne rasti je nenaravna in škodljiva. Otrok jo spozna v šoli in pri starših, ki zapovedujejo:</p>
     <ul>
@@ -1183,7 +1189,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <div class="box-label">Iz vsakdanjega življenja</div>
     <p>Andrej je po mesecih dela oddal velik projekt. Namesto da bi šel na sprehod ali se zvečer veselil z družino, je že isti večer odprl seznam naslednjih nalog. Ko ga je žena vprašala, kako se počuti, ni znal odgovoriti.</p>
   </div>
-  <p class="navdih">Navdih: razlikovanje med »being« in »doing« ter kritika stalne rasti po A. Lowenu (<i>Fear of Life</i>, 1980; <i>Narcissism</i>, 1983).</p>
+  <p class="navdih">Navdih: razlikovanje med »being« in »doing« ter kritika stalne rasti po A. Lowenu (<i>Fear of Life</i>, 1980; <i>Narcissism</i>, 1983); namen kot <i>dharma</i> po R. Sharmi (<i>The Monk Who Sold His Ferrari</i>, 1997).</p>
   <div class="box kljucne">
     <div class="box-label">Ključne točke</div>
     <ul>
@@ -1301,7 +1307,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </div>
 
 <section class="ch" id="p22" data-toc="Od zadrževanja do potlačitve" data-num="22">
-  <div class="ch-eyebrow"><b>Poglavje 22</b><span>≈ 6 min branja</span></div>
+  <div class="ch-eyebrow"><b>Poglavje 22</b><span>≈ 7 min branja</span></div>
   <h2>Od zadrževanja do potlačitve</h2>
   <p class="short">Čustvo, ki ga ne izrazimo, ustavimo z mišicami. Če se to ponavlja, napetost ostane, čustvo pa izgine iz zavesti.</p>
   <div class="col">
@@ -1345,6 +1351,14 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <div class="box-label">Iz vsakdanjega življenja</div>
     <p>Marjeta je kot deklica slišala: »Nehaj jokati, saj nisi dojenček.« Danes, pri petdesetih, nikoli ne joka in je ponosna, da je močna. Ko pa vidi koga jokati, jo to nerazložljivo razjezi. Že leta jo bolijo vrat in prsi, kot da bi ji nekaj stiskalo grlo.</p>
   </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>Tolle o bolečinskem telesu</span></summary>
+    <div class="in">
+      <p>Eckhart Tolle v knjigi <em>A New Earth</em> (2005) nakopičeno, nepredelano čustveno bolečino imenuje <strong>bolečinsko telo</strong>. Po njegovem opisu večino časa miruje, občasno pa se prebudi, na primer ob utrujenosti, sporu ali spominu, in obarva naše misli in odzive. Takrat se odzovemo močneje, kot bi ustrezalo trenutku.</p>
+      <p>Tolle meni, da bolečinsko telo izgublja moč, ko ga opazujemo, ne da bi se z njim poistovetili: ko zaznamo, da se je prebudilo, in ga ne hranimo z novimi mislimi. Kot zdravilo navaja prisotnost.</p>
+      <p>Opis je podoben Lowenovi potlačitvi, le da je Tolle ne opisuje s telesnega vidika. Vaje Senzorne prenove delajo na telesni strani istega pojava: s počasnim čutenjem membrane vračajo zavesti dele, ki so otopeli.</p>
+    </div>
+  </details>
   <figure class="figure">
     <div class="cycles">
       <div class="cycle-card c-bad"><h4>Začarani krog</h4><svg id="cyc-bad" viewBox="0 0 520 440" role="img" aria-label="Začarani krog: stres, zakrčenost, izguba občutka, napačna odločitev, več stresa"></svg></div>
@@ -1352,7 +1366,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     </div>
     <figcaption>Isti mehanizem deluje v obe smeri. Vaje Senzorne prenove krog obrnejo pri točki »občutek«.</figcaption>
   </figure>
-  <p class="navdih">Navdih: zaporedje zadrževanje, zatiranje, potlačitev in vloga kronične mišične napetosti po A. Lowenu (<i>Bioenergetics</i>, 1975; <i>Pleasure</i>, 1970).</p>
+  <p class="navdih">Navdih: zaporedje zadrževanje, zatiranje, potlačitev in vloga kronične mišične napetosti po A. Lowenu (<i>Bioenergetics</i>, 1975; <i>Pleasure</i>, 1970); bolečinsko telo po E. Tolleju (<i>A New Earth</i>, 2005).</p>
   <div class="box kljucne">
     <div class="box-label">Ključne točke</div>
     <ul>
@@ -1884,7 +1898,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </section>
 
 <section class="ch" id="p35" data-toc="Misli kot neposodobljen telefon" data-num="35">
-  <div class="ch-eyebrow"><b>Poglavje 35</b><span>≈ 6 min branja</span></div>
+  <div class="ch-eyebrow"><b>Poglavje 35</b><span>≈ 7 min branja</span></div>
   <h2>Misli kot neposodobljen telefon</h2>
   <p class="short">Mnoge misli o sebi so stari programi iz otroštva. Še delujejo, a ne ustrezajo več današnjemu življenju.</p>
   <div class="col">
@@ -1901,8 +1915,12 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <h3>Kaj okoliščine povedo o nas</h3>
     <p>Poglejte, kako živite: odnose, finance, koliko ste srečni in zdravi. Na marsikaj od tega niste imeli vpliva. Del pa je odsev vaših misli in dejanj, ki iz njih izhajajo. Ta del priznajte brez krivde, ker je prav on tisti, ki ga lahko spremenite. Moč usmerjene pozornosti lahko uporabite, da stanje ohranite, poslabšate ali izboljšate.</p>
     <p>Ko je energije, časa in pozornosti dolgo premalo, se življenje skrči na preživetje. To ni značajska napaka, temveč posledica izčrpanosti. Ljudje, ki so se izvili iz na videz brezupnih razmer, pogosto povedo, da je bila gonilna sila njihova vera vase. In vedite: niste oseba, kakršna ste bili. Ste tukaj in zdaj, rezultat vseh dosedanjih dejanj. Na podlagi spremenjenega mišljenja lahko naredite nova, drugačna dejanja.</p>
+    <h3>Notranji programi obilja in življenjski krči</h3>
+    <p>Boris Vene in Nikola Grubiša v knjigi <em>Iz dnevnika novodobnega milijonarja</em> pišeta, da se zunanji krči, finančna stiska in boj za preživetje najprej rodijo v notranjem svetu. Če globoko v sebi nosite neposodobljen program iz preteklosti, denimo tiho prepričanje, da se je treba za vsak košček varnosti mučiti ali da je obilje nedosegljivo, se ga telo drži, kot da bi bil resničen.</p>
+    <p>Predstavljajte si svoj um kot tempelj, v katerem še vedno teče star program preživetja. Ko se v vsakdanu bojite pomanjkanja ali neuspeha, se ramena nezavedno dvignejo proti ušesom, prsni koš se skrči kot prestrašena školjka, dih postane plitev. To je telesni odraz miselnega krča. Ko stari program prepoznate in posodobite ter spoznate, da varnost in mir lahko najdete tudi v sebi, se oklep v zgornjem delu trupa lahko začne mehčati. Po prepričanju avtorjev zunanje blagostanje in zdravje nista sad brezglavega garanja, temveč odraz urejenega notranjega sveta.</p>
     <p>Pozitivno razmišljanje samo po sebi ne zadošča, kadar telo nima energije. Zato misli in vaje gredo skupaj: telo, ki se počuti bolj varno, lažje verjame novi misli.</p>
   </div>
+  <p class="navdih">Navdih: B. Vene, N. Grubiša, <i>Iz dnevnika novodobnega milijonarja … ali bogastvo je v nas</i>.</p>
   <div class="box kljucne">
     <div class="box-label">Ključne točke</div>
     <ul>
@@ -1921,7 +1939,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </section>
 
 <section class="ch" id="p36" data-toc="Energija za spremembo" data-num="36">
-  <div class="ch-eyebrow"><b>Poglavje 36</b><span>≈ 6 min branja</span></div>
+  <div class="ch-eyebrow"><b>Poglavje 36</b><span>≈ 7 min branja</span></div>
   <h2>Energija za spremembo</h2>
   <p class="short">Odraslost ni stanje, v katerem se nič več ne spreminja. Je zorenje, za katero potrebujemo energijo.</p>
   <div class="col">
@@ -1935,10 +1953,14 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <h3>Od stresa do kronične napetosti</h3>
     <p>Vsak stres ustvari napetost, ki ima namen odstraniti oviro. Ko željo izpolnimo, potrebo zadovoljimo ali težavo rešimo, vzrok izgine in napetost se porabi. Če ovire ne moremo odstraniti ali se napetosti ne zavedamo (med počitkom, v spanju), nastane kronična napetost. Ostane, tudi ko je ovire že dolgo ni. Zmanjšuje energijo, otežuje gibanje in mišljenje, zmanjša spontanost in samoizražanje.</p>
     <p>Staranju in nekaj trdote se ne moremo izogniti. Trdoto, ki izvira iz neurejenih telesnih in čustvenih ran, pa lahko zmanjšamo in energijo povečamo. Vaje Senzorne prenove so zasnovane tako, da povečajo zavedanje napetosti in sposobnost zavesti, da spremeni signale mišicam in jih vrne v stanje, ki ustreza trenutnim potrebam.</p>
+    <h3>Zakon notranje zrcalne slike</h3>
+    <p>Spomnite se zgodbe Robina Sharme o uspešnem odvetniku, ki je prodal svoj bleščeči ferrari, da bi našel, česar z denarjem ni mogel kupiti: globok notranji mir, jasen namen in pristno veselje. Sharma ter Vene in Grubiša poudarjajo isto misel: zunanje okoliščine so v veliki meri zrcalo notranjega stanja.</p>
+    <p>Ko praznino ali manko v življenju poskušate zapolniti s hektičnim tekanjem po hitrem pasu (poglavje 21), se zgodi tisto, čemur v Senzorni prenovi pravimo zdrs v entropijo (poglavje 31). Telo se izčrpava, energija odteka v vzdrževanje oklepa, vi pa se sprašujete, zakaj kljub trudu ni prave izpolnitve. Preobrazba se začne od znotraj navzven. Ko skrbno negujete svoj »vrt uma«, presežete misli o pomanjkanju in telesu vrnete naraven, globok dih, se vam okoliščine, zdravje in tisto, kar vam je zares pomembno, laže uskladijo z novim notranjim mirom.</p>
     <h3>Odgovornost</h3>
     <p>Vsaka kronično napeta mišica ovira gibanje in popači čutenje. Zato je pomembno, da si povrnemo samonadzor in prevzamemo odgovornost zase. Tako lahko postanemo svobodno misleči, neodvisni ljudje, ki se z drugimi povezujejo za skupne cilje, sicer pa razmišljajo s svojo glavo.</p>
     <p>Ko začnemo čutiti, nosimo tudi odgovornost, da ne delamo več tistega, kar nam ne ustreza, če ni nujno. Prej smo to leta počeli, ne da bi vedeli. Življenje je bilo preprostejše. Zdaj se moramo svojega ravnanja zavedati v celoti. To je včasih zapleteno. Vemo pa, kaj sledi, če ta pristop opustimo in urejanje življenja prepustimo tehnologiji: vrnejo se bolečine in težave.</p>
   </div>
+  <p class="navdih">Navdih: R. Sharma, <i>The Monk Who Sold His Ferrari</i> (1997); B. Vene, N. Grubiša.</p>
   <blockquote>»Močan si, če se grobi moči odpoveš, podobno pa tudi tehnologija nudi odrešujoče možnosti samo tedaj, ko je ne postavljaš več na vzvišeno mesto rešitelja naših človeških težav. Tako kot vidimo zvezde samo na jasnem nočnem nebu, lahko naš pogled uzre in osmisli naše dejavnosti samo na jasnem ozadju vsepovezujočega vesolja.«</blockquote>
   <p class="navdih">Andrej Detela, <i>Sintropija</i>.</p>
   <div class="box kljucne">
@@ -2018,6 +2040,16 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   <div class="weeks" id="weeks"></div>
   <p class="progress" id="progress"></p>
   <button type="button" class="reset" id="reset">Počisti oznake</button>
+  <div class="box vaja">
+    <div class="box-label">Zlata ura · jutranji začetek</div>
+    <ol>
+      <li>Prvih 10 do 20 minut po prebujenju ostanite brez zaslona: brez telefona, novic in sporočil.</li>
+      <li>Nekaj minut dihajte mirno in tiho skozi nos (poglavje 29).</li>
+      <li>Na kratko preglejte telo od glave do medenice. Kje je danes napeto, kje mehko? Ne popravljajte, samo opazite.</li>
+      <li>Izberite eno namero za dan, na primer: »Danes bom opazil(a), kdaj dvignem ramena.«</li>
+    </ol>
+  </div>
+  <p class="navdih">Po zamisli R. Sharme o jutranjih ritualih (<i>The Monk Who Sold His Ferrari</i>, 1997).</p>
   <div class="box vprasanja">
     <div class="box-label">Dnevni vprašalnik · 3 minute zvečer</div>
     <ol>
@@ -2095,6 +2127,9 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <li>James Nestor: <em>Dih</em> (2020). <span class="why">Znanost in zgodovina dihanja.</span></li>
       <li>Gabor Maté: <em>Ko telo reče ne</em> (2003). <span class="why">Stres, čustva in bolezen.</span></li>
       <li>Paul Grossman (2023), <em>Biological Psychology</em>. <span class="why">Kritika polivagalne teorije.</span></li>
+      <li>Eckhart Tolle: <em>The Power of Now</em> (1997), <em>A New Earth</em> (2005). <span class="why">Prisotnost, opazovanje uma, bolečinsko telo.</span></li>
+      <li>Robin Sharma: <em>The Monk Who Sold His Ferrari</em> (1997). <span class="why">Jutranji ritual, namen.</span></li>
+      <li>Boris Vene, Nikola Grubiša: <em>Iz dnevnika novodobnega milijonarja … ali bogastvo je v nas</em>. <span class="why">Notranje bogastvo in prepričanja o obilju.</span></li>
     </ul>
   </div>
 </section>
@@ -2128,6 +2163,9 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <tr><td>Slika plasti membrane brez razlage (str. 10)</td><td>Nova slika z razlago in ohranjeno barvno legendo.</td><td>8</td></tr>
         <tr><td>Tipkarske napake (življenska, Co2, aveolih, saturdacija, pendikulacija …)</td><td>Popravljeno.</td><td>—</td></tr>
         <tr><td>Polivagalna teorija (predlog AI analize)</td><td>Dodana kot model v okvirju, z opozorilom o znanstvenih sporih.</td><td>24</td></tr>
+        <tr><td>Novo (ni v 1. izdaji)</td><td>Tolle: um med preteklostjo in prihodnostjo; okvir »Za radovedne« o bolečinskem telesu. Zapisano kot avtorjev pogled, z opombo »Navdih«.</td><td>2, 22</td></tr>
+        <tr><td>Novo (ni v 1. izdaji)</td><td>Sharma: namen (<em>dharma</em>); okvir »Zlata ura« v sledilniku; zgodba o ferrariju.</td><td>19, 36, sledilnik</td></tr>
+        <tr><td>Novo (ni v 1. izdaji)</td><td>Vene in Grubiša: razdelka »Notranji programi obilja in življenjski krči« in »Zakon notranje zrcalne slike« (avtorjevo besedilo z redakcijo; absolutne trditve pripisane avtorjem knjig zaradi skladnosti z mislijo »brez krivde«).</td><td>35, 36</td></tr>
       </tbody>
     </table>
   </div>
@@ -2140,6 +2178,8 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <li>Ali želite navesti Lowena, Hanno in Feldenkraisa kot navdih po imenu, kot je predlagano?</li>
       <li>Ali naj polivagalni okvir ostane?</li>
       <li>Ali je primerno, da so primeri (Mateja, Marjeta, Andrej) izmišljeni? Morda jih nadomestite z resničnimi, anonimiziranimi zgodbami strank.</li>
+      <li>Ali naj Dodatek B pri Tolleju in Sharmi navaja slovenske prevode (naslove, založbo in letnico prevoda)?</li>
+      <li>Kateri sta založba in leto izida knjige B. Veneta in N. Grubiše <em>Iz dnevnika novodobnega milijonarja … ali bogastvo je v nas</em>?</li>
     </ol>
   </div>
 </section>
