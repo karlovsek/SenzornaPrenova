@@ -255,6 +255,10 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   .print-only{display:block}
   span.print-only{display:inline}
 
+  /* Obojestranska poravnava tekočega besedila */
+  p,li,dd{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+  .navdih,.print-toc li,td,th{text-align:left;hyphens:manual;-webkit-hyphens:manual}
+
   /* Naslovnica sama na prvi strani */
   .hero{border-bottom:0;margin:0;padding:70mm 0 0;break-after:page}
   .hero h1{font-size:3.4rem}
