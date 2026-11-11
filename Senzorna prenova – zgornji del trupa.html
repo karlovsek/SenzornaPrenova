@@ -1875,7 +1875,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       </defs>
       <line x1="320" y1="16" x2="320" y2="284" style="stroke:var(--line);stroke-width:1.5"/>
       <!-- Levo: vdih -->
-      <path d="M180,176 Q192,208 182,246" style="fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
+      <path d="M180,176 Q192,208 182,246" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
       <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
         <circle cx="140" cy="58" r="26"/>
         <path d="M158,76 Q162,82 154,85"/>
@@ -1887,12 +1887,12 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <path d="M210,44 Q188,50 172,62" style="fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:4 4" marker-end="url(#m-dih-a)"/>
       <line x1="196" y1="134" x2="204" y2="134" style="stroke:var(--accent);stroke-width:2;stroke-linecap:round" marker-end="url(#m-dih-a)"/>
       <line x1="214" y1="206" x2="248" y2="206" style="stroke:var(--accent);stroke-width:2.5;stroke-linecap:round" marker-end="url(#m-dih-a)"/>
-      <text class="t-s" x="216" y="138">prsi mirujejo</text>
+      <text class="t-s" x="216" y="138">prsi le malo</text>
       <text class="t-s" x="256" y="211">trebuh</text>
       <text class="t-b" x="160" y="280" text-anchor="middle">vdih skozi nos · štejte do 4</text>
       <!-- Desno: izdih -->
       <g transform="translate(320,0)">
-        <path d="M180,176 Q210,206 190,246" style="fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
+        <path d="M180,176 Q210,206 190,246" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
         <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
           <circle cx="140" cy="58" r="26"/>
           <path d="M158,76 Q162,82 154,85"/>
@@ -2418,7 +2418,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <line x1="268" y1="176" x2="268" y2="118" style="stroke:var(--accent);stroke-width:2.5;stroke-linecap:round" marker-end="url(#m-pv-a)"/>
       <text class="t-b" x="160" y="280" text-anchor="middle">vdih · zategnite</text>
       <!-- Desno: ramena spuščena -->
-      <path d="M470,107 L470,112 Q442,114 418,128 Q404,140 404,172 M490,107 L490,112 Q518,114 542,128 Q556,140 556,172" style="fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
+      <path d="M470,107 L470,112 Q442,114 418,128 Q404,140 404,172 M490,107 L490,112 Q518,114 542,128 Q556,140 556,172" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
       <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
         <circle cx="480" cy="78" r="30"/>
         <path d="M470,107 L470,134 Q442,136 418,150 Q404,162 404,192 L406,250"/>
@@ -2443,7 +2443,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <!-- Vaja 3: lopatice skupaj (od zadaj) -->
       <g>
         <text class="t-s" x="16" y="30">3</text>
-        <path d="M138,118 L108,122 Q116,150 134,170 Z M182,118 L212,122 Q204,150 186,170 Z" style="fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:4 5;stroke-linejoin:round"/>
+        <path d="M138,118 L108,122 Q116,150 134,170 Z M182,118 L212,122 Q204,150 186,170 Z" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linejoin:round"/>
         <path d="M148,124 L118,128 Q126,156 144,176 Z M172,124 L202,128 Q194,156 176,176 Z" style="fill:var(--muscle-soft);stroke:var(--muscle);stroke-width:1.5;stroke-linejoin:round"/>
         <line x1="160" y1="110" x2="160" y2="222" style="stroke:var(--muted);stroke-width:1.5;stroke-dasharray:2 5;stroke-linecap:round"/>
         <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
@@ -2460,6 +2460,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <!-- Vaja 4: zatilje (od strani) -->
       <g transform="translate(320,0)">
         <text class="t-s" x="16" y="30">4</text>
+        <ellipse cx="149" cy="106" rx="4.5" ry="12" transform="rotate(-6 149 106)" style="fill:var(--muscle-soft);stroke:var(--muscle);stroke-width:1.5"/>
         <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
           <path d="M156,128 L204,96 L132,70"/>
           <circle cx="156" cy="70" r="26" style="fill:var(--surface)"/>
@@ -2478,10 +2479,11 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <!-- Vaja 5: brada nazaj (od strani) -->
       <g transform="translate(0,280)">
         <text class="t-s" x="16" y="30">5</text>
-        <g style="fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round">
+        <g style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round">
           <circle cx="170" cy="70" r="26"/>
           <path d="M188,88 Q192,94 184,97"/>
         </g>
+        <ellipse cx="159" cy="108" rx="4.5" ry="11" transform="rotate(6 159 108)" style="fill:var(--muscle-soft);stroke:var(--muscle);stroke-width:1.5"/>
         <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
           <circle cx="154" cy="70" r="26"/>
           <path d="M172,88 Q176,94 168,97"/>
@@ -2496,7 +2498,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <!-- Vaja 6: čeljust (od strani) -->
       <g transform="translate(320,280)">
         <text class="t-s" x="16" y="30">6</text>
-        <path d="M140,124 Q142,146 150,156 Q172,166 196,156 Q202,146 198,128" transform="rotate(14 140 124)" style="fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
+        <path d="M140,124 Q142,146 150,156 Q172,166 196,156 Q202,146 198,128" transform="rotate(14 140 124)" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
         <ellipse cx="156" cy="140" rx="9" ry="15" transform="rotate(-12 156 140)" style="fill:var(--muscle-soft);stroke:var(--muscle);stroke-width:1.5"/>
         <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
           <path d="M140,124 A48 48 0 1 1 198,128"/>
@@ -2513,7 +2515,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   </figure>
   <div class="col">
     <h3>Kdaj in kako pogosto</h3>
-    <p>Najbolje vsak dan, zjutraj in še enkrat sredi delovnega dne. Ko začutite, da se začenja glavobol iz napetosti, naredite samo vaji 3 in 5 (zatilje in čeljust). Prve učinke večina ljudi opazi po enem do treh tednih redne vadbe.</p>
+    <p>Najbolje vsak dan, zjutraj in še enkrat sredi delovnega dne. Ko začutite, da se začenja glavobol iz napetosti, naredite samo vaji 4 in 6 (zatilje in čeljust). Prve učinke večina ljudi opazi po enem do treh tednih redne vadbe.</p>
     <h3>Najpogostejše napake</h3>
     <ul>
       <li><strong>Prehitro spuščanje.</strong> Mišica »pade«, namesto da bi jo vodili. Šteje prav počasni del.</li>
@@ -2662,6 +2664,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <tr><td>Novo (avtorjeva zahteva)</td><td>Delovni list »Pet minut pandikulacije«: tri pravila, petminutna rutina za ramena, lopatice, vrat in čeljust, pogostost, pogoste napake in okvir »Kdaj prenehajte«. Sklic iz poglavja 15 in iz sledilnika.</td><td>15, delovni del</td></tr>
         <tr><td>Novo (avtorjeva zahteva)</td><td>Poskusna grafika: skica vaje 2 »Ramena proti ušesom« na delovnem listu, diagram SMA (zdrava zanka proti zbledelemu občutku), motiv na naslovnici. Avtor je slog potrdil.</td><td>naslovnica, 15, delovni del</td></tr>
         <tr><td>Novo (avtorjeva zahteva)</td><td>Skice vaj v istem slogu: vaje 3–6 delovnega lista (lopatice, zatilje, brada, čeljust) v eni sliki ter mala vaja »Mehki nosni dih« (vdih in izdih). Mala vaja v poglavju 15 je enaka vaji 2, druge male vaje so opazovalne, zato brez skice.</td><td>29, delovni del</td></tr>
+        <tr><td>Popravek</td><td>Delovni list: v »Kdaj in kako pogosto« pri glavobolu iz napetosti »vaji 4 in 6 (zatilje in čeljust)« namesto »3 in 5«, skladno s številkami v rutini in na skicah. Skice: začetni položaj (črtkano) je bolje viden, na vajah 4 in 5 sta obarvani mišici zatilja in globoke upogibalke vratu, pri dihu oznaka »prsi le malo«.</td><td>29, delovni del</td></tr>
       </tbody>
     </table>
   </div>
@@ -2721,7 +2724,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     m.appendChild(el("path",{d:"M0,0 L10,5 L0,10 z","class":"ah"})); defs.appendChild(m); svg.appendChild(defs);
     function pt(deg,rad){var a=deg*Math.PI/180;rad=rad||r;return [cx+rad*Math.cos(a),cy+rad*Math.sin(a)];}
     function hh(j){return labels[j].indexOf("|")>=0?27:19;}
-    // Lok tece malo zunaj vozlisc in se zacne/konca tam, kjer zapusti okvir (z robom), da puscica ni skrita.
+    // Lok teče malo zunaj vozlišč ter se začne in konča tam, kjer zapusti okvir (z robom), da puščica ni skrita.
     function exit(j,dir){
       var a=-90+j*360/n,c=pt(a),pad=9;
       for(var s=0;s<60;s++){var p=pt(a+dir*s,ra);if(Math.abs(p[0]-c[0])>w/2+pad||Math.abs(p[1]-c[1])>hh(j)+pad)return a+dir*s;}
