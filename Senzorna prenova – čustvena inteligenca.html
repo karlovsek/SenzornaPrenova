@@ -110,6 +110,23 @@ strong{font-weight:600}
 .vaja{border:1.5px solid var(--accent);background:var(--surface)} .vaja .box-label{color:var(--accent)}
 .varno{background:var(--dorsal-soft)} .varno .box-label{color:var(--dorsal)}
 .razlaga{border:1.5px solid var(--warm);background:var(--surface)} .razlaga .box-label{color:var(--warm)}
+/* Ikone v nalepkah okvirjev */
+.box-label::before{content:"";display:inline-block;width:1.45em;height:1.45em;margin:-.3em .55em 0 0;vertical-align:middle;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.box.april .box-label::before{content:none}
+.kljucne{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
+.vaja{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='13.5' r='7.5'/%3E%3Cpath d='M12 10v3.5l2.5 2M10 2.5h4M12 2.5V6'/%3E%3C/svg%3E")}
+.primer{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 18c2.5-1 4-3.5 4-6V6H4v6h5M15 18c2.5-1 4-3.5 4-6V6h-5v6h5'/%3E%3C/svg%3E")}
+.vprasanja{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.5v.4M12 17h.01'/%3E%3C/svg%3E")}
+.varno{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5.5c0 4.5-3 7.8-7 9.5-4-1.7-7-5-7-9.5V6z'/%3E%3C/svg%3E")}
+.razlaga{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M20 20l-4.3-4.3'/%3E%3C/svg%3E")}
+/* Ikone stebrov */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.4em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.steber-ico{display:block;width:56px;height:56px;padding:13px;border-radius:50%;box-sizing:border-box;background:var(--accent-soft);color:var(--accent);border:1.5px solid var(--accent);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.steber-ico.topel{background:var(--warm-soft);color:var(--warm);border-color:var(--warm)}
+.tbl td .ico{color:var(--accent);flex:none;margin:.15em 0 0} .tbl td .ico.topel{color:var(--warm)}
+.tbl td strong:has(.ico){display:flex;gap:.45em;align-items:flex-start}
+@media print{.part-head:has(.steber-ico){position:relative}.steber-ico{position:absolute;right:0;top:10mm;width:46px;height:46px;padding:11px;margin:0}}
 .box ul,.box ol{padding-left:1.2em}
 details.radoved{max-width:var(--measure);border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 details.radoved summary{cursor:pointer;padding:14px 20px;font-family:var(--f-display);font-weight:600;font-size:.95rem;color:var(--ink);list-style-position:outside}
@@ -333,6 +350,13 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 }
 </style>
 <body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="ico-s1" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="ico-s2" viewBox="0 0 24 24"><path d="M2 12c1.5-7 3.5-7 5 0s3 4.5 4.5 0 2.5-2.5 3.8 0 2 1 3 0 1.7-.4 3.7 0"/></symbol>
+  <symbol id="ico-s3" viewBox="0 0 24 24"><path d="M12 21v-9M12 12c0-4.2-2.8-6.5-7-6.5 0 4.2 2.8 6.5 7 6.5zM12 10c0-3.6 2.4-5.7 6.5-5.7 0 3.6-2.4 5.7-6.5 5.7z"/></symbol>
+  <symbol id="ico-s4" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></symbol>
+  <symbol id="ico-s5" viewBox="0 0 24 24"><path d="M3 4.5h11v7.5H8L3 15.5z"/><path d="M17.5 9H21v10.5l-4-3h-6.5V15"/></symbol>
+</svg>
 
 <div class="shell">
 
@@ -459,11 +483,11 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <table>
       <thead><tr><th>Steber</th><th>Kaj pomeni v praksi</th><th>Kje v priročniku</th></tr></thead>
       <tbody>
-        <tr><td><strong>1. Samozavedanje</strong></td><td>Čustvo prepoznate v trenutku, ko se pojavi, in razumete, kako vpliva na vaše misli in vedenje.</td><td>Del II</td></tr>
-        <tr><td><strong>2. Samoregulacija</strong></td><td>Na čustvo se ne odzovete samodejno, ampak izberete odziv. Obvladate stres in se prilagodite spremembam brez panike.</td><td>Del III</td></tr>
-        <tr><td><strong>3. Notranja motivacija</strong></td><td>Vztrajate zaradi notranjega zadovoljstva in radovednosti, ne le zaradi zunanjih nagrad, in zdržite nelagodje, ne da bi zbežali.</td><td>Del IV</td></tr>
-        <tr><td><strong>4. Empatija</strong></td><td>Vživite se v čustveno stanje drugega in razumete njegov zorni kot, ne da bi se v njem izgubili.</td><td>Del V</td></tr>
-        <tr><td><strong>5. Socialne veščine</strong></td><td>Jasno poveste, kaj čutite in potrebujete, postavite meje, rešujete spore in gradite trdne odnose.</td><td>Del VI</td></tr>
+        <tr><td><strong><svg class="ico" aria-hidden="true"><use href="#ico-s1"/></svg>1. Samozavedanje</strong></td><td>Čustvo prepoznate v trenutku, ko se pojavi, in razumete, kako vpliva na vaše misli in vedenje.</td><td>Del II</td></tr>
+        <tr><td><strong><svg class="ico" aria-hidden="true"><use href="#ico-s2"/></svg>2. Samoregulacija</strong></td><td>Na čustvo se ne odzovete samodejno, ampak izberete odziv. Obvladate stres in se prilagodite spremembam brez panike.</td><td>Del III</td></tr>
+        <tr><td><strong><svg class="ico" aria-hidden="true"><use href="#ico-s3"/></svg>3. Notranja motivacija</strong></td><td>Vztrajate zaradi notranjega zadovoljstva in radovednosti, ne le zaradi zunanjih nagrad, in zdržite nelagodje, ne da bi zbežali.</td><td>Del IV</td></tr>
+        <tr><td><strong><svg class="ico topel" aria-hidden="true"><use href="#ico-s4"/></svg>4. Empatija</strong></td><td>Vživite se v čustveno stanje drugega in razumete njegov zorni kot, ne da bi se v njem izgubili.</td><td>Del V</td></tr>
+        <tr><td><strong><svg class="ico topel" aria-hidden="true"><use href="#ico-s5"/></svg>5. Socialne veščine</strong></td><td>Jasno poveste, kaj čutite in potrebujete, postavite meje, rešujete spore in gradite trdne odnose.</td><td>Del VI</td></tr>
       </tbody>
     </table>
   </div>
@@ -557,6 +581,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </section>
 
 <div class="part-head" id="del2" data-toc="II · Samozavedanje">
+  <svg class="steber-ico" aria-hidden="true"><use href="#ico-s1"/></svg>
   <div class="kicker">Del II</div>
   <h2>Samozavedanje</h2>
   <p>Opazujte, ne sodite. Kako čustvo opaziti, natančno poimenovati in mu slediti iz dneva v dan.</p>
@@ -708,6 +733,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </section>
 
 <div class="part-head" id="del3" data-toc="III · Samoregulacija">
+  <svg class="steber-ico" aria-hidden="true"><use href="#ico-s2"/></svg>
   <div class="kicker">Del III</div>
   <h2>Samoregulacija</h2>
   <p>Samoregulacija ne pomeni potlačiti čustva, ampak izbrati primeren odziv nanj.</p>
@@ -855,7 +881,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   <div class="col">
     <p>O polnem razponu čustev in nevtralnosti govori tudi Elizabeth April, ki se predstavlja kot izvajalka »oddaljenega gledanja« (angl. <em>remote viewing</em>) in terapevtka regresije v pretekla življenja. V videu <em>Exactly What You Need… Not What You Expect</em> (YouTube, 2026) to postavi v širšo duhovno zgodbo. Povzemamo jo v treh okvirjih, prva dva tu, tretjega v poglavju 10.</p>
   </div>
-  <div class="box razlaga">
+  <div class="box razlaga april">
     <div class="box-label">Pogled Elizabeth April · 1 · Zakaj omejitve in trpljenje</div>
     <p><em>To je njen osebni pogled, ne znanstveno dognanje. Povzemamo ga, ker ga je avtor priročnika želel predstaviti podrobno.</em></p>
     <p>Pripoveduje, da je pri osemnajstih s pomočjo lucidnega sanjanja in tehnik globoke meditacije, ki jih uporablja pri regresiji, prvič zapustila telo. Odšla je v »središče vesolja«, kjer je pred seboj zagledala veliko kroglo bele svetlobe. To je bil zanjo Vir oziroma Bog. Vprašala ga je, kaj je smisel življenja in zakaj je v njem toliko trpljenja.</p>
@@ -863,7 +889,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <p>Težka obdobja razlaga z dvema rekoma. »Svetlejša ko je luč, ki jo širiš, temnejšo senco mečeš.« In: »Najtemnejši del noči je tik pred zoro.« Za primer navaja porod: trenutek, ko porodnica reče »ne zmorem več«, je pogosto tik pred rojstvom. Podobno je po njenem z vsako veliko spremembo.</p>
     <p class="navdih">Vir: Elizabeth April, <i>Exactly What You Need… Not What You Expect</i>, video na YouTubu (5:03–5:32, 13:47–15:40, 15:55–22:30).</p>
   </div>
-  <div class="box razlaga">
+  <div class="box razlaga april">
     <div class="box-label">Pogled Elizabeth April · 2 · Razpon čustev kot supermoč</div>
     <p>Ljudi opisuje kot hibride: po njenem je »manjkajoči člen« v človeški evoluciji zunajzemeljski, zato v sebi nosimo DNK »najvišjih in najnižjih frekvenc«. Zato zmoremo doživeti najlepše, najbolj blažene trenutke in nekaj sekund pozneje najglobljo temo. Ta <strong>razpon polarnosti</strong> imenuje največja <strong>supermoč</strong> človeka.</p>
     <p>Kdor se življenju izogiba, ker se boji neznanega, ker si ne zaupa ali ker »ni predelal svojih stvari«, po njenem ne izkusi vsega, kar pomeni biti človek. Mogoče je seči do najvišjih doživetij, se spustiti v najglobje trpljenje in se vseeno vrniti v <strong>nevtralnost in objektivno opazovanje</strong>. Nevtralnost imenuje najpomembnejše, kar želi naučiti ljudi: »Nisem tu za ljubezen in svetlobo. Nisem pa tu niti za pogubo in mrak. Tu sem za ves razpon.«</p>
@@ -896,6 +922,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </section>
 
 <div class="part-head" id="del4" data-toc="IV · Notranja motivacija">
+  <svg class="steber-ico" aria-hidden="true"><use href="#ico-s3"/></svg>
   <div class="kicker">Del IV</div>
   <h2>Notranja motivacija</h2>
   <p>Zakaj bežimo v udobje in kako ostati prisoten, ko je težko.</p>
@@ -908,7 +935,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   <div class="col">
     <p>Ko se pojavi dolgčas, negotovost ali žalost, ima sodobni človek vedno pri roki izhod. Pogled na zaslon, nekaj sladkega, še ena epizoda. Nič od tega ni slabo samo po sebi. Težava nastane, ko postane samodejni odgovor na vsako nelagodje. Takrat čustva ne doživimo do konca in se iz njega ne naučimo ničesar. Naslednjič pride znova, mi pa spet pobegnemo.</p>
   </div>
-  <div class="box razlaga">
+  <div class="box razlaga april">
     <div class="box-label">Pogled Elizabeth April · 3 · Past udobja</div>
     <p><em>Njen osebni pogled iz istega videa kot v poglavju 9.</em></p>
     <p>Če je namen življenja doživljati, pravi, potem večino dni ravnamo prav nasprotno. Jemo sladko hrano, pijemo sladke pijače, drsimo po družbenih omrežjih, gledamo serije, odpovemo dogovor, ker je doma laže. »Ne obtožujem vas, tudi sama to počnem.« Vedno znova izberemo <strong>priročnost in samozadovoljstvo namesto prisotnosti</strong>. To po njenem drži dušo v čakalni zanki, kot letalo, ki kroži nad letališčem: ni premika.</p>
@@ -982,6 +1009,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </section>
 
 <div class="part-head" id="del5" data-toc="V · Empatija">
+  <svg class="steber-ico topel" aria-hidden="true"><use href="#ico-s4"/></svg>
   <div class="kicker">Del V</div>
   <h2>Empatija</h2>
   <p>Empatija ni strinjanje. Je razumevanje, zakaj nekdo čuti in ravna tako, kot ravna.</p>
@@ -1105,6 +1133,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 </section>
 
 <div class="part-head" id="del6" data-toc="VI · Socialne veščine">
+  <svg class="steber-ico topel" aria-hidden="true"><use href="#ico-s5"/></svg>
   <div class="kicker">Del VI</div>
   <h2>Socialne veščine</h2>
   <p>Visoka čustvena inteligenca se najbolj pokaže v napetih odnosih in konfliktih.</p>
