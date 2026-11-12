@@ -125,6 +125,16 @@ blockquote{margin:0;padding:4px 0 4px 16px;border-left:3px solid var(--accent);f
 .figure svg{width:100%;height:auto;display:block}
 .svgwrap{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
 .scroll-x{overflow-x:auto}
+/* Slike iz več plošč: na široko druga ob drugi, na telefonu ena pod drugo, da besedilo ostane berljivo */
+.panels{display:grid;grid-template-columns:1fr 1fr}
+.panels>svg:nth-child(even){border-left:1.5px solid var(--line)}
+.panels>svg:nth-child(n+3){border-top:1.5px solid var(--line)}
+@media (max-width:520px){
+  .panels{grid-template-columns:1fr;justify-items:center}
+  .panels>svg{max-width:340px}
+  .panels>svg:nth-child(n){border-left:0}
+  .panels>svg+svg{border-top:1.5px solid var(--line)}
+}
 .t{font-family:var(--f-display);font-size:15px;fill:var(--ink)}
 .t-s{font-family:var(--f-display);font-size:13px;fill:var(--muted)}
 .t-b{font-family:var(--f-display);font-size:15px;font-weight:600;fill:var(--ink)}
@@ -295,7 +305,8 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
 
   /* Širši stolpec */
   .figure,.cards3,.ladder,.checkin,.budget,.tbl,.rules,.weeks{max-width:none}
-  .figure.figure-compact{max-width:78%}
+  /* Skice vaj na delovnem listu: obe enako veliki, da gresta skupaj na eno stran */
+  #pand5 .figure{max-width:90%}
   .cycles{grid-template-columns:1fr;gap:8pt}
   .cycle-card{padding:8pt}
   .cycle-card svg{width:92mm;margin:0 auto}
@@ -1098,15 +1109,14 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   </div>
   <figure class="figure">
     <div class="svgwrap">
-    <svg viewBox="0 0 640 320" role="img" aria-label="Zdrava zanka: možgani pošljejo mišici ukaz, mišica vrne občutek. Pri SMA ukaz ostane, občutek zbledi, mišica ostane stalno napeta. Pandikulacija znova poveže občutek.">
+    <div class="panels" role="img" aria-label="Zdrava zanka: možgani pošljejo mišici ukaz, mišica vrne občutek. Pri SMA ukaz ostane, občutek zbledi, mišica ostane stalno napeta. Pandikulacija znova poveže občutek.">
+    <svg viewBox="0 0 320 320" aria-hidden="true">
       <defs>
         <marker id="m-sma-c" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--core)"/></marker>
         <marker id="m-sma-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--mind)"/></marker>
         <marker id="m-sma-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--accent)"/></marker>
       </defs>
-      <line x1="320" y1="20" x2="320" y2="300" style="stroke:var(--line);stroke-width:1.5"/>
       <text class="t-b" x="160" y="28" text-anchor="middle">Zdrava zanka</text>
-      <text class="t-b" x="480" y="28" text-anchor="middle">SMA</text>
       <!-- Zdrava zanka -->
       <ellipse cx="160" cy="82" rx="66" ry="32" style="fill:var(--core-soft);stroke:var(--core);stroke-width:2"/>
       <text class="t-b" x="160" y="87" text-anchor="middle">možgani</text>
@@ -1117,7 +1127,10 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <ellipse cx="160" cy="240" rx="74" ry="24" style="fill:var(--muscle-soft);stroke:var(--muscle);stroke-width:2"/>
       <text class="t-b" x="160" y="245" text-anchor="middle">mišica</text>
       <text class="t-s" x="160" y="286" text-anchor="middle">napne se in spet sprosti</text>
+    </svg>
+    <svg viewBox="320 0 320 320" aria-hidden="true">
       <!-- SMA -->
+      <text class="t-b" x="480" y="28" text-anchor="middle">SMA</text>
       <ellipse cx="480" cy="82" rx="66" ry="32" style="fill:var(--core-soft);stroke:var(--core);stroke-width:2"/>
       <text class="t-b" x="480" y="87" text-anchor="middle">možgani</text>
       <line x1="460" y1="118" x2="460" y2="206" style="stroke:var(--core);stroke-width:2.5" marker-end="url(#m-sma-c)"/>
@@ -1130,6 +1143,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <path d="M600,290 Q632,214 514,198" style="fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round" marker-end="url(#m-sma-a)"/>
       <text class="t-s" x="626" y="306" text-anchor="end" style="fill:var(--accent)">pandikulacija znova poveže</text>
     </svg>
+    </div>
     </div>
     <figcaption>Pri SMA ukaz še deluje, občutek pa zbledi. Mišica ostane napeta, ker je možgani ne čutijo več.</figcaption>
   </figure>
@@ -1869,11 +1883,11 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   </div>
   <figure class="figure">
     <div class="svgwrap">
-    <svg viewBox="0 0 640 300" role="img" aria-label="Mehki nosni dih, pogled od strani. Ena dlan na prsih, druga na trebuhu. Ob vdihu skozi nos se trebuh izboči in dlan na trebuhu se premakne naprej, dlan na prsih skoraj miruje. Ob daljšem izdihu se trebuh vrne.">
+    <div class="panels" role="img" aria-label="Mehki nosni dih, pogled od strani. Ena dlan na prsih, druga na trebuhu. Ob vdihu skozi nos se trebuh izboči in dlan na trebuhu se premakne naprej, dlan na prsih skoraj miruje. Ob daljšem izdihu se trebuh vrne.">
+    <svg viewBox="0 0 320 300" aria-hidden="true">
       <defs>
         <marker id="m-dih-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--accent)"/></marker>
       </defs>
-      <line x1="320" y1="16" x2="320" y2="284" style="stroke:var(--line);stroke-width:1.5"/>
       <!-- Levo: vdih -->
       <path d="M180,176 Q192,208 182,246" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
       <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
@@ -1890,6 +1904,8 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <text class="t-s" x="216" y="138">prsi le malo</text>
       <text class="t-s" x="256" y="211">trebuh</text>
       <text class="t-b" x="160" y="280" text-anchor="middle">vdih skozi nos · štejte do 4</text>
+    </svg>
+    <svg viewBox="320 0 320 300" aria-hidden="true">
       <!-- Desno: izdih -->
       <g transform="translate(320,0)">
         <path d="M180,176 Q210,206 190,246" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
@@ -1907,6 +1923,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <text class="t-b" x="160" y="280" text-anchor="middle">daljši izdih skozi nos · do 6</text>
       </g>
     </svg>
+    </div>
     </div>
     <figcaption>Mehki nosni dih: dlan na trebuhu se premika bolj kot dlan na prsih.</figcaption>
   </figure>
@@ -2401,12 +2418,13 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   </div>
   <figure class="figure">
     <div class="svgwrap">
-    <svg viewBox="0 0 640 300" role="img" aria-label="Vaja ramena proti ušesom. Levo: ob vdihu ramena dvignemo, mišice med vratom in rameni so zategnjene. Desno: ob dolgem izdihu ramena spuščamo trikrat počasneje.">
+    <div class="panels" role="img" aria-label="Vaja ramena proti ušesom. Levo: ob vdihu ramena dvignemo, mišice med vratom in rameni so zategnjene. Desno: ob dolgem izdihu ramena spuščamo trikrat počasneje.">
+    <svg viewBox="0 0 320 300" aria-hidden="true">
       <defs>
         <marker id="m-pv-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--accent)"/></marker>
       </defs>
-      <line x1="320" y1="16" x2="320" y2="284" style="stroke:var(--line);stroke-width:1.5"/>
       <!-- Levo: ramena dvignjena -->
+      <text class="t-s" x="16" y="30">1</text>
       <path d="M150,112 Q122,114 98,128 Q122,142 150,132 Z M170,112 Q198,114 222,128 Q198,142 170,132 Z" style="fill:var(--muscle-soft);stroke:var(--muscle);stroke-width:1.5;stroke-linejoin:round"/>
       <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
         <circle cx="160" cy="78" r="30"/>
@@ -2417,7 +2435,10 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <line x1="52" y1="176" x2="52" y2="118" style="stroke:var(--accent);stroke-width:2.5;stroke-linecap:round" marker-end="url(#m-pv-a)"/>
       <line x1="268" y1="176" x2="268" y2="118" style="stroke:var(--accent);stroke-width:2.5;stroke-linecap:round" marker-end="url(#m-pv-a)"/>
       <text class="t-b" x="160" y="280" text-anchor="middle">vdih · zategnite</text>
+    </svg>
+    <svg viewBox="320 0 320 300" aria-hidden="true">
       <!-- Desno: ramena spuščena -->
+      <text class="t-s" x="336" y="30">2</text>
       <path d="M470,107 L470,112 Q442,114 418,128 Q404,140 404,172 M490,107 L490,112 Q518,114 542,128 Q556,140 556,172" style="fill:none;stroke:var(--muted);opacity:.55;stroke-width:2;stroke-dasharray:4 5;stroke-linecap:round"/>
       <g style="fill:none;stroke:var(--skin);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
         <circle cx="480" cy="78" r="30"/>
@@ -2430,16 +2451,16 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <text class="t-b" x="480" y="280" text-anchor="middle">dolg izdih · 3× počasneje</text>
     </svg>
     </div>
-    <figcaption>Vaja 2: zategovanje traja kratko, spuščanje trikrat dlje.</figcaption>
+    </div>
+    <figcaption>Vaja 2: zategovanje (1) traja kratko, spuščanje (2) trikrat dlje.</figcaption>
   </figure>
-  <figure class="figure figure-compact">
+  <figure class="figure">
     <div class="svgwrap">
-    <svg viewBox="0 0 640 560" role="img" aria-label="Vaje 3 do 6. Lopatice skupaj in navzdol, pogled od zadaj. Zatilje: glava pritiska nazaj v prepletene dlani, nato se počasi sprosti naprej. Brada vodoravno nazaj, brez nagiba glave. Čeljust: zobje se razmaknejo, usta se počasi odprejo. Črtkano je začetni položaj.">
+    <div class="panels" role="img" aria-label="Vaje 3 do 6. Lopatice skupaj in navzdol, pogled od zadaj. Zatilje: glava pritiska nazaj v prepletene dlani, nato se počasi sprosti naprej. Brada vodoravno nazaj, brez nagiba glave. Čeljust: zobje se razmaknejo, usta se počasi odprejo. Črtkano je začetni položaj.">
+    <svg viewBox="0 0 320 280" aria-hidden="true">
       <defs>
         <marker id="m-pv3-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--accent)"/></marker>
       </defs>
-      <line x1="320" y1="16" x2="320" y2="544" style="stroke:var(--line);stroke-width:1.5"/>
-      <line x1="16" y1="280" x2="624" y2="280" style="stroke:var(--line);stroke-width:1.5"/>
       <!-- Vaja 3: lopatice skupaj (od zadaj) -->
       <g>
         <text class="t-s" x="16" y="30">3</text>
@@ -2457,6 +2478,8 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <text class="t-b" x="160" y="246" text-anchor="middle">lopatice skupaj in navzdol</text>
         <text class="t-s" x="160" y="265" text-anchor="middle">pogled od zadaj</text>
       </g>
+    </svg>
+    <svg viewBox="320 0 320 280" aria-hidden="true">
       <!-- Vaja 4: zatilje (od strani) -->
       <g transform="translate(320,0)">
         <text class="t-s" x="16" y="30">4</text>
@@ -2476,6 +2499,8 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <text class="t-b" x="160" y="246" text-anchor="middle">1 glava nazaj v dlani · do 30 %</text>
         <text class="t-s" x="160" y="265" text-anchor="middle">2 nato zelo počasi popustite naprej</text>
       </g>
+    </svg>
+    <svg viewBox="0 280 320 280" aria-hidden="true">
       <!-- Vaja 5: brada nazaj (od strani) -->
       <g transform="translate(0,280)">
         <text class="t-s" x="16" y="30">5</text>
@@ -2495,6 +2520,8 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <text class="t-b" x="160" y="246" text-anchor="middle">brada vodoravno nazaj</text>
         <text class="t-s" x="160" y="265" text-anchor="middle">glave ne nagibajte</text>
       </g>
+    </svg>
+    <svg viewBox="320 280 320 280" aria-hidden="true">
       <!-- Vaja 6: čeljust (od strani) -->
       <g transform="translate(320,280)">
         <text class="t-s" x="16" y="30">6</text>
@@ -2510,6 +2537,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <text class="t-s" x="160" y="265" text-anchor="middle">kot pri zehanju</text>
       </g>
     </svg>
+    </div>
     </div>
     <figcaption>Vaje 3–6. Črtkano je začetni položaj, puščica kaže počasni gib. Mišice, ki jih zategnemo, so obarvane.</figcaption>
   </figure>
@@ -2665,6 +2693,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
         <tr><td>Novo (avtorjeva zahteva)</td><td>Poskusna grafika: skica vaje 2 »Ramena proti ušesom« na delovnem listu, diagram SMA (zdrava zanka proti zbledelemu občutku), motiv na naslovnici. Avtor je slog potrdil.</td><td>naslovnica, 15, delovni del</td></tr>
         <tr><td>Novo (avtorjeva zahteva)</td><td>Skice vaj v istem slogu: vaje 3–6 delovnega lista (lopatice, zatilje, brada, čeljust) v eni sliki ter mala vaja »Mehki nosni dih« (vdih in izdih). Mala vaja v poglavju 15 je enaka vaji 2, druge male vaje so opazovalne, zato brez skice.</td><td>29, delovni del</td></tr>
         <tr><td>Popravek</td><td>Delovni list: v »Kdaj in kako pogosto« pri glavobolu iz napetosti »vaji 4 in 6 (zatilje in čeljust)« namesto »3 in 5«, skladno s številkami v rutini in na skicah. Skice: začetni položaj (črtkano) je bolje viden, na vajah 4 in 5 sta obarvani mišici zatilja in globoke upogibalke vratu, pri dihu oznaka »prsi le malo«.</td><td>29, delovni del</td></tr>
+        <tr><td>Popravek</td><td>Slike iz več plošč (zdrava zanka in SMA, mehki nosni dih, vaja 2, vaje 3–6) se na telefonu razvrstijo eno pod drugo, da je besedilo v njih berljivo. V tisku in na širokem zaslonu ostanejo enake.</td><td>15, 29, delovni del</td></tr>
       </tbody>
     </table>
   </div>
