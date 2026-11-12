@@ -1,9 +1,10 @@
-"""Izdela PDF učbenika Senzorna prenova (izdaja 2) s številkami strani v kazalu.
+"""Izdela PDF iz HTML zbirke Senzorna prenova s številkami strani v kazalu.
 
 Pass 1: tisk z nevidnimi označevalci @@id@@ v naslovih in nadomestkom 000 v kazalu.
 Iz PDF preberemo stran vsakega označevalca, jih vpišemo kot data-page in natisnemo
 znova. Kontrolni tisk (z označevalci) preveri, da se številke ujemajo; nato končni tisk.
-Uporaba: python tools/build_pdf.py  (odvisnosti: pip install --target tools/pylib -r tools/requirements.txt)
+Uporaba: python tools/build_pdf.py ["<pot do HTML>"]  (privzeto učbenik za zgornji del trupa;
+PDF nastane ob HTML z istim imenom; odvisnosti: pip install --target tools/pylib -r tools/requirements.txt)
 """
 import json, re, subprocess, sys
 from pathlib import Path
@@ -13,8 +14,10 @@ sys.path.insert(0, str(HERE / "pylib"))
 from pypdf import PdfReader  # noqa: E402
 
 PROJ = HERE.parent
-SRC = PROJ / "Senzorna prenova – zgornji del trupa.html"
-OUT = PROJ / "Senzorna prenova – zgornji del trupa.pdf"
+SRC = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else PROJ / "Senzorna prenova – zgornji del trupa.html"
+if not SRC.is_file():
+    raise SystemExit(f"Ni datoteke: {SRC}")
+OUT = SRC.with_suffix(".pdf")
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 WORK = HERE / "build"
 WORK.mkdir(exist_ok=True)

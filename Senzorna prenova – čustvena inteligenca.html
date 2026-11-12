@@ -1,0 +1,1459 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Senzorna prenova – čustvena inteligenca</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>
+/* Layout (enak kot v učbeniku Senzorna prenova): mirna bralna knjiga – ozek stolpec besedila (~66 znakov), lepljivo kazalo na levi pri širokih zaslonih, ponavljajoč se ritem okvirjev v vsakem poglavju, zložljivi okvirji »Za radovedne« za globljo teorijo. */
+:root{
+  --bg:#F2F5F3; --surface:#FBFCFB; --ink:#1D2826; --muted:#56645F; --line:#D3DDD9;
+  --accent:#2E6B66; --accent-soft:#DDEBE8;
+  --warm:#9A6418; --warm-soft:#F5EBD8;
+  --ventral:#3B8456; --ventral-soft:#E0EFE4;
+  --symp:#B0680F; --symp-soft:#F7E6CF;
+  --dorsal:#4F5F7A; --dorsal-soft:#E2E7EF;
+  --skin:#3A3430; --muscle:#B0483C; --muscle-soft:#F4DCD8; --core:#3C6FA8; --core-soft:#DCE7F4; --mind:#3B8456;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Literata", Georgia, "Times New Roman", serif;
+  --measure:66ch;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#121917; --surface:#18211E; --ink:#E2E9E6; --muted:#9BA9A4; --line:#2C3834;
+  --accent:#7DC3BB; --accent-soft:#1E3431;
+  --warm:#E2B46A; --warm-soft:#2D2617;
+  --ventral:#72C390; --ventral-soft:#1A2E22;
+  --symp:#E9A653; --symp-soft:#33250F;
+  --dorsal:#9DB0CF; --dorsal-soft:#1F2633;
+  --skin:#D8CFC8; --muscle:#E88D80; --muscle-soft:#3A2220; --core:#8DB6E6; --core-soft:#1C2A3B; --mind:#72C390;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#121917; --surface:#18211E; --ink:#E2E9E6; --muted:#9BA9A4; --line:#2C3834;
+  --accent:#7DC3BB; --accent-soft:#1E3431;
+  --warm:#E2B46A; --warm-soft:#2D2617;
+  --ventral:#72C390; --ventral-soft:#1A2E22;
+  --symp:#E9A653; --symp-soft:#33250F;
+  --dorsal:#9DB0CF; --dorsal-soft:#1F2633;
+  --skin:#D8CFC8; --muscle:#E88D80; --muscle-soft:#3A2220; --core:#8DB6E6; --core-soft:#1C2A3B; --mind:#72C390;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.12rem;line-height:1.72;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px;padding-block:40px 80px}
+@media (min-width:1020px){.shell{grid-template-columns:260px minmax(0,1fr)}}
+
+/* Kazalo */
+.toc{font-family:var(--f-display);font-size:.9rem;line-height:1.35;min-width:0}
+@media (min-width:1020px){.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;max-height:calc(100vh - 48px);overflow:auto;padding-right:8px}}
+.toc details{border:1px solid var(--line);border-radius:10px;padding:12px 16px;background:var(--surface)}
+@media (min-width:1020px){.toc details{border:0;padding:0;background:none}.toc summary{pointer-events:none;list-style:none}.toc summary::-webkit-details-marker{display:none}}
+.toc summary{cursor:pointer;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;color:var(--muted)}
+.toc ol{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:1px}
+.toc .part{margin-top:14px}
+.toc .part a{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.toc a{display:flex;gap:10px;padding:4px 8px;border-radius:6px;color:var(--ink);text-decoration:none}
+.toc a:hover{background:var(--accent-soft)}
+.toc a span{color:var(--muted);font-variant-numeric:tabular-nums;min-width:1.5em}
+
+main{min-width:0}
+.col{max-width:var(--measure);display:grid;gap:16px}
+
+/* Naslovnica */
+.hero{display:grid;gap:20px;padding-bottom:40px;border-bottom:1px solid var(--line);margin-bottom:56px}
+.kicker{font-family:var(--f-display);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(2.3rem,6vw,3.8rem);font-weight:700;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:1.22rem;line-height:1.6;max-width:56ch}
+.hero-art{width:120px}
+.hero-art svg{width:100%;height:auto;display:block}
+@media (min-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr) 180px;column-gap:32px}
+  .hero>*{grid-column:1}
+  .hero>.hero-art{grid-column:2;grid-row:1 / span 4;align-self:center;width:100%}
+}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--f-display);font-size:.88rem;color:var(--muted)}
+
+/* Poglavja */
+section.ch{display:grid;gap:22px;margin-bottom:84px;scroll-margin-top:24px}
+.part-head{margin:24px 0 56px;padding:28px 0;border-top:2px solid var(--ink);display:grid;gap:8px;scroll-margin-top:24px}
+.part-head .kicker{color:var(--muted)}
+.part-head h2{font-size:clamp(1.7rem,3.6vw,2.3rem)}
+.part-head p{color:var(--muted);max-width:56ch}
+.ch-eyebrow{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;font-family:var(--f-display);font-size:.8rem;color:var(--muted)}
+.ch-eyebrow b{color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+.ch h2{font-size:clamp(1.55rem,3.3vw,2.1rem);letter-spacing:-.01em}
+.ch h3{font-size:1.18rem;margin-top:8px}
+.ch .short{font-size:1.16rem;color:var(--muted);font-style:italic;max-width:var(--measure)}
+.ch ul,.ch ol{margin:0;padding-left:1.3em;display:grid;gap:6px}
+strong{font-weight:600}
+.navdih{font-family:var(--f-display);font-size:.8rem;color:var(--muted);max-width:var(--measure);border-left:2px solid var(--line);padding-left:10px}
+.navdih i{font-style:italic}
+
+/* Okvirji */
+.box{border-radius:12px;padding:20px 22px;display:grid;gap:10px;max-width:var(--measure)}
+.box-label{font-family:var(--f-display);font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.primer{background:var(--warm-soft)} .primer .box-label{color:var(--warm)}
+.kljucne{background:var(--accent-soft)} .kljucne .box-label{color:var(--accent)}
+.vprasanja{border:1.5px dashed var(--line);background:var(--surface)} .vprasanja .box-label{color:var(--muted)}
+.vaja{border:1.5px solid var(--accent);background:var(--surface)} .vaja .box-label{color:var(--accent)}
+.varno{background:var(--dorsal-soft)} .varno .box-label{color:var(--dorsal)}
+.razlaga{border:1.5px solid var(--warm);background:var(--surface)} .razlaga .box-label{color:var(--warm)}
+.box ul,.box ol{padding-left:1.2em}
+details.radoved{max-width:var(--measure);border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+details.radoved summary{cursor:pointer;padding:14px 20px;font-family:var(--f-display);font-weight:600;font-size:.95rem;color:var(--ink);list-style-position:outside}
+details.radoved summary::marker{color:var(--accent)}
+details.radoved summary span{font-weight:400;color:var(--muted);font-size:.85rem;margin-left:6px}
+details.radoved .in{padding:0 20px 18px;display:grid;gap:12px;font-size:1.02rem}
+blockquote{margin:0;padding:4px 0 4px 16px;border-left:3px solid var(--accent);font-style:italic}
+.geslo{max-width:var(--measure);padding:2px 0 2px 16px;border-left:3px solid var(--warm);font-style:italic;font-size:1.3rem;line-height:1.45;color:var(--accent)}
+
+/* Slike */
+.figure{display:grid;gap:10px;margin:6px 0;max-width:820px}
+.figure figcaption{font-family:var(--f-display);font-size:.85rem;color:var(--muted);max-width:var(--measure)}
+.figure svg{width:100%;height:auto;display:block}
+.svgwrap{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+.scroll-x{overflow-x:auto}
+/* Slike iz več plošč: na široko druga ob drugi, na telefonu ena pod drugo, da besedilo ostane berljivo */
+.panels{display:grid;grid-template-columns:1fr 1fr}
+.panels>svg:nth-child(even){border-left:1.5px solid var(--line)}
+.panels>svg:nth-child(n+3){border-top:1.5px solid var(--line)}
+@media (max-width:520px){
+  .panels{grid-template-columns:1fr;justify-items:center}
+  .panels>svg{max-width:340px}
+  .panels>svg:nth-child(n){border-left:0}
+  .panels>svg+svg{border-top:1.5px solid var(--line)}
+}
+.t{font-family:var(--f-display);font-size:15px;fill:var(--ink)}
+.t-s{font-family:var(--f-display);font-size:13px;fill:var(--muted)}
+.t-b{font-family:var(--f-display);font-size:15px;font-weight:600;fill:var(--ink)}
+.stroke-muted{stroke:var(--muted)} .fill-muted{fill:var(--muted)}
+.fill-surface{fill:var(--surface)} .fill-bg{fill:var(--bg)}
+/* Večja pisava v slikah, da je berljiva tudi na telefonu */
+.big .t-b{font-size:18px} .big .t-s{font-size:15px}
+
+
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--f-display);font-size:.92rem;line-height:1.3}
+.flow .step{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.flow .arr{color:var(--muted)}
+.flow.danger .step:last-child{border-color:var(--symp);background:var(--symp-soft)}
+.flow.grow .step:last-child{border-color:var(--ventral);background:var(--ventral-soft)}
+
+/* Kartice */
+.cards3{display:grid;grid-template-columns:1fr;gap:12px;max-width:860px}
+@media (min-width:720px){.cards3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.card h4{font-size:1rem}
+.card p{font-size:.98rem;line-height:1.55}
+.card svg{width:100%;max-width:180px;height:auto;justify-self:center}
+.card.mid{border-color:var(--ventral);background:var(--ventral-soft)}
+.meter{display:grid;gap:4px;font-family:var(--f-display);font-size:.8rem;color:var(--muted)}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:5px}
+.bar .em{background:var(--accent)} .bar .to{background:var(--muscle)}
+
+
+/* Tabele */
+table{border-collapse:collapse;width:100%;font-size:.98rem;line-height:1.5}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-display);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.tbl{max-width:820px}
+.tbl table{min-width:560px}
+
+/* Zlata pravila */
+.rules{display:grid;gap:14px;max-width:820px}
+.rule{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.rule .n{font-family:var(--f-display);font-weight:700;font-size:1.6rem;line-height:1;color:var(--warm);font-variant-numeric:tabular-nums}
+.rule h4{font-size:1.05rem;margin-bottom:4px}
+.rule p{font-size:1rem;line-height:1.6}
+
+/* Sledilnik */
+.weeks{display:grid;gap:16px;max-width:820px}
+.week{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:10px}
+.week h4{font-size:1.05rem}
+.week .theme{font-size:.98rem;color:var(--muted);line-height:1.55}
+.days{display:flex;flex-wrap:wrap;gap:6px}
+.day{width:42px;height:42px;border-radius:8px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-family:var(--f-display);font-weight:600;font-variant-numeric:tabular-nums;cursor:pointer}
+.day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.progress{font-family:var(--f-display);font-size:.9rem;color:var(--muted)}
+.reset{font-family:var(--f-display);font-size:.85rem;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0;justify-self:start}
+
+/* Slovar */
+dl.gloss{display:grid;gap:14px;margin:0}
+dl.gloss div{display:grid;gap:2px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+dl.gloss dt{font-family:var(--f-display);font-weight:600}
+dl.gloss dd{margin:0;font-size:1rem;line-height:1.6}
+.refs li{font-size:1rem}
+.refs .why{color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-display);font-size:.85rem;color:var(--muted);display:grid;gap:8px;max-width:var(--measure)}
+
+/* Lestvica od svetlobe do črnine */
+.spectrum{display:grid;grid-template-columns:1fr 1.2fr 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:820px;font-family:var(--f-display);text-align:center}
+.spectrum>div{display:grid;gap:2px;padding:14px 10px;align-content:center}
+.spectrum strong{font-size:.98rem}
+.spectrum span{font-size:.82rem;color:var(--muted);line-height:1.35}
+.spectrum .sp-end:first-child{background:var(--warm-soft)}
+.spectrum .sp-end:last-child{background:var(--dorsal-soft)}
+.spectrum .sp-mid{background:var(--ventral-soft);border-inline:1.5px solid var(--ventral)}
+.spectrum .sp-mid strong{color:var(--ventral)}
+@media (max-width:520px){.spectrum{grid-template-columns:1fr}.spectrum .sp-mid{border-inline:0;border-block:1.5px solid var(--ventral)}}
+
+/* Zmote in resnice */
+.myths{display:grid;grid-template-columns:1fr;gap:12px;max-width:860px}
+@media (min-width:720px){.myths{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.myth{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;align-content:start}
+.myth p{padding:12px 16px;font-size:.98rem;line-height:1.55}
+.myth b{display:block;font-family:var(--f-display);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.m-z{color:var(--muted)} .m-z b{color:var(--symp)}
+.m-r{border-top:1px dashed var(--line)} .m-r b{color:var(--ventral)}
+
+/* Predloga čustvenega dnevnika */
+.journal table{table-layout:fixed}
+.journal th:first-child{width:11%}
+.journal th,.journal td{border:1px solid var(--line)}
+.journal td{height:64px}
+
+/* Tisk: na zaslonu skrito */
+.print-toc,.print-only,.print-lines{display:none}
+.print-btn{margin-top:14px;font-family:var(--f-display);font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.print-btn:hover{border-color:var(--accent)}
+
+/* Tisk: A4, belo ozadje, kazalo s številkami strani */
+@page{
+  size:A4;margin:20mm 18mm 18mm;
+  @top-right{content:"Senzorna prenova · Čustvena inteligenca";font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-size:7.5pt;color:#8a8f8d}
+  @bottom-center{content:counter(page);font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-size:9pt;color:#444}
+}
+@page :first{
+  @top-right{content:none}
+  @bottom-center{content:none}
+}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --bg:#fff; --surface:#fff; --ink:#1D2826; --muted:#56645F; --line:#C9D3CF;
+    --accent:#2E6B66; --accent-soft:#DDEBE8;
+    --warm:#9A6418; --warm-soft:#F5EBD8;
+    --ventral:#3B8456; --ventral-soft:#E0EFE4;
+    --symp:#B0680F; --symp-soft:#F7E6CF;
+    --dorsal:#4F5F7A; --dorsal-soft:#E2E7EF;
+    --skin:#3A3430; --muscle:#B0483C; --muscle-soft:#F4DCD8; --core:#3C6FA8; --core-soft:#DCE7F4; --mind:#3B8456;
+    --measure:80ch;
+    color-scheme:light;
+  }
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{font-size:9.6pt}
+  body{background:#fff;font-size:1.12rem;line-height:1.5;padding:0}
+  a{color:inherit;text-decoration:none}
+  .shell{display:block;max-width:none;padding:0}
+  nav.toc,.screen-only{display:none!important}
+  .print-only{display:block}
+  span.print-only{display:inline}
+
+  /* Obojestranska poravnava tekočega besedila */
+  p,li,dd{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+  .navdih,.print-toc li,td,th{text-align:left;hyphens:manual;-webkit-hyphens:manual}
+
+  /* Naslovnica sama na prvi strani */
+  .hero{border-bottom:0;margin:0;padding:28mm 0 0;break-after:page;grid-template-columns:1fr}
+  .hero>.hero-art{grid-column:1;grid-row:auto;width:62mm;margin-bottom:8mm}
+  .hero h1{font-size:3.4rem}
+
+  /* Kazalo za tisk */
+  .print-toc{display:block;break-after:page;font-family:var(--f-display)}
+  .print-toc h2{font-size:2rem;margin-bottom:18pt}
+  .print-toc ol{list-style:none;margin:0;padding:0}
+  .print-toc li{display:flex;align-items:baseline;gap:6px;font-size:.98rem;line-height:1.3;padding:1.6pt 0;break-inside:avoid}
+  .print-toc li.part{font-weight:700;font-size:1rem;margin-top:9pt;break-after:avoid}
+  .print-toc li.part:first-child{margin-top:0}
+  .print-toc .n{min-width:2em;color:var(--muted);font-variant-numeric:tabular-nums}
+  .print-toc .dots{flex:1;border-bottom:1px dotted #9aa3a0;transform:translateY(-3px);min-width:12px}
+  .print-toc .pg{min-width:2.2em;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* Prelomi */
+  .part-head{break-before:page;margin:0 0 20pt;padding:10mm 0 14pt}
+  /* Blok namesto mreže, da Chrome upošteva break-after:avoid (oznaka poglavja ostane ob naslovu) */
+  section.ch{margin-bottom:26pt;display:block}
+  section.ch>*+*{margin-top:12pt}
+  #sledilnik,#dnevnik{break-before:page}
+  .card p,.myth p{text-align:left;hyphens:manual;-webkit-hyphens:manual}
+  h2,h3,h4,.ch-eyebrow,.box-label,.kicker{break-after:avoid}
+  .box,.figure,.rule,.week,.card,.tbl,table,tr,details.radoved,blockquote,dl.gloss div,.flow,.navdih,.geslo,.myth,.spectrum{break-inside:avoid}
+  p,li{orphans:3;widows:3}
+  .col{display:block}
+  .col:not(.gloss)>*{margin-top:0;margin-bottom:0}
+  .col:not(.gloss)>*+*{margin-top:8pt}
+  .ch .col>h3{margin-top:14pt}
+
+  /* Širši stolpec */
+  .figure,.cards3,.tbl,.rules,.weeks,.myths,.spectrum{max-width:none}
+  .myths{grid-template-columns:1fr 1fr;gap:8pt}
+  .myth{background:#fff}
+  .journal td{height:24mm}
+  .figure .svgwrap{max-width:120mm}
+  .tbl table{min-width:0}
+  .scroll-x{overflow:visible}
+
+  /* Okvirji: belo ozadje, tanka obroba, barvni levi rob */
+  .box{padding:10pt 12pt;border-radius:0 6px 6px 0;border:1px solid var(--line)}
+  .primer{background:#fff;border-left:3px solid var(--warm)}
+  .kljucne{background:#fff;border-left:3px solid var(--accent)}
+  .varno{background:#fff;border-left:3px solid var(--dorsal)}
+  .vprasanja{border:1px dashed #9aa3a0;border-radius:6px}
+  .vaja{border:1.5px solid var(--accent);border-radius:6px}
+  .razlaga{border:1.5px solid var(--warm);border-radius:6px}
+  .svgwrap,.card,.rule,.week{background:#fff;border:1px solid var(--line);border-radius:6px}
+  .card.mid{background:#fff;border:1.5px solid var(--ventral)}
+
+  /* Za radovedne: vedno odprto */
+  details.radoved{background:#fff;border-left:3px solid var(--muted);border-radius:0 6px 6px 0}
+  details.radoved::details-content{content-visibility:visible;display:block}
+  details.radoved summary{list-style:none;padding:10pt 12pt 6pt}
+  details.radoved summary::-webkit-details-marker{display:none}
+  details.radoved .in{padding:0 12pt 10pt}
+
+
+  /* Sledilnik: prazni kvadratki */
+  #progress,#reset{display:none}
+  .days{gap:5px}
+  .day,.day[aria-pressed="true"]{width:34px;height:34px;border-radius:3px;border:1px solid #6b7471;background:#fff;color:#8a8f8d;font-size:7pt;font-weight:400;padding:2px 3px;display:flex;align-items:flex-start;justify-content:flex-start}
+  .print-lines{display:block;height:34pt;margin-top:2pt;border-bottom:.75pt solid #9aa3a0}
+  .print-lines::before{content:"";display:block;height:17pt;border-bottom:.75pt solid #9aa3a0}
+}
+</style>
+<body>
+
+<div class="shell">
+
+<nav class="toc" aria-label="Kazalo">
+  <details open id="toc-d">
+    <summary>Kazalo</summary>
+    <ol id="toc-list"></ol>
+    <button type="button" class="print-btn" id="print-btn">Natisni</button>
+  </details>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="hero-art">
+    <svg viewBox="0 0 240 200" role="img" aria-label="Obris glave, vratu in ramen, v prsih toplo središče, iz katerega se širijo mehki valovi: čustvo, ki ga najprej začutimo v telesu">
+      <circle cx="120" cy="112" r="96" style="fill:var(--accent-soft)"/>
+      <g style="fill:none;stroke:var(--warm);stroke-width:2;stroke-linecap:round">
+        <circle cx="120" cy="146" r="22"/>
+        <circle cx="120" cy="146" r="36" style="opacity:.6"/>
+        <circle cx="120" cy="146" r="50" style="opacity:.3"/>
+      </g>
+      <circle cx="120" cy="146" r="9" style="fill:var(--warm)"/>
+      <g style="fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">
+        <circle cx="120" cy="58" r="28"/>
+        <path d="M109,86 L109,104 Q82,108 64,124 Q52,136 50,158 L50,198"/>
+        <path d="M131,86 L131,104 Q158,108 176,124 Q188,136 190,158 L190,198"/>
+        <path d="M72,160 L74,198 M168,160 L166,198"/>
+      </g>
+    </svg>
+  </div>
+  <div class="kicker">Zbirka Senzorna prenova · 4-tedenski program · 1. izdaja (osnutek)</div>
+  <h1>Senzorna prenova: <em>čustvena inteligenca</em></h1>
+  <p class="lede">Priročnik o tem, kako čustvo začutiti, preden vas odnese, ga natančno poimenovati, izbrati odziv in razumeti ljudi okoli sebe. Izhaja iz preprostega opažanja Senzorne prenove: vsako čustvo se začne v telesu.</p>
+  <div class="meta-row"><span>7 delov · 17 kratkih poglavij</span><span>3–6 min branja na poglavje</span><span>Avtor: Peter Karlovšek</span></div>
+</header>
+
+<section class="print-toc" aria-hidden="true">
+  <h2>Kazalo</h2>
+  <ol id="print-toc-list"></ol>
+</section>
+
+<section class="ch" id="uvod" data-toc="Kako brati ta priročnik" data-num="·">
+  <div class="ch-eyebrow"><b>Začetek</b><span>≈ 3 min branja</span></div>
+  <h2>Kako brati ta priročnik</h2>
+  <div class="col">
+    <p>Čustvena inteligenca ni dar, ki ga nekateri imajo, drugi pa ne. Je skupek spretnosti: opaziti, kaj čutite, to poimenovati, počakati s prvim odzivom, razumeti drugega in mu povedati, kaj potrebujete. Spretnosti se učimo z vajo, ne z branjem. Zato je ta priročnik kratek, poglavja pa se končajo z nalogo za vsakdan.</p>
+    <p>Vsako poglavje ima enak ritem:</p>
+    <ul>
+      <li><strong>Stavek bistva</strong> pod naslovom. Če nimate časa za več, preberite le tega.</li>
+      <li><strong>Razlaga</strong> v kratkih odstavkih.</li>
+      <li><strong>Iz vsakdanjega življenja</strong>: primer, v katerem se boste morda prepoznali.</li>
+      <li><strong>Ključne točke</strong> in <strong>vprašanja zase</strong> za trenutek tišine ali dnevnik.</li>
+      <li>Ponekod <strong>mala vaja</strong>, ki traja nekaj minut.</li>
+      <li>Ponekod zložljiv okvir <strong>Za radovedne</strong> z ozadjem iz raziskav. Lahko ga preskočite.</li>
+    </ul>
+    <p>Na koncu je delovni del: tedenski načrt po deset minut na dan, sledilnik za štiri tedne in predloga čustvenega dnevnika. Priporočamo, da preberete en del na teden in ob tem vadite po načrtu.</p>
+    <h3>Povezava z učbenikom</h3>
+    <p>Priročnik spada v zbirko Senzorna prenova. Učbenik <em>Senzorna prenova: kako prebuditi zakrčeno telo in um</em> razloži, kako zadržano čustvo postane mišična napetost (poglavja 22–24) in kako dih vpliva na živčni sistem (poglavje 29). Tu iz istega izhodišča gradimo naprej: kako telesni signal prepoznati kot čustvo in kaj z njim narediti v odnosu do sebe in drugih. Učbenika za branje ne potrebujete, kjer pa se nanj sklicujemo, je navedeno poglavje.</p>
+    <h3>Dva glasova</h3>
+    <p>Večina priročnika se naslanja na psihologijo čustev (D. Goleman, P. Salovey in J. D. Mayer, J. J. Gross in drugi). Ponekod pa navajamo tudi duhovni pogled Elizabeth April, ki o polnem razponu čustev govori v enem od svojih videov. Takšni deli so vedno v posebnem okviru z oznako <em>Pogled Elizabeth April</em>. Gre za njen osebni pogled, ne za znanstveno dognanje; vzemite iz njega, kar vam koristi.</p>
+  </div>
+  <div class="box varno">
+    <div class="box-label">Za vašo varnost</div>
+    <p>Priročnik ne nadomešča psihoterapevta, psihologa ali zdravnika. Če vas čustva dlje časa preplavljajo, če ne morete spati, jesti ali delati ali če se pojavijo misli, da bi si kaj naredili, poiščite strokovno pomoč. V stiski lahko kadarkoli pokličete zaupni telefon Samarijan in Sopotnik (116 123) ali Klic v duševni stiski (01 520 99 00); v nujnem primeru pokličite 112.</p>
+  </div>
+</section>
+
+<div class="part-head" id="del1" data-toc="I · Kaj je čustvena inteligenca">
+  <div class="kicker">Del I</div>
+  <h2>Kaj je čustvena inteligenca</h2>
+  <p>Kaj so čustva, iz katerih spretnosti je sestavljena čustvena inteligenca in zakaj začnemo pri telesu.</p>
+</div>
+
+<section class="ch" id="p1" data-toc="Čustva niso motnja" data-num="1">
+  <div class="ch-eyebrow"><b>Poglavje 1</b><span>≈ 5 min branja</span></div>
+  <h2>Čustva niso motnja</h2>
+  <p class="short">Čustvo je sporočilo o tem, kaj se vam dogaja in kaj vam je pomembno. Čustvena inteligenca je spretnost, kako to sporočilo prebrati in kaj z njim narediti.</p>
+  <div class="col">
+    <p>Mnogi smo odraščali z mislijo, da čustva motijo razum. »Ne jokaj.« »Ne bodi tako občutljiv.« »Najprej se umiri, potem se bova pogovarjala.« Iz tega se hitro naučimo, da je najbolje čustva ne imeti, ali vsaj ne pokazati.</p>
+    <p>Čustva pa niso napaka v sistemu. So del njega. Strah opozori na nevarnost, jeza na mejo, ki jo je nekdo prestopil, žalost na izgubo, sram na to, da nam je mar, kako nas vidijo drugi. Veselje in hvaležnost nam povesta, kaj je vredno ohraniti. Brez čustev bi težko odločali, saj ne bi vedeli, kaj nam je pomembno.</p>
+    <p><strong>Čustvena inteligenca</strong> je sposobnost, da prepoznamo, razumemo in vodimo lastna čustva ter prepoznamo in razumemo čustva drugih in se nanje primerno odzovemo. Pojem sta leta 1990 opisala psihologa Peter Salovey in John D. Mayer, širše pa ga je predstavil Daniel Goleman v knjigi <em>Čustvena inteligenca</em> (1995).</p>
+    <p>Pogosto slišimo, da je IQ prirojen in nespremenljiv, čustvena inteligenca pa naučljiva. Resnica je nekoliko mehkejša. Splošne umske sposobnosti so v odrasli dobi razmeroma stabilne, čeprav tudi nanje vplivajo šolanje in okolje. Spretnosti čustvene inteligence pa so v veliki meri naučene navade: kako hitro opazimo čustvo, katere besede imamo zanj, kaj naredimo v prvih sekundah. Navade lahko spremenimo v vsakem življenjskem obdobju.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Petra dobi ob šestih zvečer e-pošto vodje: »Jutri ob osmih na pogovor o projektu.« Brez pozdrava, brez razlage. Večer je pokvarjen. Napiše dolg odgovor, v katerem se vnaprej opravičuje in brani, ga izbriše, ne spi dobro.</p>
+    <p>Mesec pozneje dobi podobno sporočilo. Tokrat opazi, da se ji je stisnil želodec. Pomisli: »To je strah. Bojim se, da sem kaj zamočila.« Trikrat počasi izdihne in si zapiše, kaj pravzaprav ve: nič, samo uro sestanka. Vodji odgovori z eno vrstico: »Bom. Lahko na kratko poveste, za kaj gre, da se pripravim?« Večer je njen.</p>
+    <p>Petra se ni nehala bati. Strah je samo pravočasno opazila, ga poimenovala in izbrala odziv.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Čustva so sporočila, ne motnje. Vsako nekaj pove o vas in vaših potrebah.</li>
+      <li>Čustvena inteligenca je skupek spretnosti, ne prirojena lastnost.</li>
+      <li>Cilj ni manj čustev, ampak več izbire, kaj z njimi narediti.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katera čustva so bila v vaši družini dovoljena in katera ne?</li>
+      <li>Katero čustvo vas najpogosteje »odnese«, da se pozneje odzivu čudite?</li>
+    </ul>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>Dva modela čustvene inteligence</span></summary>
+    <div class="in">
+      <p>Salovey in Mayer razumeta čustveno inteligenco kot <strong>sposobnost</strong> s štirimi vejami: zaznati čustva, z njimi podpreti mišljenje, razumeti jih in jih uravnavati. Merita jo s testom, ki ima pravilne in napačne odgovore, podobno kot test znanja.</p>
+      <p>Goleman je pojem razširil v <strong>mešani model</strong>, ki poleg sposobnosti vključuje tudi motivacijo in socialne veščine. Ta model je bolj praktičen in je osnova tega priročnika, raziskovalci pa mu očitajo, da se delno prekriva z osebnostnimi lastnostmi.</p>
+      <p>Za vas je pomembno predvsem to: pregled raziskav (Mattingly in Kraiger, 2019) je pokazal, da se pri ljudeh, ki čustvene spretnosti načrtno vadijo, te zmerno, a merljivo izboljšajo.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ch" id="p2" data-toc="Pet stebrov" data-num="2">
+  <div class="ch-eyebrow"><b>Poglavje 2</b><span>≈ 4 min branja</span></div>
+  <h2>Pet stebrov</h2>
+  <p class="short">Goleman čustveno inteligenco razdeli na pet področij. Prva tri zadevajo odnos do sebe, zadnji dve odnos do drugih.</p>
+  <div class="col">
+    <p>Pet stebrov ni pet ločenih predmetov. Gradijo drug na drugem. Česar ne opazite, ne morete uravnavati. Kdor ne razume svojih čustev, težko razume čustva drugih. In kdor ne zna počakati s prvim odzivom, bo v konfliktu težko uporabil še tako dobro komunikacijsko tehniko.</p>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Steber</th><th>Kaj pomeni v praksi</th><th>Kje v priročniku</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Samozavedanje</strong></td><td>Čustvo prepoznate v trenutku, ko se pojavi, in razumete, kako vpliva na vaše misli in vedenje.</td><td>Del II</td></tr>
+        <tr><td><strong>2. Samoregulacija</strong></td><td>Na čustvo se ne odzovete samodejno, ampak izberete odziv. Obvladate stres in se prilagodite spremembam brez panike.</td><td>Del III</td></tr>
+        <tr><td><strong>3. Notranja motivacija</strong></td><td>Vztrajate zaradi notranjega zadovoljstva in radovednosti, ne le zaradi zunanjih nagrad, in zdržite nelagodje, ne da bi zbežali.</td><td>Del IV</td></tr>
+        <tr><td><strong>4. Empatija</strong></td><td>Vživite se v čustveno stanje drugega in razumete njegov zorni kot, ne da bi se v njem izgubili.</td><td>Del V</td></tr>
+        <tr><td><strong>5. Socialne veščine</strong></td><td>Jasno poveste, kaj čutite in potrebujete, postavite meje, rešujete spore in gradite trdne odnose.</td><td>Del VI</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 480 400" role="img" aria-label="Pet krogov v krogu okrog središča z napisom čustvo v telesu: samozavedanje, samoregulacija, notranja motivacija, empatija in socialne veščine. Prvi trije so zeleno obarvani, zadnja dva toplo.">
+        <g class="stroke-muted" style="stroke-width:1.5;opacity:.6">
+          <line x1="240" y1="210" x2="240" y2="70"/>
+          <line x1="240" y1="210" x2="373" y2="167"/>
+          <line x1="240" y1="210" x2="322" y2="323"/>
+          <line x1="240" y1="210" x2="158" y2="323"/>
+          <line x1="240" y1="210" x2="107" y2="167"/>
+        </g>
+        <circle cx="240" cy="210" r="50" class="fill-bg" style="stroke:var(--muted);stroke-width:1.5;stroke-dasharray:4 4"/>
+        <text x="240" y="205" text-anchor="middle" class="t-s">čustvo</text>
+        <text x="240" y="223" text-anchor="middle" class="t-s">v telesu</text>
+        <g style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5">
+          <circle cx="240" cy="70" r="62"/>
+          <circle cx="373" cy="167" r="62"/>
+          <circle cx="322" cy="323" r="62"/>
+        </g>
+        <g style="fill:var(--warm-soft);stroke:var(--warm);stroke-width:1.5">
+          <circle cx="158" cy="323" r="62"/>
+          <circle cx="107" cy="167" r="62"/>
+        </g>
+        <g text-anchor="middle">
+          <text x="240" y="46" class="t-s">1</text><text x="240" y="72" class="t-b">Samo-</text><text x="240" y="91" class="t-b">zavedanje</text>
+          <text x="373" y="147" class="t-s">2</text><text x="373" y="169" class="t-b">Samo-</text><text x="373" y="188" class="t-b">regulacija</text>
+          <text x="322" y="303" class="t-s">3</text><text x="322" y="325" class="t-b">Notranja</text><text x="322" y="344" class="t-b">motivacija</text>
+          <text x="158" y="303" class="t-s">4</text><text x="158" y="334" class="t-b">Empatija</text>
+          <text x="107" y="147" class="t-s">5</text><text x="107" y="169" class="t-b">Socialne</text><text x="107" y="188" class="t-b">veščine</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>Pet stebrov čustvene inteligence. Zeleni krogi (1–3) zadevajo odnos do sebe, topli (4–5) odnos do drugih. V središču je izhodišče Senzorne prenove: vsako čustvo najprej začutimo v telesu.</figcaption>
+  </figure>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Pet stebrov: samozavedanje, samoregulacija, notranja motivacija, empatija, socialne veščine.</li>
+      <li>Gradijo drug na drugem. Začnite pri samozavedanju, ne pri komunikacijskih tehnikah.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Kateri steber je vaša močna stran? Kateri najšibkejša?</li>
+      <li>V katerem odnosu bi si najbolj želeli spremembe in kateri steber bi tam najbolj pomagal?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p3" data-toc="Čustvo se začne v telesu" data-num="3">
+  <div class="ch-eyebrow"><b>Poglavje 3</b><span>≈ 5 min branja</span></div>
+  <h2>Čustvo se začne v telesu</h2>
+  <p class="short">Preden čustvo dobi ime, je že v telesu: v dihu, mišicah, srčnem utripu. Kdor bolje čuti telo, prej opazi čustvo.</p>
+  <div class="col">
+    <p>Pomislite na zadnjič, ko ste se ustrašili. Najprej je bil sunek v trebuhu, zastal dih, srce je pospešilo. Šele nato je prišla misel: »Ojej.« Čustvo ni najprej misel, ki ji telo sledi. Je predvsem dogajanje v telesu, ki ga možgani nato preberejo in poimenujejo.</p>
+    <p>Sposobnosti, da zaznamo, kaj se dogaja v notranjosti telesa, pravimo <strong>interocepcija</strong>. Raziskovalci, kot sta Antonio Damasio in Lisa Feldman Barrett, menijo, da so telesni signali eno od temeljnih gradiv, iz katerih možgani sestavijo čustvo. Kdor jih bolje zazna, ima za samozavedanje več podatkov.</p>
+    <p>Tu se priročnik poveže s Senzorno prenovo. Učbenik opisuje, kako se naučimo čustva zadrževati: z mišicami ustavimo njegov izraz. Kadar se to ponavlja, postane zadrževanje navada, na koncu pa lahko čustvo in želja po izrazu izgineta iz zavesti, napetost pa ostane (več v poglavjih 22–24 učbenika).</p>
+  </div>
+  <div class="flow danger" aria-label="Od zadrževanja do potlačitve">
+    <span class="step">Zadrževanje: čustvo čutim, ustavim le izraz</span><span class="arr">→</span>
+    <span class="step">Navada: ustavljam samodejno, dih postane plitvejši</span><span class="arr">→</span>
+    <span class="step">Potlačitev: čustva ne čutim več, napetost ostane</span>
+  </div>
+  <div class="col">
+    <p>Za čustveno inteligenco to pomeni nekaj preprostega in hkrati pomembnega. Če je del telesa dolgo zakrčen, iz njega prihaja manj signalov. Človek tedaj ne ve, kaj čuti, ali čuti le splošno »napetost« ali »utrujenost«. Takrat ni dovolj, da se naučimo več besed za čustva. Najprej moramo telo spet slišati.</p>
+  </div>
+  <div class="box razlaga">
+    <div class="box-label">Razlaga Senzorne prenove</div>
+    <p>Zamisel, da kronična mišična napetost otopi zaznavo čustev, izhaja iz telesno usmerjenih pristopov (W. Reich, A. Lowen, T. Hanna) in iz izkušenj pri vadbi. Raziskave interocepcije jo podpirajo posredno, neposrednih dokazov pa je malo. Vzemite jo kot delovno hipotezo, ki jo lahko preverite na sebi.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 1 minuta · Kje sem zdaj</div>
+    <ol>
+      <li>Ustavite se tam, kjer ste. Ne spreminjajte drže.</li>
+      <li>Opazite dih: je hiter ali počasen, visoko v prsih ali nizko v trebuhu?</li>
+      <li>Opazite ramena, čeljust in trebuh. Kje je napeto, kje mehko?</li>
+      <li>Vprašajte se: »Če bi ta občutek imel ime, kako bi mu bilo ime?« Prvi odgovor je dovolj dober.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Čustvo je najprej telesno dogajanje, šele nato misel in beseda.</li>
+      <li>Zadržano čustvo postane napetost; dolgotrajna napetost otopi zaznavo.</li>
+      <li>Pot do samozavedanja zato pogosto vodi skozi telo.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del2" data-toc="II · Samozavedanje">
+  <div class="kicker">Del II</div>
+  <h2>Samozavedanje</h2>
+  <p>Opazujte, ne sodite. Kako čustvo opaziti, natančno poimenovati in mu slediti iz dneva v dan.</p>
+</div>
+
+<section class="ch" id="p4" data-toc="Poimenujte čustvo" data-num="4">
+  <div class="ch-eyebrow"><b>Poglavje 4</b><span>≈ 5 min branja</span></div>
+  <h2>Poimenujte čustvo</h2>
+  <p class="short">»Slabo mi je« ne pove skoraj nič. »Razočarana sem, ker se nisi oglasil« pove veliko. Natančna beseda čustvo že nekoliko umiri.</p>
+  <div class="col">
+    <p>Na vprašanje »Kako si?« večina odgovori z »dobro«, »slabo« ali »pod stresom sem«. Te besede so kot vremenska napoved, ki pravi samo »vreme«. Ne povedo, ali potrebujemo dežnik ali sončna očala.</p>
+    <p>Razlika med »jezen sem« in »razočaran sem« ni le jezikovna. Jeza kliče po tem, da nekaj zaščitimo ali postavimo mejo. Razočaranje kliče po tem, da si priznamo, da smo pričakovali več. Iz različnih čustev sledijo različna dejanja. Kdor ima za vse samo besedo »slabo«, tudi pravega dejanja težko izbere.</p>
+    <p>Poimenovanje ima še en učinek. V raziskavi, v kateri so udeleženci gledali fotografije jeznih in prestrašenih obrazov, se je dejavnost v amigdali, delu možganov, ki sproži alarm, zmanjšala, ko so čustvo na sliki poimenovali z besedo (Lieberman idr., 2007). Učinek ni čudežen, je pa resničen: beseda ustvari majhno razdaljo med vami in čustvom.</p>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Osnovno čustvo</th><th>Odtenki, od blažjega do močnejšega</th><th>Kaj pogosto sporoča</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Jeza</strong></td><td>razdraženost, nejevolja, frustracija, ogorčenje, bes</td><td>Nekdo je prestopil mejo ali ovira pot do cilja.</td></tr>
+        <tr><td><strong>Strah</strong></td><td>nelagodje, negotovost, zaskrbljenost, tesnoba, groza</td><td>Nekaj pomembnega je lahko ogroženo.</td></tr>
+        <tr><td><strong>Žalost</strong></td><td>otožnost, razočaranje, osamljenost, potrtost, obup</td><td>Nekaj sem izgubil(a) ali tega nimam.</td></tr>
+        <tr><td><strong>Sram in krivda</strong></td><td>zadrega, nerodnost, krivda, sram, ponižanje</td><td>Krivda: storil(a) sem nekaj narobe. Sram: z mano je nekaj narobe.</td></tr>
+        <tr><td><strong>Gnus</strong></td><td>odpor, zoprnost, ogabnost, gnus</td><td>Tega nočem v svoji bližini.</td></tr>
+        <tr><td><strong>Presenečenje</strong></td><td>začudenje, zmedenost, osuplost, šok</td><td>Zgodilo se je nekaj nepričakovanega; pozor.</td></tr>
+        <tr><td><strong>Veselje</strong></td><td>zadovoljstvo, olajšanje, hvaležnost, navdušenje, radost</td><td>To je dobro zame; več tega.</td></tr>
+        <tr><td><strong>Ljubezen in bližina</strong></td><td>naklonjenost, toplina, nežnost, zaupanje, predanost</td><td>Ta človek mi je pomemben.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>Pogosto čutimo več čustev hkrati: veselje in strah pred novo službo, ljubezen in jezo do starša. To ni zmeda, ampak natančnost. Poimenujte oba: »Veselim se in hkrati me je strah.«</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · ves dan · Brez »dobro« in »slabo«</div>
+    <ol>
+      <li>Danes besed »dobro« in »slabo« ne uporabljajte za svoje počutje.</li>
+      <li>Ko vas kdo vpraša, kako ste, ali ko se vprašate sami, poiščite natančnejšo besedo v zgornji tabeli.</li>
+      <li>Če ste v dvomih, dodajte še, kje v telesu to čutite: »Nekoliko zaskrbljen sem, čutim v želodcu.«</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Natančna beseda za čustvo pokaže, kaj potrebujete.</li>
+      <li>Poimenovanje čustvo omili, ker ustvari razdaljo med vami in njim.</li>
+      <li>Več čustev hkrati je običajno. Poimenujte vsa.</li>
+    </ul>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>Čustvena zrnatost</span></summary>
+    <div class="in">
+      <p>Psihologi sposobnosti, da med podobnimi čustvi natančno razlikujemo, pravijo <strong>čustvena zrnatost</strong> (angl. <em>emotional granularity</em>). Ljudje z bolj zrnatim čustvenim besednjakom se po raziskavah (Kashdan, Barrett in McKnight, 2015) v stresu manj zatekajo k pitju, prenajedanju in agresiji ter se laže odločijo, kaj storiti.</p>
+      <p>Besednjak se da razširiti kot vsak drug besednjak: z branjem, pogovorom in vajo. Zgornja tabela je le začetek.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ch" id="p5" data-toc="Telesni pregled" data-num="5">
+  <div class="ch-eyebrow"><b>Poglavje 5</b><span>≈ 5 min branja</span></div>
+  <h2>Telesni pregled</h2>
+  <p class="short">Ko opazite telesni znak, se ustavite in vprašajte: katero čustvo stoji za tem?</p>
+  <div class="col">
+    <p>Čustva se v telesu pokažejo prej, kot jih opazi um: stisnjen želodec, dvignjena ramena, cmok v grlu, pospešen utrip. Ti znaki so zgodnje opozorilo. Kdor jih opazi, ima čas za izbiro; kdor jih ne, izve za čustvo šele, ko je že kričal ali zaloputnil vrata.</p>
+    <p>Telesni znaki niso pri vseh enaki. Spodnja tabela kaže pogoste povezave, ki jih ljudje opisujejo. Uporabite jo kot zemljevid, ne kot pravilo, in jo dopolnite s svojimi opažanji.</p>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Telesni znak</th><th>Pogosto spremlja</th></tr></thead>
+      <tbody>
+        <tr><td>Stisnjena čeljust, stisnjene pesti</td><td>jeza, zadržana beseda, odločenost</td></tr>
+        <tr><td>Cmok v grlu, pekoče oči</td><td>žalost, neizrečeno, ganjenost</td></tr>
+        <tr><td>Tiščanje ali teža v prsih, plitev dih</td><td>tesnoba, žalost, preobremenjenost</td></tr>
+        <tr><td>Stisnjen ali »prazen« želodec</td><td>strah, nervoza, pričakovanje</td></tr>
+        <tr><td>Dvignjena, napeta ramena</td><td>strah, pripravljenost na udarec, napor</td></tr>
+        <tr><td>Vročina v obrazu in vratu</td><td>sram, zadrega, jeza</td></tr>
+        <tr><td>Teža v udih, želja, da bi legli</td><td>potrtost, izčrpanost, vdanost</td></tr>
+        <tr><td>Lahkotnost, toplina v prsih, širok dih</td><td>veselje, olajšanje, hvaležnost, bližina</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 3 minute · Telesni pregled s čustvom</div>
+    <ol>
+      <li>Sedite, stopala na tleh. Nekaj vdihov in izdihov skozi nos; izdih naj bo malo daljši.</li>
+      <li>S pozornostjo pojdite od glave navzdol: čelo, oči, čeljust, grlo, vrat, ramena, prsni koš, trebuh, medenica.</li>
+      <li>Pri vsakem delu se za trenutek ustavite. Je napet, mehak, topel, hladen, ga sploh ne čutite?</li>
+      <li>Kjer je občutek najmočnejši, ostanite dlje. Vprašajte: »Če bi ta del telesa lahko govoril, kaj bi rekel? Katero čustvo je tu?«</li>
+      <li>Ničesar ne popravljajte. Zapišite si mesto in besedo.</li>
+    </ol>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Marko je bil prepričan, da je preprosto utrujen. Pri telesnem pregledu je opazil, da ima že ves dan stisnjeno čeljust in da mu ramena silijo k ušesom. Ko se je vprašal, kaj bi rekla čeljust, mu je prišlo na misel: »Ni prav, da so me na sestanku preslišali.« Utrujenost je bila v resnici jeza, ki jo je ves dan zadrževal.</p>
+  </div>
+  <div class="box varno">
+    <div class="box-label">Za vašo varnost</div>
+    <p>Če vas pri pregledu preplavi močno čustvo ali spomin, odprite oči, poglejte po prostoru in poimenujte tri stvari, ki jih vidite. Pritisnite stopala v tla. Vajo lahko nadaljujete pozneje ali s podporo usposobljene osebe.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Telesni znak je zgodnje opozorilo, ki pride pred mislijo.</li>
+      <li>Povezave med znakom in čustvom so osebne; ustvarite svoj zemljevid.</li>
+      <li>»Utrujenost« ali »napetost« je pogosto čustvo, ki še nima imena.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p6" data-toc="Čustveni dnevnik" data-num="6">
+  <div class="ch-eyebrow"><b>Poglavje 6</b><span>≈ 4 min branja</span></div>
+  <h2>Čustveni dnevnik</h2>
+  <p class="short">Vsak večer en dogodek, štiri vprašanja, pet minut. Čez nekaj tednov boste v zapisih zagledali svoje vzorce.</p>
+  <div class="col">
+    <p>Čustva v trenutku pogosto ne vidimo jasno, saj smo preblizu. Zvečer, ko se val poleže, jih lahko pogledamo z nekaj razdalje. Pisanje pomaga, ker misli upočasni in jih postavi v vrstni red. Psiholog James Pennebaker je v številnih raziskavah pokazal, da redno pisanje o čustveno pomembnih dogodkih ljudem pomaga, da jih laže predelajo.</p>
+    <p>Dnevnik ni spis. Zadošča nekaj vrstic. Vsak večer izberite eno situacijo, ki vas je čustveno vrgla iz tira, in odgovorite na štiri vprašanja:</p>
+    <ol>
+      <li><strong>Kaj se je zgodilo?</strong> Samo dejstva, kot bi jih posnela kamera.</li>
+      <li><strong>Kaj sem čutil(a) v telesu in katero čustvo je bilo to?</strong> Natančna beseda iz poglavja 4.</li>
+      <li><strong>Kako sem se odzval(a)?</strong> Kaj sem rekel(a), naredil(a), česa nisem.</li>
+      <li><strong>Kaj bi naslednjič naredil(a) drugače?</strong> En majhen korak, ne nov značaj.</li>
+    </ol>
+    <p>Predlogo za tisk najdete v delovnem delu. Ob koncu tedna zapise preberite. Katere osebe, ure ali okoliščine se ponavljajo? To so vaši <strong>sprožilci</strong>. Ko jih poznate, jih lahko pričakate.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Primer zapisa</div>
+    <p><strong>Kaj se je zgodilo?</strong> Sin je pri večerji gledal v telefon, ko sem mu pripovedovala o dnevu.<br><strong>Telo in čustvo:</strong> vročina v obrazu, stisnjen trebuh. Prizadetost, pod njo osamljenost.<br><strong>Moj odziv:</strong> zavpila sem »Nikoli me ne poslušaš!« in odšla od mize.<br><strong>Naslednjič:</strong> povem, kaj čutim, preden zavpijem: »Ko gledaš v telefon, se počutim nepomembna.«</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>En dogodek, štiri vprašanja, pet minut na večer.</li>
+      <li>Ločite dejstva od čustev in od odziva.</li>
+      <li>Ponavljajoči se vzorci v zapisih so vaši sprožilci.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del3" data-toc="III · Samoregulacija">
+  <div class="kicker">Del III</div>
+  <h2>Samoregulacija</h2>
+  <p>Samoregulacija ne pomeni potlačiti čustva, ampak izbrati primeren odziv nanj.</p>
+</div>
+
+<section class="ch" id="p7" data-toc="Premor pred odzivom" data-num="7">
+  <div class="ch-eyebrow"><b>Poglavje 7</b><span>≈ 6 min branja</span></div>
+  <h2>Premor pred odzivom</h2>
+  <p class="short">Med dražljajem in odzivom je majhen prostor. Če ga podaljšate za nekaj dihov, imate izbiro.</p>
+  <div class="col">
+    <p>Najmočnejši del čustvenega vala pride hitro in v nekaj trenutkih začne pojenjati, če ga ne hranimo z novimi mislimi. V priročnikih o čustveni inteligenci pogosto beremo o <strong>pravilu šestih sekund</strong>. Številke ne jemljite kot natančno kemijo, je pa dobro praktično vodilo: prvih nekaj sekund po sprožilcu ne naredite ničesar, kar bi bilo težko preklicati. Ne pošljite sporočila, ne odgovorite, ne udarite po mizi.</p>
+    <p>Premor ni potlačitev. Čustva ne ustavite, ustavite le samodejni odziv. Čustvo še vedno čutite in ga lahko pozneje izrazite, le da tedaj sami izberete kako.</p>
+    <p>Premor je najlažje napolniti z dihom. V poglavju 29 učbenika so zlata pravila dihanja: dihajte skozi nos in naj bo izdih daljši od vdiha. Daljši izdih sporoči živčnemu sistemu, da nevarnosti ni. Šest počasnih dihov traja približno minuto in je eden najzanesljivejših načinov, da se val umiri.</p>
+    <h3>Tehnika STOP</h3>
+    <p>Iz programov čuječnosti izhaja preprost pripomoček v štirih korakih. Začetnice tvorijo besedo STOP.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 520 310" role="img" aria-label="Štirje koraki tehnike STOP: S, stopite korak nazaj; T, tok diha; O, opazujte; P, premišljeno nadaljujte. Puščice vodijo od prvega do četrtega koraka.">
+        <defs><marker id="m-stop" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fill-muted"/></marker></defs>
+        <g style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5">
+          <rect x="10" y="10" width="230" height="130" rx="12"/>
+          <rect x="280" y="10" width="230" height="130" rx="12"/>
+          <rect x="10" y="170" width="230" height="130" rx="12"/>
+          <rect x="280" y="170" width="230" height="130" rx="12"/>
+        </g>
+        <g style="font-family:var(--f-display);font-size:42px;font-weight:700;fill:var(--accent)">
+          <text x="26" y="64">S</text><text x="296" y="64">T</text><text x="26" y="224">O</text><text x="296" y="224">P</text>
+        </g>
+        <text x="74" y="42" class="t-b">Stopite</text><text x="74" y="62" class="t-b">korak nazaj</text>
+        <text x="344" y="42" class="t-b">Tok</text><text x="344" y="62" class="t-b">diha</text>
+        <text x="74" y="212" class="t-b">Opazujte</text>
+        <text x="344" y="202" class="t-b">Premišljeno</text><text x="344" y="222" class="t-b">nadaljujte</text>
+        <text x="26" y="98" class="t-s">Ustavite se. Ne odgovorite</text><text x="26" y="118" class="t-s">in ne pošljite ničesar.</text>
+        <text x="296" y="98" class="t-s">Nekaj mirnih dihov skozi</text><text x="296" y="118" class="t-s">nos, izdih daljši od vdiha.</text>
+        <text x="26" y="258" class="t-s">Kaj čutim v telesu? Katero</text><text x="26" y="278" class="t-s">čustvo je to? Kaj si mislim?</text>
+        <text x="296" y="258" class="t-s">Izberite odziv, ki ga</text><text x="296" y="278" class="t-s">jutri ne boste obžalovali.</text>
+        <g class="stroke-muted" style="stroke-width:2;fill:none">
+          <line x1="244" y1="75" x2="274" y2="75" marker-end="url(#m-stop)"/>
+          <line x1="300" y1="144" x2="222" y2="166" marker-end="url(#m-stop)"/>
+          <line x1="244" y1="235" x2="274" y2="235" marker-end="url(#m-stop)"/>
+        </g>
+      </svg>
+    </div>
+    <figcaption>Tehnika STOP v štirih korakih. Ko jo nekajkrat preizkusite, traja manj kot minuto.</figcaption>
+  </figure>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Sosed je v skupino stanovalcev napisal, da »nekateri očitno ne znajo parkirati«, in priložil fotografijo Tomaževega avtomobila. Tomaž je že tipkal odgovor s tremi klicaji. Potem je telefon odložil (S), šestkrat počasi izdihnil (T) in opazil: vroč obraz, sram pred vsemi sosedi, pod tem jeza (O). Nato je sosedu napisal zasebno sporočilo: »Videl sem fotografijo. Prav imate, parkiral sem postrani, bom popravil. Raje pa bi, da mi naslednjič pišete neposredno.« (P)</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · ves dan · Dve sekundi</div>
+    <ol>
+      <li>V vsakem pogovoru današnjega dne počakajte dve sekundi, preden odgovorite.</li>
+      <li>V tem času naredite en mehak izdih skozi nos.</li>
+      <li>Zvečer zapišite: kako so se pogovori spremenili? Kdaj je bilo čakanje najtežje?</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Prvih nekaj sekund po sprožilcu ne naredite ničesar, česar ne morete preklicati.</li>
+      <li>Premor napolnite z dihom: skozi nos, izdih daljši od vdiha.</li>
+      <li>STOP: stopite korak nazaj, tok diha, opazujte, premišljeno nadaljujte.</li>
+    </ul>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>»Ugrabitev amigdale«</span></summary>
+    <div class="in">
+      <p>Goleman je za trenutke, ko nas čustvo popolnoma prevzame, uporabil izraz <strong>ugrabitev amigdale</strong>. Amigdala hitro oceni, ali je nekaj nevarno, in sproži odziv telesa, še preden čelni del možganov, ki tehta posledice, sploh pride do besede.</p>
+      <p>Današnja nevroznanost to sliko nekoliko mehča: čustva ne nastajajo v enem samem središču, ampak v mreži več delov možganov in telesa. Praktično sporočilo pa ostaja: hitri sistem je hitrejši od premišljenega. Premor in dih dasta premišljenemu sistemu čas, da ga dohiti.</p>
+    </div>
+  </details>
+</section>
+
+<section class="ch" id="p8" data-toc="Preoblikovanje misli" data-num="8">
+  <div class="ch-eyebrow"><b>Poglavje 8</b><span>≈ 5 min branja</span></div>
+  <h2>Preoblikovanje misli</h2>
+  <p class="short">Na položaj ne vplivate vedno, na to, kako ga razumete, pa skoraj vedno. Drugačna razlaga prinese drugačno čustvo.</p>
+  <div class="col">
+    <p>Čustvo ne izhaja le iz dogodka, ampak tudi iz tega, kako ga razumemo. Če vas prijateljica ne pozdravi na ulici, boste čutili prizadetost, če mislite, da vas ignorira, in skrb, če mislite, da jo nekaj teži. Dogodek je enak, razlaga in čustvo pa sta drugačna.</p>
+    <p>Psiholog James J. Gross temu pravi <strong>ponovna ocena</strong> (angl. <em>reappraisal</em>): položaj premislimo še enkrat in najdemo razlago, ki je prav tako resnična, a nam bolj koristi. Raziskave kažejo, da je to ena najbolj zdravih poti uravnavanja čustev. Mnogo bolj kot potlačitev, pri kateri čustvo skrijemo, v telesu pa ostane.</p>
+    <p>Preoblikovanje ni olepševanje in ne zanikanje. Ne gre za to, da bi si rekli »saj ni nič hudega«, ko je hudo. Gre za to, da najdemo širši pogled. Pomagajo vprašanja:</p>
+    <ul>
+      <li>»Kaj se lahko iz tega naučim?«</li>
+      <li>»Kako bom na to gledal(a) čez eno leto?«</li>
+      <li>»Kaj bi rekel(a) prijatelju, ki bi bil v tem položaju?«</li>
+      <li>»Ali je še kakšna druga razlaga, ki je enako verjetna?«</li>
+      <li>»Kaj od tega je dejstvo in kaj moja zgodba o dejstvu?«</li>
+    </ul>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Prva misel</th><th>Preoblikovana misel</th></tr></thead>
+      <tbody>
+        <tr><td>»Spet sem vse pokvaril(a).«</td><td>»Ta del mi ni uspel. Kaj točno bom naslednjič naredil(a) drugače?«</td></tr>
+        <tr><td>»Nihče me ne spoštuje.«</td><td>»Danes me je preslišal en človek. Kdo me je ta teden res slišal?«</td></tr>
+        <tr><td>»Tega ne bom zmogel(-gla).«</td><td>»To je težko in novo. Kateri je prvi majhen korak?«</td></tr>
+        <tr><td>»Namerno me jezi.«</td><td>»Morda ima slab dan. Vprašam ga lahko, kaj se dogaja.«</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>Najprej poimenujte čustvo in umirite dih, šele nato preoblikujte misel. V vrhu vala um nove razlage ne sprejme. Učbenik v poglavju 35 opisuje stare misli kot telefon brez posodobitev: delujejo po pravilih, ki so nekoč veljala. Preoblikovanje je takšna posodobitev.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 5 minut · Tri razlage</div>
+    <ol>
+      <li>Izberite dogodek iz čustvenega dnevnika, ki vas še vedno zbada.</li>
+      <li>Zapišite svojo prvo razlago in čustvo, ki je iz nje sledilo.</li>
+      <li>Zapišite še dve drugačni razlagi, ki bi lahko bili resnični.</li>
+      <li>Opazite, kaj se ob vsaki zgodi v telesu. Katera vas najbolj umiri, ne da bi lagala?</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Čustvo izhaja iz dogodka in iz naše razlage dogodka.</li>
+      <li>Ponovna ocena je zdravejša od potlačitve.</li>
+      <li>Najprej telo in dih, nato misel.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p9" data-toc="Polni razpon čustev in nevtralnost" data-num="9">
+  <div class="ch-eyebrow"><b>Poglavje 9</b><span>≈ 9 min branja</span></div>
+  <h2>Polni razpon čustev in nevtralnost</h2>
+  <p class="short">Ne »samo ljubezen in svetloba« ne »samo črnina«. Čustvena zrelost pomeni, da ste lahko prisotni pri vsem, kar čutite.</p>
+  <div class="col">
+    <p>Pri delu s čustvi zlahka zaidemo v eno od dveh skrajnosti. Prva je <strong>»samo ljubezen in svetloba«</strong>: težka čustva imamo za znak, da delamo nekaj narobe, zato jih prekrijemo s pozitivnimi mislimi, afirmacijami ali duhovnimi razlagami. Psihologi temu pravijo duhovni obvod (angl. <em>spiritual bypassing</em>, J. Welwood). Druga je <strong>»samo črnina«</strong>: v težkih čustvih se utopimo, vse vidimo skozi njih in jih imamo za edino resnico.</p>
+    <p>Obe skrajnosti sta beg. Prva beži od teme, druga od svetlobe in od odgovornosti, da bi kaj spremenili. Med njima je prostor, ki mu tu pravimo <strong>nevtralnost</strong>: mirno, objektivno opazovanje tega, kar je. Ni ravnodušnost. Čustvo čutite polno, a ste hkrati tudi tisti, ki ga gleda. Učbenik ta položaj imenuje um kot opazovalec (poglavje 2).</p>
+  </div>
+  <div class="spectrum" aria-label="Lestvica od skrajnosti samo svetloba prek nevtralnosti do skrajnosti samo črnina">
+    <div class="sp-end"><strong>Samo svetloba</strong><span>zanikam težka čustva</span></div>
+    <div class="sp-mid"><strong>Nevtralnost</strong><span>čutim vse in opazujem</span></div>
+    <div class="sp-end"><strong>Samo črnina</strong><span>težka čustva so vse</span></div>
+  </div>
+  <div class="col">
+    <p>Nevtralnost se gradi v sedanjem trenutku. Ko opazite težko čustvo, ga ne odrinite in ne raztegnite v zgodbo o vsem življenju. Ostanite pri njem toliko časa, kolikor zmorete: kje je v telesu, kakšno je, kako se spreminja. Pogosto boste opazili, da se čustvo, ki ga ne odrivamo in ne hranimo, samo od sebe premakne.</p>
+  </div>
+  <div class="col">
+    <p>O polnem razponu čustev in nevtralnosti govori tudi Elizabeth April, ki se predstavlja kot izvajalka »oddaljenega gledanja« (angl. <em>remote viewing</em>) in terapevtka regresije v pretekla življenja. V videu <em>Exactly What You Need… Not What You Expect</em> (YouTube, 2026) to postavi v širšo duhovno zgodbo. Povzemamo jo v treh okvirjih, prvi dva tu, tretjega v poglavju 10.</p>
+  </div>
+  <div class="box razlaga">
+    <div class="box-label">Pogled Elizabeth April · 1 · Zakaj omejitve in trpljenje</div>
+    <p><em>To je njen osebni pogled, ne znanstveno dognanje. Povzemamo ga, ker ga je avtor priročnika želel predstaviti v celoti.</em></p>
+    <p>Pripoveduje, da je pri osemnajstih s pomočjo lucidnega sanjanja in tehnik globoke meditacije, ki jih uporablja pri regresiji, prvič zapustila telo. Odšla je v »središče vesolja«, kjer je pred seboj zagledala veliko kroglo bele svetlobe. To je bil zanjo Vir oziroma Bog. Vprašala ga je, kaj je smisel življenja in zakaj je v njem toliko trpljenja.</p>
+    <p>Vir ji je odgovoril z vprašanjem: »Predstavljaj si, da imaš vse, kar si kdaj želiš. Koliko časa bi trajalo, da bi se začela dolgočasiti?« Po njenem opisu je Vir iz dolgčasa ustvaril samega sebe v omejitvah: vesolje s približno dvanajstimi razsežnostmi. Bližje ko je razsežnost Viru, manj je polarnosti in več razumevanja; dlje ko je, več je pomanjkanja, omejitev in trpljenja. Vse, kar obstaja, ljudje, živali, rastline, je del Vira, ki se v omejitvah uči. Ko se naučimo vsega, lahko izberemo, ali se vrnemo k Viru ali ustvarimo lastno vesolje. Njen sklep: namen življenja je <strong>doživljati</strong>.</p>
+    <p>Težka obdobja razlaga z dvema rekoma. »Svetlejša ko je luč, ki jo širiš, temnejšo senco mečeš.« In: »Najtemnejši del noči je tik pred zoro.« Za primer navaja porod: trenutek, ko porodnica reče »ne zmorem več«, je pogosto tik pred rojstvom. Podobno je po njenem z vsako veliko spremembo.</p>
+    <p class="navdih">Vir: Elizabeth April, <i>Exactly What You Need… Not What You Expect</i>, video na YouTubu (5:03–5:32, 13:47–15:40, 15:55–22:30).</p>
+  </div>
+  <div class="box razlaga">
+    <div class="box-label">Pogled Elizabeth April · 2 · Razpon čustev kot supermoč</div>
+    <p>Ljudi opisuje kot hibride: po njenem je »manjkajoči člen« v človeški evoluciji zunajzemeljski, zato v sebi nosimo DNK »najvišjih in najnižjih frekvenc«. Zato zmoremo doživeti najlepše, najbolj blažene trenutke in nekaj sekund pozneje najglobljo temo. Ta <strong>razpon polarnosti</strong> imenuje največja <strong>supermoč</strong> človeka.</p>
+    <p>Kdor se življenju izogiba, ker se boji neznanega, ker si ne zaupa ali ker »ni predelal svojih stvari«, po njenem ne izkusi vsega, kar pomeni biti človek. Mogoče je seči do najvišjih doživetij, se spustiti v najglobje trpljenje in se vseeno vrniti v <strong>nevtralnost in objektivno opazovanje</strong>. Nevtralnost imenuje najpomembnejše, kar želi naučiti ljudi: »Nisem tu za ljubezen in svetlobo. Nisem pa tu niti za pogubo in mrak. Tu sem za ves razpon.«</p>
+    <p>Opisuje tudi <strong>prostor vmes</strong>: ko ne lovimo slave, zmag in »dopaminskega zadetka« in hkrati ne bežimo pred trpljenjem in nelagodjem. Ko v tem prostoru sedimo, si upa reči, celo ko se začnemo <strong>dolgočasiti</strong>, se vidimo onkraj navezanosti, odporov, identitet in preteklosti. Takrat spoznamo, da smo »vse to in nič od tega«. Vzporednica z Virom, ki je iz dolgčasa ustvaril svet, je namerna.</p>
+    <p class="navdih">Vir: isti video (29:23–32:51, 34:21–35:43).</p>
+  </div>
+  <div class="col">
+    <p>Za trditev o zunajzemeljskem izvoru človeške DNK ni znanstvenih dokazov; genetika kaže, da imamo skupne prednike z drugimi primati. Njen praktični nasvet pa se ujema s psihologijo čustev. Sprejemanje vseh čustev in opazovanje brez obsojanja sta temelj samoregulacije, potlačitev in zanikanje pa jo spodkopavata. »Prostoru vmes« bi psihologi rekli <strong>sprejemanje</strong> ali <strong>enakodušnost</strong> (angl. <em>equanimity</em>): mirna pozornost, ki ne grabi prijetnega in ne odriva neprijetnega.</p>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Mojca je po ločitvi dva meseca živela »samo v svetlobi«: afirmacije, hvaležnostni dnevnik, nasmeh za vse. Ko je v trgovini zagledala nekdanjega moža z novo partnerko, se je v avtu sesula. Prvič si je dovolila jokati. Potem je opazila, da se pod žalostjo skriva jeza, pod jezo pa strah, kako bo sama. Ko je ta čustva poimenovala, je bila hvaležnost, ki jo je pisala v dnevnik, prvič resnična. Ni ji bilo treba izbrati med svetlobo in temo. Imela je prostor za obe.</p>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>K kateri skrajnosti se nagibate v težkih dneh: k svetlobi ali k črnini?</li>
+      <li>Katero čustvo najraje preskočite? Kaj bi se zgodilo, če bi z njim ostali eno minuto?</li>
+      <li>Se spomnite obdobja, ko se je zdelo, da ne zmorete več, potem pa se je obrnilo? Kaj vam je takrat pomagalo vztrajati?</li>
+    </ul>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Obe skrajnosti, samo svetloba in samo črnina, sta beg.</li>
+      <li>Nevtralnost pomeni čutiti polno in hkrati opazovati.</li>
+      <li>Čustvo, ki ga ne odrivamo in ne hranimo, se pogosto samo premakne.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del4" data-toc="IV · Notranja motivacija">
+  <div class="kicker">Del IV</div>
+  <h2>Notranja motivacija</h2>
+  <p>Zakaj bežimo v udobje in kako ostati prisoten, ko je težko.</p>
+</div>
+
+<section class="ch" id="p10" data-toc="Udobje, beg in prisotnost" data-num="10">
+  <div class="ch-eyebrow"><b>Poglavje 10</b><span>≈ 9 min branja</span></div>
+  <h2>Udobje, beg in prisotnost</h2>
+  <p class="short">Telefon, prigrizek ali serija za hip utišajo neprijetno čustvo. Notranja motivacija se gradi takrat, ko z nelagodjem ostanemo še malo dlje.</p>
+  <div class="col">
+    <p>Ko se pojavi dolgčas, negotovost ali žalost, ima sodobni človek vedno pri roki izhod. Pogled na zaslon, nekaj sladkega, še ena epizoda. Nič od tega ni slabo samo po sebi. Težava nastane, ko postane samodejni odgovor na vsako nelagodje. Takrat čustva ne doživimo do konca in se iz njega ne naučimo ničesar. Naslednjič pride znova, mi pa spet pobegnemo.</p>
+  </div>
+  <div class="box razlaga">
+    <div class="box-label">Pogled Elizabeth April · 3 · Past udobja</div>
+    <p><em>Njen osebni pogled iz istega videa kot v poglavju 9.</em></p>
+    <p>Če je namen življenja doživljati, pravi, potem večino dni ravnamo prav nasprotno. Jemo sladko hrano, pijemo sladke pijače, drsimo po družbenih omrežjih, gledamo serije, odpovemo dogovor, ker je doma laže. »Ne obtožujem vas, tudi sama to počnem.« Vedno znova izberemo <strong>priročnost in samozadovoljstvo namesto prisotnosti</strong>. To po njenem drži dušo v čakalni zanki, kot letalo, ki kroži nad letališčem: ni premika.</p>
+    <p>Zakaj? »Ker trpljenje boli. Ker ne znam biti s svojimi čustvi. <strong>Nihče me ni naučil čustvene inteligence.</strong> Nihče me ni naučil, kako ravnati s slabimi stvarmi.« Namesto da bi čustvo začutili, pojemo vrečko čipsa ali drsimo po telefonu in se počutimo bolje. Namesto da bi bili ob otroku, ko ga premaga trma, mu damo tablico. Soočanje z izzivom nam ne da »dopaminskega zadetka«. Največja težava družbe zanjo niso gospodarstvo ali politika, ampak to, da nismo pripravljeni začutiti teme in sprejeti, da »so tudi dnevi, ko ni v redu«.</p>
+    <p>Ne zahteva odrekanja: »Vse zmerno.« Tudi sama kdaj poje kaj predelanega in gleda televizijo, a ceni tudi prostor vmes. Na koncu sprašuje: »Ali ustvarjate ali le trošite?«</p>
+    <p class="navdih">Vir: Elizabeth April, <i>Exactly What You Need… Not What You Expect</i>, video na YouTubu (22:30–26:15, 35:43–37:53).</p>
+  </div>
+  <div class="col">
+    <p>Psihologija to opisuje bolj prizemljeno, a podobno. Ljudje se izogibamo neprijetnim notranjim stanjem, in prav izogibanje je eden od dejavnikov, ki tesnobo in potrtost ohranja. Kdor se nauči nelagodje nekaj časa zdržati, ga ne da bi pobegnil, odkrije, da je zdržljivo in da mine.</p>
+    <h3>Notranja in zunanja nagrada</h3>
+    <p>Goleman notranjo motivacijo uvršča med stebre čustvene inteligence, ker nas drži na poti, ko zunanjih nagrad ni. Psihologa Edward Deci in Richard Ryan sta pokazala, da je motivacija najtrdnejša, kadar dejavnost izbiramo sami, kadar v njej napredujemo in kadar nas povezuje z drugimi. Zunanja nagrada, denar, pohvala ali všečki, deluje hitro, a kratko. Notranja, radovednost, občutek napredka in smisla, deluje počasi, a dolgo.</p>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Ko me vleče v beg</th><th>Kaj lahko naredim namesto tega</th></tr></thead>
+      <tbody>
+        <tr><td>Roka sama seže po telefonu.</td><td>Za 90 sekund odložim telefon in poimenujem, kaj čutim.</td></tr>
+        <tr><td>Odprem hladilnik, čeprav nisem lačen(-čna).</td><td>Vprašam se: »Kaj bi rad(a) v resnici pojedel(a): hrano ali tolažbo?«</td></tr>
+        <tr><td>Odlašam z nalogo.</td><td>Naredim samo prvih pet minut. Nato se odločim znova.</td></tr>
+        <tr><td>Pogovor postane neprijeten, spremenim temo.</td><td>Povem: »To mi je težko, pa vseeno želim nadaljevati.«</td></tr>
+        <tr><td>Odpovem dogovor, ker je doma laže.</td><td>Preverim: sem res utrujen(a) ali se nečemu izogibam? Če sem utrujen(a), počivam brez slabe vesti.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 3 minute · Val zdrži</div>
+    <ol>
+      <li>Ko opazite željo, da bi pobegnili v zaslon, hrano ali drugo dejavnost, se ustavite.</li>
+      <li>Poiščite, kje v telesu je nelagodje. Poimenujte ga.</li>
+      <li>Dihajte skozi nos in opazujte, kako se občutek spreminja. Zdržite 90 sekund.</li>
+      <li>Nato se svobodno odločite. Morda boste še vedno vzeli telefon, a tokrat po izbiri, ne samodejno.</li>
+    </ol>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Triletni Jaka na tleh trgovine kriči, ker ne dobi bombona. Ljudje gledajo. Oče Luka čuti vročino v obrazu in sram, roka mu že seže po telefonu, da bi Jaki prižgal risanko. Tokrat se ustavi, poklekne in globoko izdihne. »Jezen si, ker si si zelo želel bombon.« Jaka kriči še pol minute, nato se mu stisne v naročje. Luka je bil z jezo svojega sina in s svojim sramom, ne da bi pred katerim od njiju pobegnil.</p>
+    <p>Otroci se uravnavanja čustev učijo ob odraslih, ki ostanejo mirni, ko je njim težko. Tablica bi tisti dan prinesla mir hitreje. Pol minute, ki jo je zdržal Luka, pa je za Jako lekcija čustvene inteligence, ki je ne nadomesti nobena risanka.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 5 minut · Brez ničesar</div>
+    <ol>
+      <li>Sedite nekam brez telefona, knjige, glasbe in naloge. Nastavite si budilko na pet minut.</li>
+      <li>Ničesar ne počnite. Opazujte, kaj se pojavi: nemir, dolgčas, misli, nalogo, ki se je spomnite, željo, da bi vstali.</li>
+      <li>Vsako željo samo poimenujte (»želja po telefonu«, »nemir v nogah«) in ostanite.</li>
+      <li>Ko budilka zazvoni, zapišite, kaj je bilo pod dolgčasom.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Beg v udobje je samodejen odgovor na nelagodje, ne značajska napaka.</li>
+      <li>Kdor nelagodje zdrži nekaj časa, odkrije, da mine.</li>
+      <li>Notranja motivacija raste iz izbire, napredka in povezanosti.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Katero je vaše najljubše zatočišče, ko je težko?</li>
+      <li>Kaj bi počeli, tudi če vas za to nihče ne bi pohvalil?</li>
+      <li>Koliko vašega dneva je ustvarjanje in koliko trošenje? Kaj bi radi zamenjali?</li>
+    </ul>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>Raje elektrošok kot dolgčas in »dopaminski zadetek«</span></summary>
+    <div class="in">
+      <p>Kako težko nam je biti sam s seboj, je pokazala raziskava Timothyja Wilsona in sodelavcev (2014). Udeleženci so morali 6 do 15 minut sedeti sami v prazni sobi in le razmišljati. Večini je bilo to neprijetno. V eni od različic so si lahko med čakanjem sami sprožili rahel elektrošok, ki so ga pred tem označili za tako neprijeten, da bi plačali, da se mu izognejo. Kar dve tretjini moških in četrtina žensk sta si ga sprožili vsaj enkrat.</p>
+      <p>Izraz »dopaminski zadetek« je poenostavitev. Dopamin ni hormon užitka, ampak predvsem pričakovanja in želje po več. Zato nas drsenje po zaslonu žene naprej, ne da bi nas nasitilo. Vaja »Brez ničesar« krepi ravno nasprotno: sposobnost, da zdržimo brez novega dražljaja.</p>
+    </div>
+  </details>
+</section>
+
+<div class="part-head" id="del5" data-toc="V · Empatija">
+  <div class="kicker">Del V</div>
+  <h2>Empatija</h2>
+  <p>Empatija ni strinjanje. Je razumevanje, zakaj nekdo čuti in ravna tako, kot ravna.</p>
+</div>
+
+<section class="ch" id="p11" data-toc="Aktivno poslušanje" data-num="11">
+  <div class="ch-eyebrow"><b>Poglavje 11</b><span>≈ 5 min branja</span></div>
+  <h2>Aktivno poslušanje</h2>
+  <p class="short">Poslušajte z namenom, da razumete, ne da odgovorite. Povzetek pove sogovorniku več kot nasvet.</p>
+  <div class="col">
+    <p>Ko nam nekdo pripoveduje o težavi, ga pogosto poslušamo le napol. Drugo polovico pozornosti porabimo za to, da pripravljamo odgovor, nasvet ali svojo podobno zgodbo. Sogovornik to začuti in se zapre.</p>
+    <p>Aktivno poslušanje ima tri dele:</p>
+    <ol>
+      <li><strong>Pozornost.</strong> Odložite telefon, obrnite se k sogovorniku, ne prekinjajte. Opazite, kje v vašem telesu se med poslušanjem kaj zgane.</li>
+      <li><strong>Povzetek.</strong> S svojimi besedami povejte, kaj ste slišali, vključno s čustvom: »Če te prav razumem, te skrbi, da ne boš zmogla vsega do petka.« Sogovornik vas bo popravil ali pa se mu bo vidno odleglo.</li>
+      <li><strong>Odprto vprašanje.</strong> Vprašanje, na katero ni mogoče odgovoriti z da ali ne, odpre prostor.</li>
+    </ol>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Zaprto vprašanje</th><th>Odprto vprašanje</th></tr></thead>
+      <tbody>
+        <tr><td>»A si jezen?«</td><td>»Kako si doživel to situacijo?«</td></tr>
+        <tr><td>»Si v redu?«</td><td>»Kaj se ti zdaj dogaja?«</td></tr>
+        <tr><td>»Ali ne bi raje …?«</td><td>»Kaj zdaj najbolj potrebuješ?«</td></tr>
+        <tr><td>»Je bilo hudo?«</td><td>»Kaj je bilo pri tem najtežje?«</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Hči pride iz šole: »Nihče me ne mara.« Prvi odziv mame bi bil: »Ne govori neumnosti, saj imaš toliko prijateljic!« Tokrat reče: »Danes se počutiš sama.« Hči prikima in začne pripovedovati, da se prijateljice niso usedle k njej pri kosilu. Pogovor traja deset minut. Nasveta na koncu ne potrebuje.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · en pogovor · Brez nasveta</div>
+    <ol>
+      <li>V enem pogovoru danes sogovorniku ne ponudite nobenega nasveta.</li>
+      <li>Samo povzemite, kar ste slišali: »Če te prav razumem …«</li>
+      <li>Postavite eno odprto vprašanje.</li>
+      <li>Zvečer zapišite, kaj se je zgodilo s pogovorom in kaj z vami, ko niste smeli svetovati.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Pozornost, povzetek, odprto vprašanje.</li>
+      <li>V povzetek vključite tudi čustvo, ki ga slišite.</li>
+      <li>Ljudje pogosto ne potrebujejo rešitve, ampak to, da so slišani.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p12" data-toc="Nebesedna sporočila" data-num="12">
+  <div class="ch-eyebrow"><b>Poglavje 12</b><span>≈ 5 min branja</span></div>
+  <h2>Nebesedna sporočila</h2>
+  <p class="short">Ton glasu, drža in obraz pogosto povedo, kar besede zamolčijo. Kadar se ne ujemajo z besedami, jim ljudje bolj verjamejo.</p>
+  <div class="col">
+    <p>»V redu je,« reče partner, z rokami na prsih in s pogledom v tla. Besede pravijo eno, telo drugo. Takšno neskladje vsi dobro zaznamo, tudi če ga ne znamo poimenovati: nekaj ni prav.</p>
+    <p>Kaj opazovati:</p>
+    <ul>
+      <li><strong>Ton in tempo glasu.</strong> Hitrejši, višji, tišji ali bolj odsekan kot običajno?</li>
+      <li><strong>Drža.</strong> Odprta ali zaprta, nagnjena k vam ali stran, ramena dvignjena ali spuščena?</li>
+      <li><strong>Obraz.</strong> Čeljust, ustnice, oči. Nasmeh, ki ne seže do oči.</li>
+      <li><strong>Dih.</strong> Zadržan, plitev, globok vzdih.</li>
+    </ul>
+    <p>Nebesedni znaki so namig, ne dokaz. Prekrižane roke lahko pomenijo zaprtost ali pa preprosto mraz. Zato ugibanja ne spremenite v sodbo, ampak v vprašanje: »Rečeš, da je v redu, pa se mi zdi, da te nekaj teži. Je tako?«</p>
+    <p>Enako velja za vas. Vaše telo govori ves čas. Dvignjena ramena in stisnjena čeljust, o katerih piše učbenik, ne bremenijo le vas, ampak sogovorniku sporočajo nevarnost. Ko se pred težkim pogovorom spustite v stopala in podaljšate izdih, se spremeni tudi vaš glas.</p>
+  </div>
+  <details class="radoved">
+    <summary>Za radovedne <span>Mit o 7 odstotkih</span></summary>
+    <div class="in">
+      <p>Pogosto beremo, da se več kot polovica sporočila prenese z govorico telesa, le 7 odstotkov pa z besedami. Številke izhajajo iz poskusov Alberta Mehrabiana (1967, povzete v knjigi <em>Silent Messages</em>, 1971). V njih so udeleženci poslušali posamezne besede, izgovorjene s tonom, ki se z besedo ni ujemal, na primer »draga« z jeznim glasom.</p>
+      <p>Mehrabian je sam poudaril, da razmerje velja le za takšna neskladja pri sporočanju čustev in naklonjenosti, ne za vsako sporočanje. Pri navodilih, razlagah in dogovorih so besede seveda ključne. Prav pa je jedro: kadar se besede in telo ne ujemajo, ljudje bolj verjamejo telesu.</p>
+    </div>
+  </details>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Opazujte ton, držo, obraz in dih.</li>
+      <li>Nebesedni znak je namig. Ugibanje spremenite v vprašanje.</li>
+      <li>Ko se besede in telo ne ujemajo, ljudje verjamejo telesu, tudi vašemu.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p13" data-toc="Empatija z mejami" data-num="13">
+  <div class="ch-eyebrow"><b>Poglavje 13</b><span>≈ 5 min branja</span></div>
+  <h2>Empatija z mejami</h2>
+  <p class="short">Razumeti stisko drugega ne pomeni, da jo morate nositi namesto njega. Zdrava empatija ima mejo.</p>
+  <div class="col">
+    <p>Nekateri ljudje čustva drugih začutijo tako močno, da jih vzamejo za svoja. Po pogovoru s prijateljem v stiski so izčrpani, kot bi stisko doživeli sami. Takšni »empatiji« raziskovalci pravijo <strong>empatična stiska</strong>. Tania Singer in Olga Klimecki (2014) sta pokazali, da dolgotrajno vodi v izgorelost in umik.</p>
+    <p>Drugačen odziv je <strong>sočutje</strong>: čutim, da ti je hudo, ostanem s tabo, želim ti dobro, a vem, kaj je tvoje in kaj moje. Sočutje aktivira drugačna možganska omrežja kot empatična stiska, takšna, ki so povezana s toplino in skrbjo, in ga je mogoče vaditi.</p>
+    <p>Učbenik Senzorne prenove opisuje <strong>membrano</strong>, mejo med nami in svetom, ki jo tvorita koža in mišice tik pod njo (poglavji 8 in 9). Zdrava membrana je selektivno prepustna: spusti noter, kar hrani, in zadrži, kar škodi. Tudi v odnosih je tako. Preveč zaprta membrana ne čuti nikogar. Preveč prepustna se razlije v vsakogar. Empatija z mejami je zdrava membrana v odnosih.</p>
+  </div>
+  <div class="cards3">
+    <div class="card"><h4>Brez empatije</h4><p>»Ne vem, zakaj toliko komplicira.« Stiske drugega ne opazim ali je ne jemljem resno.</p></div>
+    <div class="card mid"><h4>Empatija z mejami</h4><p>»Vidim, da ti je hudo. Tu sem.« Stisko razumem, ostanem v stiku s sabo.</p></div>
+    <div class="card"><h4>Empatična stiska</h4><p>»Ne morem spati, ker mi je tako hudo zanjo.« Stisko drugega nosim, kot da je moja.</p></div>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 1 minuta · Moje in tvoje</div>
+    <ol>
+      <li>Med pogovorom s človekom v stiski za trenutek začutite stopala na tleh in hrbet na stolu.</li>
+      <li>Podaljšajte izdih. Opazite, kje v telesu čutite njegovo stisko.</li>
+      <li>V mislih recite: »To je tvoje. Lahko sem s tabo, ne da bi to postalo moje.«</li>
+      <li>Po pogovoru se pretegnite ali stresite roke, kot bi odvrgli, kar ni vaše.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Empatična stiska izčrpa, sočutje krepi.</li>
+      <li>Zdrava empatija je kot zdrava membrana: selektivno prepustna.</li>
+      <li>Telo vam pomaga ostati pri sebi: stopala, izdih, pretegovanje.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del6" data-toc="VI · Socialne veščine">
+  <div class="kicker">Del VI</div>
+  <h2>Socialne veščine</h2>
+  <p>Visoka čustvena inteligenca se najbolj pokaže v napetih odnosih in konfliktih.</p>
+</div>
+
+<section class="ch" id="p14" data-toc="Jaz-stavki" data-num="14">
+  <div class="ch-eyebrow"><b>Poglavje 14</b><span>≈ 5 min branja</span></div>
+  <h2>Jaz-stavki</h2>
+  <p class="short">»Ti nikoli ne poslušaš!« sproži obrambo. »Ko me prekineš, se počutim nepomembno« odpre pogovor.</p>
+  <div class="col">
+    <p>Ko smo prizadeti, govorimo o drugem: kaj je naredil, kakšen je, kaj vedno počne. Takšni ti-stavki zvenijo kot obtožba, zato sogovornik ne sliši naše stiske, ampak napad, in se brani.</p>
+    <p>Jaz-stavek govori o tem, kar lahko zares poznamo: o lastnem doživljanju. Psiholog Thomas Gordon ga je opisal v šestdesetih letih, Marshall Rosenberg pa ga je razvil v nenasilno komunikacijo. Ima štiri dele:</p>
+    <ol>
+      <li><strong>Dejstvo:</strong> »Ko …« kar bi posnela kamera, brez ocene.</li>
+      <li><strong>Čustvo:</strong> »… se počutim …« natančna beseda, ne »se počutim, da si ti …«.</li>
+      <li><strong>Potreba:</strong> »… ker mi je pomembno …«</li>
+      <li><strong>Prošnja:</strong> »Bi lahko …?« konkretno, izvedljivo, kot vprašanje.</li>
+    </ol>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Pred: ti-stavek</th><th>Po: jaz-stavek</th></tr></thead>
+      <tbody>
+        <tr><td>»Ti nikoli ne poslušaš!«</td><td>»Ko me prekineš, imam občutek, da moje mnenje ni pomembno. Rad bi povedal do konca. Me lahko poslušaš še dve minuti?«</td></tr>
+        <tr><td>»Vedno zamujaš, nič ti ni mar.«</td><td>»Ko prideš pol ure pozneje, kot sva se zmenila, sem razočarana, ker se veselim najinega časa. Mi lahko naslednjič pišeš, če boš zamudil?«</td></tr>
+        <tr><td>»Spet si pustil nered.«</td><td>»Ko zvečer najdem posodo v umivalniku, sem utrujena in jezna, ker si želim urejen začetek dneva. Se lahko dogovoriva, kdo jo pomije?«</td></tr>
+        <tr><td>»Z vami se ne da pogovarjati.«</td><td>»Ko se glasovi dvignejo, se zaprem in ne slišim več vsebine. Lahko nadaljujemo čez deset minut?«</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col">
+    <p>Pozor na skriti ti-stavek: »Čutim, da si sebičen« je obtožba v jaz-preobleki. Za besedo »čutim« mora priti čustvo, ne ocena drugega.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 5 minut · Prepis</div>
+    <ol>
+      <li>Spomnite se zadnjega očitka, ki ste ga izrekli ali si ga mislili.</li>
+      <li>Zapišite ga v obliki jaz-stavka: dejstvo, čustvo, potreba, prošnja.</li>
+      <li>Preberite ga na glas. Opazite, kako se ob tem počuti vaše telo v primerjavi z izvirnim očitkom.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Ti-stavek sproži obrambo, jaz-stavek odpre pogovor.</li>
+      <li>Dejstvo, čustvo, potreba, prošnja.</li>
+      <li>»Čutim, da si …« ni jaz-stavek.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p15" data-toc="Zdrave meje brez krivde" data-num="15">
+  <div class="ch-eyebrow"><b>Poglavje 15</b><span>≈ 5 min branja</span></div>
+  <h2>Zdrave meje brez krivde</h2>
+  <p class="short">Meja ni zid in ne kazen. Je jasna informacija o tem, kaj je za vas sprejemljivo, povedana prijazno in odločno.</p>
+  <div class="col">
+    <p>Mnogi ljudje rečejo »ja«, ko mislijo »ne«, ker se bojijo, da bodo drugega prizadeli ali izgubili njegovo naklonjenost. Za trenutek je laže. Pozneje pa se nabere zamera, utrujenost in napetost, ki jo telo nosi v ramenih in čeljusti.</p>
+    <p>Telo pogosto reče »ne« prej kot um: stisk v trebuhu, ko nas kdo prosi za uslugo, teža v prsih ob misli na obisk. Ta znak je vreden pozornosti. Ne pomeni nujno, da morate reči ne, pomeni pa, da se splača premisliti.</p>
+    <p>Krivda po postavljeni meji je pogosta in ne pomeni, da ste naredili kaj narobe. Pogosto je le znak, da delate nekaj novega. Krivda je koristna, ko nas opozori, da smo prekršili lastno vrednoto. Če ste mejo postavili spoštljivo, je ni treba poslušati kot sodnika.</p>
+    <h3>Kako povedati</h3>
+    <ul>
+      <li><strong>Kratko.</strong> »Tega ne morem prevzeti.« Dolga opravičila vabijo pogajanja.</li>
+      <li><strong>Prijazno in odločno.</strong> »Hvala, ker si pomislil name. Ta vikend ne bom prišla.«</li>
+      <li><strong>Z alternativo, če jo želite ponuditi.</strong> »Danes ne, v četrtek pa lahko pomagam eno uro.«</li>
+      <li><strong>Ponovljeno, če je treba.</strong> Mirno ponovite isti stavek, ne da bi dodajali razloge.</li>
+    </ul>
+  </div>
+  <div class="box primer">
+    <div class="box-label">Iz vsakdanjega življenja</div>
+    <p>Sodelavec Ani vsak petek ob treh prinese »še eno nujno stvar«. Ana je doslej vedno ostala dlje. Tokrat reče: »Danes ob štirih odidem. Če je nujno, lahko pogledam v ponedeljek zjutraj kot prvo stvar.« Sodelavec je presenečen in malo nejevoljen. Ana čuti krivdo vso pot domov. V ponedeljek ugotovi, da »nujna stvar« ni bila nujna.</p>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zase</div>
+    <ul>
+      <li>Komu najteže rečete »ne«? Česa se pri tem bojite?</li>
+      <li>Kje v telesu začutite, da ste rekli »ja«, ko ste mislili »ne«?</li>
+    </ul>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Meja je informacija, ne kazen.</li>
+      <li>Telo pogosto reče »ne« prej kot um.</li>
+      <li>Krivda po meji je pogosto le znak, da delate nekaj novega.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p16" data-toc="Povratna informacija kot podatek" data-num="16">
+  <div class="ch-eyebrow"><b>Poglavje 16</b><span>≈ 5 min branja</span></div>
+  <h2>Povratna informacija kot podatek</h2>
+  <p class="short">Kritika ni sodba o vaši vrednosti. Je podatek, ki ga lahko preučite in nato sami odločite, kaj z njim.</p>
+  <div class="col">
+    <p>Ko nas nekdo kritizira, telo pogosto odreagira, kot da gre za nevarnost: vročina v obrazu, utrip, želja, da bi se branili ali umaknili. To je razumljivo. Za naše prednike je bila izključitev iz skupine resna grožnja. Zato kritiko pogosto slišimo kot »nisi dovolj dober« namesto kot »to poročilo ima napako na tretji strani«.</p>
+    <p>Kritiko lahko sprejmete v petih korakih:</p>
+    <ol>
+      <li><strong>Opazite odziv telesa</strong> in podaljšajte izdih. Ne odgovorite takoj.</li>
+      <li><strong>Zahvalite se</strong> za povratno informacijo, tudi če se z njo ne strinjate. Zahvala ni strinjanje.</li>
+      <li><strong>Vprašajte za primer.</strong> »Mi lahko pokažete, kje točno?« Splošna ocena postane konkreten podatek.</li>
+      <li><strong>Ločite dejstvo od oznake.</strong> »Na sestanku si me dvakrat prekinil« je dejstvo. »Nevljuden si« je oznaka.</li>
+      <li><strong>Premislite in se odločite.</strong> Kaj od tega je res? Kaj boste spremenili? Česa ne?</li>
+    </ol>
+    <p>Ko povratno informacijo dajete vi, ravnajte enako: govorite o dejstvih, ne o značaju, z jaz-stavkom in z mislijo na to, kaj lahko drugi spremeni.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Mala vaja · 5 minut · Kritika, ki še vedno boli</div>
+    <ol>
+      <li>Spomnite se kritike, ki vas še vedno zbada.</li>
+      <li>Zapišite, kaj je bilo v njej dejstvo in kaj oznaka.</li>
+      <li>Zapišite eno stvar, ki je bila morda res, in eno, ki ni bila.</li>
+      <li>Opazite, ali se je ob tem v telesu kaj sprostilo.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Telo kritiko pogosto doživi kot nevarnost. Najprej izdih.</li>
+      <li>Zahvala ni strinjanje. Vprašajte za primer.</li>
+      <li>Dejstvo preučite, oznako odložite, odločite se sami.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del7" data-toc="VII · Zmote">
+  <div class="kicker">Del VII</div>
+  <h2>Zmote</h2>
+  <p>Kaj čustvena inteligenca ni.</p>
+</div>
+
+<section class="ch" id="p17" data-toc="Zmote o čustveni inteligenci" data-num="17">
+  <div class="ch-eyebrow"><b>Poglavje 17</b><span>≈ 4 min branja</span></div>
+  <h2>Zmote o čustveni inteligenci</h2>
+  <p class="short">Čustveno inteligenten človek ni vedno miren, prijazen in brez težkih čustev. Ima jih, le da ga ne vodijo.</p>
+  <div class="myths">
+    <div class="myth"><p class="m-z"><b>Zmota</b> Čustveno inteligentni ljudje so vedno mirni in prijazni.</p><p class="m-r"><b>Resnica</b> Tudi oni čutijo jezo, žalost in strah. Teh čustev ne zanikajo, a jim ne dovolijo, da bi prevzela nadzor nad vedenjem.</p></div>
+    <div class="myth"><p class="m-z"><b>Zmota</b> Empatija pomeni, da prevzameš čustva drugih nase.</p><p class="m-r"><b>Resnica</b> Zdrava empatija ima meje. Razumeš stisko drugega, a se v njej ne utopiš (poglavje 13).</p></div>
+    <div class="myth"><p class="m-z"><b>Zmota</b> Obvladati čustva pomeni, da jih ne pokažeš.</p><p class="m-r"><b>Resnica</b> To je potlačitev. Čustvo ostane v telesu kot napetost. Samoregulacija je izbira odziva, ne skrivanje.</p></div>
+    <div class="myth"><p class="m-z"><b>Zmota</b> Nekatera čustva so dobra, druga slaba.</p><p class="m-r"><b>Resnica</b> Vsa čustva so sporočila. Prijetna ali neprijetna so, dobro ali slabo pa je lahko le to, kar z njimi naredimo.</p></div>
+    <div class="myth"><p class="m-z"><b>Zmota</b> Čustvena inteligenca pomeni ugajati drugim.</p><p class="m-r"><b>Resnica</b> Pomeni tudi jasno povedati »ne« in vzdržati nelagodje, ki pri tem nastane (poglavje 15).</p></div>
+    <div class="myth"><p class="m-z"><b>Zmota</b> Dovolj je, da to razumem.</p><p class="m-r"><b>Resnica</b> Razumevanje je začetek. Spretnost nastane šele z vajo, v telesu in v resničnih pogovorih.</p></div>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Ključne točke</div>
+    <ul>
+      <li>Visok EQ ne pomeni manj čustev, ampak več izbire.</li>
+      <li>Ni potlačitve, ni ugajanja, ni prevzemanja tujih čustev.</li>
+      <li>Vadite, ne le berite.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="delovni" data-toc="Delovni del">
+  <div class="kicker">Delovni del</div>
+  <h2>Vaši štirje tedni</h2>
+  <p>Deset minut na dan, en del priročnika na teden.</p>
+</div>
+
+<section class="ch" id="nacrt" data-toc="Tedenski načrt" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Tedenski načrt</h2>
+  <div class="col">
+    <p>Vsak dan v tednu ima svojo nalogo. Nobena ne traja več kot deset minut, večina se zgodi sredi običajnega dne. Načrt ponovite vsak teden; ponavljanje je tisto, kar spremeni navado.</p>
+  </div>
+  <div class="tbl scroll-x">
+    <table>
+      <thead><tr><th>Dan</th><th>Naloga</th><th>Poglavje</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Ponedeljek</strong><br>Telesni pregled</td><td>Trikrat na dan za 30 sekund preverite, kje v telesu čutite napetost in katero čustvo jo spremlja.</td><td>3, 5</td></tr>
+        <tr><td><strong>Torek</strong><br>Premor pred odzivom</td><td>V vsakem pogovoru počakajte dve sekundi in en izdih, preden odgovorite.</td><td>7</td></tr>
+        <tr><td><strong>Sreda</strong><br>Čustveni besednjak</td><td>Ne uporabljajte besed »dobro« in »slabo« za svoje počutje; poiščite natančne besede.</td><td>4</td></tr>
+        <tr><td><strong>Četrtek</strong><br>Poslušanje brez prekinjanja</td><td>V enem pogovoru ne ponudite nobenega nasveta, le povzemite: »Če te prav razumem, te skrbi …«</td><td>11</td></tr>
+        <tr><td><strong>Petek</strong><br>Prepoznavanje sprožilcev</td><td>Zapišite, katera situacija ali oseba vas je ta teden najbolj vrgla iz ravnovesja in zakaj.</td><td>6</td></tr>
+        <tr><td><strong>Sobota</strong><br>Hvaležnost in empatija</td><td>Nekomu iskreno povejte, kaj cenite pri njem ali kako ste opazili njegov trud.</td><td>11, 13</td></tr>
+        <tr><td><strong>Nedelja</strong><br>Pregled tedna</td><td>Preberite dnevnik. Brez samokritike opazite, kje ste se odzvali bolj mirno kot običajno.</td><td>6, 9</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Vsak večer · 5 minut</div>
+    <p>Ne glede na nalogo dneva vpišite en dogodek v čustveni dnevnik (predloga je na naslednjem delovnem listu).</p>
+  </div>
+</section>
+
+<section class="ch" id="sledilnik" data-toc="Sledilnik 4 tedni" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Sledilnik 4 tedni</h2>
+  <div class="col">
+    <p>Vsak teden ponovite tedenski načrt in ob tem preberite del priročnika, ki je naveden pri tednu. <span class="screen-only">Ko ste opravili nalogo dneva, se dotaknite številke dneva. Oznake si zapomni samo vaš brskalnik.</span><span class="print-only">Ko ste opravili nalogo dneva, prekrižajte kvadratek.</span></p>
+  </div>
+  <div class="weeks" id="weeks"></div>
+  <p class="progress" id="progress"></p>
+  <button type="button" class="reset" id="reset">Počisti oznake</button>
+  <div class="box vprasanja">
+    <div class="box-label">Pogled nazaj · po štirih tednih</div>
+    <ol>
+      <li>Katero čustvo zdaj prepoznam prej kot pred mesecem? Kje v telesu ga začutim?</li>
+      <li>Kdaj mi je premor pred odzivom uspel? Kaj mi je pri tem pomagalo?</li>
+      <li>Kateri sprožilci so se v dnevniku ponavljali?</li>
+      <li>V katerem odnosu se je kaj spremenilo?</li>
+      <li>Katero vajo želim obdržati tudi naprej?</li>
+    </ol>
+  </div>
+</section>
+
+<section class="ch" id="dnevnik" data-toc="Predloga čustvenega dnevnika" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Predloga čustvenega dnevnika</h2>
+  <div class="col">
+    <p>En dogodek na večer. Natisnite si več izvodov te strani ali jo prerišite v zvezek. Navodila so v poglavju 6.</p>
+  </div>
+  <div class="tbl scroll-x journal">
+    <table>
+      <thead><tr><th>Dan</th><th>Kaj se je zgodilo?</th><th>Telo in čustvo</th><th>Moj odziv</th><th>Naslednjič</th></tr></thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="part-head" id="dodatki" data-toc="Dodatki">
+  <div class="kicker">Dodatki</div>
+  <h2>Za sprotno uporabo</h2>
+</div>
+
+<section class="ch" id="slovar" data-toc="Slovar" data-num="A">
+  <div class="ch-eyebrow"><b>Dodatek A</b></div>
+  <h2>Mali slovar</h2>
+  <dl class="gloss col">
+    <div><dt>Aktivno poslušanje</dt><dd>Poslušanje z namenom razumeti: pozornost, povzetek slišanega in odprto vprašanje.</dd></div>
+    <div><dt>Amigdala</dt><dd>Del možganov, ki hitro oceni nevarnost in sproži odziv telesa.</dd></div>
+    <div><dt>Čustvena inteligenca (EQ)</dt><dd>Sposobnost prepoznati, razumeti in voditi lastna čustva ter prepoznati in razumeti čustva drugih.</dd></div>
+    <div><dt>Čustvena zrnatost</dt><dd>Sposobnost natančnega razlikovanja med podobnimi čustvi (npr. razočaranje, žalost, osamljenost).</dd></div>
+    <div><dt>Duhovni obvod</dt><dd>Izogibanje težkim čustvom s pomočjo duhovnih razlag ali pozitivnega mišljenja.</dd></div>
+    <div><dt>Empatična stiska</dt><dd>Prevzemanje tuje stiske, kot bi bila lastna; vodi v izčrpanost.</dd></div>
+    <div><dt>Interocepcija</dt><dd>Zaznavanje dogajanja v notranjosti telesa: dih, utrip, napetost, lakota.</dd></div>
+    <div><dt>Jaz-stavek</dt><dd>Sporočilo o lastnem doživljanju: dejstvo, čustvo, potreba, prošnja.</dd></div>
+    <div><dt>Membrana</dt><dd>V Senzorni prenovi: koža in mišice tik pod njo kot meja med nami in svetom. Zdrava je selektivno prepustna.</dd></div>
+    <div><dt>Nevtralnost</dt><dd>Mirno opazovanje tega, kar čutimo, brez zanikanja in brez utapljanja.</dd></div>
+    <div><dt>Notranja motivacija</dt><dd>Vztrajanje zaradi radovednosti, napredka in smisla, ne zaradi zunanjih nagrad.</dd></div>
+    <div><dt>Ponovna ocena</dt><dd>Premislek o položaju, ki najde drugo, prav tako resnično razlago; zdrava pot uravnavanja čustev.</dd></div>
+    <div><dt>Potlačitev</dt><dd>Čustvo in želja po izrazu sta potisnjena iz zavesti; v telesu ostane napetost.</dd></div>
+    <div><dt>Samoregulacija</dt><dd>Izbira primernega odziva na čustvo namesto samodejnega odziva.</dd></div>
+    <div><dt>Samozavedanje</dt><dd>Prepoznavanje lastnih čustev v trenutku, ko se pojavijo.</dd></div>
+    <div><dt>Sočutje</dt><dd>Toplina in skrb za človeka v stiski ob ohranjanju lastne meje.</dd></div>
+    <div><dt>Sprožilec</dt><dd>Oseba, položaj ali misel, ki pri nas redno sproži močno čustvo.</dd></div>
+    <div><dt>STOP</dt><dd>Stopite korak nazaj, tok diha, opazujte, premišljeno nadaljujte.</dd></div>
+  </dl>
+</section>
+
+<section class="ch" id="viri" data-toc="Viri in navdihi" data-num="B">
+  <div class="ch-eyebrow"><b>Dodatek B</b></div>
+  <h2>Viri in navdihi</h2>
+  <div class="col">
+    <h3>Psihologija čustev</h3>
+    <ul class="refs">
+      <li>Daniel Goleman: <em>Čustvena inteligenca</em> (izv. <em>Emotional Intelligence</em>, 1995). <span class="why">Pet stebrov, ugrabitev amigdale.</span></li>
+      <li>Peter Salovey, John D. Mayer: Emotional Intelligence. <em>Imagination, Cognition and Personality</em> 9 (1990). <span class="why">Prvi opis pojma.</span></li>
+      <li>Victoria Mattingly, Kurt Kraiger: Can emotional intelligence be trained? <em>Human Resource Management Review</em> 29 (2019). <span class="why">Učinki treninga čustvenih spretnosti.</span></li>
+      <li>Matthew D. Lieberman idr.: Putting feelings into words. <em>Psychological Science</em> 18 (2007). <span class="why">Poimenovanje čustva in amigdala.</span></li>
+      <li>Todd B. Kashdan, Lisa Feldman Barrett, Patrick E. McKnight: Unpacking emotion differentiation. <em>Current Directions in Psychological Science</em> 24 (2015). <span class="why">Čustvena zrnatost.</span></li>
+      <li>James J. Gross: The emerging field of emotion regulation. <em>Review of General Psychology</em> 2 (1998). <span class="why">Ponovna ocena in potlačitev.</span></li>
+      <li>James W. Pennebaker: <em>Opening Up</em> (1990). <span class="why">Pisanje o čustvih.</span></li>
+      <li>Albert Mehrabian: <em>Silent Messages</em> (1971). <span class="why">Neskladje besed in tona.</span></li>
+      <li>Tania Singer, Olga M. Klimecki: Empathy and compassion. <em>Current Biology</em> 24 (2014). <span class="why">Empatična stiska in sočutje.</span></li>
+      <li>Edward L. Deci, Richard M. Ryan: <em>Intrinsic Motivation and Self-Determination in Human Behavior</em> (1985). <span class="why">Notranja motivacija.</span></li>
+      <li>Thomas Gordon: <em>Parent Effectiveness Training</em> (1970); Marshall B. Rosenberg: <em>Nenasilna komunikacija</em> (izv. 2003). <span class="why">Jaz-stavki.</span></li>
+      <li>Timothy D. Wilson idr.: Just think: The challenges of the disengaged mind. <em>Science</em> 345 (2014). <span class="why">Težave z bivanjem brez dražljajev.</span></li>
+      <li>Douglas Stone, Sheila Heen: <em>Thanks for the Feedback</em> (2014). <span class="why">Sprejemanje povratne informacije.</span></li>
+      <li>John Welwood: <em>Toward a Psychology of Awakening</em> (2000). <span class="why">Duhovni obvod.</span></li>
+    </ul>
+    <h3>Telo in čustva</h3>
+    <ul class="refs">
+      <li>Peter Karlovšek: <em>Senzorna prenova: kako prebuditi zakrčeno telo in um</em>, 2. izdaja (osnutek, 2026). <span class="why">Membrana, od zadrževanja do potlačitve, zlata pravila dihanja.</span></li>
+      <li>Antonio Damasio: <em>Descartes' Error</em> (1994). <span class="why">Telo pri čustvih in odločanju.</span></li>
+      <li>Lisa Feldman Barrett: <em>How Emotions Are Made</em> (2017). <span class="why">Interocepcija in nastanek čustev.</span></li>
+    </ul>
+    <h3>Duhovni pogled</h3>
+    <ul class="refs">
+      <li>Elizabeth April: <em>Exactly What You Need… Not What You Expect</em>, video na YouTubu (youtube.com/watch?v=3tLPthFt99A). <span class="why">Smisel omejitev, razpon čustev kot supermoč, nevtralnost, past udobja (poglavji 9 in 10). Njen osebni pogled. Navedeni časi so po prepisu videa.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="opombe" data-toc="Opombe za avtorja" data-num="C">
+  <div class="ch-eyebrow"><b>Dodatek C</b><span>Za avtorja</span></div>
+  <h2>Opombe za avtorja</h2>
+  <div class="col"><p>Pred tiskom ta dodatek odstranite.</p></div>
+  <div class="col">
+    <h3>Odprta vprašanja</h3>
+    <ol>
+      <li>Okvirji »Pogled Elizabeth April« (poglavji 9 in 10) so preverjeni ob prepisu videa. Natančen datum objave ni znan: po napovedih v videu (seja 11. 11. 2026 »čez nekaj dni«) je bil objavljen v začetku novembra 2026. Vpišite točen datum, če ga želite navesti.</li>
+      <li>Ali želite iz videa vključiti še njeno trditev, da »dokler ne nehamo dajati svoje moči stran«, privlačimo narcise in »energijske vampirje« (6:06–6:22)? Izpustili smo jo, ker lahko izzveni kot krivda žrtve; za meje glejte poglavje 15.</li>
+      <li>Ali naj Dodatek B navaja slovenske prevode (Goleman, <em>Čustvena inteligenca</em>; Rosenberg, <em>Nenasilna komunikacija</em>) z založbo in letnico prevoda?</li>
+      <li>Ali sta telefonski številki v okviru »Za vašo varnost« (Samarijan in Sopotnik 116 123, Klic v duševni stiski 01 520 99 00) še veljavni ob tisku?</li>
+      <li>Ali naj izmišljeni primeri (Petra, Marko, Tomaž, Ana …) ostanejo ali jih nadomestite z resničnimi, anonimiziranimi zgodbami?</li>
+      <li>Ali želite poglavje o čustvih v otroštvu (kako so starši odzivali na naša čustva) ali le sklic na učbenik (poglavja 18–23)?</li>
+      <li>Ali naj priročnik dobi lasten program (na primer delavnico v štirih srečanjih), na katerega bi se skliceval delovni del?</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Izjava o uporabi gradiva.</strong> Ta priročnik lahko uporabljate samo za lastne potrebe in v skladu s pravicami in omejitvami Zakona o avtorskih in sorodnih pravicah (ZASP), ki veljajo za prosto uporabo avtorskih del. Priročnik je avtorsko delo in ga brez izrecnega pisnega dovoljenja avtorja, Petra Karlovška, ni dovoljeno distribuirati, kopirati (delno ali v celoti) ali objavljati.</p>
+  <p>Avtor: Peter Karlovšek · 1. izdaja, delovni osnutek november 2026 · Zbirka Senzorna prenova.</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function(){
+  // Kazalo iz naslovov delov in poglavij
+  var list=document.getElementById("toc-list"), plist=document.getElementById("print-toc-list");
+  function span(c,t){var s=document.createElement("span");s.className=c;s.textContent=t;return s;}
+  document.querySelectorAll("[data-toc]").forEach(function(el){
+    var li=document.createElement("li"), a=document.createElement("a");
+    a.href="#"+el.id;
+    var part=el.classList.contains("part-head");
+    if(part){li.className="part";a.textContent=el.dataset.toc;}
+    else{var s=document.createElement("span");s.textContent=el.dataset.num||"·";a.appendChild(s);a.appendChild(document.createTextNode(el.dataset.toc));}
+    li.appendChild(a);list.appendChild(li);
+    // Kazalo za tisk: številka strani iz data-page (vpiše jo izdelava PDF)
+    var pli=document.createElement("li");
+    if(part)pli.className="part";else pli.appendChild(span("n",el.dataset.num||"·"));
+    pli.appendChild(span("t",el.dataset.toc));pli.appendChild(span("dots",""));
+    var pg=span("pg",el.dataset.page||"");pg.dataset.for=el.id;pli.appendChild(pg);
+    plist.appendChild(pli);
+  });
+  document.getElementById("print-btn").addEventListener("click",function(){window.print();});
+
+  // Za tisk prazne vrstice pod vprašanji za pogled nazaj
+  document.querySelectorAll("#sledilnik .vprasanja li").forEach(function(li){var l=document.createElement("span");l.className="print-lines";li.appendChild(l);});
+
+  // Za radovedne: pri tiskanju odpri, potem vrni
+  var rad=document.querySelectorAll("details.radoved"), was=[];
+  window.addEventListener("beforeprint",function(){rad.forEach(function(d,i){was[i]=d.open;d.open=true;});});
+  window.addEventListener("afterprint",function(){rad.forEach(function(d,i){d.open=!!was[i];});});
+
+  // Sledilnik 4 tedni
+  var W=[
+    {t:"1. teden · Samozavedanje (dela I–II)",d:"Preberite poglavja 1–6. Poudarek: telesni pregled in natančne besede za čustva. Vsak večer en zapis v dnevnik.",days:[1,7]},
+    {t:"2. teden · Samoregulacija (del III)",d:"Preberite poglavja 7–9. Poudarek: premor pred odzivom in STOP. Ko vas val odnese, si zvečer zapišite, kje bi lahko naredili premor.",days:[8,14]},
+    {t:"3. teden · Motivacija in empatija (dela IV–V)",d:"Preberite poglavja 10–13. Poudarek: zdržati nelagodje 90 sekund in poslušati brez nasveta.",days:[15,21]},
+    {t:"4. teden · Socialne veščine (dela VI–VII)",d:"Preberite poglavja 14–17. Poudarek: en jaz-stavek in ena meja na teden. Na koncu tedna odgovorite na vprašanja za pogled nazaj.",days:[22,28]}
+  ];
+  var KEY="sp-eq-4-tedni", N=28, done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){done={};}
+  var wrap=document.getElementById("weeks"), prog=document.getElementById("progress");
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}}
+  function upd(){var c=0;for(var k in done)if(done[k])c++;prog.textContent="Opravljeni dnevi: "+c+" od "+N;}
+  W.forEach(function(w){
+    var box=document.createElement("div");box.className="week";
+    var h=document.createElement("h4");h.textContent=w.t;var p=document.createElement("p");p.className="theme";p.textContent=w.d;
+    var ds=document.createElement("div");ds.className="days";
+    for(var i=w.days[0];i<=w.days[1];i++){(function(i){var b=document.createElement("button");b.type="button";b.className="day";b.id="dan-"+i;b.textContent=i;b.setAttribute("aria-label","Dan "+i);b.setAttribute("aria-pressed",done[i]?"true":"false");b.addEventListener("click",function(){done[i]=!done[i];b.setAttribute("aria-pressed",done[i]?"true":"false");save();upd();});ds.appendChild(b);})(i);}
+    box.appendChild(h);box.appendChild(p);box.appendChild(ds);wrap.appendChild(box);
+  });
+  upd();
+  document.getElementById("reset").addEventListener("click",function(){done={};save();document.querySelectorAll(".day").forEach(function(b){b.setAttribute("aria-pressed","false");});upd();});
+
+  // Na ozkih zaslonih kazalo zaprto
+  if(window.matchMedia&&window.matchMedia("(max-width:1019px)").matches){var d=document.getElementById("toc-d");if(d)d.removeAttribute("open");}
+})();
+</script>
+</body>
+</html>

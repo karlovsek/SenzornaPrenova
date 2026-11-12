@@ -8,6 +8,7 @@ Avtor: Peter Karlovšek · 2. izdaja, delovni osnutek (oktober 2026) · delno po
 
 - `Senzorna prenova – zgornji del trupa.html`: učbenik v eni datoteki (9 delov, 37 kratkih poglavij, slovar, viri, sledilnik 30 dni). Odprite ga v brskalniku. Ima kazalo ob strani in temni način, sledilnik pa si kljukice zapomni v brskalniku.
 - `Senzorna prenova – zgornji del trupa.pdf`: različica za tisk, zgrajena iz HTML. Kazalo ima številke strani.
+- `Senzorna prenova – čustvena inteligenca.html` in `.pdf`: sestrski priročnik iz iste zbirke (7 delov, 17 kratkih poglavij, tedenski načrt, sledilnik 4 tedni, predloga čustvenega dnevnika). Pet stebrov čustvene inteligence z izhodiščem Senzorne prenove: vsako čustvo se začne v telesu.
 - `tools/`: orodja za gradnjo PDF.
 
 ## Gradnja PDF
@@ -17,7 +18,10 @@ Potrebujete Python 3 in Google Chrome (`C:\Program Files\Google\Chrome\Applicati
 ```
 pip install --target tools/pylib -r tools/requirements.txt
 python tools/build_pdf.py
+python tools/build_pdf.py "Senzorna prenova – čustvena inteligenca.html"
 ```
+
+Brez argumenta skripta zgradi učbenik, z argumentom pa PDF iz podanega HTML.
 
 Skripta natisne HTML s Chromom brez okna, poišče, na kateri strani se začne vsako poglavje, te številke vpiše v kazalo in natisne še enkrat. PDF nastane ob HTML-ju. Če je PDF odprt v drugem programu, ga zaprite in skripto poženite znova.
 
