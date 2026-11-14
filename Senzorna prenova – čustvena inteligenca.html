@@ -112,7 +112,7 @@ strong{font-weight:600}
 .razlaga{border:1.5px solid var(--warm);background:var(--surface)} .razlaga .box-label{color:var(--warm)}
 /* Ikone v nalepkah okvirjev */
 .box-label::before{content:"";display:inline-block;width:1.45em;height:1.45em;margin:-.3em .55em 0 0;vertical-align:middle;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
-.box.april .box-label::before{content:none}
+.box.april .box-label::before,.box.pogled .box-label::before{content:none}
 .kljucne{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
 .vaja{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='13.5' r='7.5'/%3E%3Cpath d='M12 10v3.5l2.5 2M10 2.5h4M12 2.5V6'/%3E%3C/svg%3E")}
 .primer{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 18c2.5-1 4-3.5 4-6V6H4v6h5M15 18c2.5-1 4-3.5 4-6V6h-5v6h5'/%3E%3C/svg%3E")}
@@ -418,7 +418,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <h3>Povezava z učbenikom</h3>
     <p>Priročnik spada v zbirko Senzorna prenova. Učbenik <em>Senzorna prenova: kako prebuditi zakrčeno telo in um</em> razloži, kako zadržano čustvo postane mišična napetost (poglavja 22–24) in kako dih vpliva na živčni sistem (poglavje 29). Tu iz istega izhodišča gradimo naprej: kako telesni signal prepoznati kot čustvo in kaj z njim narediti v odnosu do sebe in drugih. Učbenika za branje ne potrebujete; kjer se nanj sklicujemo, navajamo poglavje.</p>
     <h3>Dva glasova</h3>
-    <p>Večina priročnika se naslanja na psihologijo čustev (D. Goleman, P. Salovey in J. D. Mayer, J. J. Gross in drugi). Ponekod pa navajamo tudi duhovni pogled Elizabeth April, ki o polnem razponu čustev govori v enem od svojih videov. Takšni deli so vedno v posebnem okviru z oznako <em>Pogled Elizabeth April</em>. Gre za njen osebni pogled, ne za znanstveno dognanje; vzemite iz njega, kar vam koristi.</p>
+    <p>Večina priročnika se naslanja na psihologijo čustev (D. Goleman, P. Salovey in J. D. Mayer, J. J. Gross in drugi). Ponekod pa navajamo tudi duhovni pogled Elizabeth April, ki o polnem razponu čustev govori v enem od svojih videov. Takšni deli so vedno v posebnem okviru z oznako <em>Pogled Elizabeth April</em>. Gre za njen osebni pogled, ne za znanstveno dognanje; vzemite iz njega, kar vam koristi. Podobno so v okvirjih z oznako <em>Pogled Gaborja Matéja</em> povzete misli zdravnika in avtorja Gaborja Matéja o travmi, telesu in bolezni. Tudi to je njegov osebni pogled in med strokovnjaki je deloma sporen.</p>
   </div>
   <div class="box varno">
     <div class="box-label">Za vašo varnost</div>
@@ -800,6 +800,22 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <p>Psiholog John Gottman je pri družinah opisal štiri sloge, s katerimi se starši odzivajo na otrokova čustva. Pri <strong>čustvenem vodenju</strong> starš čustvo opazi, ga poimenuje in otroku pomaga najti primeren odziv. Pri <strong>odrivanju</strong> ga zmanjša ali preusmeri (»Saj ni tako hudo, glej, kuža!«). Pri <strong>neodobravanju</strong> otroka zaradi čustva kara ali kaznuje. Pri <strong>popustljivosti</strong> čustvo sprejme, a ne postavi meje in ne pomaga. Po Gottmanovih ugotovitvah se otroci staršev, ki čustveno vodijo, lažje umirijo in bolje razumejo svoja čustva. Oče Luka v poglavju 10 je primer čustvenega vodenja.</p>
     <p>To ni iskanje krivca. Večina staršev je dala, kar je imela, in tudi njih so učili starši s svojimi slogi. Sprožilec, ki ga razumemo, izgubi del moči, in vzorca nam ni treba prenesti naprej. Več o tem piše učbenik v poglavjih 20 in 23. Če vas spomini na otroštvo preplavijo, upoštevajte okvir »Za vašo varnost« na začetku priročnika in si poiščite podporo.</p>
   </div>
+  <div class="box razlaga pogled">
+    <div class="box-label">Pogled Gaborja Matéja · 1 · Navezanost ali avtentičnost</div>
+    <p><em>Njegov osebni pogled iz knjige</em> The Myth of Normal <em>(2022), ki jo je napisal s sinom Danielom.</em></p>
+    <p>Kanadski zdravnik madžarskega rodu Gabor Maté pravi, da ima otrok dve temeljni potrebi. Prva je <strong>navezanost</strong>, bližina s tistimi, ki zanj skrbijo. Za dojenčka, ki brez odraslih ne preživi, je to vprašanje življenja. Druga je <strong>avtentičnost</strong>: vedeti, kaj čuti, in to upoštevati. Kaj pa, ko otrok dobi sporočilo, da ga njegova čustva oddaljujejo od staršev? »Takoj nehaj jokati.« »Pridni otroci se ne jezijo.« Otrok v tem sliši tiho grožnjo: če to pokažeš, izgubiš mojo ljubezen. Izbire pravzaprav nima. <strong>Navezanost vedno zmaga</strong>, ker gre za preživetje. Tako se otrok postopoma odpove avtentičnosti, da ohrani vez, svoja čustva pa zakoplje.</p>
+    <p>Travma po njegovem ni to, kar se vam zgodi, ampak <strong>to, kar se zaradi tega zgodi v vas</strong>: notranja rana, ki ostane v živčnem sistemu in telesu. Poleg velikih travm, kot so vojna, zloraba ali nesreča, opisuje še »malo« travmo, ki je skoraj splošna. Ne nastane le, kadar se zgodi kaj slabega, ampak tudi, kadar dobro, ki bi ga otrok potreboval, izostane: ko ga tudi ljubeči, a utrujeni ali raztreseni starši ne vidijo takšnega, kakršen je.</p>
+    <p>Iz tega zrastejo t. i. <strong>navade osebnosti</strong>: ugajanje vsem, nezmožnost reči »ne«, prevzemanje odgovornosti za čustva drugih in zatiranje zdrave jeze. Družba jih pogosto hvali, saj je takšen človek vedno na voljo in se nikoli ne pritoži. Maté jih ima za prilagoditve, ki so otroku pomagale preživeti, odraslemu pa postanejo vir skritega stresa (več o tem v poglavju 15).</p>
+    <p class="navdih">Vir: Gabor Maté, Daniel Maté, <i>The Myth of Normal: Trauma, Illness, and Healing in a Toxic Culture</i> (2022).</p>
+  </div>
+  <div class="box razlaga pogled">
+    <div class="box-label">Pogled Gaborja Matéja · 2 · Prizor na letališču</div>
+    <p><em>Primer, s katerim Maté odpre knjigo.</em></p>
+    <p>Enainsedemdesetletni zdravnik in avtor se vrača s predavanja, ki je odlično uspelo. Letalo se spušča proti Vancouvru, ko dobi sporočilo od žene, ki naj bi ga počakala na letališču: »Oprosti, še nisem odšla od doma. Ali še želiš, da pridem?« Zrel človek bi bil morda malo razočaran in bi odpisal, da bo vzel taksi. Njega pa v hipu zalije ledena jeza. Odreže se: »Pusti.« Naslednjih 24 ur žene skoraj ne pogleda. Ta človek je Maté sam.</p>
+    <p>Jeza po njegovem ni bila odziv na zamudo, ampak <strong>časovni skok</strong>. Rodil se je leta 1944 v Budimpešti, judovski otrok pod nacistično okupacijo. Ko je bil še dojenček, ga je mati v strahu za njegovo življenje dala neznanki na ulici, da ga je odnesla na varno. Ko sta se po nekaj tednih spet srečala, je dneve ni hotel pogledati. Psihiater John Bowlby je takšno vedenje imenoval <strong>odmik</strong> (angl. <em>detachment</em>): otrok se zaščiti pred bolečino tako, da se ne upa znova odpreti. Sporočilo žene, majhna zapuščenost, je desetletja pozneje sprožilo isti stari, predbesedni odziv in razumni, odrasli del je za hip ugasnil.</p>
+    <p>Travma po Matéju odvzame <strong>odzivno prožnost</strong>: svobodo, da med dogodkom in odzivom naredimo premor in izberemo, kako se bomo odzvali. Namesto tega nas zaklene v samodejne obrambne vzorce. O tem premoru govori poglavje 7.</p>
+    <p class="navdih">Vir: kot zgoraj.</p>
+  </div>
   <div class="box primer">
     <div class="box-label">Primer zapisa</div>
     <p><strong>Kaj se je zgodilo?</strong> Sin je pri večerji gledal v telefon, ko sem mu pripovedovala o dnevu.<br><strong>Telo in čustvo:</strong> vročina v obrazu, stisnjen trebuh. Prizadetost, pod njo osamljenost.<br><strong>Moj odziv:</strong> zavpila sem »Nikoli me ne poslušaš!« in odšla od mize.<br><strong>Naslednjič:</strong> povem, kaj čutim, preden zavpijem: »Ko gledaš v telefon, medtem ko ti pripovedujem, sem žalostna in osamljena.«</p>
@@ -811,6 +827,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
       <li>Katero čustvo je bilo v vaši družini »preveč«? Ga danes kdaj zadržite?</li>
       <li>Kateri vaš sprožilec je morda starejši od položaja, v katerem se pojavi?</li>
       <li>Se v vaših odnosih ponavlja kakšen prizor, čeprav so ljudje drugi?</li>
+      <li>Ko vas kaj vrže iz tira bolj, kot bi pričakovali, se vprašajte: »Na kaj starega me spominja ta občutek?«</li>
     </ul>
   </div>
   <div class="box kljucne">
@@ -846,6 +863,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   <div class="col">
     <p>Najmočnejši del čustvenega vala pride hitro in v nekaj trenutkih začne pojenjati, če ga ne hranimo z novimi mislimi. V priročnikih o čustveni inteligenci pogosto beremo o <strong>pravilu šestih sekund</strong>. Številke ne jemljite dobesedno, je pa dobro praktično vodilo: prvih nekaj sekund po sprožilcu ne naredite ničesar, kar bi bilo težko preklicati. Ne pošljite sporočila, ne odgovorite, ne udarite po mizi.</p>
     <p>Premor ni potlačitev. Čustva ne ustavite, ustavite le samodejni odziv. Čustvo še vedno čutite in ga lahko pozneje izrazite, le da tedaj sami izberete kako.</p>
+    <p>Gabor Maté (okvir v poglavju 6) temu prostoru pravi <strong>odzivna prožnost</strong>: svoboda, da med dogodkom in odzivom naredimo premor in izberemo, kako se bomo odzvali. Stari sprožilci ga skrčijo, vaja ga spet razširi.</p>
     <p>Premor je najlažje napolniti z dihom. V poglavju 29 učbenika so zlata pravila dihanja: dihajte skozi nos in naj bo izdih daljši od vdiha. Daljši izdih sporoči živčnemu sistemu, da nevarnosti ni. Šest počasnih dihov traja približno minuto in je eden najzanesljivejših načinov, da se val umiri.</p>
     <h3>Tehnika STOP</h3>
     <p>Iz programov čuječnosti izhaja preprost pripomoček v štirih korakih. Začetnice tvorijo besedo STOP.</p>
@@ -1042,6 +1060,13 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <p>Zakaj? »Ker trpljenje boli. Ker ne znam biti s svojimi čustvi. <strong>Nihče me ni naučil čustvene inteligence.</strong> Nihče me ni naučil, kako ravnati s slabimi stvarmi.« Namesto da bi čustvo začutili, pojemo vrečko čipsa ali drsimo po telefonu in se počutimo bolje. Namesto da bi bili ob otroku, ko ga premaga trma, mu damo tablico. Soočanje z izzivom nam ne da »dopaminskega zadetka«. Največja težava družbe po njenem ni izpad elektrike, zlom finančnega sistema, korupcija v vladi ali priseljevanje, ampak to, da nismo pripravljeni začutiti teme in sprejeti, da »so tudi dnevi, ko ni v redu«.</p>
     <p>Ne zahteva odrekanja: »Vse zmerno.« Tudi sama kdaj poje kaj predelanega in gleda televizijo, a ceni tudi prostor vmes. Na koncu sprašuje: »Ali ustvarjate ali le trošite?«</p>
     <p class="navdih">Vir: Elizabeth April, <i>Exactly What You Need… Not What You Expect</i>, video na YouTubu (22:30–26:15, 35:43–37:53).</p>
+  </div>
+  <div class="box razlaga pogled">
+    <div class="box-label">Pogled Gaborja Matéja · 3 · Ne zakaj odvisnost, ampak zakaj bolečina</div>
+    <p><em>Njegov osebni pogled iz iste knjige kot v poglavju 6.</em></p>
+    <p>Maté odvisnost opredeli zelo široko. Je <strong>vsako vedenje, ki prinese kratkotrajno olajšanje ali užitek, zato si ga želimo, dolgoročno pa škodi in ga ne moremo opustiti</strong>. Po tej opredelitvi odvisnost ni le droga ali alkohol, ampak tudi nakupovanje, igre na srečo, delo, internet ali neutrudna gonja za uspehom. Tudi roka, ki sama seže po telefonu, sodi sem, ko to postane pravilo.</p>
+    <p>Odvisnost po njegovem ni slaba izbira in ne le bolezen možganov, ampak <strong>poskus, da bi si olajšali bolečino</strong> ali našli toplino, mir in občutek vrednosti, ki so nam manjkali. Zato predlaga, da ne sprašujemo več »Zakaj odvisnost?«, ampak »<strong>Zakaj bolečina?</strong>« Isto vprašanje lahko postavite sebi, ko vas vleče v beg: »Katero čustvo bi rad(a) utišal(a)?« Odgovor pogosto vodi k sprožilcem iz poglavja 6.</p>
+    <p class="navdih">Vir: Gabor Maté, Daniel Maté, <i>The Myth of Normal: Trauma, Illness, and Healing in a Toxic Culture</i> (2022).</p>
   </div>
   <div class="col">
     <p>Psihologija to opisuje bolj prizemljeno, a podobno. Ljudje se izogibamo neprijetnim notranjim stanjem in prav izogibanje je eden od dejavnikov, ki tesnobo in potrtost ohranjajo. Kdor se nauči nekaj časa ostati v nelagodju, ne da bi pobegnil, odkrije, da ga zmore prenesti in da mine.</p>
@@ -1313,11 +1338,20 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <div class="box-label">Iz vsakdanjega življenja</div>
     <p>Sodelavec Ani vsak petek ob treh prinese »še eno nujno stvar«. Ana je doslej vedno ostala dlje. Tokrat reče: »Danes ob štirih odidem. Če je nujno, se tega lotim v ponedeljek zjutraj, takoj ko pridem.« Sodelavec je presenečen in malo nejevoljen. Ana čuti krivdo vso pot domov. V ponedeljek ugotovi, da »nujna stvar« ni bila nujna.</p>
   </div>
+  <div class="box razlaga pogled">
+    <div class="box-label">Pogled Gaborja Matéja · 4 · Zdrava jeza</div>
+    <p><em>Njegov osebni pogled iz iste knjige kot v poglavju 6.</em></p>
+    <p>Med štiri vodila zdravljenja, ki jih predlaga Maté (avtentičnost, lastna izbira, jeza in sprejemanje), uvršča tudi jezo, kar marsikoga preseneti. Ne misli besa ali zamere, ki se kuha leta. <strong>Zdrava jeza je obramba meje</strong>: energija, ki reče »ne« temu, kar nam škodi, in »ja« temu, kar varuje našo celovitost. Kdor se je v otroštvu naučil jezo zatreti, da bi ohranil vez (poglavje 6), je pogosto tudi kot odrasel ne začuti pravočasno, zato reče »ja«, ko misli »ne«.</p>
+    <p>Maté gre še dlje. Kdor vse življenje ne reče »ne«, temu po njegovem prepričanju prej ali slej reče »ne« telo, s kroničnim stresom in boleznijo. O tem je napisal tudi knjigo <i>When the Body Says No</i> (2003). To je njegov pogled in med strokovnjaki je sporen. Telesni znaki niso diagnoza in ne nadomestijo zdravnika (okvir »Za vašo varnost« na začetku priročnika).</p>
+    <p class="navdih">Vir: Gabor Maté, Daniel Maté, <i>The Myth of Normal: Trauma, Illness, and Healing in a Toxic Culture</i> (2022); Gabor Maté, <i>When the Body Says No</i> (2003).</p>
+  </div>
   <div class="box vprasanja">
     <div class="box-label">Vprašanja zase</div>
     <ul>
       <li>Komu najtežje rečete »ne«? Česa se pri tem bojite?</li>
       <li>Kje v telesu začutite, da ste rekli »ja«, ko ste mislili »ne«?</li>
+      <li>Ali ugajate drugim tudi takrat, ko vam ni do tega? Kaj se bojite, da bi se zgodilo, če ne bi?</li>
+      <li>Za čigava čustva se počutite odgovorni? Kje v telesu nosite to odgovornost?</li>
     </ul>
   </div>
   <div class="box kljucne">
@@ -1547,6 +1581,11 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
     <ul class="refs">
       <li>Elizabeth April: <em>Exactly What You Need… Not What You Expect</em>, video na YouTubu (youtube.com/watch?v=3tLPthFt99A). <span class="why">Smisel omejitev, razpon čustev kot supermoč, nevtralnost, past udobja (poglavji 9 in 10). Njen osebni pogled. Navedeni časi so po prepisu videa.</span></li>
     </ul>
+    <h3>Pogled Gaborja Matéja</h3>
+    <ul class="refs">
+      <li>Gabor Maté, Daniel Maté: <em>The Myth of Normal: Trauma, Illness, and Healing in a Toxic Culture</em> (2022). <span class="why">Navezanost in avtentičnost, mala travma, navade osebnosti, prizor na letališču, odzivna prožnost, odvisnost kot olajšanje bolečine, zdrava jeza (poglavja 6, 7, 10 in 15). Njegov osebni pogled.</span></li>
+      <li>Gabor Maté: <em>When the Body Says No</em> (2003). <span class="why">Ko besede ne rečejo »ne«, ga reče telo (poglavje 15).</span></li>
+    </ul>
   </div>
 </section>
 
@@ -1556,7 +1595,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-dis
   <div class="col"><p>Pred tiskom ta dodatek odstranite.</p></div>
   <div class="col">
     <h3>Odprta vprašanja</h3>
-    <p>Trenutno ni odprtih vprašanj.</p>
+    <p>Okvirji »Pogled Gaborja Matéja« (poglavja 6, 10 in 15) so napisani po povzetku knjige <em>The Myth of Normal</em> (video na YouTubu), ne po knjigi sami. Pred tiskom preverite podrobnosti v knjigi, zlasti prizor na letališču (starost, ko ga je mati izročila neznanki, in čas ločitve) in navedene opredelitve.</p>
   </div>
 </section>
 
