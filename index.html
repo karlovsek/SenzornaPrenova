@@ -1,15 +1,163 @@
 <!doctype html>
-<html lang="sl">
+<html lang="sl" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Senzorna prenova – čustvena inteligenca</title>
-<meta http-equiv="refresh" content="0; url=Senzorna%20prenova%20%E2%80%93%20%C4%8Dustvena%20inteligenca.html">
-<link rel="canonical" href="Senzorna%20prenova%20%E2%80%93%20%C4%8Dustvena%20inteligenca.html">
-<script>location.replace("Senzorna%20prenova%20%E2%80%93%20%C4%8Dustvena%20inteligenca.html" + location.hash);</script>
-<style>body{font-family:Georgia,serif;max-width:36rem;margin:4rem auto;padding:0 16px;line-height:1.5;color:#222;background:#fff}</style>
+<title>Zbirka Senzorna prenova</title>
+<meta name="description" content="Zbirka Senzorna prenova: učbenik o zakrčenem telu in priročnik o čustveni inteligenci. Metoda za prebujanje zakrčenega telesa in uma z vajami, dihom in pozornostjo na občutke.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:title" content="Zbirka Senzorna prenova">
+<meta property="og:description" content="Dva dela z istim izhodiščem: telo je vstopna točka. Učbenik o zakrčenem telu in priročnik o čustveni inteligenci.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>
+:root{
+  --bg:#F2F5F3; --surface:#FBFCFB; --ink:#1D2826; --muted:#56645F; --line:#D3DDD9;
+  --accent:#2E6B66; --accent-soft:#DDEBE8;
+  --warm:#9A6418; --warm-soft:#F5EBD8;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Literata", Georgia, "Times New Roman", serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.0625rem;line-height:1.6}
+.wrap{max-width:60rem;margin:0 auto;padding:56px 16px 40px}
+h1,h2,h3,.kicker,.flow figcaption,.facts,.links a,footer{font-family:var(--f-display)}
+.kicker{text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;font-weight:600;color:var(--accent);margin:0 0 6px}
+h1{font-size:clamp(2.4rem,7vw,3.8rem);line-height:1.05;margin:0 0 10px;font-weight:700;letter-spacing:-.01em}
+.author{font-family:var(--f-display);color:var(--muted);margin:0 0 28px}
+.intro{max-width:40rem;margin:0 0 36px}
+.intro p{margin:0 0 14px}
+
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:8px 4px;margin:0 0 48px;padding:20px 16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;justify-content:center}
+.flow figure{margin:0;display:grid;justify-items:center;gap:6px;min-width:96px}
+.flow svg{width:44px;height:44px}
+.flow figcaption{font-size:.95rem;font-weight:600}
+.flow .arrow{color:var(--muted);width:28px;height:16px;flex:none}
+@media (max-width:30rem){
+  .flow{flex-wrap:nowrap;padding:18px 8px;gap:4px}
+  .flow figure{min-width:0;flex:1}
+  .flow .arrow{width:18px}
+  .flow figcaption{font-size:.85rem}
+}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:24px 22px 22px;display:flex;flex-direction:column;gap:12px}
+.card.ucb{--c:var(--accent);--c-soft:var(--accent-soft)}
+.card.pri{--c:var(--warm);--c-soft:var(--warm-soft)}
+.card .head{display:flex;gap:16px;align-items:flex-start}
+.card .icon{flex:none;width:64px;height:64px;border-radius:12px;background:var(--c-soft);color:var(--c);display:grid;place-items:center}
+.card .icon svg{width:44px;height:44px}
+.card .type{font-family:var(--f-display);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--c);font-weight:600;margin:0 0 2px}
+.card h2{font-size:1.3rem;line-height:1.25;margin:0}
+.card p{margin:0}
+.facts{display:flex;flex-wrap:wrap;gap:6px 8px;padding:0;margin:4px 0 0;list-style:none;font-size:.85rem;color:var(--muted)}
+.facts li{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:8px}
+.links a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:.95rem;border-radius:10px;padding:9px 16px;border:2px solid var(--c);color:var(--c)}
+.links a.primary{background:var(--c);color:#fff}
+.links a:hover{filter:brightness(1.1)}
+.links a:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.links svg{width:18px;height:18px}
+
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+</style>
 </head>
 <body>
-<p>Preusmerjam na priročnik <a href="Senzorna%20prenova%20%E2%80%93%20%C4%8Dustvena%20inteligenca.html">Senzorna prenova: čustvena inteligenca</a> …</p>
+<main class="wrap">
+  <header>
+    <p class="kicker">Zbirka</p>
+    <h1>Senzorna prenova</h1>
+    <p class="author">Peter Karlovšek</p>
+  </header>
+
+  <section class="intro">
+    <p>Senzorna prenova je metoda za prebujanje zakrčenega telesa in uma. Z vajami, dihom in pozornostjo na občutke spet začutite telo in ga začnete voditi, namesto da bi ono vodilo vas.</p>
+    <p>Zbirka Senzorna prenova obsega dva dela z istim izhodiščem: telo je vstopna točka. Prvi del je o telesu, drugi o čustvih.</p>
+  </section>
+
+  <div class="flow" role="list" aria-label="Pot Senzorne prenove">
+    <figure role="listitem">
+      <svg viewBox="0 0 48 48" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M17 26V12a3 3 0 0 1 6 0v11"/><path d="M23 22v-3a3 3 0 0 1 6 0v4"/><path d="M29 22a3 3 0 0 1 6 0v6c0 8-5 13-12 13s-10-4-13-10l-2-4a3 3 0 0 1 5-3l4 5"/>
+        <path d="M8 10c2-2 4-2 6 0" opacity=".6"/><path d="M36 8c2-2 4-2 6 0" opacity=".6"/>
+      </svg>
+      <figcaption>Začutite</figcaption>
+    </figure>
+    <svg class="arrow" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h22M18 3l6 5-6 5"/></svg>
+    <figure role="listitem">
+      <svg viewBox="0 0 48 48" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M8 10h32a3 3 0 0 1 3 3v17a3 3 0 0 1-3 3H22l-9 7v-7H8a3 3 0 0 1-3-3V13a3 3 0 0 1 3-3z"/><path d="M14 19h20M14 25h12"/>
+      </svg>
+      <figcaption>Poimenujte</figcaption>
+    </figure>
+    <svg class="arrow" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8h22M18 3l6 5-6 5"/></svg>
+    <figure role="listitem">
+      <svg viewBox="0 0 48 48" fill="none" stroke="var(--warm)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M24 44V28"/><path d="M24 28c0-8-6-12-14-14"/><path d="M24 28c0-8 6-12 14-14"/><path d="M6 10l4 4-5 2"/><path d="M42 10l-4 4 5 2"/><circle cx="24" cy="28" r="2.2" fill="var(--warm)"/>
+      </svg>
+      <figcaption>Izberite</figcaption>
+    </figure>
+  </div>
+
+  <div class="cards">
+    <article class="card ucb">
+      <div class="head">
+        <div class="icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="24" cy="7" r="4"/>
+            <path d="M8 18c4-3 10-4 16-4s12 1 16 4"/>
+            <path d="M12 18l-1 16M36 18l1 16"/>
+            <rect x="21.5" y="15" width="5" height="4" rx="1.5"/><rect x="21.5" y="21" width="5" height="4" rx="1.5"/><rect x="21.5" y="27" width="5" height="4" rx="1.5"/><rect x="21.5" y="33" width="5" height="4" rx="1.5"/>
+            <path d="M14 40c3 2 6 3 10 3s7-1 10-3"/>
+          </svg>
+        </div>
+        <div>
+          <p class="type">Učbenik</p>
+          <h2>Senzorna prenova: kako prebuditi zakrčeno telo in um</h2>
+        </div>
+      </div>
+      <p>Za vse, ki jih bolijo vrat, ramena, hrbet ali prsni koš. Zakaj se telo zakrči in kako ga z vajami spet začutiti.</p>
+      <ul class="facts"><li>30-dnevni program</li><li>9 delov</li><li>37 poglavij</li></ul>
+      <div class="links">
+        <a class="primary" href="Senzorna%20prenova%20%E2%80%93%20zgornji%20del%20trupa.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg>
+          Berite na spletu</a>
+        <a href="Senzorna%20prenova%20%E2%80%93%20zgornji%20del%20trupa.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+          PDF</a>
+      </div>
+    </article>
+
+    <article class="card pri">
+      <div class="head">
+        <div class="icon">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 42S6 31 6 18a9 9 0 0 1 18-3 9 9 0 0 1 18 3c0 13-18 24-18 24z"/>
+            <path d="M11 24h7l3-6 4 11 3-5h9"/>
+          </svg>
+        </div>
+        <div>
+          <p class="type">Priročnik</p>
+          <h2>Senzorna prenova: čustvena inteligenca</h2>
+        </div>
+      </div>
+      <p>Kako čustvo začutiti, preden vas odnese, ga poimenovati, izbrati odziv in razumeti druge.</p>
+      <ul class="facts"><li>4-tedenski program</li><li>7 delov</li><li>18 poglavij</li></ul>
+      <div class="links">
+        <a class="primary" href="Senzorna%20prenova%20%E2%80%93%20%C4%8Dustvena%20inteligenca.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg>
+          Berite na spletu</a>
+        <a href="Senzorna%20prenova%20%E2%80%93%20%C4%8Dustvena%20inteligenca.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+          PDF</a>
+      </div>
+    </article>
+  </div>
+
+  <footer>© Peter Karlovšek · delovni osnutek</footer>
+</main>
 </body>
 </html>
