@@ -1,0 +1,1878 @@
+<!doctype html>
+<html lang="sl" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Senzorna prenova – čustvena inteligenca za mlade</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap">
+<style>
+/* Layout (izhaja iz priročnika Senzorna prenova: čustvena inteligenca): ozek stolpec besedila, lepljivo kazalo na levi pri širokih zaslonih, ponavljajoč se ritem v vsakem poglavju (stavek bistva, strip, kaj se dogaja, poskusi, zapomni si, vprašanja zate). Za mlade: večja pisava brez serifov, bolj živa paleta, štirje liki s svojimi barvami. */
+:root{
+  --bg:#F7F5F0; --surface:#FFFFFF; --ink:#1F2433; --muted:#585E70; --line:#DDD9E3;
+  --accent:#4B3FC2; --accent-soft:#ECEAFB;
+  --warm:#C2611F; --warm-soft:#FCE9DC;
+  --dorsal:#3E5C8A; --dorsal-soft:#E3EAF5;
+  --ventral:#2F8F57; --ventral-soft:#DFF2E6;
+  /* Liki */
+  --nika:#D63F78; --nika-soft:#FBE3EC;
+  --marko:#2D7FCF; --marko-soft:#DFECFA;
+  --zan:#2E9256; --zan-soft:#DDF2E4;
+  --lara:#DD7A1C; --lara-soft:#FCEBD7;
+  /* Barvni merilnik razpoloženja */
+  --red:#DC3F45; --red-soft:#FCE1E1;
+  --yellow:#C99208; --yellow-soft:#FFF2C6;
+  --green:#2F9157; --green-soft:#DCF1E3;
+  --blue:#3577C8; --blue-soft:#DDE9F8;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-quote:"Literata", Georgia, serif;
+  --measure:62ch;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#15161D; --surface:#1D1F29; --ink:#E7E8EF; --muted:#A3A7B7; --line:#323545;
+  --accent:#A79DF5; --accent-soft:#2A2747;
+  --warm:#F0A266; --warm-soft:#3A2919;
+  --dorsal:#9DB4DA; --dorsal-soft:#212B3B;
+  --ventral:#7ACB98; --ventral-soft:#1C3125;
+  --nika:#F07FA8; --nika-soft:#3B1F2B; --marko:#7DB5EC; --marko-soft:#1C2A3B;
+  --zan:#76C995; --zan-soft:#1B3124; --lara:#F2AA62; --lara-soft:#3A2817;
+  --red:#F07A7E; --red-soft:#3D1F21; --yellow:#E9C14F; --yellow-soft:#3A3118;
+  --green:#76C995; --green-soft:#1B3124; --blue:#7DB0EC; --blue-soft:#1C2A3B;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#15161D; --surface:#1D1F29; --ink:#E7E8EF; --muted:#A3A7B7; --line:#323545;
+  --accent:#A79DF5; --accent-soft:#2A2747;
+  --warm:#F0A266; --warm-soft:#3A2919;
+  --dorsal:#9DB4DA; --dorsal-soft:#212B3B;
+  --ventral:#7ACB98; --ventral-soft:#1C3125;
+  --nika:#F07FA8; --nika-soft:#3B1F2B; --marko:#7DB5EC; --marko-soft:#1C2A3B;
+  --zan:#76C995; --zan-soft:#1B3124; --lara:#F2AA62; --lara-soft:#3A2817;
+  --red:#F07A7E; --red-soft:#3D1F21; --yellow:#E9C14F; --yellow-soft:#3A3118;
+  --green:#76C995; --green-soft:#1B3124; --blue:#7DB0EC; --blue-soft:#1C2A3B;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:1.18rem;line-height:1.65;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px;padding-block:40px 80px}
+@media (min-width:1020px){.shell{grid-template-columns:250px minmax(0,1fr)}}
+
+/* Kazalo */
+.toc{font-family:var(--f-display);font-size:.9rem;line-height:1.35;min-width:0}
+@media (min-width:1020px){.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;max-height:calc(100vh - 48px);overflow:auto;padding-right:8px}}
+.toc details{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--surface)}
+@media (min-width:1020px){.toc details{border:0;padding:0;background:none}.toc summary{pointer-events:none;list-style:none}.toc summary::-webkit-details-marker{display:none}}
+.toc summary{cursor:pointer;font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:.75rem;color:var(--muted)}
+.toc ol{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:1px}
+.toc .part{margin-top:14px}
+.toc .part a{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.toc a{display:flex;gap:10px;padding:4px 8px;border-radius:6px;color:var(--ink);text-decoration:none}
+.toc a:hover{background:var(--accent-soft)}
+.toc a span{color:var(--muted);font-variant-numeric:tabular-nums;min-width:1.5em}
+
+main{min-width:0}
+.col{max-width:var(--measure);display:grid;gap:14px}
+
+/* Naslovnica */
+.hero{display:grid;gap:20px;padding-bottom:40px;border-bottom:1px solid var(--line);margin-bottom:56px}
+.kicker{font-family:var(--f-display);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.hero h1{font-size:clamp(2.3rem,6vw,3.9rem);font-weight:700;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero h1 em b{color:var(--warm);font-weight:700}
+.hero .lede{font-size:1.25rem;line-height:1.55;max-width:54ch}
+.hero-art{display:flex;gap:10px;flex-wrap:wrap}
+.hero-art svg{width:72px;height:72px}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--f-display);font-size:.88rem;color:var(--muted)}
+
+/* Poglavja */
+section.ch{display:grid;gap:22px;margin-bottom:84px;scroll-margin-top:24px}
+.part-head{margin:24px 0 56px;padding:28px 0;border-top:3px solid var(--ink);display:grid;gap:8px;scroll-margin-top:24px}
+.part-head .kicker{color:var(--muted)}
+.part-head h2{font-size:clamp(1.8rem,3.8vw,2.5rem)}
+.part-head p{color:var(--muted);max-width:54ch}
+.ch-head{display:grid;gap:22px;min-width:0}
+section.ch>*,.ch-head>*{min-width:0}
+.ch-eyebrow{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;font-family:var(--f-display);font-size:.8rem;color:var(--muted)}
+.ch-eyebrow b{color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+.ch h2{font-size:clamp(1.7rem,3.6vw,2.3rem);letter-spacing:-.01em}
+.ch h3{font-size:1.2rem;margin-top:8px}
+.ch .short{font-size:1.22rem;line-height:1.5;font-weight:600;color:var(--accent);max-width:var(--measure);padding-left:14px;border-left:4px solid var(--warm)}
+.ch ul,.ch ol{margin:0;padding-left:1.3em;display:grid;gap:6px}
+strong{font-weight:700}
+.sub{font-family:var(--f-display);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* Okvirji */
+.box{border-radius:14px;padding:20px 22px;display:grid;gap:10px;max-width:var(--measure)}
+.box-label{font-family:var(--f-display);font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.primer{background:var(--warm-soft)} .primer .box-label{color:var(--warm)}
+.kljucne{background:var(--accent-soft)} .kljucne .box-label{color:var(--accent)}
+.vprasanja{border:2px dashed var(--line);background:var(--surface)} .vprasanja .box-label{color:var(--muted)}
+.vaja{border:2px solid var(--accent);background:var(--surface)} .vaja .box-label{color:var(--accent)}
+.varno{background:var(--dorsal-soft)} .varno .box-label{color:var(--dorsal)}
+.box-label::before{content:"";display:inline-block;width:1.45em;height:1.45em;margin:-.3em .55em 0 0;vertical-align:middle;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.kljucne{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z'/%3E%3C/svg%3E")}
+.vaja{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='13.5' r='7.5'/%3E%3Cpath d='M12 10v3.5l2.5 2M10 2.5h4M12 2.5V6'/%3E%3C/svg%3E")}
+.primer{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 18c2.5-1 4-3.5 4-6V6H4v6h5M15 18c2.5-1 4-3.5 4-6V6h-5v6h5'/%3E%3C/svg%3E")}
+.vprasanja{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.5v.4M12 17h.01'/%3E%3C/svg%3E")}
+.varno{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l7 3v5.5c0 4.5-3 7.8-7 9.5-4-1.7-7-5-7-9.5V6z'/%3E%3C/svg%3E")}
+.box ul,.box ol{padding-left:1.2em}
+.box .note{font-size:1rem;color:var(--muted)}
+
+/* Ikone */
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+.ico{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.4em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.steber-ico{display:block;width:56px;height:56px;padding:13px;border-radius:50%;box-sizing:border-box;background:var(--accent-soft);color:var(--accent);border:2px solid var(--accent);fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.steber-ico.topel{background:var(--warm-soft);color:var(--warm);border-color:var(--warm)}
+@media print{.part-head:has(.steber-ico){position:relative}.steber-ico{position:absolute;right:0;top:10mm;width:46px;height:46px;padding:11px;margin:0}}
+
+/* Liki */
+.av{width:46px;height:46px;flex:none;display:block}
+.cast{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:860px}
+@media (min-width:760px){.cast{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.who{background:var(--surface);border:2px solid var(--c);border-radius:16px;padding:14px;display:grid;gap:6px;align-content:start;justify-items:start}
+.who .av{width:64px;height:64px}
+.who h4{font-size:1.1rem;color:var(--c)}
+.who h4 span{color:var(--muted);font-weight:400;font-size:.9rem}
+.who p{font-size:.95rem;line-height:1.45}
+.c-nika{--c:var(--nika);--cs:var(--nika-soft)} .c-marko{--c:var(--marko);--cs:var(--marko-soft)}
+.c-zan{--c:var(--zan);--cs:var(--zan-soft)} .c-lara{--c:var(--lara);--cs:var(--lara-soft)}
+
+/* Strip */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:10px;max-width:860px;counter-reset:pan}
+.pan{background:var(--surface);border:2px solid var(--ink);border-radius:14px;padding:12px;display:grid;gap:10px;align-content:start;position:relative}
+.pan::after{counter-increment:pan;content:counter(pan);position:absolute;top:-10px;right:10px;background:var(--ink);color:var(--bg);font-family:var(--f-display);font-size:.72rem;font-weight:700;width:20px;height:20px;border-radius:50%;display:grid;place-items:center}
+.cap{font-family:var(--f-display);font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:1.3}
+.nar{font-size:.95rem;line-height:1.4;font-style:italic;color:var(--muted)}
+.say{display:grid;grid-template-columns:46px minmax(0,1fr);gap:8px;align-items:start}
+.bub{background:var(--cs,var(--bg));border:2px solid var(--c,var(--line));border-radius:16px;padding:7px 11px;font-size:.98rem;line-height:1.38;position:relative;margin-top:4px}
+.bub::before{content:"";position:absolute;left:-8px;top:12px;width:12px;height:12px;background:inherit;border-left:2px solid var(--c,var(--line));border-bottom:2px solid var(--c,var(--line));transform:rotate(45deg)}
+.say.misel .bub{border-style:dashed;border-radius:22px}
+.say.misel .bub::before{content:none}
+.say.krik .bub{font-weight:700;text-transform:uppercase;letter-spacing:.02em;border-width:3px}
+.sms{background:var(--bg);border:1.5px solid var(--line);border-radius:14px 14px 14px 4px;padding:7px 11px;font-size:.95rem;line-height:1.38}
+.sms b{display:block;font-family:var(--f-display);font-size:.75rem;color:var(--muted);font-weight:600}
+.sms.out{border-radius:14px 14px 4px 14px;background:var(--accent-soft);border-color:var(--accent)}
+.seen{font-family:var(--f-display);font-size:.72rem;color:var(--muted);text-align:right}
+
+/* Telefon */
+.phone{max-width:320px;border:3px solid var(--ink);border-radius:30px;padding:16px 14px 20px;background:var(--surface);display:grid;gap:8px}
+.phone .bar{font-family:var(--f-display);font-size:.8rem;font-weight:700;text-align:center;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.phone .post{background:var(--bg);border-radius:12px;height:110px;display:grid;place-items:center;color:var(--muted);font-family:var(--f-display);font-size:.85rem}
+.phone .send{display:flex;gap:8px;align-items:center;border:1.5px solid var(--line);border-radius:999px;padding:6px 6px 6px 14px;font-size:.92rem;color:var(--muted)}
+.phone .send span{flex:1}
+.phone .send b{background:var(--accent);color:#fff;border-radius:999px;padding:4px 12px;font-family:var(--f-display);font-size:.8rem}
+.phone-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;max-width:860px}
+.phone-row>.col{flex:1 1 280px}
+
+/* Slike */
+.figure{display:grid;gap:10px;margin:6px 0;max-width:820px}
+.figure figcaption{font-family:var(--f-display);font-size:.88rem;color:var(--muted);max-width:var(--measure)}
+.figure svg{width:100%;height:auto;display:block}
+.svgwrap{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
+.panels{display:grid;grid-template-columns:1fr 1fr}
+.panels>svg:nth-child(even){border-left:1.5px solid var(--line)}
+@media (max-width:520px){.panels{grid-template-columns:1fr;justify-items:center}.panels>svg{max-width:340px}.panels>svg:nth-child(n){border-left:0}.panels>svg+svg{border-top:1.5px solid var(--line)}}
+.t{font-family:var(--f-display);font-size:15px;fill:var(--ink)}
+.t-s{font-family:var(--f-display);font-size:14px;fill:var(--muted)}
+.t-b{font-family:var(--f-display);font-size:16px;font-weight:700;fill:var(--ink)}
+.stroke-muted{stroke:var(--muted)} .fill-muted{fill:var(--muted)}
+.fill-surface{fill:var(--surface)} .fill-bg{fill:var(--bg)}
+.big .t-b{font-size:19px} .big .t-s{font-size:16px} .big .t{font-size:17px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-family:var(--f-display);font-size:.88rem}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:16px;height:16px;border-radius:50%;display:inline-block;border:1.5px solid var(--ink)}
+
+/* Kartice */
+.emo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:860px}
+@media (min-width:720px){.emo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.emo{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:12px;padding:12px 14px;display:grid;gap:4px;align-content:start}
+.emo svg{width:32px;height:32px;fill:none;stroke:var(--c);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.emo h4{font-size:1.05rem}
+.emo p{font-size:.95rem;line-height:1.45}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px;max-width:860px}
+.tcard{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.tcard h4{font-size:1.05rem}
+.tcard p{font-size:.98rem;line-height:1.45}
+.tcard .n{font-family:var(--f-display);font-weight:700;font-size:1.5rem;line-height:1;color:var(--warm)}
+ul.chips{display:flex;flex-wrap:wrap;gap:8px;max-width:860px;padding:0;margin:0;list-style:none}
+.chips li{font-family:var(--f-display);font-size:.98rem;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px}
+.chips li::before{content:"";width:14px;height:14px;border:2px solid var(--muted);border-radius:4px}
+.chips.say-no li::before{content:none}
+.chips.say-no li{padding:6px 14px;border-color:var(--accent);background:var(--accent-soft)}
+
+/* Obrnljive kartice (details) */
+.flips{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:10px;max-width:860px}
+details.flip{background:var(--surface);border:2px solid var(--c,var(--accent));border-radius:14px;overflow:hidden}
+details.flip summary{cursor:pointer;list-style:none;padding:14px 16px;display:grid;gap:4px}
+details.flip summary::-webkit-details-marker{display:none}
+details.flip summary small,details.flip .back small{font-family:var(--f-display);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+details.flip summary em{font-style:normal;font-family:var(--f-display);font-size:.8rem;color:var(--accent)}
+details.flip[open] summary em{display:none}
+details.flip .back{padding:12px 16px 14px;background:var(--cs,var(--accent-soft));border-top:2px dashed var(--c,var(--accent));display:grid;gap:4px}
+
+/* Barvni merilnik razpoloženja */
+.mood{display:grid;grid-template-columns:28px 1fr 1fr;grid-template-rows:auto auto auto;gap:6px;max-width:640px;font-family:var(--f-display)}
+.mood .q{border-radius:14px;padding:12px 14px;display:grid;gap:4px;align-content:start;border:2px solid var(--c);background:var(--cs)}
+.mood .q h4{color:var(--c);font-size:1.05rem}
+.mood .q p{font-size:.95rem;line-height:1.45}
+.mood .ax-y{grid-row:1 / span 2;writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font-size:.82rem;color:var(--muted)}
+.mood .ax-x{grid-column:2 / span 2;text-align:center;font-size:.82rem;color:var(--muted)}
+.q.red{--c:var(--red);--cs:var(--red-soft)} .q.yellow{--c:var(--yellow);--cs:var(--yellow-soft)}
+.q.green{--c:var(--green);--cs:var(--green-soft)} .q.blue{--c:var(--blue);--cs:var(--blue-soft)}
+
+/* Polja za izpolnjevanje */
+.fill{display:grid;gap:12px;max-width:var(--measure)}
+.fill .row{display:grid;gap:2px}
+.fill label,.fill .lbl{font-family:var(--f-display);font-size:.9rem;font-weight:600}
+.fill .ln{height:30px;border-bottom:1.5px dashed var(--muted)}
+.fill .ln.two{height:60px;background:linear-gradient(to bottom,transparent 29px,var(--line) 29px,var(--line) 30.5px,transparent 30.5px)}
+.sentence{max-width:var(--measure);font-size:1.1rem;line-height:2.4}
+.sentence .gap{display:inline-block;min-width:9em;border-bottom:1.5px dashed var(--muted);line-height:1.2}
+.sentence .hint{font-size:.8rem;color:var(--muted);font-family:var(--f-display)}
+
+/* Kviz */
+.quiz{display:grid;gap:10px;max-width:var(--measure)}
+details.qz{background:var(--surface);border:2px solid var(--line);border-radius:14px}
+details.qz summary{cursor:pointer;padding:14px 16px;font-weight:600;list-style:none;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+details.qz summary::-webkit-details-marker{display:none}
+details.qz summary .n{font-family:var(--f-display);color:var(--accent);font-weight:700}
+details.qz summary small{grid-column:2;font-family:var(--f-display);font-weight:400;font-size:.82rem;color:var(--accent)}
+details.qz[open] summary small{display:none}
+details.qz .ans{padding:0 16px 14px 16px;display:grid;gap:4px;font-size:1.02rem}
+details.qz .ans b{font-family:var(--f-display);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+details.qz .ans b.mit{color:var(--red)} details.qz .ans b.res{color:var(--green)}
+
+/* Sledilnik */
+.weeks{display:grid;gap:16px;max-width:820px}
+.week{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px}
+.week h4{font-size:1.08rem}
+.week .theme{font-size:1rem;color:var(--muted);line-height:1.5}
+.days{display:flex;flex-wrap:wrap;gap:8px}
+.day{width:46px;height:46px;border-radius:50%;border:2px dashed var(--line);background:var(--bg);color:var(--ink);font-family:var(--f-display);font-weight:700;font-variant-numeric:tabular-nums;cursor:pointer;position:relative}
+.day[aria-pressed="true"]{background:var(--warm);border:3px double var(--surface);box-shadow:0 0 0 2px var(--warm);color:#fff;transform:rotate(-8deg)}
+.day[aria-pressed="true"]::after{content:"★";position:absolute;right:-6px;top:-8px;font-size:.9rem;color:var(--warm)}
+.progress{font-family:var(--f-display);font-size:.92rem;color:var(--muted)}
+.reset{font-family:var(--f-display);font-size:.85rem;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0;justify-self:start}
+
+/* Misije */
+.missions{display:grid;gap:12px;max-width:820px}
+.mission{background:var(--surface);border:1.5px solid var(--line);border-left:6px solid var(--c);border-radius:0 14px 14px 0;padding:14px 18px;display:grid;gap:6px}
+.mission h4{font-size:1.05rem;color:var(--c)}
+.mission ul{padding-left:1.2em;display:grid;gap:4px}
+
+/* Barvni dnevnik */
+.mood-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:560px}
+.mood-days div{aspect-ratio:1;border:1.5px solid var(--muted);border-radius:10px;font-family:var(--f-display);font-size:.78rem;color:var(--muted);padding:4px 6px}
+
+/* Kartica za umirjanje */
+.calm{max-width:640px;border:3px solid var(--accent);border-radius:20px;padding:20px 22px;display:grid;gap:14px;background:var(--surface)}
+.calm h3{color:var(--accent)}
+
+/* Slovar in viri */
+dl.gloss{display:grid;gap:14px;margin:0}
+dl.gloss div{display:grid;gap:2px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+dl.gloss dt{font-family:var(--f-display);font-weight:700}
+dl.gloss dd{margin:0;font-size:1.02rem;line-height:1.55}
+.refs li{font-size:1rem}
+.refs .why{color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding-top:24px;font-family:var(--f-display);font-size:.85rem;color:var(--muted);display:grid;gap:8px;max-width:var(--measure)}
+
+/* Tisk: na zaslonu skrito */
+.print-toc,.print-only,.print-lines{display:none}
+.print-btn{margin-top:14px;font-family:var(--f-display);font-size:.8rem;font-weight:600;padding:6px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.print-btn:hover{border-color:var(--accent)}
+
+/* Tisk: A4, belo ozadje, kazalo s številkami strani */
+@page{
+  size:A4;margin:20mm 18mm 18mm;
+  @top-right{content:"Senzorna prenova · Čustvena inteligenca za mlade";font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-size:7.5pt;color:#8a8f8d}
+  @bottom-center{content:counter(page);font-family:"Bricolage Grotesque","Segoe UI",sans-serif;font-size:9pt;color:#444}
+}
+@page :first{
+  @top-right{content:none}
+  @bottom-center{content:none}
+}
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --bg:#fff; --surface:#fff; --ink:#1F2433; --muted:#585E70; --line:#CFCBD8;
+    --accent:#4B3FC2; --accent-soft:#ECEAFB;
+    --warm:#C2611F; --warm-soft:#FCE9DC;
+    --dorsal:#3E5C8A; --dorsal-soft:#E3EAF5;
+    --ventral:#2F8F57; --ventral-soft:#DFF2E6;
+    --nika:#D63F78; --nika-soft:#FBE3EC; --marko:#2D7FCF; --marko-soft:#DFECFA;
+    --zan:#2E9256; --zan-soft:#DDF2E4; --lara:#DD7A1C; --lara-soft:#FCEBD7;
+    --red:#DC3F45; --red-soft:#FCE1E1; --yellow:#C99208; --yellow-soft:#FFF2C6;
+    --green:#2F9157; --green-soft:#DCF1E3; --blue:#3577C8; --blue-soft:#DDE9F8;
+    --measure:80ch;
+    color-scheme:light;
+  }
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html{font-size:9.8pt}
+  body{background:#fff;font-size:1.12rem;line-height:1.48;padding:0}
+  a{color:inherit;text-decoration:none}
+  .shell{display:block;max-width:none;padding:0}
+  nav.toc,.screen-only{display:none!important}
+  .print-only{display:block}
+  span.print-only{display:inline}
+
+  p,li,dd{hyphens:auto;-webkit-hyphens:auto}
+
+  /* Naslovnica sama na prvi strani */
+  .hero{border-bottom:0;margin:0;padding:24mm 0 0;break-after:page}
+  .hero-art svg{width:30mm;height:30mm}
+  .hero h1{font-size:3.5rem}
+
+  /* Kazalo za tisk */
+  .print-toc{display:block;break-after:page;font-family:var(--f-display)}
+  .print-toc h2{font-size:2rem;margin-bottom:18pt}
+  .print-toc ol{list-style:none;margin:0;padding:0}
+  .print-toc li{display:flex;align-items:baseline;gap:6px;font-size:.96rem;line-height:1.25;padding:1.2pt 0;break-inside:avoid}
+  .print-toc li.part{font-weight:700;font-size:1rem;margin-top:7pt;break-after:avoid}
+  .print-toc li.part:first-child{margin-top:0}
+  .print-toc .n{min-width:2em;color:var(--muted);font-variant-numeric:tabular-nums}
+  .print-toc .dots{flex:1;border-bottom:1px dotted #9aa3a0;transform:translateY(-3px);min-width:12px}
+  .print-toc .pg{min-width:2.2em;text-align:right;font-variant-numeric:tabular-nums}
+
+  /* Prelomi: deli in delovni listi na novi strani, poglavja tečejo naprej */
+  .part-head{break-before:page;margin:0 0 20pt;padding:10mm 0 14pt}
+  section.ch{margin-bottom:26pt;display:block}
+  #sledilnik,#kartica,#barvni-dnevnik,#mini-dnevnik{break-before:page}
+  section.ch>*+*,.ch-head>*+*{margin-top:11pt}
+  .ch-head{display:block;break-inside:avoid}
+  h2,h3,h4,.ch-eyebrow,.box-label,.kicker,.sub,.ch .short{break-after:avoid}
+  .box,.figure,.week,.mission,.tcard,.emo,.who,.pan,.strip,.phone,.phone-row,.mood,details.flip,details.qz,dl.gloss div{break-inside:avoid}
+  p,li{orphans:3;widows:3}
+  .col{display:block}
+  .col:not(.gloss)>*{margin-top:0;margin-bottom:0}
+  .col:not(.gloss)>*+*{margin-top:7pt}
+  .ch .col>h3{margin-top:12pt}
+
+  .figure,.strip,.cast,.emo-grid,.card-grid,.flips,.weeks,.missions,.chips,.phone-row{max-width:none}
+  .figure .svgwrap{max-width:150mm}
+  .strip{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pan{padding:7px;gap:6px;border-width:1.5px}
+  .say{grid-template-columns:24px minmax(0,1fr);gap:5px}
+  .say .av{width:24px;height:24px}
+  .bub{font-size:.88rem;line-height:1.3;padding:4px 7px;border-width:1.5px}
+  .bub::before{left:-6px;width:9px;height:9px}
+  .sms,.nar{font-size:.86rem;line-height:1.3}
+  .phone .send{font-size:.8rem}
+  .cast{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .emo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+  .box{padding:9pt 12pt;border-radius:0 6px 6px 0;border:1px solid var(--line)}
+  .primer{background:#fff;border-left:3px solid var(--warm)}
+  .kljucne{background:#fff;border-left:3px solid var(--accent)}
+  .varno{background:#fff;border-left:3px solid var(--dorsal)}
+  .vprasanja{border:1px dashed #9aa3a0;border-radius:6px}
+  .vaja{border:1.5px solid var(--accent);border-radius:6px}
+  .svgwrap,.week,.mission,.tcard,.emo{background:#fff}
+
+  /* Zložljivi deli: v tisku vedno odprti */
+  details::details-content{content-visibility:visible;display:block}
+  details.flip summary em,details.qz summary small{display:none}
+  .vprasanja li .print-lines{display:block}
+
+  /* Sledilnik: prazni krogi za štampiljke */
+  #progress,#reset{display:none}
+  .day,.day[aria-pressed="true"]{width:34px;height:34px;border:1.2px dashed #6b7471;background:#fff;color:#8a8f8d;font-size:8pt;font-weight:400;box-shadow:none;transform:none}
+  .day[aria-pressed="true"]::after{content:none}
+  .print-lines{display:block;height:34pt;margin-top:2pt;border-bottom:.75pt solid #9aa3a0}
+  .print-lines::before{content:"";display:block;height:17pt;border-bottom:.75pt solid #9aa3a0}
+  .mood-days{max-width:none}
+}
+</style>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs><clipPath id="avc"><circle cx="32" cy="32" r="32"/></clipPath></defs>
+  <!-- Ikone supermoči -->
+  <symbol id="ico-s1" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="ico-s2" viewBox="0 0 24 24"><path d="M2 12c1.5-7 3.5-7 5 0s3 4.5 4.5 0 2.5-2.5 3.8 0 2 1 3 0 1.7-.4 3.7 0"/></symbol>
+  <symbol id="ico-s3" viewBox="0 0 24 24"><path d="M12 21v-9M12 12c0-4.2-2.8-6.5-7-6.5 0 4.2 2.8 6.5 7 6.5zM12 10c0-3.6 2.4-5.7 6.5-5.7 0 3.6-2.4 5.7-6.5 5.7z"/></symbol>
+  <symbol id="ico-s4" viewBox="0 0 24 24"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></symbol>
+  <symbol id="ico-s5" viewBox="0 0 24 24"><path d="M3 4.5h11v7.5H8L3 15.5z"/><path d="M17.5 9H21v10.5l-4-3h-6.5V15"/></symbol>
+  <!-- Liki -->
+  <symbol id="lik-nika" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="32" style="fill:var(--nika-soft)"/>
+    <g clip-path="url(#avc)">
+      <path d="M17 31c0-12 6.5-19 15-19s15 7 15 19v17H17z" fill="#3B2A22"/>
+      <path d="M9 66c0-13 9.5-19 23-19s23 6 23 19z" style="fill:var(--nika)"/>
+      <rect x="28" y="38" width="8" height="11" rx="3" fill="#E5B58F"/>
+      <circle cx="32" cy="29" r="12" fill="#F2CBA8"/>
+      <path d="M20 28c1.5-8.5 6.5-13 12-13s10.5 4.5 12 13c-5-2-9.5-5-12-9.5-2.5 4.5-7 7.5-12 9.5z" fill="#3B2A22"/>
+      <circle cx="27.5" cy="30.5" r="1.5" fill="#1F2433"/><circle cx="36.5" cy="30.5" r="1.5" fill="#1F2433"/>
+      <path d="M28.5 35.2c2 1.7 5 1.7 7 0" stroke="#1F2433" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <circle cx="25" cy="34" r="1.8" fill="#F29BB5" opacity=".7"/><circle cx="39" cy="34" r="1.8" fill="#F29BB5" opacity=".7"/>
+    </g>
+  </symbol>
+  <symbol id="lik-marko" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="32" style="fill:var(--marko-soft)"/>
+    <g clip-path="url(#avc)">
+      <path d="M9 66c0-13 9.5-19 23-19s23 6 23 19z" style="fill:var(--marko)"/>
+      <path d="M24 48c2 3 5 4 8 4s6-1 8-4" stroke="#fff" stroke-width="1.5" fill="none" opacity=".7"/>
+      <rect x="28" y="38" width="8" height="11" rx="3" fill="#DDAA84"/>
+      <circle cx="32" cy="29" r="12" fill="#EEC3A0"/>
+      <path d="M19.5 28c-.5-9 5-15 12.5-15s13 6 12.5 15c-1.5-3-3.5-4.5-5.5-4.5-1.5 1.5-3.5 1.5-5 0-1.5 1.5-3.5 1.5-5 0-1.5 1.5-3.5 1.5-5 0-2 0-3.5 1.5-4.5 4.5z" fill="#1E1A18"/>
+      <circle cx="27.5" cy="30.5" r="1.5" fill="#1F2433"/><circle cx="36.5" cy="30.5" r="1.5" fill="#1F2433"/>
+      <path d="M29 35.5c1.8 1 4.2 1 6 0" stroke="#1F2433" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </g>
+  </symbol>
+  <symbol id="lik-zan" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="32" style="fill:var(--zan-soft)"/>
+    <g clip-path="url(#avc)">
+      <path d="M9 66c0-13 9.5-19 23-19s23 6 23 19z" style="fill:var(--zan)"/>
+      <rect x="28" y="38" width="8" height="11" rx="3" fill="#E2B48E"/>
+      <circle cx="32" cy="29" r="12" fill="#F4D2B2"/>
+      <path d="M19 29c-1-10 5-16 13-16 8.5 0 14 5.5 13 14-4-.5-8.5-3-11.5-7.5-3 5-8.5 8.5-14.5 9.5z" fill="#C9963F"/>
+      <circle cx="27.5" cy="30.5" r="1.5" fill="#1F2433"/><circle cx="36.5" cy="30.5" r="1.5" fill="#1F2433"/>
+      <path d="M28 35c2.4 2.2 5.6 2.2 8 0" stroke="#1F2433" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </g>
+  </symbol>
+  <symbol id="lik-lara" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="32" style="fill:var(--lara-soft)"/>
+    <g clip-path="url(#avc)">
+      <circle cx="32" cy="12.5" r="6.5" fill="#7A3E1D"/>
+      <path d="M9 66c0-13 9.5-19 23-19s23 6 23 19z" style="fill:var(--lara)"/>
+      <rect x="28" y="38" width="8" height="11" rx="3" fill="#CE9C74"/>
+      <circle cx="32" cy="29" r="12" fill="#E3B48B"/>
+      <path d="M19.5 30c-.5-10 5-15.5 12.5-15.5S45 20 44.5 30c-3-5.5-7.5-8.5-12.5-8.5S22.5 24.5 19.5 30z" fill="#7A3E1D"/>
+      <g stroke="#1F2433" stroke-width="1.4" fill="none">
+        <circle cx="27.3" cy="30.5" r="3.4"/><circle cx="36.7" cy="30.5" r="3.4"/><path d="M30.7 30.5h2.6"/>
+      </g>
+      <circle cx="27.3" cy="30.5" r="1.3" fill="#1F2433"/><circle cx="36.7" cy="30.5" r="1.3" fill="#1F2433"/>
+      <path d="M29 36c1.8 1.2 4.2 1.2 6 0" stroke="#1F2433" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </g>
+  </symbol>
+  <!-- Obris telesa za barvanje -->
+  <symbol id="obris" viewBox="0 0 160 300">
+    <circle cx="80" cy="34" r="24"/>
+    <path d="M68 58v12q-28 2-38 16L14 170q-2 10 6 12t10-8l14-64 2 70-6 106q0 10 12 10t12-10l12-90h8l12 90q2 10 12 10t12-10l-6-106 2-70 14 64q2 10 10 8t6-12L130 86q-10-14-38-16V58z"/>
+  </symbol>
+</svg>
+
+<div class="shell">
+
+<nav class="toc" aria-label="Kazalo">
+  <details open id="toc-d">
+    <summary>Kazalo</summary>
+    <ol id="toc-list"></ol>
+    <button type="button" class="print-btn" id="print-btn">Natisni</button>
+  </details>
+</nav>
+
+<main>
+
+<header class="hero">
+  <div class="hero-art" role="img" aria-label="Štirje liki iz priročnika: Nika, Marko, Žan in Lara">
+    <svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg>
+    <svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg>
+    <svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg>
+    <svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg>
+  </div>
+  <div class="kicker">Zbirka Senzorna prenova · 4-tedenski izziv · 1. izdaja (osnutek)</div>
+  <h1>Senzorna prenova: <em>čustvena inteligenca <b>za mlade</b></em></h1>
+  <p class="lede">Priročnik za mlade od 12 do 16 let. Kako čustvo začutiš v telesu, preden te odnese, in kako mu daš ime. Kako izbereš, kaj boš naredil(a), in kako bolje razumeš ljudi okoli sebe.</p>
+  <div class="meta-row"><span>7 delov · 16 kratkih poglavij</span><span>3–5 min branja na poglavje</span><span>Avtor: Peter Karlovšek</span></div>
+</header>
+
+<section class="print-toc" aria-hidden="true">
+  <h2>Kazalo</h2>
+  <ol id="print-toc-list"></ol>
+</section>
+
+<section class="ch" id="uvod" data-toc="Kako uporabljaš ta priročnik" data-num="·">
+  <div class="ch-eyebrow"><b>Začetek</b><span>≈ 5 min branja</span></div>
+  <h2>Kako uporabljaš ta priročnik</h2>
+  <p class="short">Čustva niso nekaj, kar se ti samo zgodi. Z njimi se da delati, tako kot z žogo, kitaro ali novo igrico: z vajo.</p>
+  <div class="col">
+    <p>Ta priročnik govori o tem, kako čustvo opaziš v telesu, preden te odnese. Kako mu daš ime. Kako izbereš, kaj boš naredil(a). In kako bolje razumeš ljudi okoli sebe. Vsemu skupaj pravimo <strong>čustvena inteligenca</strong>.</p>
+    <p>Ne bereš ga za oceno. Ni testa in ni napačnih odgovorov. Poglavja so kratka, vsako vzame tri do pet minut. Lahko jih bereš po vrsti ali skočiš tja, kjer te nekaj zanima.</p>
+    <p>Priročnik spada v zbirko Senzorna prenova. Njeno izhodišče je preprosto: <strong>čustvo se začne v telesu</strong>. Zato bomo telo veliko poslušali.</p>
+    <h3>Spoznaj ekipo</h3>
+    <p>Skozi knjigo te spremljajo štirje prijatelji. Hodijo na isto šolo, imajo dobre in slabe dneve. V vsakem poglavju se jim zgodi nekaj, kar se je morda zgodilo tudi tebi.</p>
+  </div>
+  <div class="cast">
+    <div class="who c-nika"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><h4>Nika <span>12 let</span></h4><p>Najmlajša v ekipi. Riše, ima starejšega brata in vse pove naravnost. Včasih prehitro.</p></div>
+    <div class="who c-marko"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><h4>Marko <span>13 let</span></h4><p>Igra nogomet in igrice. Navzven je miren, v njem pa se včasih vse zavozla.</p></div>
+    <div class="who c-zan"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><h4>Žan <span>14 let</span></h4><p>Igra kitaro in ima veliko idej. Telefon je njegov najboljši prijatelj in največji tat časa.</p></div>
+    <div class="who c-lara"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><h4>Lara <span>15 let</span></h4><p>Odlična učenka, ki jo pred vsakim nastopom stisne v trebuhu. Vsi ji pišejo, ko imajo težave.</p></div>
+  </div>
+  <div class="col">
+    <h3>Kako je zgrajeno poglavje</h3>
+    <ol>
+      <li><strong>Stavek bistva</strong> pod naslovom. Če nimaš časa za več, preberi samo tega.</li>
+      <li><strong>Strip</strong>: prizor iz življenja ekipe.</li>
+      <li><strong>Kaj se dogaja</strong>: kratka razlaga.</li>
+      <li><strong>Poskusi</strong>: vaja ali misija za eno do pet minut.</li>
+      <li><strong>Zapomni si</strong>: tri najpomembnejše misli.</li>
+      <li><strong>Vprašanja zate</strong>: za razmislek, zvezek ali pogovor s prijateljem.</li>
+    </ol>
+    <p>Na koncu te čaka <strong>štiritedenski izziv</strong>: kratke misije po pet minut, sledilnik s štampiljkami, kartica za umirjanje in barvni dnevnik razpoloženja. Ti izbereš, koliko boš naredil(a).</p>
+  </div>
+  <div class="box varno" id="varni-koticek">
+    <div class="box-label">Tvoj varni kotiček</div>
+    <p>Ta knjiga ne nadomesti pogovora s človekom. Vse vaje so neobvezne. Če ti katera ni prijetna, jo preskoči.</p>
+    <p>Če te med vajo kaj preplavi, se ustavi. Postavi stopala trdno na tla in poimenuj tri stvari, ki jih vidiš okoli sebe.</p>
+    <p>Morda ti je že dlje časa težko, ne moreš spati ali se pojavijo misli, da bi si kaj naredil(a). Takrat ne ostani sam(a) s tem. Povej odraslemu, ki mu zaupaš, ali pokliči:</p>
+    <ul>
+      <li><strong>TOM telefon za otroke in mladostnike: 116 111</strong>, vsak dan od 12. do 20. ure, brezplačno in anonimno.</li>
+      <li><strong>Zaupni telefon Samarijan in Sopotnik: 116 123</strong>, vsak dan, 24 ur, brezplačno.</li>
+      <li><strong>Klic v duševni stiski: 01 520 99 00</strong>, vsak dan od 19. do 7. ure.</li>
+      <li><strong>112</strong>, če je kdo v nevarnosti zdaj.</li>
+      <li><strong>Šolska svetovalna služba</strong>: svetovalni delavec ali delavka na tvoji šoli.</li>
+      <li><strong>safe.si</strong>: nasveti in pomoč pri težavah na spletu.</li>
+    </ul>
+    <p><strong>Varnost je pomembnejša od skrivnosti.</strong> Če je v nevarnosti kdo drug, povej odraslemu, tudi če si obljubil(a), da ne boš.</p>
+  </div>
+</section>
+
+<div class="part-head" id="del1" data-toc="I · Čustva in telo">
+  <div class="kicker">Del I</div>
+  <h2>Čustva in telo</h2>
+  <p>Kaj so čustva, zakaj so pri tvojih letih tako močna in zakaj začnemo pri telesu.</p>
+</div>
+
+<section class="ch" id="p1" data-toc="Čustva so sporočila" data-num="1">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 1</b><span>≈ 4 min branja</span></div>
+  <h2>Čustva so sporočila</h2>
+  <p class="short">Čustvo ni napaka. Je sporočilo o tem, kaj se ti dogaja in kaj ti je pomembno.</p>
+  <div class="strip" role="group" aria-label="Strip: Marko in sporočilo trenerja">
+    <div class="pan c-marko"><p class="cap">Nedelja, 20.14</p><p class="sms"><b>Trener</b>Marko, jutri po treningu se pogovoriva.</p></div>
+    <div class="pan c-marko"><p class="cap">Pet minut pozneje</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Kaj sem naredil? Me bo vrgel iz ekipe?</p></div></div>
+    <div class="pan c-marko"><p class="cap">Ponoči</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Ne morem zaspati. V trebuhu imam kamen.</p></div></div>
+    <div class="pan c-marko"><p class="cap">Ponedeljek po treningu</p><p class="nar">Trener mu pove, da bo v soboto prvič kapetan.</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Torej sem se bal čisto zaman?</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Markov strah ni bil zaman. Opravil je svoje delo: povedal mu je, da mu je ekipa zelo pomembna. Narobe je samo uganil, kaj bo trener rekel.</p>
+    <p>Vsako čustvo nekaj sporoča. Strah pravi: pazi, nekaj pomembnega je lahko v nevarnosti. Jeza pravi: nekdo je prestopil mejo ali nekaj ni pošteno. Žalost pravi: nekaj si izgubil(a). Veselje pravi: to je dobro zate, več tega.</p>
+    <p>Čustva niso dobra ali slaba. So prijetna ali neprijetna. Dobro ali slabo je lahko le to, kar z njimi narediš. Jeza, zaradi katere udariš brata, škodi. Jeza, zaradi katere rečeš »to ni pošteno«, pomaga.</p>
+    <p>Sposobnosti, da čustva opaziš, razumeš in z njimi pametno ravnaš, pravimo čustvena inteligenca. To ni prirojen talent. Je spretnost, ki se je naučiš z vajo, kot kolesarjenja ali tujega jezika.</p>
+  </div>
+  <figure class="figure">
+    <div class="emo-grid">
+      <div class="emo" style="--c:var(--red)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c1 4 5.5 5.5 5.5 11a5.5 5.5 0 0 1-11 0c0-3 2-4.5 2-6.5 2 1 3 2.5 3 4.5 1.2-3.2.5-6 .5-9z"/></svg><h4>Jeza</h4><p>Nekdo je prestopil mejo ali nekaj ni pošteno.</p></div>
+      <div class="emo" style="--c:var(--warm)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9.5 17h-19zM12 10v4M12 17.3h.01"/></svg><h4>Strah</h4><p>Pazi, nekaj pomembnega je lahko v nevarnosti.</p></div>
+      <div class="emo" style="--c:var(--blue)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s6.5 7.2 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10.2 12 3 12 3z"/></svg><h4>Žalost</h4><p>Nekaj ali nekoga si izgubil(a). Potrebuješ tolažbo.</p></div>
+      <div class="emo" style="--c:var(--accent)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.8 10.5q1.6 1.6 3.2 0M13 10.5q1.6 1.6 3.2 0M10 16h4"/></svg><h4>Sram</h4><p>Pomembno ti je, kako te vidijo drugi.</p></div>
+      <div class="emo" style="--c:var(--yellow)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg><h4>Veselje</h4><p>To je dobro zate. Več tega!</p></div>
+      <div class="emo" style="--c:var(--muted)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3h11M6.5 21h11M7.5 3c0 5 9 6.5 9 9s-9 4-9 9M16.5 3c0 5-9 6.5-9 9s9 4 9 9"/></svg><h4>Dolgčas</h4><p>Nič te ne pritegne. Morda potrebuješ izziv ali spremembo.</p></div>
+    </div>
+    <figcaption>Šest čustev in kaj pogosto sporočajo. Sporočilo je namig, ne ukaz: ti odločiš, kaj boš z njim naredil(a).</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 2 minuti · Kaj mi sporoča?</div>
+    <ol>
+      <li>Spomni se trenutka danes ali včeraj, ko si nekaj močno začutil(a).</li>
+      <li>Poimenuj čustvo z eno besedo. Prva, ki ti pride na misel, je dovolj dobra.</li>
+      <li>Vprašaj se: »Kaj mi to čustvo sporoča? Kaj mi je pomembno?«</li>
+      <li>Če želiš, odgovor zapiši v zvezek ali telefon.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Čustvo je sporočilo, ne napaka.</li>
+      <li>Čustva so prijetna ali neprijetna, ne dobra ali slaba.</li>
+      <li>Čustvena inteligenca je spretnost. Naučiš se je z vajo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Katero čustvo pri sebi najhitreje opaziš? Katero najtežje?</li>
+      <li>Kdaj ti je neprijetno čustvo sporočilo nekaj koristnega?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p2" data-toc="Možgani v gradnji in pet supermoči" data-num="2">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 2</b><span>≈ 5 min branja</span></div>
+  <h2>Možgani v gradnji in pet supermoči</h2>
+  <p class="short">Če ti čustva včasih zavrejo hitreje kot drugim, s tabo ni nič narobe. Tvoji možgani se gradijo. In to je dobra novica.</p>
+  <div class="strip" role="group" aria-label="Strip: Nika in omejitev telefona">
+    <div class="pan c-nika"><p class="cap">Torek, 21.30</p><p class="nar">Mama: »Telefon na polnilec v kuhinjo. Zdaj.«</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Samo še pet minut! Vsi so še na klepetu!</p></div></div>
+    <div class="pan c-nika"><p class="cap">Mama reče ne</p><div class="say krik"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Ti mi vedno vse uničiš!</p></div></div>
+    <div class="pan c-nika"><p class="cap">Vrata zaloputnejo</p><p class="nar">Srce razbija, obraz gori, roke se tresejo.</p></div>
+    <div class="pan c-nika"><p class="cap">Deset minut pozneje</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Zakaj sem to rekla? Saj je ne sovražim.</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Nika ni slaba hči. Njeni možgani so naredili to, kar možgani pri dvanajstih letih pogosto naredijo.</p>
+    <p>Možgani ne dozorijo naenkrat. Deli, ki skrbijo za čustva in nagrade, so pri tvojih letih že zelo močni. Del, ki premisli, preden ukrepa, pa se gradi še do sredine dvajsetih let. To je <strong>čelni reženj</strong>, nekakšne zavore možganov. Zato čustva pridejo hitro in močno, zavore pa včasih zamujajo.</p>
+    <h3>Možgani na dlani</h3>
+    <p>Psihiater Daniel Siegel je zasnoval preprost model. Dvigni roko. Palec položi na dlan in ga pokrij s prsti, kot da delaš pest.</p>
+    <ul>
+      <li><strong>Zapestje in dlan</strong> sta hrbtenjača in možgansko deblo. Skrbita za dih in srčni utrip.</li>
+      <li><strong>Palec</strong> so čustveni možgani z <strong>amigdalo</strong>, alarmom za nevarnost.</li>
+      <li><strong>Prsti</strong> so čelni reženj, ki premisli in izbere.</li>
+    </ul>
+    <p>Ko te nekaj močno vznemiri, je, kot bi prsti poskočili navzgor. Siegel temu pravi, da <strong>pokrov odleti</strong>. Alarm vodi, premislek je za trenutek odklopljen. Takrat lahko rečeš stvari, ki jih v resnici ne misliš.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap panels">
+      <svg viewBox="0 0 300 280" role="img" aria-label="Pokrov zaprt: roka v pesti. Prsti, čelni reženj, pokrivajo palec, amigdalo. Zapestje in dlan sta hrbtenjača in možgansko deblo.">
+        <text x="150" y="26" text-anchor="middle" class="t-b">Pokrov zaprt</text>
+        <rect x="58" y="198" width="64" height="72" rx="14" style="fill:var(--blue-soft);stroke:var(--blue);stroke-width:2"/>
+        <rect x="40" y="112" width="100" height="98" rx="24" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>
+        <ellipse cx="90" cy="150" rx="30" ry="12" style="fill:none;stroke:var(--red);stroke-width:2;stroke-dasharray:5 4"/>
+        <g style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2">
+          <rect x="38" y="70" width="27" height="62" rx="13"/><rect x="64" y="64" width="27" height="68" rx="13"/><rect x="90" y="66" width="27" height="66" rx="13"/><rect x="116" y="76" width="25" height="56" rx="12"/>
+        </g>
+        <g class="t-s"><text x="164" y="88">prsti:</text><text x="164" y="106" style="fill:var(--accent)">premislek</text>
+        <text x="164" y="150">palec (skrit):</text><text x="164" y="168" style="fill:var(--red)">alarm</text>
+        <text x="164" y="228">zapestje, dlan:</text><text x="164" y="246" style="fill:var(--blue)">dih, srce</text></g>
+        <g class="stroke-muted" style="stroke-width:1;fill:none"><path d="M143 96h18M122 150h39M124 236h37"/></g>
+      </svg>
+      <svg viewBox="0 0 300 280" role="img" aria-label="Pokrov odleti: prsti so iztegnjeni navzgor, palec, amigdala, je odkrit in vodi.">
+        <text x="150" y="26" text-anchor="middle" class="t-b">Pokrov odleti</text>
+        <rect x="58" y="198" width="64" height="72" rx="14" style="fill:var(--blue-soft);stroke:var(--blue);stroke-width:2"/>
+        <rect x="40" y="128" width="100" height="82" rx="22" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>
+        <g style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2;opacity:.55">
+          <rect x="40" y="52" width="23" height="86" rx="11"/><rect x="65" y="40" width="23" height="98" rx="11"/><rect x="90" y="44" width="23" height="94" rx="11"/><rect x="115" y="58" width="22" height="80" rx="11"/>
+        </g>
+        <rect x="52" y="152" width="78" height="26" rx="13" style="fill:var(--red-soft);stroke:var(--red);stroke-width:2.5"/>
+        <g class="t-s"><text x="164" y="88">premislek</text><text x="164" y="106">je odklopljen</text>
+        <text x="164" y="160" style="fill:var(--red);font-weight:700">alarm vodi</text><text x="164" y="178">(amigdala)</text></g>
+        <g class="stroke-muted" style="stroke-width:1;fill:none"><path d="M139 96h22M132 166h29"/></g>
+      </svg>
+    </div>
+    <figcaption>Model možganov na dlani po D. J. Siegelu. Ko pokrov odleti, ne pomaga pametovanje. Najprej počakaj, da se vrne.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Dobra novica: možgani so pri tvojih letih zelo prilagodljivi. Kar zdaj vadiš, se jih dobro prime. Vsakič, ko se ustaviš in počakaš, da se pokrov vrne, krepiš zavore.</p>
+    <h3>Pet supermoči</h3>
+    <p>Psiholog Daniel Goleman je čustveno inteligenco razdelil na pet spretnosti. Tu jim pravimo <strong>supermoči</strong>, ker jih lahko vadiš in krepiš kot mišice. Vsaka ima v knjigi svoj del.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 520 420" role="img" aria-label="Drevo petih supermoči. Korenine so v telesu. Iz debla rastejo veje do petih krogov: samozavedanje, samoregulacija, notranja motivacija, empatija in socialne veščine.">
+        <g style="fill:none;stroke:var(--warm);stroke-width:5;stroke-linecap:round">
+          <path d="M260 360V250M260 250L95 225M260 250L155 120M260 250V82M260 250L365 120M260 250L425 225"/>
+          <path d="M260 360q-30 10-60 30M260 360q30 10 60 30M260 360v34M260 362q-60 4-100 14M260 362q60 4 100 14" style="stroke-width:3;opacity:.7"/>
+        </g>
+        <g style="stroke-width:2">
+          <circle cx="90" cy="230" r="58" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+          <circle cx="155" cy="115" r="58" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+          <circle cx="260" cy="70" r="58" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+          <circle cx="365" cy="115" r="58" style="fill:var(--warm-soft);stroke:var(--warm)"/>
+          <circle cx="430" cy="230" r="58" style="fill:var(--warm-soft);stroke:var(--warm)"/>
+        </g>
+        <g style="fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round">
+          <use href="#ico-s1" x="76" y="190" width="28" height="28" style="stroke:var(--accent)"/>
+          <use href="#ico-s2" x="141" y="75" width="28" height="28" style="stroke:var(--accent)"/>
+          <use href="#ico-s3" x="246" y="30" width="28" height="28" style="stroke:var(--accent)"/>
+          <use href="#ico-s4" x="351" y="75" width="28" height="28" style="stroke:var(--warm)"/>
+          <use href="#ico-s5" x="416" y="190" width="28" height="28" style="stroke:var(--warm)"/>
+        </g>
+        <g text-anchor="middle">
+          <text x="90" y="238" class="t-b">1 Samo-</text><text x="90" y="260" class="t-b">zavedanje</text>
+          <text x="155" y="123" class="t-b">2 Samo-</text><text x="155" y="145" class="t-b">regulacija</text>
+          <text x="260" y="78" class="t-b">3 Notranja</text><text x="260" y="100" class="t-b">motivacija</text>
+          <text x="365" y="132" class="t-b">4 Empatija</text>
+          <text x="430" y="238" class="t-b">5 Socialne</text><text x="430" y="260" class="t-b">veščine</text>
+          <text x="260" y="414" class="t-s">korenine: tvoje telo</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption>Drevo petih supermoči. Prve tri (vijolične) so o odnosu do sebe, zadnji dve (oranžni) o odnosu do drugih. Korenine so v telesu: tam se čustvo začne.</figcaption>
+  </figure>
+  <div class="card-grid">
+    <div class="tcard"><span class="n">1</span><h4>Samozavedanje</h4><p>Opaziš, kaj čutiš, ko se to zgodi. Del II.</p></div>
+    <div class="tcard"><span class="n">2</span><h4>Samoregulacija</h4><p>Izbereš, kaj boš naredil(a), namesto da te čustvo odnese. Del III.</p></div>
+    <div class="tcard"><span class="n">3</span><h4>Notranja motivacija</h4><p>Vztrajaš zaradi tega, kar ti je pomembno, ne le zaradi nagrade. Del IV.</p></div>
+    <div class="tcard"><span class="n">4</span><h4>Empatija</h4><p>Razumeš, kaj čuti drugi, in se v tem ne izgubiš. Del V.</p></div>
+    <div class="tcard"><span class="n">5</span><h4>Socialne veščine</h4><p>Poveš, kaj čutiš in potrebuješ, rečeš »ne« in se dogovoriš. Del VI.</p></div>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 1 minuta · Pokrov nazaj</div>
+    <ol>
+      <li>Ko začutiš, da ti bo pokrov odletel, naredi pest kot na sliki. Lahko tudi v žepu.</li>
+      <li>Počasi izdihni, kot bi pihal(a) v juho. Še enkrat.</li>
+      <li>V mislih reci: »Pokrov se vrača.«</li>
+      <li>Odgovori šele, ko čutiš, da se je telo vsaj malo umirilo.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Močna čustva pri tvojih letih so normalna. Zavore se še gradijo.</li>
+      <li>Ko pokrov odleti, vodi alarm. Najprej počakaj, da se vrne.</li>
+      <li>Pet supermoči: samozavedanje, samoregulacija, notranja motivacija, empatija, socialne veščine.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Kdaj ti je nazadnje odletel pokrov? Kaj se je zgodilo tik pred tem?</li>
+      <li>Katera supermoč je že tvoja močna stran? Katero bi rad(a) okrepil(a)?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p3" data-toc="Telo pove prvo" data-num="3">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 3</b><span>≈ 4 min branja</span></div>
+  <h2>Telo pove prvo</h2>
+  <p class="short">Čustvo najprej začutiš v telesu: v trebuhu, prsih, grlu, rokah. Kdor telo bolje sliši, prej opazi čustvo.</p>
+  <div class="strip" role="group" aria-label="Strip: Lara pred govornim nastopom">
+    <div class="pan c-lara"><p class="cap">Slovenščina, 9.55</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Še pet minut do mojega govornega nastopa.</p></div></div>
+    <div class="pan c-lara"><p class="cap">Telo se oglasi</p><p class="nar">Roke so mrzle. V trebuhu vozel. Srce razbija.</p></div>
+    <div class="pan c-lara"><p class="cap">Lara opazi</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Aha. To je trema. Telo se pripravlja.</p></div></div>
+    <div class="pan c-lara"><p class="cap">Trije dolgi izdihi pozneje</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Še vedno me je strah. Ampak zdaj vem, kaj je to.</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Preden čustvo dobi ime, je že v telesu. Srce pospeši, dih se spremeni, mišice se napnejo ali postanejo težke. Šele nato pride misel: »Strah me je.«</p>
+    <p>Sposobnosti, da začutiš, kaj se dogaja v notranjosti telesa, pravimo <strong>interocepcija</strong>. Beseda je dolga, pomeni pa preprosto: slišati telo.</p>
+    <p>Raziskovalci so ljudi iz več držav prosili, naj na obrisu telesa pobarvajo, kje čutijo posamezno čustvo. Zemljevidi so si bili presenetljivo podobni. Jeza je bila vroča v rokah in prsih, žalost težka v prsih, veselje toplo po vsem telesu (Nummenmaa idr., 2014).</p>
+    <p>Kdor svoje telo dobro pozna, ima prednost. Jezo opazi, ko so pesti šele napol stisnjene. Tremo prepozna kot tremo in ne misli, da je z njim kaj narobe.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 560 360" role="img" aria-label="Dva obrisa telesa. Levo Larin zemljevid pred nastopom: rdeče v prsih, kjer srce razbija, rdeče v trebuhu, kjer je vozel, modro v rokah, ki so mrzle. Desno prazen obris z napisom ti, za barvanje.">
+        <text x="110" y="22" text-anchor="middle" class="t-b">Lara pred nastopom</text>
+        <circle cx="110" cy="130" r="17" style="fill:var(--red-soft);stroke:var(--red);stroke-width:2"/>
+        <circle cx="110" cy="180" r="17" style="fill:var(--red-soft);stroke:var(--red);stroke-width:2"/>
+        <circle cx="50" cy="206" r="10" style="fill:var(--blue-soft);stroke:var(--blue);stroke-width:2"/>
+        <circle cx="170" cy="206" r="10" style="fill:var(--blue-soft);stroke:var(--blue);stroke-width:2"/>
+        <use href="#obris" x="30" y="40" width="160" height="300" style="fill:none;stroke:var(--ink);stroke-width:2"/>
+        <g class="stroke-muted" style="stroke-width:1;fill:none"><path d="M128 130h80M128 180h80M181 206h27"/></g>
+        <g class="t-s"><text x="212" y="135">srce razbija</text><text x="212" y="185">vozel v trebuhu</text><text x="212" y="211">mrzle roke</text></g>
+        <text x="430" y="22" text-anchor="middle" class="t-b">Ti, danes</text>
+        <use href="#obris" x="350" y="40" width="160" height="300" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>
+      </svg>
+    </div>
+    <div class="legend" aria-label="Legenda barv">
+      <span><i style="background:var(--red-soft);border-color:var(--red)"></i>rdeča: vroče, napeto, razbija</span>
+      <span><i style="background:var(--blue-soft);border-color:var(--blue)"></i>modra: hladno, težko, prazno</span>
+      <span><i style="background:var(--yellow-soft);border-color:var(--yellow)"></i>rumena: žgečka, brni, živahno</span>
+      <span><i style="background:var(--green-soft);border-color:var(--green)"></i>zelena: mehko, mirno, toplo</span>
+    </div>
+    <figcaption>Telesni zemljevid. Na desni obris pobarvaj, kje danes kaj čutiš. Barve so predlog, lahko izbereš svoje.</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 1 minuta · Kje sem zdaj</div>
+    <ol>
+      <li>Oči imej odprte. Ne spreminjaj drže.</li>
+      <li>Opazi dih: je hiter ali počasen, visoko v prsih ali nizko v trebuhu?</li>
+      <li>Opazi ramena, čeljust, trebuh in roke. Kje je napeto, kje mehko?</li>
+      <li>Vprašaj se: »Če bi ta občutek imel ime, kako bi mu bilo ime?« Prva beseda je dovolj dobra.</li>
+    </ol>
+    <p class="note">Če ne čutiš nič posebnega, je tudi to odgovor. Telo se včasih oglasi šele po nekaj dneh vaje. Če ti postane neprijetno, postavi stopala na tla in poimenuj tri stvari, ki jih vidiš.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 3 minute · Moj telesni zemljevid</div>
+    <p>Na obrisu zgoraj ali na listu papirja pobarvaj, kje danes čutiš kaj močnega. Zraven napiši, katero čustvo bi to lahko bilo. Čez nekaj dni ponovi in primerjaj.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Čustvo najprej začutiš v telesu, šele nato dobi besedo.</li>
+      <li>Telesni znaki so zgodnje opozorilo. Opaziš jih, preden te čustvo odnese.</li>
+      <li>Telo se da slišati vedno bolje. Z vajo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Kje v telesu najprej začutiš jezo? Kje strah?</li>
+      <li>Kaj naredi tvoje telo, ko si zares vesel(a)?</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del2" data-toc="II · Samozavedanje">
+  <svg class="steber-ico" aria-hidden="true"><use href="#ico-s1"/></svg>
+  <div class="kicker">Del II · Prva supermoč</div>
+  <h2>Samozavedanje</h2>
+  <p>Opazuj, ne sodi. Kako čustvo opaziš, mu daš ime in odkriješ, kaj ga sproži.</p>
+</div>
+
+<section class="ch" id="p4" data-toc="Poimenuj, da ukrotiš" data-num="4">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 4</b><span>≈ 4 min branja</span></div>
+  <h2>Poimenuj, da ukrotiš</h2>
+  <p class="short">»Fajn« ne pove skoraj nič. Natančna beseda za čustvo ti pokaže, kaj potrebuješ, in čustvo že malo umiri.</p>
+  <div class="strip" role="group" aria-label="Strip: Žan in beseda fajn">
+    <div class="pan c-zan"><p class="cap">Glavni odmor</p><div class="say c-lara"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Kako si?</p></div><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Fajn.</p></div></div>
+    <div class="pan c-zan"><div class="say c-lara"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Res? Ves dan si tiho.</p></div><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Ok. Vseeno.</p></div></div>
+    <div class="pan c-zan"><p class="cap">Zvečer</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">V resnici sem razočaran. Niso me vzeli v šolski bend.</p></div></div>
+    <div class="pan c-zan"><p class="cap">21.40</p><p class="sms out"><b>Žan</b>Danes nisem bil fajn. Razočaran sem, ker me niso vzeli v bend.</p><p class="sms"><b>Lara</b>Hvala, da si povedal. Greva jutri skupaj domov?</p></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Na vprašanje »Kako si?« večina reče »fajn«, »ok« ali »vseeno«. Te besede so kot vremenska napoved, ki pravi samo »vreme«. Ne veš, ali potrebuješ dežnik ali sončna očala.</p>
+    <p>Razočaranje, jeza in žalost so si podobni, a hočejo različne stvari. Jeza hoče zaščititi mejo. Razočaranje hoče priznati, da si pričakoval(a) več. Žalost hoče tolažbo. Kdor ima za vse le besedo »slabo«, težko ve, kaj bi mu pomagalo.</p>
+    <p>Poimenovanje ima še en učinek. V raziskavi so ljudje gledali fotografije jeznih in prestrašenih obrazov. Ko so čustvo na sliki poimenovali z besedo, se je alarm v možganih, amigdala, umiril (Lieberman idr., 2007). Siegel temu pravi: <strong>poimenuj, da ukrotiš</strong>.</p>
+    <p>Pogosto čutiš več čustev hkrati. Pred prvim dnem v novi šoli si lahko vesel(a) in te je hkrati strah. To ni zmeda. Poimenuj oboje.</p>
+    <h3>Barvni merilnik razpoloženja</h3>
+    <p>Če prave besede ne najdeš, si pomagaj z dvema vprašanjema. Je občutek prijeten ali neprijeten? Ima tvoje telo veliko energije ali malo? Odgovora te pripeljeta do ene od štirih barv. Merilnik je razvil Marc Brackett z Univerze Yale.</p>
+  </div>
+  <figure class="figure">
+    <div class="mood" role="img" aria-label="Barvni merilnik razpoloženja. Rdeča: neprijetno in veliko energije. Rumena: prijetno in veliko energije. Modra: neprijetno in malo energije. Zelena: prijetno in malo energije.">
+      <div class="ax-y">malo energije ← → veliko energije</div>
+      <div class="q red"><h4>Rdeča</h4><p>jeza, strah, nervoza, frustracija, panika, ljubosumje</p></div>
+      <div class="q yellow"><h4>Rumena</h4><p>navdušenje, veselje, ponos, radovednost, zabava, upanje</p></div>
+      <div class="q blue"><h4>Modra</h4><p>žalost, razočaranje, utrujenost, osamljenost, dolgčas, sram</p></div>
+      <div class="q green"><h4>Zelena</h4><p>mir, sproščenost, zadovoljstvo, hvaležnost, varnost, olajšanje</p></div>
+      <div class="ax-x">← neprijetno · prijetno →</div>
+    </div>
+    <figcaption>Barvni merilnik razpoloženja (po M. Brackettu in J. A. Russellu). Zgoraj je veliko energije v telesu, spodaj malo. Levo je neprijetno, desno prijetno.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Nobena barva ni boljša od druge. Rdeča ti da moč, da se postaviš zase. Modra te upočasni, da si odpočiješ ali žaluješ. Vse barve so del življenja.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 3-krat na dan · V kateri barvi sem?</div>
+    <ol>
+      <li>Zjutraj, po pouku in zvečer se ustavi za deset sekund.</li>
+      <li>Vprašaj se: »V kateri barvi sem zdaj?«</li>
+      <li>Poišči eno natančno besedo iz te barve. Ali svojo.</li>
+      <li>Dodaj, kje v telesu to čutiš: »Modra, utrujenost, težke roke.«</li>
+    </ol>
+    <p class="note">Barve dneva lahko vpisuješ v barvni dnevnik na koncu knjige.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Natančna beseda pokaže, kaj potrebuješ.</li>
+      <li>Poimenovanje umiri alarm v možganih.</li>
+      <li>Če besede ne najdeš, začni z barvo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Katero barvo imaš najpogosteje? Ob katerem delu dneva?</li>
+      <li>Katero čustvo pogosto skriješ za besedo »fajn«?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p5" data-toc="Moji sprožilci" data-num="5">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 5</b><span>≈ 4 min branja</span></div>
+  <h2>Moji sprožilci</h2>
+  <p class="short">Sprožilec je to, kar čustvo prižge. Ko ga nekajkrat zapišeš, začneš videti vzorec. In vzorec lahko spremeniš.</p>
+  <div class="strip" role="group" aria-label="Strip: Nika odkrije vzorec">
+    <div class="pan c-nika"><p class="cap">Ponedeljek</p><div class="say krik"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Spet si mi vzel polnilec!</p></div><p class="nar">Brat skomigne in gre.</p></div>
+    <div class="pan c-nika"><p class="cap">Sreda</p><p class="sms out"><b>Nika · razredni klepet</b>Ima kdo zapiske iz zgodovine?</p><p class="seen">Videno: 9</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Nihče ne odgovori. Vsem sem odveč.</p></div></div>
+    <div class="pan c-nika"><p class="cap">Petek, Nika bere svoj dnevnik</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Polnilec, klepet … Obakrat sem se počutila spregledana.</p></div></div>
+    <div class="pan c-nika"><p class="cap">Odkritje</p><p class="nar">Isti občutek v različnih situacijah. To je vzorec.</p></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p><strong>Sprožilec</strong> je oseba, situacija ali misel, ki pri tebi redno prižge močno čustvo. Pri Niki je bil to občutek, da je spregledana. Enkrat ga je sprožil brat, drugič tišina v klepetu.</p>
+    <p>Sprožilce težko opaziš, dokler jih ne zapišeš. V glavi se dnevi pomešajo. Na papirju pa se po enem tednu pokaže, kaj se ponavlja: isti predmet v šoli, ista ura dneva, ista vrsta sporočila.</p>
+    <p>Ko se isti občutek pojavlja v vedno novih situacijah, to ni naključje. To je <strong>vzorec</strong>. Vzorec ni tvoja napaka in ne pove, kdo si. Je kot shojena pot čez travnik: misli so šle po njej že velikokrat, zato gredo najlažje prav tam. Ko pot opaziš, lahko izbereš drugo.</p>
+    <p>Psiholog James Pennebaker je ugotovil, da že kratko pisanje o tem, kar čutimo, pomaga urediti misli. Ne potrebuješ dolgih zapisov. Dovolj so tri vprašanja.</p>
+  </div>
+  <figure class="figure">
+    <div class="tcard c-nika" style="border-color:var(--nika);max-width:var(--measure)">
+      <h4 style="color:var(--nika)">Nikin mini dnevnik · ponedeljek</h4>
+      <p><strong>1. Kaj se je zgodilo?</strong> Brat je spet vzel moj polnilec.</p>
+      <p><strong>2. Kaj sem čutila in kje v telesu?</strong> Rdeča. Jeza, vroče v obrazu. Pod tem: spregledana.</p>
+      <p><strong>3. Kaj sem naredila in kaj bi naslednjič?</strong> Kričala sem. Naslednjič mu mirno povem, da me moti, in polnilec pospravim v predal.</p>
+    </div>
+    <figcaption>Mini dnevnik ima samo tri vprašanja. Prazna predloga je v delovnem delu na koncu knjige.</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 3 minute zvečer · Mini dnevnik</div>
+    <ol>
+      <li>Izberi en dogodek dneva, ob katerem si nekaj močno začutil(a).</li>
+      <li>Odgovori na tri vprašanja: Kaj se je zgodilo? Kaj sem čutil(a) in kje v telesu? Kaj sem naredil(a) in kaj bi naslednjič?</li>
+      <li>Po enem tednu preberi vse zapise. Podčrtaj, kar se ponavlja.</li>
+    </ol>
+    <p class="note">Dnevnik je samo tvoj in ga ni treba nikomur kazati. Piši o tem dnevu, ne o starih bolečih spominih. Če ti pride na misel kaj zelo težkega, se o tem pogovori z odraslim, ki mu zaupaš.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Sprožilec je to, kar čustvo prižge.</li>
+      <li>Zapis pokaže vzorec, ki ga v glavi ne vidiš.</li>
+      <li>Vzorec ni tvoja napaka. Ko ga opaziš, lahko izbereš drugo pot.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Kateri trije sprožilci te ta mesec najpogosteje vržejo iz tira?</li>
+      <li>Se kakšen občutek ponavlja v različnih situacijah? Kateri?</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del3" data-toc="III · Samoregulacija">
+  <svg class="steber-ico" aria-hidden="true"><use href="#ico-s2"/></svg>
+  <div class="kicker">Del III · Druga supermoč</div>
+  <h2>Samoregulacija</h2>
+  <p>Ne pomeni skriti čustva, ampak izbrati, kaj boš z njim naredil(a).</p>
+</div>
+
+<section class="ch" id="p6" data-toc="Semafor" data-num="6">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 6</b><span>≈ 3 min branja</span></div>
+  <h2>Semafor</h2>
+  <p class="short">Med čustvom in dejanjem je majhen prostor. Nekaj dihov ga poveča. V tem prostoru je tvoja izbira.</p>
+  <div class="strip" role="group" aria-label="Strip: Marko in žaljivka v razrednem klepetu">
+    <div class="pan c-marko"><p class="cap">Razredni klepet, 22.05</p><p class="sms"><b>Luka</b>Marko je včeraj igral, kot da spi. Hahaha</p><p class="seen">Videno: 23</p></div>
+    <div class="pan c-marko"><p class="cap">Markovo telo</p><p class="nar">Vroče v obrazu, stisnjena čeljust. Prsti že tipkajo.</p><div class="phone" style="border-width:2px;border-radius:18px;padding:8px"><div class="send"><span>Ti si sploh navaden …</span><b>Pošlji</b></div></div></div>
+    <div class="pan c-marko"><p class="cap">Rdeča luč</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Stop. Deset sekund.</p></div><p class="nar">Trije dolgi izdihi.</p></div>
+    <div class="pan c-marko"><p class="cap">Zelena luč</p><p class="nar">Izbriše. Napiše samo:</p><p class="sms out"><b>Marko</b>Se vidimo v soboto na tekmi.</p></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Ko te nekdo užali, telo zavre v sekundi. Prst je na gumbu Pošlji, preden pomisliš. Tako nastanejo sporočila, ki jih naslednji dan obžaluješ. In ki jih iz tujih telefonov ne moreš več izbrisati.</p>
+    <p>Samoregulacija ne pomeni, da jeze ne čutiš ali da jo skriješ. Pomeni, da med čustvom in dejanjem narediš majhen premor. V tem premoru se pokrov vrne in lahko izbiraš.</p>
+    <p>Odrasli temu premoru pravijo STOP. Mi uporabimo semafor.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 560 300" role="img" aria-label="Semafor. Rdeča luč: stop, roke stran od tipkovnice, ne reci ničesar. Rumena luč: diham in opazim, trije dolgi izdihi, kaj čutim in kje v telesu. Zelena luč: izberem, pošljem, popravim, počakam ali rečem v živo.">
+        <rect x="30" y="16" width="104" height="268" rx="26" style="fill:var(--ink)"/>
+        <circle cx="82" cy="66" r="34" style="fill:var(--red)"/>
+        <circle cx="82" cy="150" r="34" style="fill:var(--yellow)"/>
+        <circle cx="82" cy="234" r="34" style="fill:var(--green)"/>
+        <text x="160" y="60" class="t-b" style="fill:var(--red)">1 · STOP</text>
+        <text x="160" y="84" class="t-s">Roke stran od tipkovnice. Ne reci ničesar.</text>
+        <text x="160" y="144" class="t-b" style="fill:var(--yellow)">2 · DIHAM IN OPAZIM</text>
+        <text x="160" y="168" class="t-s">Trije dolgi izdihi. Kaj čutim? Kje v telesu?</text>
+        <text x="160" y="228" class="t-b" style="fill:var(--green)">3 · IZBEREM</text>
+        <text x="160" y="252" class="t-s">Pošljem, popravim, počakam ali rečem v živo.</text>
+      </svg>
+    </div>
+    <figcaption>Semafor za močna čustva. Rumena luč traja le nekaj dihov, a v tem času se pokrov vrne.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Najpomembnejši je <strong>izdih</strong>. Ko je izdih daljši od vdiha, se srčni utrip malo umiri in telo dobi znak, da ni v nevarnosti. To ni čarovnija, je pa hitro: deluje že v nekaj dihih.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · ves teden · 10 sekund pred Pošlji</div>
+    <ol>
+      <li>Ko pišeš sporočilo in čutiš, da ti vre, ne pritisni Pošlji.</li>
+      <li>Odmakni prst. Naredi tri dolge izdihe, približno deset sekund.</li>
+      <li>Vprašaj se: »Bi to rekel(a) v obraz? Bom to jutri še vedno mislil(a)?«</li>
+      <li>Izberi: pošlji, popravi, počakaj do jutri ali se pogovori v živo.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Samoregulacija ni skrivanje čustva, ampak izbira dejanja.</li>
+      <li>Rdeča: stop. Rumena: diham in opazim. Zelena: izberem.</li>
+      <li>Daljši izdih umiri telo. Deset sekund lahko reši prijateljstvo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Katero sporočilo bi rad(a) vzel(a) nazaj? Kaj bi ti takrat pomagalo?</li>
+      <li>Kje ti premor najlažje uspe: v pogovoru, v klepetu ali pri igri?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p7" data-toc="Druga zgodba" data-num="7">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 7</b><span>≈ 4 min branja</span></div>
+  <h2>Druga zgodba</h2>
+  <p class="short">Pogosto te ne razjezi ali užalosti dogodek, ampak zgodba, ki si jo o njem poveš. Druga zgodba prinese drugo čustvo.</p>
+  <div class="strip" role="group" aria-label="Strip: Lara čaka na odgovor">
+    <div class="pan c-lara"><p class="cap">Petek, 18.00</p><p class="sms out"><b>Lara</b>Greva jutri v kino?</p><p class="seen">Videno 18.02</p></div>
+    <div class="pan c-lara"><p class="cap">21.30, še vedno nič</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Jezna je name. Mogoče me ne mara več.</p></div></div>
+    <div class="pan c-lara"><p class="cap">Lara se ustavi</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Počakaj. Kaj zares vem? Samo to, da ni odgovorila.</p></div></div>
+    <div class="pan c-lara"><p class="cap">Sobota zjutraj</p><p class="sms"><b>Nika</b>Oprosti! Mama mi je vzela telefon. Kino, ja!</p></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Lara ni bila žalostna zaradi tišine. Žalostna je bila zaradi zgodbe, ki si jo je povedala: »Jezna je name.« Možgani tišino hitro napolnijo z zgodbo. Pogosto z najhujšo.</p>
+    <p>Prva zgodba pride sama in je videti kot resnica. A je le ena od možnih razlag. Ko poiščeš drugo, ki je prav tako lahko resnična, se spremeni tudi čustvo. Psihologi temu pravijo <strong>ponovna ocena</strong>. Raziskave kažejo, da je to eden najbolj zdravih načinov za uravnavanje čustev (Gross, 1998).</p>
+    <p>Druga zgodba ni laganje sebi in ni »misli pozitivno«. Ne rečeš: »Vse je super.« Rečeš: »Ne vem še, kaj se je zgodilo. Morda je to, morda ono.« In če lahko, vprašaš.</p>
+  </div>
+  <figure class="figure">
+    <div class="flips">
+      <details class="flip"><summary><small>Prva zgodba</small>»Učiteljica me ne mara, zato mi je dala slabo oceno.«<em>Obrni kartico →</em></summary><div class="back"><small>Druga zgodba</small>»Test je bil težek. Lahko jo vprašam, kje sem izgubil(a) točke.«</div></details>
+      <details class="flip"><summary><small>Prva zgodba</small>»Smejijo se meni.«<em>Obrni kartico →</em></summary><div class="back"><small>Druga zgodba</small>»Smejijo se nečemu na telefonu. Ne vem, ali gre sploh zame.«</div></details>
+      <details class="flip"><summary><small>Prva zgodba</small>»Ne odgovori, ker je jezen name.«<em>Obrni kartico →</em></summary><div class="back"><small>Druga zgodba</small>»Morda je brez baterije, na treningu ali ima težek dan.«</div></details>
+      <details class="flip"><summary><small>Prva zgodba</small>»Nikoli mi ne bo uspelo.«<em>Obrni kartico →</em></summary><div class="back"><small>Druga zgodba</small>»Tokrat mi ni uspelo. Kaj lahko naslednjič naredim drugače?«</div></details>
+    </div>
+    <figcaption>Obrnljive kartice. Najprej sam(a) poišči drugo zgodbo, potem obrni kartico in primerjaj.</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 5 minut · Tri zgodbe</div>
+    <ol>
+      <li>Ko te nekaj vznemiri, zapiši, kaj se je zgodilo. Samo dejstva, kot bi posnela kamera.</li>
+      <li>Zapiši tri zgodbe: najhujšo, najboljšo in najbolj verjetno.</li>
+      <li>Opazi, kako se čustvo spremeni pri vsaki.</li>
+      <li>Če ne veš, katera je prava, vprašaj. Kratko vprašanje je hitrejše od ure ugibanja.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Čustvo pogosto sproži zgodba o dogodku, ne dogodek sam.</li>
+      <li>Prva zgodba je hitra, ni pa nujno resnična.</li>
+      <li>Poišči drugo možno razlago. Ali vprašaj.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Katero zgodbo si najpogosteje poveš, ko ti kdo ne odgovori?</li>
+      <li>Kdaj se je tvoja najhujša zgodba izkazala za napačno?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p8" data-toc="Vsa čustva smejo biti" data-num="8">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 8</b><span>≈ 4 min branja</span></div>
+  <h2>Vsa čustva smejo biti</h2>
+  <p class="short">Ni ti treba biti ves čas dobre volje. Težko čustvo, ki ga pustiš skozi, mine hitreje kot tisto, pred katerim bežiš.</p>
+  <div class="strip" role="group" aria-label="Strip: Marko ostane zadnji pri izbiri ekipe">
+    <div class="pan c-marko"><p class="cap">Športna vzgoja</p><p class="nar">Kapetana izbirata ekipi. Marko ostane zadnji.</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Spet zadnji.</p></div></div>
+    <div class="pan c-marko"><div class="say c-zan"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Daj no, bodi pozitiven! Saj ni nič.</p></div><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Ja, ja. Vse je super.</p></div></div>
+    <div class="pan c-marko"><p class="cap">Ostanek dneva</p><p class="nar">Marko je zoprn do vseh. Doma zaloputne vrata.</p></div>
+    <div class="pan c-marko"><p class="cap">Zvečer</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">V resnici me je bilo sram. In bil sem žalosten. Ko sem si to priznal, je postalo lažje.</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Na spletu je polno nasvetov, naj bomo ves čas pozitivni. Samo dobre vibracije. A čustvo, ki ga odrivaš, pogosto ne izgine. Skrije se in lahko pride ven drugje: kot slaba volja, zbadanje, glavobol ali nespečnost.</p>
+    <p>Druga past je obratna: da se v čustvo potopiš in ga ves dan vrtiš v glavi. Pot je vmes. Čustvo opaziš, ga poimenuješ in pustiš, da je tu. Ne bežiš pred njim in se ne utopiš v njem.</p>
+    <p>Nevroznanstvenica Jill Bolte Taylor opisuje, da kemični val čustva v telesu traja približno minuto in pol. Če traja dlje, ga pogosto hranijo naše misli. To ni natančno pravilo, je pa dobra slika: <strong>čustvo je val</strong>. Pride, se dvigne in odide, če ga ne poganjaš.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 560 270" role="img" aria-label="Graf vala čustva. Moč čustva se hitro dvigne, doseže vrh in v približno devetdesetih sekundah upade. Črtkana črta kaže, da se val znova dvigne, če ga hranimo z mislimi.">
+        <g class="stroke-muted" style="stroke-width:1.5;fill:none"><path d="M50 30V222H535"/><path d="M528 216l7 6-7 6"/></g>
+        <text x="40" y="24" class="t-s">moč čustva</text>
+        <text x="535" y="250" class="t-s" text-anchor="end">čas</text>
+        <path d="M50 218C110 214 140 52 195 52S290 196 380 210 490 216 530 216" style="fill:var(--accent-soft);fill-opacity:.6;stroke:var(--accent);stroke-width:4;stroke-linecap:round"/>
+        <path d="M262 120C292 150 300 74 340 66S408 126 450 116" style="fill:none;stroke:var(--red);stroke-width:3;stroke-dasharray:7 6;stroke-linecap:round"/>
+        <text x="100" y="120" class="t-b" text-anchor="end" style="fill:var(--accent)">pride</text>
+        <text x="195" y="40" class="t-b" text-anchor="middle" style="fill:var(--accent)">vrh</text>
+        <text x="400" y="196" class="t-b" style="fill:var(--accent)">in odide</text>
+        <text x="350" y="54" class="t-s" style="fill:var(--red)">če ga hraniš z mislimi</text>
+        <path d="M380 222v8" class="stroke-muted" style="stroke-width:1.5"/><text x="380" y="250" class="t-s" text-anchor="middle">≈ 90 s</text>
+      </svg>
+    </div>
+    <figcaption>Čustvo je val. Če ga opazuješ, upade. Če ga hraniš z mislimi (»vedno sem zadnji, nihče me ne mara«), se znova dvigne.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Pomaga tudi prijazen glas. Psihologinja Kristin Neff predlaga vprašanje: »Kaj bi rekel(a) prijatelju ali prijateljici, ki bi se tako počutil(a)?« Potem to povej sebi. Na primer: »Ostati zadnji je res zoprno. Razumljivo je, da me peče.«</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 90 sekund · Pusti val skozi</div>
+    <ol>
+      <li>Ko pride težko čustvo, ga poimenuj: »To je žalost.«</li>
+      <li>Poišči ga v telesu. Kje je? Kako veliko je? Je vroče ali hladno?</li>
+      <li>Dihaj počasi in ga opazuj, kot bi z obale opazoval(a) val. Ne odganjaj ga in ga ne poganjaj z novimi mislimi.</li>
+      <li>Po minuti in pol preveri: je val višji, nižji ali drugačen?</li>
+    </ol>
+    <p class="note">Če je val previsok, postavi stopala na tla in poimenuj tri stvari, ki jih vidiš. Tudi pogovor z nekom, ki mu zaupaš, pomaga, da val mine.</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Vsa čustva smejo biti, tudi neprijetna.</li>
+      <li>Ne bežiš in se ne utopiš: opaziš, poimenuješ, pustiš.</li>
+      <li>Val pride in gre. Prijazen glas mu pomaga mimo.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Katero čustvo najraje skriješ za »saj ni nič«?</li>
+      <li>Kaj ti pomaga, da težko čustvo mine?</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del4" data-toc="IV · Notranja motivacija">
+  <svg class="steber-ico" aria-hidden="true"><use href="#ico-s3"/></svg>
+  <div class="kicker">Del IV · Tretja supermoč</div>
+  <h2>Notranja motivacija</h2>
+  <p>Kako ostaneš pri stvari, tudi ko je dolgočasna ali težka, in kako veš, kaj ti je zares pomembno.</p>
+</div>
+
+<section class="ch" id="p9" data-toc="Skrolanje ali fokus" data-num="9">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 9</b><span>≈ 4 min branja</span></div>
+  <h2>Skrolanje ali fokus</h2>
+  <p class="short">Ko naloga postane neprijetna, telefon ponudi hiter izhod. Če z nelagodjem ostaneš malo dlje, val upade in pride fokus.</p>
+  <div class="strip" role="group" aria-label="Strip: Žan in domača naloga">
+    <div class="pan c-zan"><p class="cap">Ponedeljek, 17.00</p><p class="nar">Žan odpre zvezek za matematiko. Prva naloga je težka.</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Uf. Samo hitro pogledam telefon.</p></div></div>
+    <div class="pan c-zan"><p class="cap">17.01</p><p class="nar">Kratki videi. Še enega. Pa še enega.</p></div>
+    <div class="pan c-zan"><p class="cap">17.41</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Kaj? Že štirideset minut?</p></div><p class="nar">Naloga je še vedno tam. Zdaj je še bolj zoprna.</p></div>
+    <div class="pan c-zan"><p class="cap">Torek</p><p class="nar">Telefon je v drugi sobi. Žan zdrži tri minute nelagodja.</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Hm. Pravzaprav ni tako hudo.</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Žan ni len. Njegovi možgani so naredili to, kar možgani pogosto delajo: pobegnili so od nelagodja k nečemu prijetnemu. Telefon je za to popoln. Vsak nov video prinese majhno nagrado, videov pa ni nikoli konec.</p>
+    <p>Beg pomaga le za kratek čas. Nelagodje ne izgine, samo počaka. Ko se vrneš, je naloga še vedno tam, poleg nje pa še slaba vest. In vsakič, ko zbežiš, se možgani naučijo: »Nelagodje je nevarno, beži.«</p>
+    <p>Telefon ni sovražnik. Z njim se pogovarjaš s prijatelji, poslušaš glasbo, se učiš. Znanstveniki se še vedno prepirajo, koliko škodi. Nekaj pa je jasno: kadar vzameš telefon samo zato, da ti ni treba čutiti nelagodja, ne izbiraš ti. Izbira beg.</p>
+    <p>Tudi želja po begu je val. Če se ji ne predaš takoj, se dvigne, doseže vrh in upade. Psihologi temu pravijo <strong>jahanje vala</strong>. Po nekaj minutah je nelagodje manjše in pogosto pride fokus.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 560 280" role="img" aria-label="Krivulja želje. Če zdržiš, se želja dvigne do vrha in v nekaj minutah upade. Če popustiš, je olajšanje kratko, naslednjič pa je želja še močnejša.">
+        <g class="stroke-muted" style="stroke-width:1.5;fill:none"><path d="M50 30V232H535"/><path d="M528 226l7 6-7 6"/></g>
+        <text x="40" y="24" class="t-s">moč želje</text>
+        <g class="t-s" text-anchor="middle"><text x="170" y="256">1 min</text><text x="290" y="256">2 min</text><text x="410" y="256">3 min</text></g>
+        <path d="M50 214C110 200 140 92 200 92S300 200 410 214 500 222 530 222" style="fill:var(--accent-soft);fill-opacity:.6;stroke:var(--accent);stroke-width:4;stroke-linecap:round"/>
+        <path d="M110 170L138 226" style="stroke:var(--red);stroke-width:3;stroke-linecap:round"/>
+        <path d="M300 214C330 200 350 50 400 48S470 150 500 150" style="fill:none;stroke:var(--red);stroke-width:3;stroke-dasharray:7 6;stroke-linecap:round"/>
+        <text x="200" y="80" class="t-b" text-anchor="middle" style="fill:var(--accent)">vrh</text>
+        <text x="420" y="204" class="t-b" style="fill:var(--accent)">zdržiš: upade</text>
+        <text x="58" y="96" class="t-s" style="fill:var(--red)">popustiš:</text>
+        <text x="58" y="114" class="t-s" style="fill:var(--red)">olajšanje</text>
+        <text x="58" y="132" class="t-s" style="fill:var(--red)">za hip</text>
+        <text x="545" y="36" class="t-s" text-anchor="end" style="fill:var(--red)">naslednjič še močnejša</text>
+      </svg>
+    </div>
+    <figcaption>Krivulja želje. Če popustiš, je olajšanje kratko, želja pa se naslednjič vrne močnejša. Če zdržiš, val upade sam od sebe.</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 3 minute · Val zdrži</div>
+    <ol>
+      <li>Ko začutiš željo, da bi vzel(a) telefon, ga ne vzemi takoj.</li>
+      <li>Poimenuj, kaj je pod željo: »Dolgčas. Strah, da tega ne znam. Utrujenost.«</li>
+      <li>Poišči željo v telesu: srbenje v prstih, nemir v nogah, pritisk v prsih.</li>
+      <li>Dihaj in jo opazuj tri minute. Najverjetneje se bo dvignila in nato upadla.</li>
+      <li>Potem se odloči. Če še vedno želiš telefon, ga vzemi. Zdaj si izbral(a) ti.</li>
+    </ol>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Misija · 20 minut · Fokus brez telefona</div>
+    <ol>
+      <li>Telefon daj v drugo sobo ali v torbo, ne na mizo.</li>
+      <li>Nastavi uro na 20 minut. Lahko na budilki ali pečici.</li>
+      <li>Delaj samo eno stvar. Ko ura zazvoni, si vzemi pet minut odmora. Lahko s telefonom.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Beg pred nelagodjem pomaga le za kratek čas.</li>
+      <li>Telefon ni sovražnik. Težava je, ko namesto tebe izbira beg.</li>
+      <li>Želja je val. Pogosto upade že v nekaj minutah.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Kdaj najpogosteje vzameš telefon, ne da bi se odločil(a)? Kaj čutiš tik pred tem?</li>
+      <li>Kaj bi počel(a) s štiridesetimi minutami na dan, ki bi jih dobil(a) nazaj?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p10" data-toc="Kaj mi je pomembno" data-num="10">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 10</b><span>≈ 4 min branja</span></div>
+  <h2>Kaj mi je pomembno</h2>
+  <p class="short">Ko veš, kaj ti je pomembno, lažje vztrajaš. Tvoji razlogi so močnejši od tujih pravil in nagrad.</p>
+  <div class="strip" role="group" aria-label="Strip: Marko po izgubljeni tekmi">
+    <div class="pan c-marko"><p class="cap">Sobota</p><p class="nar">Ekipa izgubi 0 : 4. Marko zgreši enajstmetrovko.</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Nehal bom. Nogomet ni zame.</p></div></div>
+    <div class="pan c-marko"><p class="cap">Doma</p><p class="nar">Kopačke poletijo v kot.</p></div>
+    <div class="pan c-marko"><p class="cap">Zvečer</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Zakaj sem sploh začel? Zaradi fantov. Ker ob igri pozabim na vse. Ker uživam, ko mi uspe podaja.</p></div></div>
+    <div class="pan c-marko"><p class="cap">Ponedeljek</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Trener, lahko po treningu še malo vadim enajstmetrovke?</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Po slabi tekmi je bil Markov prvi odgovor: odneham. To je normalno. Neuspeh boli in bolečina najhitreje preneha, če odideš.</p>
+    <p>Pomagalo mu je vprašanje, zakaj sploh igra. Ne zaradi pokala in ne zato, ker bi tako hotel oče. Zaradi prijateljev in zaradi občutka, ko igra steče. To so njegove <strong>vrednote</strong>: stvari, ki so mu pomembne same po sebi.</p>
+    <p>Psihologa Edward Deci in Richard Ryan sta ugotovila, da najdlje vztrajamo, kadar nas žene <strong>notranja motivacija</strong>. Takrat nekaj počnemo, ker nas zanima, ker napredujemo ali ker se nam zdi pomembno. Nagrade, kazni in tuja pričakovanja delujejo krajši čas.</p>
+    <p>Vrednote so kot kompas. Ne povedo, kam točno iti, a vedno kažejo smer. Pomagajo tudi pri odločitvah. Ko ne veš, kaj narediti, se vprašaj: katera možnost je bližje temu, kar mi je pomembno?</p>
+  </div>
+  <figure class="figure">
+    <ul class="chips" aria-label="Kartice vrednot">
+      <li>prijateljstvo</li><li>družina</li><li>poštenost</li><li>zabava in humor</li><li>ustvarjalnost</li><li>pogum</li><li>pomoč drugim</li><li>svoboda</li><li>znanje in radovednost</li><li>šport in gibanje</li><li>narava in živali</li><li>pravičnost</li><li>zanesljivost</li><li>napredek</li><li>mir</li><li>glasba in umetnost</li>
+    </ul>
+    <figcaption>Kartice vrednot. Obkljukaj tiste, ki ti nekaj pomenijo, in med njimi izberi tri. Manjka katera? Dopiši jo.</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 5 minut · Moje tri vrednote</div>
+    <ol>
+      <li>Preberi kartice in obkljukaj tiste, ki ti nekaj pomenijo.</li>
+      <li>Med njimi izberi tri najpomembnejše. Pravilnih odgovorov ni.</li>
+      <li>Za vsako zapiši en majhen korak, ki ga lahko narediš ta teden.</li>
+      <li>Ko boš naslednjič hotel(a) odnehati, preberi svoje tri vrednote.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Vrednote so stvari, ki so ti pomembne same po sebi.</li>
+      <li>Notranja motivacija zdrži dlje kot nagrade in kazni.</li>
+      <li>Ob težki odločitvi se vprašaj: kaj je bližje mojim vrednotam?</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Česa ne bi nehal(a) početi, tudi če te nihče ne bi pohvalil?</li>
+      <li>Kdaj si naredil(a) nekaj, kar je bilo v skladu s tvojimi vrednotami, čeprav je bilo težko?</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del5" data-toc="V · Empatija">
+  <svg class="steber-ico topel" aria-hidden="true"><use href="#ico-s4"/></svg>
+  <div class="kicker">Del V · Četrta supermoč</div>
+  <h2>Empatija</h2>
+  <p>Kako razumeš, kaj čuti drugi, in mu stojiš ob strani, ne da bi se v tem izgubil(a).</p>
+</div>
+
+<section class="ch" id="p11" data-toc="Poslušam zares" data-num="11">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 11</b><span>≈ 4 min branja</span></div>
+  <h2>Poslušam zares</h2>
+  <p class="short">Ko je prijatelju težko, mu najbolj pomagaš, če ga najprej razumeš. Nasvet lahko počaka.</p>
+  <div class="strip" role="group" aria-label="Strip: Lara in Marko po testu">
+    <div class="pan c-lara"><p class="cap">Po matematiki</p><div class="say c-marko"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Padel sem. Dobil sem enko.</p></div><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Saj boš popravil. Samo več se moraš učiti.</p></div></div>
+    <div class="pan c-lara"><p class="nar">Marko se zapre vase.</p><div class="say c-marko"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Ja. Vem.</p></div></div>
+    <div class="pan c-lara"><p class="cap">Lara poskusi znova</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Oprosti. Zveni, kot da si res razočaran. Si se veliko učil?</p></div></div>
+    <div class="pan c-lara"><div class="say c-marko"><svg class="av" aria-hidden="true"><use href="#lik-marko"/></svg><p class="bub">Ves vikend! Zato je tako grozno.</p></div><p class="nar">Pogovor steče. Na koncu Marko sam reče, da bo prosil za dodatno razlago.</p></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Lara je hotela pomagati. A njen prvi odgovor je bil nasvet. Nasvet pogosto zveni kot: »Tvoje čustvo ni pomembno, tu je rešitev.« Zato se je Marko zaprl.</p>
+    <p><strong>Empatija</strong> pomeni, da razumeš, kaj drugi čuti, in mu to pokažeš. Ni ti treba imeti rešitve. Ni se ti treba strinjati. Dovolj je, da poslušaš zares. To gre v treh korakih:</p>
+    <ol>
+      <li><strong>Pozornost.</strong> Telefon stran, pogled k prijatelju.</li>
+      <li><strong>Povzetek.</strong> »Zveni, kot da …« ali »Če prav razumem, te jezi …«</li>
+      <li><strong>Vprašanje.</strong> »Kako je bilo zate?« ali »Kaj bi ti zdaj pomagalo?«</li>
+    </ol>
+    <p>Ljudje veliko povemo tudi brez besed: z obrazom, držo, glasom. »V redu sem,« reče prijatelj, ramena pa so mu padla in pogled je na tleh. Takrat telesu verjemi malo bolj kot besedam. A ne ugibaj predolgo. Vprašaj.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 560 170" role="img" aria-label="Štirje preprosti obrazi, označeni s črkami od A do D, z različnimi izrazi za igro ugibanja.">
+        <g style="fill:var(--surface);stroke:var(--ink);stroke-width:2.5">
+          <circle cx="75" cy="72" r="52"/><circle cx="210" cy="72" r="52"/><circle cx="350" cy="72" r="52"/><circle cx="485" cy="72" r="52"/>
+        </g>
+        <g style="fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round">
+          <path d="M50 52l16 8M100 52l-16 8M60 98h30M60 98l-4 3M90 98l4 3"/>
+          <path d="M186 58l16-8M234 58l-16-8M195 104q15-14 30 0"/>
+          <path d="M325 44q10-8 20-2M375 44q-10-8-20-2"/>
+          <path d="M458 68q6 5 12 0M500 68q6 5 12 0M474 100q5-4 10 0t10 0"/>
+        </g>
+        <g style="fill:var(--ink)">
+          <circle cx="62" cy="70" r="4"/><circle cx="88" cy="70" r="4"/>
+          <circle cx="196" cy="72" r="4"/><circle cx="224" cy="72" r="4"/>
+          <circle cx="336" cy="64" r="3"/><circle cx="364" cy="64" r="3"/>
+        </g>
+        <g style="fill:none;stroke:var(--ink);stroke-width:2.5"><circle cx="336" cy="64" r="8"/><circle cx="364" cy="64" r="8"/></g>
+        <ellipse cx="350" cy="100" rx="9" ry="12" style="fill:var(--ink)"/>
+        <path d="M232 82q4 8 0 12q-4-4 0-12z" style="fill:var(--blue)"/>
+        <circle cx="458" cy="86" r="7" style="fill:var(--nika);opacity:.35"/><circle cx="512" cy="86" r="7" style="fill:var(--nika);opacity:.35"/>
+        <g class="t-b" text-anchor="middle"><text x="75" y="150">A</text><text x="210" y="150">B</text><text x="350" y="150">C</text><text x="485" y="150">D</text></g>
+      </svg>
+    </div>
+    <details class="flip"><summary><small>Igra ugibanja</small>Kaj misliš, kaj čuti vsak obraz?<em>Pokaži rešitve →</em></summary><div class="back"><small>Rešitve</small><p>A: jeza ali frustracija. B: žalost. C: strah ali presenečenje. D: zadrega ali sram.</p><p>Si se zmotil(a) pri katerem? Nič hudega. Obraz ne pove vsega, isti izraz ima lahko pri različnih ljudeh drugo zgodbo. Zato vprašaj.</p></div></details>
+    <figcaption>Igra ugibanja. Igraš jo lahko tudi s prijatelji: eden pokaže čustvo samo z obrazom in držo, drugi ugibajo.</figcaption>
+  </figure>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · en pogovor · Brez nasveta</div>
+    <ol>
+      <li>V enem pogovoru danes ne daj nobenega nasveta.</li>
+      <li>Samo poslušaj, povzemi in vprašaj.</li>
+      <li>Na koncu lahko vprašaš: »Bi rad(a) slišal(a), kaj mislim, ali potrebuješ samo, da te nekdo posluša?«</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Najprej razumi, potem svetuj. Ali pa sploh ne.</li>
+      <li>Pozornost, povzetek, vprašanje.</li>
+      <li>Beri tudi telo, a ne ugibaj predolgo. Vprašaj.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Kdo te zares posluša? Kaj dela drugače kot drugi?</li>
+      <li>Kdaj ti je nasvet pomagal in kdaj te je razjezil?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p12" data-toc="Sočutje z mejami" data-num="12">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 12</b><span>≈ 4 min branja</span></div>
+  <h2>Sočutje z mejami</h2>
+  <p class="short">Prijatelju lahko stojiš ob strani, ne da bi nosil(a) vse njegovo breme. Skrb zase ni sebičnost.</p>
+  <div class="strip" role="group" aria-label="Strip: Lara in sporočila ob polnoči">
+    <div class="pan c-lara"><p class="cap">Sreda, 0.14</p><p class="sms"><b>Maja</b>Spet sem se skregala z mamo. Si budna?</p></div>
+    <div class="pan c-lara"><p class="cap">Tretjič ta teden</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-lara"/></svg><p class="bub">Jutri pišem test. Ampak če ne odgovorim, sem slaba prijateljica.</p></div></div>
+    <div class="pan c-lara"><p class="cap">Ob dveh ponoči</p><p class="nar">Lara še vedno piše. Zjutraj je izčrpana in se na testu ne more zbrati.</p></div>
+    <div class="pan c-lara"><p class="cap">Isti dan zvečer</p><p class="sms out"><b>Lara</b>Maja, rada ti pomagam. Ponoči pa moram spati. Se slišiva jutri po pouku?</p></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Lara ima rada svojo prijateljico. Prav zato je hotela biti vedno na voljo. A kdor ves čas nosi tuje breme, se sčasoma izčrpa. Izčrpan prijatelj pa težko pomaga komur koli.</p>
+    <p>Raziskovalki Tania Singer in Olga Klimecki ločita dve stvari. <strong>Empatična stiska</strong> pomeni, da tuje trpljenje prevzameš, kot bi bilo tvoje. Utrudi te in hočeš pobegniti. <strong>Sočutje</strong> pomeni, da prijatelju želiš dobro in mu stojiš ob strani, a ostaneš na svojem bregu. Sočutje daje moč, stiska jo jemlje.</p>
+    <p>Pomaga slika dveh krogov. V tvojem krogu je to, za kar si odgovoren ali odgovorna ti. V prijateljevem je to, kar je njegovo.</p>
+  </div>
+  <figure class="figure">
+    <div class="svgwrap">
+      <svg class="big" viewBox="0 0 560 280" role="img" aria-label="Dva kroga. Moje: da poslušam, da pokažem, da mi je mar, moje spanje in šola, da povem odraslemu, če je kdo v nevarnosti. Tvoje: tvoja čustva, tvoje odločitve, rešitev tvoje težave, tvoj odnos z mamo. Med krogoma: pogovor.">
+        <circle cx="145" cy="140" r="125" style="fill:var(--accent-soft);stroke:var(--accent);stroke-width:2.5"/>
+        <circle cx="415" cy="140" r="125" style="fill:var(--warm-soft);stroke:var(--warm);stroke-width:2.5"/>
+        <text x="145" y="72" text-anchor="middle" class="t-b" style="fill:var(--accent)">MOJE</text>
+        <g class="t" text-anchor="middle"><text x="145" y="108">da poslušam</text><text x="145" y="134">da pokažem, da mi je mar</text><text x="145" y="160">moje spanje in šola</text><text x="145" y="186">da povem odraslemu,</text><text x="145" y="208">če je kdo v nevarnosti</text></g>
+        <text x="415" y="72" text-anchor="middle" class="t-b" style="fill:var(--warm)">TVOJE</text>
+        <g class="t" text-anchor="middle"><text x="415" y="108">tvoja čustva</text><text x="415" y="134">tvoje odločitve</text><text x="415" y="160">rešitev tvoje težave</text><text x="415" y="186">tvoj odnos z mamo</text></g>
+        <path d="M270 140h20M266 140l6-5M266 140l6 5M294 140l-6-5M294 140l-6 5" class="stroke-muted" style="stroke-width:2;fill:none;stroke-linecap:round"/>
+        <text x="280" y="268" text-anchor="middle" class="t-s">vmes: pogovor</text>
+      </svg>
+    </div>
+    <figcaption>Moje in tvoje. Za svoj krog skrbiš ti. V prijateljev krog lahko pokukaš in mu ponudiš roko, ne moreš pa živeti namesto njega.</figcaption>
+  </figure>
+  <div class="box varno">
+    <div class="box-label">Skrivnost, ki je ne nosiš sam(a)</div>
+    <p>Včasih ti prijatelj zaupa nekaj hudega: da si želi narediti kaj sebi, da ga kdo zlorablja ali da je v nevarnosti. To ni skrivnost, ki bi jo smel(a) nositi sam(a).</p>
+    <p>Povej odraslemu, ki mu zaupaš: staršu, razredniku ali svetovalnemu delavcu na šoli. Lahko pokličeš tudi TOM telefon (116 111) in vprašaš, kako ravnati. Prijatelj bo morda jezen. A <strong>varnost je pomembnejša od skrivnosti</strong>. Tako ravna pravi prijatelj.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 1 minuta · Moje in tvoje</div>
+    <ol>
+      <li>Ko ti je zaradi prijateljeve stiske hudo, se vprašaj: »Kaj od tega je v mojem krogu? Kaj v njegovem?«</li>
+      <li>Naredi, kar je v tvojem: poslušaj, pokaži, da ti je mar, povej odraslemu, če je kdo v nevarnosti.</li>
+      <li>Kar je v prijateljevem krogu, mu pusti. Lahko mu želiš dobro, ne moreš pa živeti namesto njega.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Sočutje: želim ti dobro, a ostanem na svojem bregu.</li>
+      <li>Skrb zase ni sebičnost. Izčrpan prijatelj ne more pomagati.</li>
+      <li>Skrivnost, ki ogroža varnost, povej odraslemu.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Po pogovoru s kom si vedno izčrpan(a)? Kaj bi ti pomagalo?</li>
+      <li>Kateremu odraslemu bi povedal(a), če bi bil kdo v nevarnosti?</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del6" data-toc="VI · Socialne veščine">
+  <svg class="steber-ico topel" aria-hidden="true"><use href="#ico-s5"/></svg>
+  <div class="kicker">Del VI · Peta supermoč</div>
+  <h2>Socialne veščine</h2>
+  <p>Kako poveš, kaj čutiš in potrebuješ, rečeš »ne« in preživiš komentarje.</p>
+</div>
+
+<section class="ch" id="p13" data-toc="Jaz-sporočila" data-num="13">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 13</b><span>≈ 3 min branja</span></div>
+  <h2>Jaz-sporočila</h2>
+  <p class="short">Ko govoriš o sebi namesto o napakah drugega, te drugi lažje sliši.</p>
+  <div class="strip" role="group" aria-label="Strip: Žan in oče, ki bere njegova sporočila">
+    <div class="pan c-zan"><p class="cap">Kuhinja</p><p class="nar">Oče drži Žanov telefon in bere sporočila.</p><div class="say krik"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Vedno vohljaš za mano!</p></div></div>
+    <div class="pan c-zan"><p class="cap">Prepir</p><p class="nar">Oče se razjezi. Telefona ne bo teden dni.</p></div>
+    <div class="pan c-zan"><p class="cap">Dva dni pozneje</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Kaj sem pravzaprav hotel povedati?</p></div></div>
+    <div class="pan c-zan"><p class="cap">Drugi poskus</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Ko mi bereš sporočila brez vprašanja, se počutim ponižan. Zasebnost mi je pomembna. Se lahko dogovoriva, kako boš preverjal, da sem varen?</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>»Vedno vohljaš« je ti-sporočilo. Govori o napaki drugega in ga napade. Napaden človek se brani ali napade nazaj. Tako se prepir samo stopnjuje.</p>
+    <p><strong>Jaz-sporočilo</strong> govori o tebi: kaj se je zgodilo, kaj čutiš, kaj ti je pomembno in za kaj prosiš. Zamisel je pred več kot petdesetimi leti opisal psiholog Thomas Gordon. Drugi te lažje sliši, ker ga ne napadeš.</p>
+    <p>V prvem delu opiši samo dejstvo, brez besed »vedno« in »nikoli«. »Vedno vohljaš« ni dejstvo, ampak napad. »Včeraj si bral moja sporočila« je dejstvo.</p>
+  </div>
+  <figure class="figure">
+    <div class="box primer">
+      <div class="box-label">Predloga jaz-sporočila</div>
+      <p class="sentence">Ko <span class="gap">&nbsp;</span> <span class="hint">(kaj se je zgodilo, samo dejstvo)</span>, se počutim <span class="gap">&nbsp;</span> <span class="hint">(čustvo)</span>, ker mi je pomembno <span class="gap">&nbsp;</span> <span class="hint">(kaj potrebujem)</span>. Ali bi lahko <span class="gap">&nbsp;</span> <span class="hint">(prošnja)</span>?</p>
+    </div>
+    <figcaption>Štirje deli: dejstvo, čustvo, potreba, prošnja. Ko jih nekajkrat napišeš, jih boš znal(a) tudi na pamet.</figcaption>
+  </figure>
+  <div class="col">
+    <p>Jaz-sporočilo ni čarobna formula. Starši imajo za pravila včasih dober razlog, na primer tvojo varnost. A jaz-sporočilo odpre pogovor namesto prepira. V pogovoru pa se lahko dogovorite.</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 5 minut · Prepiši stavek</div>
+    <p>Spodnja ti-sporočila prepiši v jaz-sporočila po predlogi. Nato prepiši še eno svoje.</p>
+    <ol>
+      <li>Bratu: »Ti si tako zoprn! Vedno mi jemlješ stvari!«</li>
+      <li>Mami: »Nikoli me ne poslušaš!«</li>
+      <li>Prijateljici: »Zakaj si me spet pozabila povabiti?«</li>
+    </ol>
+    <p class="note">Primer za prvega: »Ko si brez vprašanja vzameš moj polnilec, se razjezim, ker mi je pomembno, da so moje stvari na svojem mestu. Me lahko prej vprašaš?«</p>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Ti-sporočilo napade, jaz-sporočilo odpre pogovor.</li>
+      <li>Štirje deli: dejstvo, čustvo, potreba, prošnja.</li>
+      <li>Brez »vedno« in »nikoli«.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>S kom se najpogosteje prepiraš s ti-sporočili?</li>
+      <li>Katero jaz-sporočilo bi rad(a) povedal(a) ta teden? Komu?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p14" data-toc="Meje in pritisk" data-num="14">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 14</b><span>≈ 5 min branja</span></div>
+  <h2>Meje in pritisk</h2>
+  <p class="short">»Ne« je cel stavek. Ni ti ga treba razlagati, opravičevati ali si ga zaslužiti.</p>
+  <div class="strip" role="group" aria-label="Strip: Žan in vejp, Nika in neznanec">
+    <div class="pan c-zan"><p class="cap">Za telovadnico</p><p class="nar">Starejši fantje si podajajo vejp. »Daj, poskusi. Ne bodi otrok.«</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Nočem. Ampak če rečem ne, me bodo zafrkavali.</p></div></div>
+    <div class="pan c-zan"><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-zan"/></svg><p class="bub">Ne, hvala. Moram na uro kitare.</p></div><p class="nar">Malo smeha. Potem tega nihče več ne omeni.</p></div>
+    <div class="pan c-nika"><p class="cap">Isti večer</p><p class="sms"><b>neznan profil, »16 let«</b>Pošlji mi kakšno svojo sliko. Samo zame.</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">V trebuhu me stisne.</p></div></div>
+    <div class="pan c-nika"><p class="nar">Nika naredi posnetek zaslona, profil blokira in pove mami.</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Telo mi je reklo ne. Poslušala sem ga.</p></div></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p><strong>Meja</strong> pove, kaj je zate v redu in kaj ne. Zdrava meja ni zid. Je kot vrata, ki jih odpreš, komur želiš, in zapreš, kadar je treba.</p>
+    <p>Pritisk vrstnikov je pri tvojih letih pogosto zelo močan. Možgani so v tem obdobju posebej občutljivi na to, kaj si mislijo drugi. Raziskave kažejo, da najstniki v družbi vrstnikov bolj tvegajo kot takrat, ko so sami (Steinberg, 2014). To ni šibkost. Dobro pa je vedeti, da se to dogaja.</p>
+    <p>Telo pogosto reče »ne«, preden ga izrečeš z besedo: stisk v trebuhu, nelagodje, želja, da bi odšel ali odšla. To je pomemben znak. Ni ti ga treba razložiti, da ga upoštevaš.</p>
+  </div>
+  <figure class="figure">
+    <div class="card-grid">
+      <div class="tcard"><span class="n">1</span><h4>Kratek ne</h4><p>»Ne, hvala.« Brez razlage. Če je treba, ponovi, enako mirno.</p></div>
+      <div class="tcard"><span class="n">2</span><h4>Ne z izhodom</h4><p>»Ne, grem na trening.« »Ne, zdaj moram domov.« Daš si pot ven.</p></div>
+      <div class="tcard"><span class="n">3</span><h4>Ne z drugim predlogom</h4><p>»Ne bom. Gremo raje na košarko?« Druženje ostane, tveganja ni.</p></div>
+    </div>
+    <ul class="chips say-no" aria-label="Kartice s stavki za ne">
+      <li>»Ne, to ni zame.«</li><li>»Ne zanima me.«</li><li>»Raje ne.«</li><li>»Ne bom, ti pa kar.«</li><li>»Ne. Pika.«</li><li>»Zdaj ne. Bom premislil(a).«</li><li>»Nočem, in to je v redu.«</li>
+    </ul>
+    <figcaption>Trije načini za »ne« in kartice s stavki. Izberi tiste, ki zvenijo kot ti.</figcaption>
+  </figure>
+  <div class="box varno">
+    <div class="box-label">Fotografije in izsiljevanje</div>
+    <p>Fotografij, na katerih si slečen(a) ali v spodnjem perilu, ne pošiljaj nikomur. Tudi ne nekomu, ki mu zaupaš. Ko je slika enkrat poslana, je ne moreš več vzeti nazaj. Ljudje na spletu lahko lažejo o tem, kdo so in koliko so stari, kot profil »16 let« v stripu.</p>
+    <p>Če te kdo prosi zanje, pritiska ali izsiljuje, <strong>to ni tvoja krivda</strong>. Ne pošlji ničesar več in ne plačaj. Shrani posnetke zaslona, blokiraj osebo in povej odraslemu. Pomoč dobiš na TOM telefonu (116 111), nasvete na safe.si, prijaviš pa lahko na policiji (113).</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 3 minute · Moj »ne«</div>
+    <ol>
+      <li>Izberi dva stavka s kartic, ki ti ustrezata. Ali si izmisli svoja.</li>
+      <li>Na glas ju vadi pred ogledalom ali s prijateljem ali prijateljico. Mirno, brez opravičevanja.</li>
+      <li>Opazi, kaj naredi telo, ko rečeš »ne«. Nelagodje je normalno in običajno hitro mine.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>»Ne« je cel stavek.</li>
+      <li>Telo pogosto reče »ne« prvo. Poslušaj ga.</li>
+      <li>Če te kdo izsiljuje, to ni tvoja krivda. Povej odraslemu.</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Komu najtežje rečeš »ne«? Zakaj?</li>
+      <li>Kdaj si rekel(a) »da«, čeprav si hotel(a) reči »ne«? Kaj bi naredil(a) zdaj?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ch" id="p15" data-toc="Komentarji in kritika" data-num="15">
+  <div class="ch-head">
+  <div class="ch-eyebrow"><b>Poglavje 15</b><span>≈ 4 min branja</span></div>
+  <h2>Komentarji in kritika</h2>
+  <p class="short">Kritika je podatek, ne sodba o tem, kdo si. Iz nje vzameš, kar je koristno, ostalo odložiš.</p>
+  <div class="strip" role="group" aria-label="Strip: Nika in komentarji pod risbo">
+    <div class="pan c-nika"><p class="cap">Sobota</p><p class="nar">Nika objavi risbo, na kateri je delala ves teden.</p><div class="say"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Upam, da bo všeč.</p></div></div>
+    <div class="pan c-nika"><p class="cap">Pod objavo</p><p class="sms"><b>neznan_123</b>kdo pa tako riše lol</p><p class="sms"><b>Lara</b>Barve so super! Roke bi bile lahko malo daljše.</p></div>
+    <div class="pan c-nika"><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Vsi mislijo, da je grozno. Izbrisala jo bom.</p></div></div>
+    <div class="pan c-nika"><p class="cap">Nika se ustavi</p><div class="say misel"><svg class="av" aria-hidden="true"><use href="#lik-nika"/></svg><p class="bub">Prvi komentar je samo zbadanje. Larin ima nasvet. Roke so res kratke.</p></div><p class="nar">Risbo pusti. Naslednjo nariše z daljšimi rokami.</p></div>
+  </div>
+  </div>
+  <div class="col">
+    <p class="sub">Kaj se dogaja</p>
+    <p>Komentar te zadene v telo, preden ga prebereš do konca. Vroče v obrazu, stisk v prsih. Telo kritiko pogosto doživi kot nevarnost, kot da bi te skupina izključila. Zato najprej: izdih.</p>
+    <p>Potem loči dve vrsti komentarjev. <strong>Povratna informacija</strong> ima podatek, ki ti lahko pomaga: »roke bi bile lahko daljše«. <strong>Zbadanje</strong> nima podatka, hoče le prizadeti: »kdo pa tako riše«. Iz prve vzameš, kar je koristno. Drugo odložiš. Nanj ti ni treba odgovoriti.</p>
+    <p>Pomaga vprašanje: »Je v tem kaj resnice, ki mi lahko pomaga?« Če je, jo vzemi. Če ni, komentar pove več o pisalcu kot o tebi.</p>
+    <p>In ko komentiraš ti: za zaslonom je človek s telesom, ki čuti enako kot ti.</p>
+  </div>
+  <figure class="figure">
+    <div class="phone-row">
+      <div class="phone" aria-label="Maketa telefona z objavo in komentarji">
+        <div class="bar">nika_riše · objava</div>
+        <div class="post">[ Nikina risba ]</div>
+        <p class="sms"><b>neznan_123</b>kdo pa tako riše lol</p>
+        <p class="sms"><b>Lara</b>Barve so super! Roke bi bile lahko malo daljše.</p>
+        <div class="send"><span>Dodaj komentar …</span><b>Objavi</b></div>
+      </div>
+      <div class="tcard col">
+        <h4>Preden objavim ali komentiram</h4>
+        <ul class="chips" style="display:grid">
+          <li>Je res?</li>
+          <li>Je prijazno ali vsaj pošteno?</li>
+          <li>Bi to rekel(a) v obraz?</li>
+          <li>Bi bilo v redu, če bi to videl razrednik?</li>
+          <li>Kako se bom počutil(a) jutri?</li>
+          <li>Objavljam samo svoje, ne tujih slik brez dovoljenja.</li>
+        </ul>
+      </div>
+    </div>
+    <figcaption>Levo: povratna informacija in zbadanje pod isto objavo. Desno: kontrolni seznam »Preden objavim ali komentiram«.</figcaption>
+  </figure>
+  <div class="box varno">
+    <div class="box-label">Ko komentarji postanejo nadlegovanje</div>
+    <p>Če te kdo zbada vedno znova, se iz tebe norčuje v skupini ali širi tvoje slike, je to spletno nadlegovanje. Ne odgovarjaj. Shrani posnetke zaslona, blokiraj in prijavi profil ter povej odraslemu. Nasvete najdeš na safe.si, pogovor pa na TOM telefonu (116 111).</p>
+  </div>
+  <div class="box vaja">
+    <div class="box-label">Poskusi · 2 minuti · Podatek ali zbadanje?</div>
+    <ol>
+      <li>Spomni se zadnje kritike, ki te je zabolela.</li>
+      <li>Zapiši: kaj je bil podatek? Kaj je bilo samo zbadanje?</li>
+      <li>Iz podatka izberi en majhen korak. Zbadanje prečrtaj.</li>
+    </ol>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Najprej izdih: telo kritiko doživi kot nevarnost.</li>
+      <li>Povratna informacija ima podatek, zbadanje ga nima.</li>
+      <li>Preden objaviš: je res, je prijazno, bi to rekel(a) v obraz?</li>
+    </ul>
+  </div>
+  <div class="box vprasanja">
+    <div class="box-label">Vprašanja zate</div>
+    <ul>
+      <li>Katera kritika ti je kdaj zares pomagala?</li>
+      <li>Kaj narediš, ko nekoga zbadajo na spletu?</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="del7" data-toc="VII · Res ali mit?">
+  <div class="kicker">Del VII</div>
+  <h2>Res ali mit?</h2>
+  <p>Kaj čustvena inteligenca ni. In koliko si si zapomnil(a).</p>
+</div>
+
+<section class="ch" id="p16" data-toc="Res ali mit?" data-num="16">
+  <div class="ch-eyebrow"><b>Poglavje 16</b><span>≈ 4 min branja</span></div>
+  <h2>Res ali mit?</h2>
+  <p class="short">Čustveno inteligenten človek ni vedno miren, prijazen in brez težkih čustev. Ima jih, le da ga ne vodijo.</p>
+  <div class="col">
+    <p>Preberi trditev in se odloči: res ali mit? <span class="screen-only">Potem klikni nanjo in preveri.</span><span class="print-only">Odgovor je pod vsako trditvijo. Pokrij ga z listom papirja.</span> V oklepaju je poglavje, kjer izveš več.</p>
+  </div>
+  <div class="quiz">
+    <details class="qz"><summary><span class="n">1</span><span>Čustveno inteligentni ljudje so vedno mirni.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="mit">Mit</b><p>Tudi oni čutijo jezo, strah in žalost. Razlika je v tem, da jih ta čustva ne vodijo (6).</p></div></details>
+    <details class="qz"><summary><span class="n">2</span><span>Nekatera čustva so slaba in bi se jih morali znebiti.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="mit">Mit</b><p>Vsa čustva so sporočila. Nekatera so neprijetna, slaba pa niso (1).</p></div></details>
+    <details class="qz"><summary><span class="n">3</span><span>Močna čustva so pri najstnikih normalna.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="res">Res</b><p>Čustveni deli možganov dozorijo prej kot zavore v čelnem režnju (2).</p></div></details>
+    <details class="qz"><summary><span class="n">4</span><span>Če čustva ne pokažem, sem ga obvladal(a).</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="mit">Mit</b><p>Skrito čustvo pogosto ostane v telesu in lahko pride ven drugje. Samoregulacija je izbira dejanja, ne skrivanje (6, 8).</p></div></details>
+    <details class="qz"><summary><span class="n">5</span><span>Ko čustvo poimenuješ, se malo umiri.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="res">Res</b><p>Natančna beseda umiri alarm v možganih. Poimenuj, da ukrotiš (4).</p></div></details>
+    <details class="qz"><summary><span class="n">6</span><span>Biti empatičen (empatična) pomeni rešiti prijateljeve težave.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="mit">Mit</b><p>Empatija pomeni razumeti in stati ob strani. Rešitev je v prijateljevem krogu. Izjema: če je kdo v nevarnosti, povej odraslemu (11, 12).</p></div></details>
+    <details class="qz"><summary><span class="n">7</span><span>Dober prijatelj vedno reče »da«.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="mit">Mit</b><p>Dober prijatelj zna reči tudi »ne«. Zdrava meja varuje tebe in odnos (14).</p></div></details>
+    <details class="qz"><summary><span class="n">8</span><span>Želja po telefonu mine, tudi če ga ne vzameš.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="res">Res</b><p>Želja je val. Če je ne hraniš, se dvigne in običajno v nekaj minutah upade (9).</p></div></details>
+    <details class="qz"><summary><span class="n">9</span><span>Vsak komentar na spletu moraš vzeti resno.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="mit">Mit</b><p>Povratna informacija ima podatek, zbadanje ga nima. Prvo vzameš, drugo odložiš (15).</p></div></details>
+    <details class="qz"><summary><span class="n">10</span><span>Dovolj je, da to prebereš.</span><small>Res ali mit? Klikni →</small></summary><div class="ans"><b class="mit">Mit</b><p>Spretnost nastane šele z vajo: v telesu in v resničnih pogovorih. Zato te v nadaljevanju čaka izziv.</p></div></details>
+  </div>
+  <div class="box kljucne">
+    <div class="box-label">Zapomni si</div>
+    <ul>
+      <li>Čustvena inteligenca ne pomeni manj čustev, ampak več izbire.</li>
+      <li>Ne pomeni skrivanja čustev, ugajanja ali reševanja vseh okoli sebe.</li>
+      <li>Vadi, ne le beri.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="part-head" id="delovni" data-toc="Tvoj 4-tedenski izziv">
+  <div class="kicker">Delovni del</div>
+  <h2>Tvoj 4-tedenski izziv</h2>
+  <p>Pet minut na dan, štirje tedni, ena štampiljka na dan.</p>
+</div>
+
+<section class="ch" id="misije" data-toc="Tedenske misije" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Tedenske misije</h2>
+  <div class="col">
+    <p>Vsak teden ima svojo temo in štiri kratke misije. Vsak dan izberi eno in jo naredi. Nobena ne traja več kot pet minut. Vrstni red izbereš ti, misijo, ki ti je všeč, pa lahko ponoviš.</p>
+  </div>
+  <div class="missions">
+    <div class="mission c-nika"><h4>1. teden · Čustva, telo in samozavedanje · poglavja 1–5</h4><ul><li>V kateri barvi sem? Trikrat na dan (4).</li><li>Kje sem zdaj: minuta poslušanja telesa (3).</li><li>Mini dnevnik: en zapis zvečer (5).</li><li>Telesni zemljevid: pobarvaj ga enkrat na teden (3).</li></ul></div>
+    <div class="mission c-marko"><h4>2. teden · Samoregulacija · poglavja 6–8</h4><ul><li>Semafor pred jeznim odgovorom (6).</li><li>Deset sekund pred Pošlji (6).</li><li>Tri zgodbe za en dogodek (7).</li><li>Pusti val skozi: 90 sekund (8).</li></ul></div>
+    <div class="mission c-zan"><h4>3. teden · Motivacija in empatija · poglavja 9–12</h4><ul><li>Val zdrži: tri minute, ko se pojavi želja po telefonu (9).</li><li>Fokus: 20 minut naloge brez telefona (9).</li><li>Moje tri vrednote in en majhen korak (10).</li><li>En pogovor brez nasveta (11).</li></ul></div>
+    <div class="mission c-lara"><h4>4. teden · Socialne veščine · poglavja 13–16</h4><ul><li>Eno jaz-sporočilo (13).</li><li>En jasen »ne« (14).</li><li>Seznam »Preden objavim ali komentiram« pred vsako objavo (15).</li><li>Kviz Res ali mit? in pogled nazaj (16).</li></ul></div>
+  </div>
+</section>
+
+<section class="ch" id="sledilnik" data-toc="Sledilnik s štampiljkami" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Sledilnik s štampiljkami</h2>
+  <div class="col">
+    <p>Ko narediš misijo dneva, si prislužiš štampiljko. <span class="screen-only">Dotakni se številke dneva. Štampiljke si zapomni samo tvoj brskalnik, nihče drug jih ne vidi.</span><span class="print-only">V krog nariši zvezdico, smeška ali kljukico.</span> Če kak dan izpustiš, nič hudega. Nadaljuj naslednji dan.</p>
+  </div>
+  <div class="weeks" id="weeks"></div>
+  <p class="progress" id="progress"></p>
+  <button type="button" class="reset" id="reset">Počisti štampiljke</button>
+  <div class="box vprasanja nazaj">
+    <div class="box-label">Pogled nazaj · po štirih tednih</div>
+    <ol>
+      <li>Katero čustvo zdaj opazim prej kot pred mesecem? Kje v telesu ga začutim?</li>
+      <li>Kdaj mi je semafor uspel? Kaj mi je pomagalo?</li>
+      <li>Kateri sprožilci so se v mini dnevniku ponavljali?</li>
+      <li>Kaj sem se naučil(a) o ljudeh okoli sebe?</li>
+      <li>Katero misijo bom obdržal(a) tudi naprej?</li>
+    </ol>
+  </div>
+</section>
+
+<section class="ch" id="kartica" data-toc="Moja kartica za umirjanje" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Moja kartica za umirjanje</h2>
+  <div class="col">
+    <p>Izpolni jo, ko si miren ali mirna. Ko ti bo težko, ne boš imel(a) časa razmišljati, kartica pa bo že pripravljena. Natisni jo in jo daj v peresnico ali jo prepiši v telefon.</p>
+  </div>
+  <div class="calm">
+    <h3>Ko je preveč</h3>
+    <p><strong>Najprej:</strong> stopala trdno na tla. Poimenuj tri stvari, ki jih vidiš. Trije dolgi izdihi.</p>
+    <div class="fill">
+      <div class="row"><span class="lbl">Moji zgodnji znaki (kaj najprej opazim v telesu):</span><div class="ln two"></div></div>
+      <div class="row"><span class="lbl">Tri stvari, ki mi pomagajo, da se umirim:</span><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+      <div class="row"><span class="lbl">Trije odrasli, ki jim zaupam (ime in kako jih dobim):</span><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+    </div>
+    <div>
+      <p><strong>Pokličem lahko:</strong></p>
+      <ul>
+        <li>TOM telefon: <strong>116 111</strong> (vsak dan 12–20)</li>
+        <li>Samarijan in Sopotnik: <strong>116 123</strong> (vsak dan, 24 ur)</li>
+        <li>Klic v duševni stiski: <strong>01 520 99 00</strong> (vsak dan 19–7)</li>
+        <li>Nujna pomoč: <strong>112</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="ch" id="barvni-dnevnik" data-toc="Barvni dnevnik razpoloženja" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Barvni dnevnik razpoloženja</h2>
+  <div class="col">
+    <p>Vsak večer pobarvaj polje z barvo, ki je ta dan prevladovala (poglavje 4). Če je bilo več barv, polje razdeli. Po štirih tednih poglej: katera barva prevladuje? Ob katerih dnevih? <span class="screen-only">Stran natisni ali jo preriši v zvezek.</span></p>
+  </div>
+  <div class="legend" aria-label="Barve merilnika">
+    <span><i style="background:var(--red)"></i>rdeča</span>
+    <span><i style="background:var(--yellow)"></i>rumena</span>
+    <span><i style="background:var(--green)"></i>zelena</span>
+    <span><i style="background:var(--blue)"></i>modra</span>
+  </div>
+  <div class="mood-days" aria-label="28 polj za barvanje, za vsak dan izziva eno">
+    <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>
+    <div>8</div><div>9</div><div>10</div><div>11</div><div>12</div><div>13</div><div>14</div>
+    <div>15</div><div>16</div><div>17</div><div>18</div><div>19</div><div>20</div><div>21</div>
+    <div>22</div><div>23</div><div>24</div><div>25</div><div>26</div><div>27</div><div>28</div>
+  </div>
+  <div class="fill">
+    <div class="row"><span class="lbl">Kaj opazim po štirih tednih?</span><div class="ln"></div><div class="ln"></div></div>
+  </div>
+</section>
+
+<section class="ch" id="mini-dnevnik" data-toc="Predloga mini dnevnika" data-num="·">
+  <div class="ch-eyebrow"><b>Delovni list</b></div>
+  <h2>Predloga mini dnevnika</h2>
+  <div class="col">
+    <p>En dogodek na večer, tri vprašanja. Natisni več izvodov te strani ali jo preriši v zvezek. Navodila so v poglavju 5. Dnevnik je samo tvoj.</p>
+  </div>
+  <div class="fill">
+    <div class="row tcard"><span class="lbl">Dan:</span>
+      <span class="lbl">1. Kaj se je zgodilo?</span><div class="ln"></div>
+      <span class="lbl">2. Kaj sem čutil(a) in kje v telesu? Katera barva?</span><div class="ln"></div>
+      <span class="lbl">3. Kaj sem naredil(a) in kaj bi naslednjič?</span><div class="ln"></div></div>
+    <div class="row tcard"><span class="lbl">Dan:</span>
+      <span class="lbl">1. Kaj se je zgodilo?</span><div class="ln"></div>
+      <span class="lbl">2. Kaj sem čutil(a) in kje v telesu? Katera barva?</span><div class="ln"></div>
+      <span class="lbl">3. Kaj sem naredil(a) in kaj bi naslednjič?</span><div class="ln"></div></div>
+    <div class="row tcard"><span class="lbl">Dan:</span>
+      <span class="lbl">1. Kaj se je zgodilo?</span><div class="ln"></div>
+      <span class="lbl">2. Kaj sem čutil(a) in kje v telesu? Katera barva?</span><div class="ln"></div>
+      <span class="lbl">3. Kaj sem naredil(a) in kaj bi naslednjič?</span><div class="ln"></div></div>
+  </div>
+</section>
+
+<div class="part-head" id="dodatki" data-toc="Dodatki">
+  <div class="kicker">Dodatki</div>
+  <h2>Za sprotno uporabo</h2>
+</div>
+
+<section class="ch" id="slovar" data-toc="Slovar" data-num="A">
+  <div class="ch-eyebrow"><b>Dodatek A</b></div>
+  <h2>Mali slovar</h2>
+  <dl class="gloss col">
+    <div><dt>Amigdala</dt><dd>Majhen del možganov, ki v delčku sekunde oceni nevarnost in sproži alarm v telesu. Na dlani je palec (poglavje 2).</dd></div>
+    <div><dt>Barvni merilnik razpoloženja</dt><dd>Štiri barve za razpoloženje glede na to, ali je občutek prijeten ali neprijeten in koliko energije ima telo (poglavje 4).</dd></div>
+    <div><dt>Čelni reženj</dt><dd>Sprednji del možganov, ki premisli, načrtuje in izbere. Zavore možganov. Dozori okoli 25. leta.</dd></div>
+    <div><dt>Čustvena inteligenca</dt><dd>Spretnost, da opaziš, razumeš in vodiš svoja čustva ter razumeš čustva drugih in se nanje dobro odzoveš.</dd></div>
+    <div><dt>Čustvo</dt><dd>Odziv telesa in uma na to, kar se ti dogaja. Sporočilo o tem, kaj ti je pomembno.</dd></div>
+    <div><dt>Empatična stiska</dt><dd>Ko tuje trpljenje prevzameš, kot bi bilo tvoje. Utrudi te.</dd></div>
+    <div><dt>Empatija</dt><dd>Razumeš, kaj čuti drugi, in mu to pokažeš.</dd></div>
+    <div><dt>Interocepcija</dt><dd>Zaznavanje dogajanja v telesu: dih, srčni utrip, napetost, lakota. Slišati telo.</dd></div>
+    <div><dt>Jahanje vala</dt><dd>Željo ali čustvo opazuješ, dokler ne upade, in ne ukrepaš takoj (poglavje 9).</dd></div>
+    <div><dt>Jaz-sporočilo</dt><dd>Stavek o tebi: dejstvo, čustvo, potreba, prošnja. Nasprotje ti-sporočila, ki napade.</dd></div>
+    <div><dt>Meja</dt><dd>Kaj je zate v redu in kaj ne. Zdrava meja je kot vrata, ne kot zid.</dd></div>
+    <div><dt>Notranja motivacija</dt><dd>Nekaj počneš, ker te zanima, ker napreduješ ali ker se ti zdi pomembno, ne zaradi nagrade.</dd></div>
+    <div><dt>Ponovna ocena</dt><dd>Poiščeš drugo, prav tako možno razlago dogodka. Druga zgodba (poglavje 7).</dd></div>
+    <div><dt>Povratna informacija</dt><dd>Komentar, ki vsebuje podatek, s katerim lahko kaj izboljšaš.</dd></div>
+    <div><dt>Samoregulacija</dt><dd>Izbereš, kaj boš naredil(a) s čustvom, namesto da te odnese.</dd></div>
+    <div><dt>Samozavedanje</dt><dd>Opaziš, kaj čutiš, v trenutku, ko se to zgodi.</dd></div>
+    <div><dt>Semafor</dt><dd>Trije koraki pred dejanjem: stop, diham in opazim, izberem (poglavje 6).</dd></div>
+    <div><dt>Sočutje</dt><dd>Drugemu želiš dobro in mu stojiš ob strani, a ostaneš na svojem bregu. Lahko ga čutiš tudi do sebe.</dd></div>
+    <div><dt>Sprožilec</dt><dd>Oseba, situacija ali misel, ki pri tebi redno prižge močno čustvo.</dd></div>
+    <div><dt>Supermoč</dt><dd>Ena od petih spretnosti čustvene inteligence: samozavedanje, samoregulacija, notranja motivacija, empatija, socialne veščine. Krepiš jo z vajo (poglavje 2).</dd></div>
+    <div><dt>Val čustva</dt><dd>Čustvo pride, se dvigne in odide, če ga ne poganjaš z mislimi (poglavje 8).</dd></div>
+    <div><dt>Vrednote</dt><dd>Stvari, ki so ti pomembne same po sebi, na primer prijateljstvo, poštenost, pogum.</dd></div>
+    <div><dt>Vzorec</dt><dd>Isti občutek ali odziv, ki se ponavlja v različnih situacijah.</dd></div>
+    <div><dt>Zbadanje</dt><dd>Komentar brez koristnega podatka, ki hoče le prizadeti.</dd></div>
+  </dl>
+</section>
+
+<section class="ch" id="viri" data-toc="Viri" data-num="B">
+  <div class="ch-eyebrow"><b>Dodatek B</b></div>
+  <h2>Viri</h2>
+  <div class="col">
+    <h3>Čustvena inteligenca in čustva</h3>
+    <ul class="refs">
+      <li>Daniel Goleman: <em>Čustvena inteligenca</em> (izv. <em>Emotional Intelligence</em>, 1995). <span class="why">Pet supermoči (poglavje 2).</span></li>
+      <li>Peter Salovey, John D. Mayer: Emotional Intelligence. <em>Imagination, Cognition and Personality</em> 9 (1990). <span class="why">Prvi opis pojma.</span></li>
+      <li>CASEL: <em>What Is the CASEL Framework?</em> (casel.org). <span class="why">Pet področij socialnega in čustvenega učenja, ki se ujemajo s petimi supermočmi.</span></li>
+      <li>Marc Brackett: <em>Permission to Feel</em> (2019). <span class="why">Barvni merilnik razpoloženja (4).</span></li>
+      <li>James A. Russell: A circumplex model of affect. <em>Journal of Personality and Social Psychology</em> 39 (1980). <span class="why">Čustva na oseh prijetnosti in energije (4).</span></li>
+      <li>Matthew D. Lieberman idr.: Putting feelings into words. <em>Psychological Science</em> 18 (2007). <span class="why">Poimenovanje umiri amigdalo (4).</span></li>
+      <li>James W. Pennebaker, Joshua M. Smyth: <em>Opening Up by Writing It Down</em> (2016). <span class="why">Pisanje o čustvih (5).</span></li>
+      <li>James J. Gross: The emerging field of emotion regulation. <em>Review of General Psychology</em> 2 (1998). <span class="why">Ponovna ocena (7).</span></li>
+      <li>Jill Bolte Taylor: <em>My Stroke of Insight</em> (2008). <span class="why">Val čustva, približno 90 sekund (8).</span></li>
+      <li>Kristin Neff: Self-compassion. <em>Self and Identity</em> 2 (2003); Karen Bluth: <em>The Self-Compassionate Teen</em> (2020). <span class="why">Prijazen glas do sebe (8).</span></li>
+      <li>James J. Mazza idr.: <em>DBT Skills in Schools: Skills Training for Emotional Problem Solving for Adolescents (DBT STEPS-A)</em> (2016). <span class="why">Jahanje vala (9).</span></li>
+      <li>Edward L. Deci, Richard M. Ryan: <em>Intrinsic Motivation and Self-Determination in Human Behavior</em> (1985). <span class="why">Notranja motivacija (10).</span></li>
+      <li>Tania Singer, Olga M. Klimecki: Empathy and compassion. <em>Current Biology</em> 24 (2014). <span class="why">Empatična stiska in sočutje (12).</span></li>
+      <li>Thomas Gordon: <em>Parent Effectiveness Training</em> (1970); Marshall B. Rosenberg: <em>Nenasilna komunikacija</em> (izv. 2003). <span class="why">Jaz-sporočila (13).</span></li>
+    </ul>
+    <h3>Mladostniški možgani in pisanje za mlade</h3>
+    <ul class="refs">
+      <li>Daniel J. Siegel: <em>Brainstorm: The Power and Purpose of the Teenage Brain</em> (2013). <span class="why">Možgani na dlani, poimenuj, da ukrotiš (2, 4).</span></li>
+      <li>Laurence Steinberg: <em>Age of Opportunity: Lessons from the New Science of Adolescence</em> (2014). <span class="why">Zorenje možganov, vpliv vrstnikov (2, 14).</span></li>
+      <li>Sarah-Jayne Blakemore: <em>Inventing Ourselves: The Secret Life of the Teenage Brain</em> (2018). <span class="why">Mladostniški možgani (2).</span></li>
+      <li>David S. Yeager, Ronald E. Dahl, Carol S. Dweck: Why interventions to influence adolescent behavior often fail but could succeed. <em>Perspectives on Psychological Science</em> 13 (2018). <span class="why">Spoštovanje in samostojnost namesto pridig (zasnova knjige).</span></li>
+      <li>Willem Kuyken idr.: Effectiveness and cost-effectiveness of universal school-based mindfulness training compared with normal school provision in reducing risk of mental health problems and promoting well-being in adolescence: the MYRIAD cluster randomised controlled trial. <em>Evidence-Based Mental Health</em> 25 (2022). <span class="why">Zakaj so telesne vaje kratke in neobvezne.</span></li>
+      <li>Jonathan Haidt: <em>The Anxious Generation</em> (2024); Candice L. Odgers: The great rewiring: is social media really behind an epidemic of teenage mental illness? <em>Nature</em> 628 (2024). <span class="why">Razprava o telefonih in duševnem zdravju (9).</span></li>
+    </ul>
+    <h3>Telo in čustva</h3>
+    <ul class="refs">
+      <li>Lauri Nummenmaa idr.: Bodily maps of emotions. <em>Proceedings of the National Academy of Sciences</em> 111 (2014). <span class="why">Telesni zemljevidi čustev (3).</span></li>
+      <li>Lisa Feldman Barrett: <em>How Emotions Are Made</em> (2017). <span class="why">Interocepcija in nastanek čustev (3).</span></li>
+      <li>Peter Karlovšek: učbenik <em>Senzorna prenova: kako prebuditi zakrčeno telo in um</em> in priročnik <em>Senzorna prenova: čustvena inteligenca</em> (osnutka, 2026). <span class="why">Izhodišče zbirke: čustvo se začne v telesu.</span></li>
+    </ul>
+    <h3>Pomoč</h3>
+    <ul class="refs">
+      <li>TOM telefon za otroke in mladostnike, Zveza prijateljev mladine Slovenije: 116 111. <span class="why">Vsak dan od 12. do 20. ure.</span></li>
+      <li>Zaupni telefon Samarijan in Sopotnik: 116 123. <span class="why">Vsak dan, 24 ur.</span></li>
+      <li>Klic v duševni stiski, Univerzitetna psihiatrična klinika Ljubljana: 01 520 99 00. <span class="why">Vsak dan od 19. do 7. ure.</span></li>
+      <li>Center za varnejši internet: safe.si. <span class="why">Nasveti o varni rabi spleta; prijava nezakonitih vsebin prek Spletnega očesa.</span></li>
+    </ul>
+    <p class="refs why" style="font-size:.9rem;color:var(--muted)">Številke in delovni čas so preverjeni novembra 2026.</p>
+  </div>
+</section>
+
+
+<footer>
+  <p><strong>Izjava o uporabi gradiva.</strong> Ta priročnik lahko uporabljaš samo za lastne potrebe in v skladu s pravicami in omejitvami Zakona o avtorskih in sorodnih pravicah (ZASP), ki veljajo za prosto uporabo avtorskih del. Priročnik je avtorsko delo in ga brez izrecnega pisnega dovoljenja avtorja, Petra Karlovška, ni dovoljeno distribuirati, kopirati (delno ali v celoti) ali objavljati.</p>
+  <p>Avtor: Peter Karlovšek · 1. izdaja, delovni osnutek november 2026 · Zbirka Senzorna prenova.</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+(function(){
+  // Kazalo iz naslovov delov in poglavij
+  var list=document.getElementById("toc-list"), plist=document.getElementById("print-toc-list");
+  function span(c,t){var s=document.createElement("span");s.className=c;s.textContent=t;return s;}
+  document.querySelectorAll("[data-toc]").forEach(function(el){
+    var li=document.createElement("li"), a=document.createElement("a");
+    a.href="#"+el.id;
+    var part=el.classList.contains("part-head");
+    if(part){li.className="part";a.textContent=el.dataset.toc;}
+    else{var s=document.createElement("span");s.textContent=el.dataset.num||"·";a.appendChild(s);a.appendChild(document.createTextNode(el.dataset.toc));}
+    li.appendChild(a);list.appendChild(li);
+    // Kazalo za tisk: številka strani iz data-page (vpiše jo izdelava PDF)
+    var pli=document.createElement("li");
+    if(part)pli.className="part";else pli.appendChild(span("n",el.dataset.num||"·"));
+    pli.appendChild(span("t",el.dataset.toc));pli.appendChild(span("dots",""));
+    var pg=span("pg",el.dataset.page||"");pg.dataset.for=el.id;pli.appendChild(pg);
+    plist.appendChild(pli);
+  });
+  document.getElementById("print-btn").addEventListener("click",function(){window.print();});
+
+  // Za tisk prazne vrstice pod vprašanji za pogled nazaj
+  document.querySelectorAll(".nazaj li").forEach(function(li){var l=document.createElement("span");l.className="print-lines";li.appendChild(l);});
+
+  // Zložljivi deli (kartice, kviz): pri tiskanju odpri, potem vrni
+  var det=document.querySelectorAll("details"), was=[];
+  window.addEventListener("beforeprint",function(){det.forEach(function(d,i){was[i]=d.open;d.open=true;});});
+  window.addEventListener("afterprint",function(){det.forEach(function(d,i){d.open=!!was[i];});});
+
+  // Sledilnik 4 tedni (štampiljke); shrani samo, kateri dnevi so opravljeni
+  var W=[
+    {t:"1. teden · Čustva, telo in samozavedanje (dela I–II)",d:"Preberi poglavja 1–5. Vsak dan izberi eno misijo, na primer »V kateri barvi sem?« ali zapis v mini dnevnik.",days:[1,7]},
+    {t:"2. teden · Samoregulacija (del III)",d:"Preberi poglavja 6–8. Vsak dan izberi eno misijo, na primer semafor pred jeznim sporočilom ali tri zgodbe za en dogodek.",days:[8,14]},
+    {t:"3. teden · Motivacija in empatija (dela IV–V)",d:"Preberi poglavja 9–12. Vsak dan izberi eno misijo, na primer 20 minut naloge brez telefona ali en pogovor brez nasveta.",days:[15,21]},
+    {t:"4. teden · Socialne veščine in kviz (dela VI–VII)",d:"Preberi poglavja 13–16. Vsak dan izberi eno misijo, na primer jaz-sporočilo, jasen »ne« ali seznam »Preden objavim ali komentiram«. Na koncu reši kviz in odgovori na vprašanja za pogled nazaj.",days:[22,28]}
+  ];
+  var KEY="sp-eq-mladi-4-tedni", N=28, done={};
+  try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){done={};}
+  var wrap=document.getElementById("weeks"), prog=document.getElementById("progress");
+  if(wrap){
+    function save(){try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}}
+    function upd(){var c=0;for(var k in done)if(done[k])c++;prog.textContent="Štampiljke: "+c+" od "+N+(c===N?" · Izziv opravljen!":"");}
+    W.forEach(function(w){
+      var box=document.createElement("div");box.className="week";
+      var h=document.createElement("h4");h.textContent=w.t;var p=document.createElement("p");p.className="theme";p.textContent=w.d;
+      var ds=document.createElement("div");ds.className="days";
+      for(var i=w.days[0];i<=w.days[1];i++){(function(i){var b=document.createElement("button");b.type="button";b.className="day";b.id="dan-"+i;b.textContent=i;b.setAttribute("aria-label","Dan "+i);b.setAttribute("aria-pressed",done[i]?"true":"false");b.addEventListener("click",function(){done[i]=!done[i];b.setAttribute("aria-pressed",done[i]?"true":"false");save();upd();});ds.appendChild(b);})(i);}
+      box.appendChild(h);box.appendChild(p);box.appendChild(ds);wrap.appendChild(box);
+    });
+    upd();
+    document.getElementById("reset").addEventListener("click",function(){done={};save();document.querySelectorAll(".day").forEach(function(b){b.setAttribute("aria-pressed","false");});upd();});
+  }
+
+  // Na ozkih zaslonih kazalo zaprto
+  if(window.matchMedia&&window.matchMedia("(max-width:1019px)").matches){var d=document.getElementById("toc-d");if(d)d.removeAttribute("open");}
+})();
+</script>
+</body>
+</html>
